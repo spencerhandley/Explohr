@@ -306,7 +306,7 @@ block content
 						div.tab-pane#teaching
 							h4 Schools and Organizations Worked For:
 							#teachingFormContainer
-								if(locals.account.professional.teaching.experience[0].organization)
+								if(locals.account.professional.teaching.experience[0])
 									-var i = 0
 									each experience in locals.account.professional.teaching.experience
 										#teachingForm
@@ -344,7 +344,7 @@ block content
 													label.sr-only(for="professional[teaching][experience][" + i + "][description]")
 													input.form-control(placeholder="Brief Description" type="text" value=experience.description name="professional[teaching][experience][" + i + "][description]")
 											-i++
-								if(!locals.account.professional.teaching.experience[0].organization)
+								if(!locals.account.professional.teaching.experience[0])
 									#teachingForm
 										.row
 											p Type of Work
@@ -394,7 +394,7 @@ block content
 								
 								h4 Guiding Companies worked for:
 								#guidingCoFormContainer
-									if(locals.account.professional.guiding.companies[0].organization)
+									if(locals.account.professional.guiding.companies[0])
 										-var i = 0
 										each company in locals.account.professional.guiding.companies
 											#guidingCoForm
@@ -426,7 +426,7 @@ block content
 														label.sr-only(for="professional[guiding][companies][description]")
 														input.form-control(placeholder="Brief Description" type="text" value=company.description name="professional[guiding][companies][" + i + "][description]")
 												-i++
-									if(!locals.account.professional.guiding.companies[0].organization)
+									if(!locals.account.professional.guiding.companies[0])
 										#guidingCoForm
 											.row
 												div.form-group.col-md-4
@@ -461,7 +461,7 @@ block content
 							#section
 								h4 Trips / Expeditions Led:
 								#tripsFormContainer
-									if(locals.account.professional.guiding.guided[0].organization)
+									if(locals.account.professional.guiding.guided[0])
 										-var i = 0
 										each guided in locals.account.professional.guiding
 											#tripsForm
@@ -506,7 +506,7 @@ block content
 														label.sr-only(for="professional[guiding][guided][" + i + "][description]") Trip Description
 														input.form-control(placeholder="Trip Description" type="text" value=guided.description name="professional[guiding][guided][" + i + "][description]")
 												-i++
-									if(!locals.account.professional.guiding.guided[0].organization)
+									if(!locals.account.professional.guiding.guided[0])
 										#tripsForm
 											.row
 												p Age Range
@@ -560,7 +560,7 @@ block content
 							#section
 								h4 Sponsors:
 								#sponsorFormContainer
-									if(locals.account.professional.sponsors[0].organization)
+									if(locals.account.professional.sponsors[0])
 										-var i = 0
 										each sponsor in locals.account.professional.sponsors
 											#sponsorForm
@@ -585,7 +585,7 @@ block content
 														label.sr-only(for="professional[sponsors][description]")
 														input.form-control(placeholder="Brief Description" type="text" value=sponsor.description name="professional[guiding][" + i + "][description]")
 												-i++
-									if(!locals.account.professional.sponsors[0].organization)
+									if(!locals.account.professional.sponsors[0])
 										#sponsorForm
 											.row
 												div.form-group.col-md-3
@@ -617,7 +617,7 @@ block content
 								h5 Notable Climbs
 							.row
 								#rockClimbingFormContainer
-									if(locals.account.sports.rockClimbing.notableRoutes[0].organization)
+									if(locals.account.sports.rockClimbing.notableRoutes[0])
 										-var i = 0
 										each climb in locals.account.sports.rockClimbing.notableRoutes
 											#rockClimbingForm
@@ -637,7 +637,7 @@ block content
 													label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][date]") Date
 													input.form-control.climbDate(placeholder="Date" type="text" value=climb.date name="sports[rockClimbing][notableRoutes][" + i + "][date]")
 												-i++
-									if(!locals.account.sports.rockClimbing.notableRoutes[0].location)
+									if(!locals.account.sports.rockClimbing.notableRoutes[0])
 										#rockClimbingForm
 											div.form-group.col-md-3
 												label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
