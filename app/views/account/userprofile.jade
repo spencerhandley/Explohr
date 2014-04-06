@@ -27,7 +27,7 @@ block content
 					
 					p.userdetails
 						b Sports: 
-						each sport, key in user.sportsList
+						//-each sport, key in user.sportsList
 							- if(user.sportsList.hasOwnProperty(key))
 								-if(sport == true )
 									span #{key}, 

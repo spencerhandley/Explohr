@@ -15,15 +15,46 @@ routes.get({name: 'register', re: '/register'}, function (req, res){
 routes.post({re:'/register'}, function(req, res) {
 	Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
 	    if (err) {
-	        return res.render('register', { account : account });
+	        return res.render('account/register', { account : account });
 	    }
-
 	    passport.authenticate('local')(req, res, function () {
-			res.redirect('/');
-		});
+		    Account.findByIdAndUpdate( account._id, {
+				$set: {
+					general: req.body.general }
+			}, function (err, person){
+				if(err){
+					res.json(err);
+				} else if(person === null){
+					res.json('no such user');
+				} else{
+					res.send(person);
+					res.redirect('/');
+
+				}
+			});
+		});  
 	});
 });
 
+routes.post({name: 'editProfile', re: '/user/:user'}, function (req, res){
+	Account.findByIdAndUpdate( req.user.id , {
+		$set: {
+			general: req.body.general,
+			sports: req.body.sports,
+			sportsList: req.body.sportsList,
+			professional: req.body.professional}
+
+	}, function (err, person){
+		if(err){
+			res.json(err);
+		} else if(person === null){
+			res.json('no such user');
+		} else{
+			res.send(person);
+			res.redirect('/');
+		}
+	});
+});
 routes.get({name: 'setup', re: '/user/:user/setup'}, function (req, res){
 	res.render('account/setup', {
 		title: 'Setup Profile',
@@ -40,7 +71,6 @@ routes.get({name: 'login', re: '/login'}, function (req, res){
 routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		account.classes.push(req.params.courseid);
-		var firstCourse = account.classes[0];
 		account.save(function (err) {
 			if (err) return (err);
 			console.log('Success!');
@@ -115,25 +145,7 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, function (req, res){
 	});
 });
 
-routes.post({name: 'editProfile', re: '/user/:user'}, function (req, res){
-	Account.findByIdAndUpdate( req.user.id , {
-		$set: { 
-			general: req.body.general,
-			sports: req.body.sports,
-			sportsList: req.body.sportsList,
-			professional: req.body.professional}
 
-	}, function (err, person){
-		if(err){
-			res.json(err);
-		} else if(person == null){
-			res.json('no such user');
-		} else{
-			res.send(person);
-			res.redirect('/');
-		}
-	});
-});
 
 routes.get({name:'dashboard', re: '/dashboard/:user'}, function (req, res){
 	var locals = {};
