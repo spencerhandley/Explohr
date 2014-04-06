@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row.pull-right#myClassTop
+			.col-md-5.col-sm-4
+				h1 Course Catalog
+			#sorting
+				.col-lg-3.col-md-3.col-sm-3.col-xs-6.pull-right
+					.input-group.input-group-sm
+						input.form-control(type="text")
+						span.input-group-btn
+							button.btn.btn-default(type="button") <span class="glyphicon glyphicon-search"></span>
+				.col-lg-3.col-md-4.col-sm-5.pull-right
+					.btn-group.btn-group-sm.pull-right
+						button.btn.btn-default All Classes
+						button.btn.btn-default Upcoming 
+						button.btn.btn-default Library
+		.row
+			.col-md-8
+				each course in courses
+					include _catalogCourse
+				//-a#courseLink(href=router.getLink("course", {courseid: }))
+					.listedClass.thumbnail
+						.row
+							.col-md-8.col-sm-6
+								img#profilePhoto.pull-left(src="/img/mick.png")
+								.classtitle
+									h3 Lessons in Surfing and Life
+									em.subheader with <a href="http://en.wikipedia.org/wiki/Kelly_Slater">Kelly Slater</a>
+									p.dateMonth March 15th - April 15th
+									p.date Tuesdays and Thursdays 8:00pm - 9:00pm PST
+							.col-md-4.text-center
+								.btn.btn-lg.btn-success#addClassBtn + My Classes
+
+			.col-md-4
+				.list-group
+					a.list-group-item(href="") Surfing
+					a.list-group-item(href="") Rock Climbing
+					a.list-group-item(href="") Survival
+					a.list-group-item(href="") Kite Surfing
+					a.list-group-item(href="") Slack Lining
+					a.list-group-item(href="") Ice Climbing
+					a.list-group-item(href="") Mountaineering
+					a.list-group-item(href="") Lifestyle
+					a.list-group-item(href="") Motocross
+					a.list-group-item(href="") Mountain Biking
+					a.list-group-item(href="") Cycling
+					a.list-group-item(href="") Distance Running
+					a.list-group-item(href="") Eating
+					a.list-group-item(href="") Paragliding
+					a.list-group-item(href="") Boating
+					a.list-group-item(href="") Rafting
+					a.list-group-item(href="") Kayaking
+					a.list-group-item(href="") Diving
+
+	include ../_footer
+
+

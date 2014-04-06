@@ -1,0 +1,16 @@
+a#courseLink(href=router.getLink("course", {
+	courseid: course._id,
+	courseTitle: course.title, 
+}))
+	.listedClass.thumbnail
+		.row
+			.col-md-8.col-sm-6
+				img#profilePhoto.pull-left(src="/img/mick.png")
+				.classtitle
+					h3 #{course.title}
+					em.subheader with <a href="http://en.wikipedia.org/wiki/Kelly_Slater"> #{course.teacher} </a>
+			.col-md-4.text-center
+				-if(!user)
+					a(href=router.getLink("login")).btn.btn-success.btn-lg + My Classes
+				-if(user)
+					a(href=router.getLink("addToMyList", {user: locals.user.username , courseid: course._id})).btn.btn-success.btn-lg + My Classes

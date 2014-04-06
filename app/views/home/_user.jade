@@ -1,0 +1,12 @@
+a#userLink(href=router.getLink("userprofile", {
+	user: user._id,
+}))
+-console.log(user)
+	.listedClass.thumbnail
+		.row
+			.col-md-8.col-sm-6
+				img#profilePhoto.pull-left(src="/img/mick.png")
+				.classtitle
+					h3 #{user.general.firstname} #{user.general.lastname}
+						br
+						small #{user.general.hometown}

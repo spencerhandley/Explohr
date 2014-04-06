@@ -1,0 +1,50 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row
+			.col-md-8.col-md-offset-2#loginForm
+				h3 Add a Course
+				form.form(role="form" action="/newcourse" method="post")
+					.row
+						div.form-group.col-md-6
+							label.sr-only(for="username") Title
+							input.form-control(placeholder="Title" type="text" name="c[title]")
+						div.form-group.col-md-6
+							label.sr-only(for="teacher") Teacher
+							input.form-control(placeholder="Teacher" type="text" name="c[teacher]")
+					.row
+						div.form-group.col-md-6
+							label.sr-only(for="Publish") Publish Date
+							input.form-control(placeholder="Publish Date" type="textfield" name="c[date]")
+						div.form-group.col-md-6
+							label.sr-only(for="level") Level
+							input.form-control(placeholder="Skill Level" type="textfield" name="c[level]")
+					div.form-group
+						label.sr-only(for="topic") Topic
+						input.form-control#topic(placeholder="Topic" type="text" name="c[topic]")
+					div.form-group
+						label.sr-only(for="overview") Overview
+						input.form-control#overview(placeholder="Overview" type="textfield" name="c[overview]")
+					.row#formVideos
+						div.form-group.col-md-4
+							label.sr-only(for="1idea") Video 1 - Link
+							input.form-control#1idea(placeholder="Video 1 - Link" type="textfield" name="c[video][0][link]")
+						div.form-group.col-md-4
+							label.sr-only(for="1desc") Video 1 - Title
+							input.form-control#1desc(placeholder="Video 1 - Title" type="textfield" name="c[video][0][title]")
+						div.form-group.col-md-4
+							label.sr-only(for="2idea") Video 1 - Length
+							input.form-control#1idea(placeholder="Video 1 - Length" type="textfield" name="c[video][0][length]")
+					.row
+						div.addfieldsBtn#addVideo.col-md-6.col-md-offset-3 +
+					div.form-group
+						label.sr-only(for="promo") Promo Video
+						input.form-control#promo(placeholder="Promo Video" type="textfield" name="c[promo]")
+					div.form-group
+						label.sr-only(for="password") Password
+						input.form-control#password(placeholder="Password" type="text" name="c[password]")
+					
+					button.btn.btn-default.pull-right(type="submit" name="addclass") Add Class
+		

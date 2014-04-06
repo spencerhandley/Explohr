@@ -1,0 +1,28 @@
+{
+	"development": {
+		"Console": {
+			"colorize": true,
+			"handleExceptions": true
+		},
+		"File": {
+			"filename": "log/www.site.error.log",
+			"level": "error",
+			"maxsize": 1048576,
+			"handleExceptions": true,
+			"json": true
+		}
+	},
+	"production": {
+		"Console": {
+			"handleExceptions": true
+		},
+		"File": {
+			"dirname": "/var/log",
+			"filename": "www.site.error.log",
+			"level": "error",
+			"maxsize": 1048576,
+			"handleExceptions": true,
+			"json": true
+		}
+	}
+}

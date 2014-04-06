@@ -1,0 +1,20 @@
+{
+	"browser": true,
+    "evil": true,
+    "eqeqeq": true,
+    "freeze": true,
+    "globals": {
+    	"console": true,
+    	"swig": true,
+    	"App": true
+    },
+    "indent": 4,
+    "jquery": true,
+    "latedef": true,
+    "noempty": true,
+    "sub": true,
+    "trailing": true,
+    "undef": true,
+    "unused": true,
+    "wsh": true
+}

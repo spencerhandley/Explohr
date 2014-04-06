@@ -1,0 +1,505 @@
+*, *:before, *:after { -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; }
+body { font-family: "Proxima Nova", "Helvetica Neue", Helvetica, Arial, sans-serif; min-width: 1000px; }
+.modal-open .modal, .btn:focus{ outline:0!important}
+button:focus {outline:0;}
+a { text-decoration: none; }
+a.active { font-weight: bold; text-decoration: underline; }
+.top { padding:10px; background: url(/img/topbg.png) center; height: 550px;background-repeat:no-repeat; background-size: cover ;}
+.profileTop { padding:10px; width: 100%; background: url(/img/profiletop.png) center; position: fixed; top:0; z-index: -1; height: 350px;background-repeat:no-repeat; background-size: cover ;}
+#logo { margin-top: 90px; }
+#alpha {margin-top: -10px; margin-bottom: 4px; padding-left: 130px; font-size: 11px; font-weight: 300;}
+#title { margin-top: -10px }
+.white { color: white; }
+.margin-10 { margin:10px; }
+#courseBtns { text-align: center; margin-top: 45px }
+#courseBtns a {padding:10px; font-size: 20px; margin-top: 30px;}
+#courseBtns a:hover {text-decoration: none;}
+#description { padding-top: 30px; width:350px; margin: 0 auto; padding-bottom: 30px; text-align: center; }
+#description p { padding-top: 20px; }
+.outlined-clear-btn { background: rgba(0,0,0,0.0); color: white; padding-left: 15px; padding-right: 15px; line-height: 25px; border: 1px rgba(255,255,255, .4) solid; border-radius: 30px }
+.outlined-clear-btn:hover { color: white; border: 1px rgba(255,255,255, .6 ) solid }
+.outlined-clear-btn-black { background: rgba(0,0,0,0.0); color: #7a7a7a; padding-left: 15px; padding-right: 15px; line-height: 25px; border: 1px rgba(0,0,0, .1) solid; border-radius: 30px }
+.outlined-clear-btn-black:hover { color: #7a7a7a; border: 1px rgba(0,0,0, .4 ) solid }
+#signup { margin: 10px; }
+#signupbtn {margin-right: 10px;}
+.section { border-top: 1px #e5e5e5 solid; padding-top: 20px; padding-bottom: 30px; }
+.caption h3 { margin-top: 0px; }
+.caption p a { margin-top: 10px; }
+#trips .caption .btn, #teachers .caption .btn { margin-top: -10px; }
+.caption em { color: #939393; }
+.sectionTitle { font-weight: 100; margin-bottom: 30px; }
+.sectionTitle b { font-weight: 500; }
+footer { height: 350px; background-color: #2c363a; padding-top: 1px; }
+#topics .row { margin-bottom: 20px; }
+#courseCarrosel #thumbnail {height: 100px; overflow: hidden; position: relative; }
+#courseCarrosel #thumbnail img {position: absolute; left: 0%; top: 0%; right: 0%;   bottom: 0%; margin: auto; min-height: 100%; min-width: 100%;}
+#courseLink{ text-decoration: none; color: inherit;}
+#courseLink:hover{ text-decoration: none; color: inherit;}
+#teachers .row .thumbnail .caption .job {margin-top: -20px; margin-bottom: 0px} 
+.thumbnail:hover {  box-shadow: 0 5px 5px rgba(0,0,0,0.2); transform: translateY(-20px) scale(1, 1);}
+#signin {margin-left: 10px;}
+.row a {text-decoration: none;}
+.row a h3 {color: black;}
+/*pricing */
+.price {background-color: #f5f5f5; border: 1px #e5e5e5 solid; border-radius: 3px; margin-bottom: 60px; }
+.priceTitle {background-color: #d8d8d8; padding:10px; text-align: center; color: white; }
+.priceTitle h1 {font-weight: 300; }
+.priceTag {background-color: #eeeeee; padding: 10px; text-align: center; color: #595959; }
+.priceTag #dollarsign { font-size: 30px; margin-top: 35px; margin-left: -20px; position: absolute; }
+.priceTag #amount { font-size: 130px; }
+.priceTag #permonth {font-size: 30px; }
+.priceBody { font-size: 25px; padding: 20px; color: #909090; line-height: 50px; }
+.benefits li { list-style: none; }
+
+
+/* top bar */
+#topbar { padding: 10px; background-color: #f3f3f3; height: 60px; }
+#topbarnav {  margin-right: 10px; }
+#topbar img { height: 33px; margin-left: 15px; margin-top: 3px;}
+#topbar ul {margin-top: 12px;}
+.userName { margin:10px; color: #787878; }
+.dropdown .userlink {margin-left: 5px; padding:10px;float: right; display: inline-table; border: 1px rgba(0,0,0, .2) solid; border-radius: 30px; }
+.dropdown .userlinkwhite {color:white;margin-left: 5px; padding:10px;float: right; display: inline-table; border: 1px rgba(255,255,255, .2) solid; border-radius: 30px; }
+.dropdown .userlinkwhite:hover {border: 1px rgba(255,255,255, .4) solid;}
+.top ul {margin-top: 12px;}
+.dropdown  .userlink:hover { text-decoration: none;}
+#rightNav {display: inline;}
+#widelogo {display: inline;}
+#topbarnav a {color: inherit;}
+.top a:hover {color: white; text-decoration: none;}
+
+/* CoursePage */
+.courseDetails .lead { color:#afafaf; }
+.courseTitle { font-weight: 100; margin-top: 40px; margin-bottom: 0px; font-size: 40px; }
+.courseTitle b { font-weight: 500; }
+#duration { color:#a3c0c9; }
+#dates { font-weight: 500; color: black; }
+.limitLH { line-height: 5px; }
+#profilePhoto { width: 90px; border-radius: 3px; margin-bottom: 5px; }
+#classdescription { padding-bottom: 20px; }
+#courseTopics { list-style: none; padding-left: 0; }
+#courseTopics li { font-size: 20px; }
+#courseTopics li p { font-size: 15px; margin-left: 23px; margin-top: 10px; }
+.videoProfName { font-weight: 100; font-size: 15px; margin-top: -10px;}
+#adventureTrip { position: relative; background-color: #f9f9f9; padding: 10px; border-radius: 3px; }
+#adventureTrip .lead { color: #a2a2a2; line-height: 0px; font-size: 18px; }
+#adventureTrip #adventurePhoto {  margin-bottom:20px; width: calc(100% + 30px);}
+#remainingSpan { font-size:12px; color:#71cb88; }
+#adventureTrip small {margin-left: 10px;} 
+
+#registerBtns { padding:15px; text-align: center; margin-top: 55px; background-color: #f9f9f9; border: 1px #e5e5e5 solid; ;border-top: 4px #71cb88 solid; border-radius: 3px; }
+#registerBtns .lead {font-size: 30px;}
+
+#classmates .thumbnail  p {margin-bottom: 0px;}
+#userThumb {border-radius: 3px;}
+#videoThumb { height: 45px; border-radius: 3px;}
+/* login Form */
+#loginForm { text-align: center; border-top:4px #71cb88 solid; margin-top: 30px; background-color: #f9f9f9; border: 1px #e5e5e5 solid; ;border-top: 4px #71cb88 solid; border-radius: 3px; padding: 15px;}
+
+/* video */
+#videoContainer { margin-top: 30px;}
+/*d3 */
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/*profile */
+#profileBody { margin-top: 30px;}
+#educationPanel { background-color: #f5f7fd;}
+#profileContainer { margin-top: -50px;}
+#userBasics .profileImage { width: 150px; border-radius: 5px; margin-top: 10px; margin-right: 20px; border: 3px solid white;}
+#userBasics h2 {color: white; margin-bottom: 5px;}
+#userBasics {margin-top: -95px;}
+#userBasics #buttons { margin-top: -10px; text-align: right;}
+#buttons h5 {padding: 20px; background-color: #5CB85C; color: white;  margin-left: 10px;}
+#userBasics .lead {margin-bottom: 10px;}
+#userBasics .userdetails {line-height: 10px;}
+
+.profileContent {background-color: white; margin-top: 280px; padding-bottom: 50px; padding-top: 20px; box-shadow: 0px -50px 150px #000;}
+#sorting{margin-top:30px;}
+#myClassTop { padding-top: 20px; padding-bottom: 20px; }
+.listedClass{  position: relative; background-color: #f9f9f9; padding: 10px; border-radius: 3px; }
+.listedClass #profilePhoto {display: inline-block; width: 120px;}
+.subheader { color: #939393; font-size: 16px; line-height: 10px; }
+.classtitle { margin-left: 10px; display: inline-block; margin-top: -23px;}
+.classtitle h3 {margin-bottom: 0px;}
+.classtitle span {font-weight: 200; color: grey; font-size: 15px; margin-bottom: 0px; margin-left: 15px;}
+.listedClass .lead {padding-top:0px; margin-bottom: 10px;}
+.dateMonth { padding-top: 10px; font-weight: 500;}
+.date { line-height: 10px;}
+.listedClass button {margin-right: 10px}
+#tripDetails {margin-top: 10px;}
+#messageBtn {margin-left: 10px;}
+
+/* professor profile */
+#teachersCourse { height: 142px;  border: 1px #e5e5e5 solid; border-radius: 3px; padding: 5px}
+#profile { margin-bottom: 50px;}
+.profName {font-size: 50px; font-weight: 500; margin-bottom: 0px; }
+#videoContainer .profileImage { width: 100px; border-radius: 5px; margin-top: 10px; margin-right: 20px;}
+#courseImage { width: 130px; border-radius: 3px; margin-right:10px;}
+#classCaption { border-right: 1px #e5e5e5 solid; height: 131px;}
+#classCaption h3 {margin-top: 5px;}
+#rightcaption { padding-left: 3px; text-align: center;}
+#rightcaption .lead {line-height: 0px; padding-top: 15px;}
+.profileSection {}
+#addClassBtn { margin-top: 40px;}
+
+
+/*Admin */
+
+
+/*edit profile */
+.addedform {border-bottom: 1px solid #e5e5e5;}
+#section { border-bottom: 1px solid #e5e5e5; margin-bottom: 20px;}
+#courseDescription {display: inline; margin-left: 10px;}
+#educator {display: none;}
+#athlete {display: none;}
+#guide { display: none;}
+#sportsList li {display: none;}
+.addfieldsBtn { border: 1px dashed #e5e5e5; border-radius: 5px; margin-bottom: 15px; color: #e5e5e5;}
+.addfieldsBtn:hover { border: 1px dashed #b4b4b4; color: #b4b4b4}
+
+#sports { text-align: left; border-top: 1px solid  #e5e5e5;}
+label {padding-left: 5px; display: inline;}
+#IamA { text-align: left; margin-bottom: 15px;}
+#IamA p {display: inline;}
+#IamA select{ display: inline;}
+.checkboxes {display: inline; margin-left: 15px; display: none;}
+.checkboxes label {margin-left: 5px; }
+
+/* setup */
+
+.outsideCourse {border-top: 1px solid  #e5e5e5;}
+.outsideCourse:first-child {border-top: none}
+#gettingstarted {text-align: center; margin-top: 100px;}
+@font-face {font-weight: normal;font-style: normal;font-family: 'icomoon';src:url('/fonts/icomoon/icomoon.eot?-9heso');src:url('/fonts/icomoon/icomoon.eot?#iefix-9heso') format('embedded-opentype'),	url('/fonts/icomoon/icomoon.woff?-9heso') format('woff'),	url('/fonts/icomoon/icomoon.ttf?-9heso') format('truetype'),	url('/fonts/icomoon/icomoon.svg?-9heso#icomoon') format('svg');
+}
+
+.simform {
+	position: relative;
+	margin: 0 auto;
+	padding: 2em 0;
+	max-width: 860px;
+	width: 100%;
+	text-align: left;
+	font-size: 2.5em;
+}
+
+.simform label {text-align: center}
+
+.simform .submit {
+	display: none;
+}
+
+/* Question list style */
+.simform ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: relative;
+	-webkit-transition: height 0.4s;
+	transition: height 0.4s;
+}
+
+.simform ol:before {
+	content: '';
+	background-color: rgba(0,0,0,0.1);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 2.35em;
+}
+
+.questions li {
+	z-index: 100;
+	position: relative;
+	visibility: hidden;
+	height: 0;
+	-webkit-transition: visibility 0s 0.4s, height 0s 0.4s;
+	transition: visibility 0s 0.4s, height 0s 0.4s;
+}
+
+.questions li.current,
+.no-js .questions li {
+	visibility: visible;
+	height: auto;
+	-webkit-transition: none;
+	transition: none;
+}
+
+/* Labels */
+.questions li > span {
+	display: block;
+	overflow: hidden;
+}
+
+.questions li > span label {
+	display: block;
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+
+.questions li.current > span label,
+.no-js .questions li > span label {
+	-webkit-transition: none;
+	transition: none;
+	-webkit-transform: translateY(0);
+	transform: translateY(0);
+}
+
+.show-next .questions li.current > span label {
+	-webkit-animation: moveUpFromDown 0.4s both;
+	animation: moveUpFromDown 0.4s both;
+}
+
+@-webkit-keyframes moveUpFromDown {
+	from { -webkit-transform: translateY(100%); }
+	to { -webkit-transform: translateY(0); }
+}
+
+@keyframes moveUpFromDown {
+	from { transform: translateY(100%); }
+	to { transform: translateY(0); }
+}
+
+/* Input field */
+.questions input {
+	display: block;
+	margin: 0.3em 0 0 0;
+	padding: 0.5em 1em 0.5em 0.7em;
+	width: calc(100% - 2em);
+	border: none;
+	background: transparent;
+	color: rgba(0,0,0,0.8);
+	font-size: 1em;
+	line-height: 1;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s;
+	transition: opacity 0.3s;
+}
+
+.questions .current input,
+.no-js .questions input {
+	opacity: 1;
+}
+
+.questions input:focus,
+.simform button:focus {
+	outline: none;
+}
+
+/* Next question button */
+.next {
+	position: absolute;
+	right: 0;
+	bottom: 2.15em; /* padding-bottom of form plus progress bar height */
+	display: block;
+	padding: 0;
+	width: 2em;
+	height: 2em;
+	border: none;
+	background: none;
+	color: rgba(0,0,0,0.4);
+	text-align: center;
+	opacity: 0;
+	z-index: 100;
+	cursor: pointer;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	-webkit-transform: translateX(-20%);
+	transform: translateX(-20%);
+	pointer-events: none;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.next:hover {
+	color: rgba(0,0,0,0.5);
+}
+
+.next::after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: "\e600";
+	text-transform: none;
+	font-weight: normal;
+	font-style: normal;
+	font-variant: normal;
+	font-family: 'icomoon';
+	line-height: 2;
+	speak: none;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.next.show {
+	opacity: 1;
+	-webkit-transform: translateX(0);
+	transform: translateX(0);
+	pointer-events: auto;
+}
+
+/* Progress bar */
+.simform .progress {
+	width: 0%;
+	height: 0.15em;
+	background: rgba(0,0,0,0.3);
+	-webkit-transition: width 0.4s ease-in-out;
+	transition: width 0.4s ease-in-out;
+}
+
+.simform .progress::before {
+	position: absolute;
+	top: auto;
+	width: 100%;
+	height: inherit;
+	background: rgba(0,0,0,0.05);
+	content: '';
+}
+
+/* Number indicator */
+.simform .number {
+	position: absolute;
+	right: 0;
+	overflow: hidden;
+	margin: 0.4em 0;
+	width: 3em;
+	font-weight: 700;
+	font-size: 0.4em;
+}
+
+.simform .number:after {
+	position: absolute;
+	left: 50%;
+	content: '/';
+	opacity: 0.4;
+	-webkit-transform: translateX(-50%);
+	transform: translateX(-50%);
+}
+
+.simform .number span {
+	float: right;
+	width: 40%;
+	text-align: center;
+}
+
+.simform .number .number-current {
+	float: left;
+}
+
+.simform .number-next {
+	position: absolute;
+	left: 0;
+}
+
+.simform.show-next .number-current {
+	-webkit-transition: -webkit-transform 0.4s;
+	transition: transform 0.4s;
+	-webkit-transform: translateY(-100%);
+	transform: translateY(-100%);
+}
+
+.simform.show-next .number-next {
+	-webkit-animation: moveUpFromDown 0.4s both;
+	animation: moveUpFromDown 0.4s both;
+}
+
+/* Error and final message */
+.simform .error-message,
+.simform .final-message {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.4s;
+	transition: opacity 0.4s;
+}
+
+.simform .error-message {
+	padding: 0.4em 3.5em 0 0;
+	width: 100%;
+	color: rgba(0,0,0,0.7);
+	font-style: italic;
+	font-size: 0.4em;
+}
+
+.final-message {
+	top: 50%;
+	left: 0;
+	padding: 0.5em;
+	width: 100%;
+	text-align: center;
+	-webkit-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+
+.error-message.show,
+.final-message.show {
+	visibility: visible;
+	opacity: 1;
+}
+
+.final-message.show {
+	-webkit-transition-delay: 0.5s;
+	transition-delay: 0.5s;
+}
+
+/* Final hiding of form / showing message */
+.simform-inner.hide {
+	visibility: hidden;
+	opacity: 0;
+	-webkit-transition: opacity 0.3s, visibility 0s 0.3s;
+	transition: opacity 0.3s, visibility 0s 0.3s;
+}
+
+/* No JS Fallback */
+.no-js .simform {
+	font-size: 1.75em;
+}
+
+.no-js .questions li {
+	padding: 0 0 2em;
+}
+
+.no-js .simform .submit {
+	display: block;
+	float: right;
+	padding: 10px 20px;
+	border: none;
+	background: rgba(0,0,0,0.3);
+	color: rgba(0,0,0,0.4);
+}
+
+.no-js .simform .controls {
+	display: none;
+}
+
+/* Remove IE clear cross */
+input[type=text]::-ms-clear {
+    display: none;
+}
+
+/* Adjust form for smaller screens */
+@media screen and (max-width: 44.75em) {
+	.simform {
+		font-size: 1.8em;
+	}
+}
+
+@media screen and (max-width: 33.5625em) {
+	.simform {
+		font-size: 1.2em;
+	}
+}
+

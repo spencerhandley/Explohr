@@ -1,0 +1,27 @@
+#topbar
+	a#widelogo(href=router.getLink("home"))
+		img(src="/img/widelogo.png")
+	-if(!user)
+		a.outlined-clear-btn-black.btn.pull-right(href=router.getLink("login")) Sign in
+		a.outlined-clear-btn-black.btn.pull-right#signupbtn(href=router.getLink("register")) Sign Up
+	
+	#rightNav
+		-if(user)
+			.dropdown.pull-right
+				a.userlink.dropdown-toggle.pull-right(type="button" id="dropdownMenu1" data-toggle="dropdown") #{user.general.firstname} #{user.general.lastname}
+				ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="drapdownMenu1")
+					li(role="presentation")
+						a(role="menuitem" tabindex="-1" href=router.getLink("userprofile", {user: user._id})) Profile
+						a(role="menuitem" tabindex="-1" href=router.getLink("dashboard", {user: user._id})) My Classes
+						a(role="menuitem" tabindex="-1" href=router.getLink("edit", {user: user._id})) Edit Account
+						a(role="menuitem" tabindex="-1" href=router.getLink("logout")) Sign Out
+		ul.list-inline.pull-right#topbarnav
+			li.small 
+				a(href=router.getLink("catalog")) COURSES
+			li.small 
+				a(href=router.getLink("people")) PEOPLE
+
+
+
+
+

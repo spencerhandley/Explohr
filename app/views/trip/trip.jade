@@ -1,0 +1,102 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row
+			div.courseDetails.col-sm-6.col-md-6
+				h2.courseTitle Surfing in <b>Pavones, Costa Rica</b>
+				p.lead <i>with</i> Mick Fanning
+				//-each user, i in users
+				//-	p= user.name 
+				p.lead#dates.limitLH March 15th - April 15th
+
+				h3 Trip Overview
+				p Pavones is one of Costa Rica’s most famous surf breaks offering one of the world’s longest lefts, which on a good day, can connect for 2 – 3 minute rides. The wave has several sections which allow for carving, pumping and, of course, showing off for the folks sipping on their Imperials at the Cantina at the end of the break. This area is extremely remote and if you can catch it on a good day, the logistical nightmares surrounding your arrival will be well worth it.
+				h3 Your Guide
+				.col-sm-3.col-md-3.pull-right
+					img#profilePhoto(src="/img/mick.png")
+				p Michael Eugene "Mick" Fanning, nicknamed "White Lightning", is an Australian professional surfer and triple world champion. Fanning won the 2007, 2009 and 2013 ASP World Tour.
+				p In his first year on tour, aged 22, Mick finished an incredible 5th in the world, earning him the ASP Rookie of the Year award. In 2003 Mick climbed one step higher and finished 4th and many thought 2004 would be Mick’s year. However, a catastrophic freesurfing injury changed everything. Mick ripped his hamstring clean off the bone, was out of action for six months and left questioning whether he’d ever again surf competitively. His comeback to the world tour was a stirring win in front of 20,000 fans at his homebreak, Snapper Rocks.
+
+			.col-sm-6.col-md-6
+				#registerBtns
+					p.lead Book this incedible trip <b>Today</b>!
+					h3 Price per Person
+					p.lead $3,550
+					button.btn.btn-success.btn-lg Book Now
+				.panel.panel-default#tripDetails
+					.panel-heading General Information
+					ul.list-group
+						li.list-group-item <b>When:</b>  June 16th-23rd, 2014
+						li.list-group-item <b>Where:</b>  Pavones, Costa Rica
+						li.list-group-item <b>Known For:</b>  Worlds longest left breaking wave and tasty mexican food.
+						li.list-group-item <b>Spots Available:</b>  10 people <span id="remainingSpan">(6 spots remain)</span>
+						li.list-group-item <b>Includes:</b>  Flight, Accomodation, Food, Lessons, Guide, Two Excursions.
+
+
+
+		.row#classdescription
+			.col-sm-6.col-md-6
+			.col-sm-6.col-md-6
+				a(href=router.getLink("teacherprofile", { user : "mickfanning" }) style=" color: inherit")
+					
+		.section
+			.row
+				.col-sm-6.col-md-6
+					h3 What You'll Do.
+					ul#courseTopics
+						li 1 | Personalized Surf Lessons.
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 2 | Stay in an Incredible Beach Chalet.
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 3 | Dine on Local Foods Every Evening. 
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 4 | Enjoy the company of other inspired surfers
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 	
+						li 5 | Jungle Trek
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm.
+				.col-sm-6.col-md-6
+					h3 Current Attendees
+					p These awesome people have already reserved their spot. <a href="#">Join them!</a>
+					.row#classmates
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/1.jpg")
+									.caption
+										p.lead Sara Bennet
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/2.jpg")
+									.caption
+										p.lead Ellen Fairchild
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/3.jpg")
+									.caption
+										p.lead Kevin Blade
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/4.jpg")
+									.caption
+										p.lead Casey Long
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/5.jpg")
+									.caption
+										p.lead Kathy Heath
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/6.jpg")
+									.caption
+										p.lead Mike Frath
+					.text-center
+						button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
+	include ../_footer
+

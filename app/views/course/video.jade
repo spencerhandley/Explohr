@@ -1,0 +1,52 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		#video
+			.row#videoContainer
+				div.courseDetails.col-sm-8.col-md-8
+					h2.profName #{locals.title}
+					p.lead By Chris Sharma
+					iframe(src="//player.vimeo.com/video/30748835", width="100%", height="500px", frameborder="0", webkitallowfullscreen, mozallowfullscreen, allowfullscreen)
+					
+				.col-sm-4.col-md-4
+					.panel.panel-default
+						.panel-heading Videos in this Course
+						.list-group
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+							a.list-group-item(href="") Rock Climbing Video Title
+					.panel.panel-default
+						.panel-heading General Information
+						ul.list-group
+							li.list-group-item 
+								p <b>From:</b>  Tweed Head, NSW, Australia
+							li.list-group-item 
+								p <b>Sponsors:</b>  Rip Curl, Red Bull, Reef, Dragon, DHD, Creatures Of Leisure, Vertra, Skullcandy, Ford, FCS fins, DHD.
+							li.list-group-item 
+								p <b>Known For:</b>  Being the first Australian to usurp Kelly Slater for a world title in 15 years. 
+							li.list-group-item 
+								p <b>Favorite Quote:</b>  There is only one way to avoid criticism: do nothing, say nothing, and be nothing. <i>–Aristotle</i>
+							li.list-group-item 
+								p <b>Records Held:</b>  World Title
+					
+
+
+				
+	include ../_footer

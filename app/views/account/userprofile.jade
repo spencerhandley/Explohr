@@ -1,0 +1,242 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.profileTop
+	.profileContent
+		.container
+			.row#userBasics
+				div
+					-console.log(user)
+					#buttons.pull-right
+						h5.pull-right Outdoor #{user.general.IamA}
+					img.pull-left.profileImage.rounded(src="../img/3.jpg")
+					h2.profName #{user.general.firstname} #{user.general.lastname} 
+						.btn.btn-primary.btn-sm Add Friend
+
+					p.lead #{user.general.hometown}
+					p.userdetails
+						b Age: 
+						span #{user.general.age}
+					p.userdetails
+						b Occupation: 
+						span #{user.general.occupation}
+					p.userdetails
+						b Bio: 
+						span #{user.general.aboutMe}
+					
+					p.userdetails
+						b Sports: 
+						each sport, key in user.sportsList
+							- if(user.sportsList.hasOwnProperty(key))
+								-if(sport == true )
+									span #{key}, 
+
+					
+
+						//.btn.btn-success.pull-right#messageBtn Message
+			.row
+				.row#profileBody
+					.col-md-8
+						-if(user.sports.rockClimbing.notableRoutes)
+							h4 Rock Climbing
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Location
+										th Route 
+										th Pitches
+										th Type
+										th Grade
+										th Date 
+
+									each climb in user.sports.rockClimbing.notableRoutes
+										tr 
+											td #{climb.location}
+											td #{climb.route}
+											td #{climb.pitches}
+											td Traditional
+											td #{climb.grade}
+											td 5/5/13
+						-if(user.sports.rockClimbing.notableRoutes)
+							h4 Mountaineering
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Location
+										th Route 
+										th Pitches
+										th Type
+										th Grade
+										th Date 
+
+									each climb in user.sports.rockClimbing.notableRoutes
+										tr 
+											td #{climb.location}
+											td #{climb.route}
+											td #{climb.pitches}
+											td Traditional
+											td #{climb.grade}
+											td 5/5/13
+						-if(user.sports.rockClimbing.notableRoutes)
+							h4 Cycling
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Location
+										th Route 
+										th Pitches
+										th Type
+										th Grade
+										th Date 
+
+									each climb in user.sports.rockClimbing.notableRoutes
+										tr 
+											td #{climb.location}
+											td #{climb.route}
+											td #{climb.pitches}
+											td Traditional
+											td #{climb.grade}
+											td 5/5/13
+						-if(user.sports.rockClimbing.notableRoutes)
+							h4 Swimming
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Location
+										th Route 
+										th Pitches
+										th Type
+										th Grade
+										th Date 
+
+									each climb in user.sports.rockClimbing.notableRoutes
+										tr 
+											td #{climb.location}
+											td #{climb.route}
+											td #{climb.pitches}
+											td Traditional
+											td #{climb.grade}
+											td 5/5/13
+						-if(user.sports.rockClimbing.notableRoutes)
+							h4 Trips Guided
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Location
+										th Route 
+										th Pitches
+										th Type
+										th Grade
+										th Date 
+
+									each climb in user.sports.rockClimbing.notableRoutes
+										tr 
+											td #{climb.location}
+											td #{climb.route}
+											td #{climb.pitches}
+											td Traditional
+											td #{climb.grade}
+											td 5/5/13
+						-if(user.sports.rockClimbing.notableRoutes)
+							h4 Rock Climbing
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Location
+										th Route 
+										th Pitches
+										th Type
+										th Grade
+										th Date 
+
+									each climb in user.sports.rockClimbing.notableRoutes
+										tr 
+											td #{climb.location}
+											td #{climb.route}
+											td #{climb.pitches}
+											td Traditional
+											td #{climb.grade}
+											td 5/5/13
+							
+
+
+					.col-md-4
+						.row
+							.panel.panel-default#educationPanel
+								-if(user.professional.education.traditional)
+									.panel-body 
+										h4 Traditional Education
+									ul.list-group
+										each trad in user.professional.education.traditional
+											li.list-group-item
+												h4.list-group-item-heading #{trad.institution}
+													.small.list-group-item-text #{trad.degree}
+											//-p #{trad.start} to #{trad.end}
+								-if(user.professional.education.outdoor)
+									.panel-body
+										h4 Outdoor Coursework
+									ul.list-group
+										each outdoor in user.professional.education.outdoor
+											li.list-group-item
+												h4.list-group-item-heading #{outdoor.institution} 
+													.list-group-item-text.small #{outdoor.course}
+												b.list-group-item-text Duration: 
+												span #{outdoor.duration}
+												br
+												b.list-group-item-text Skills Learned: 
+												span #{outdoor.skills}
+												br
+												b.list-group-item-text More Info: 
+												span #{outdoor.other}
+								-if(user.professional.certs)
+									.panel-body
+										h4 Certifications
+									ul.list-group
+										each cert in user.professional.certs
+											li.list-group-item
+												h4.list-group-item-heading #{cert.institution}
+													.small.list-group-item-text #{cert.certificate}
+												b.list-group-item-text Acquired: 
+												span #{cert.acquired}
+												br
+												b.list-group-item-text Expires: 
+												span #{cert.expires}
+
+
+					//-.row
+							h3 Courses
+							each course in locals.user.classes
+								include _profileCourse
+							h3 Friends
+							.row#classmates
+								.col-md-2.col-sm-4
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
+										.thumbnail.text-center
+											img#userThumb(src="/img/1.jpg")
+								.col-md-2.col-sm-4
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
+										.thumbnail.text-center
+											img#userThumb(src="/img/2.jpg")
+								.col-md-2.col-sm-4
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
+										.thumbnail.text-center
+											img#userThumb(src="/img/3.jpg")
+								.col-md-2.col-sm-4
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
+										.thumbnail.text-center
+											img#userThumb(src="/img/4.jpg")
+								.col-md-2.col-sm-4
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
+										.thumbnail.text-center
+											img#userThumb(src="/img/5.jpg")
+								.col-md-2.col-sm-4
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
+										.thumbnail.text-center
+											img#userThumb(src="/img/6.jpg")
+							.text-center
+								button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
+
+
+				
+	include ../_footer

@@ -1,0 +1,9 @@
+{
+	"all": {
+		"home" : { "path": "/", "get": "home.index" },
+		"browserUnsupported": { "path": "/browser-unsupported", "get": "misc.browserUnsupported" },
+		"profile" : { "path": "/profile/spencer", "get": "home.profile"},
+		"course" : { "path": "/course", "get": "course.index"},
+		"topic" : { "path": "/topic", "get": "course.topic"}
+	}
+}

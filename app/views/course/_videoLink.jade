@@ -1,0 +1,10 @@
+a#courseLink(href=router.getLink("video", {
+	videoId: video._id,
+	videoTitle: video.title, 
+}))
+	.listedClass.thumbnail
+		img#videoThumb.pull-left(src="/img/mick.png")
+		.classtitle
+			h3 #{video.title}
+				span #{video.length}
+			em.videoProfName with <a href="http://en.wikipedia.org/wiki/Kelly_Slater"> #{course.teacher} </a>	

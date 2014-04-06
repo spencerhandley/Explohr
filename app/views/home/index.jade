@@ -1,0 +1,255 @@
+extends ../layout
+
+block content
+	.top
+		.dropdown.pull-right
+			-if(user)
+				a.userlinkwhite.dropdown-toggle.pull-right(type="button" id="dropdownMenu1" data-toggle="dropdown") #{user.general.firstname} #{user.general.lastname}
+				ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="drapdownMenu1")
+					li(role="presentation")
+						a(role="menuitem" tabindex="-1" href=router.getLink("userprofile", {user: user._id})) Profile
+						a(role="menuitem" tabindex="-1" href=router.getLink("dashboard", {user: user._id})) My Classes
+						a(role="menuitem" tabindex="-1" href=router.getLink("edit", {user: user._id})) Edit Account
+						a(role="menuitem" tabindex="-1" href=router.getLink("logout")) Sign Out
+			-if(!user)
+				a.outlined-clear-btn.btn.pull-right#signin(href=router.getLink("login")) Sign in
+				a.outlined-clear-btn.btn.pull-right(href=router.getLink("register")) Sign Up
+
+		ul.list-inline.pull-right(style="color:white;")
+			//-li.small 
+				a(href=router.getLink("catalog")) COURSES
+			//-li.small TRIPS
+			//-li.small BLOG
+			//-li.small STORE
+		.container
+			img(src="/img/logo.png" width="200px").center-block#logo
+			h5.text-center.white#alpha BETA
+			h1.text-center.white#title EXPLOHR
+			p.text-center.white ONLINE ADVENTURE SPORT EDUCATION
+			#courseBtns
+				a(href=router.getLink("catalog")).outlined-clear-btn.margin-10 Class Catalog
+	.bottom
+		.container
+			#description
+				h3 Learn Outdoor Skills and Extreme	Sports from World Class Teachers.
+			#latestCourses.section
+				div.text-center
+					h2.sectionTitle What you will <b>Learn</b>			
+				div#courseCarrosel 
+					.row
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "hey", courseid: "533a56e8abb6474712850746"}))
+								.thumbnail
+									img(src="img/rcfund.png")
+									.caption
+										h3 Rock Climbing Fundementals
+										em with <a href="http://en.wikipedia.org/wiki/Chris_Sharma">Chris Sharma</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "hey", courseid: "533a56e8abb6474712850746"}) ) More Details
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "hey", courseid: "533a56e8abb6474712850746"}))
+								.thumbnail
+									img(src="img/surfinglife.png")
+									.caption
+										h3 Lessons in Life and Surfing
+										em with <a href="http://en.wikipedia.org/wiki/Kelly_Slater">Kelly Slater</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "533a56e8abb6474712850746"})) More Details
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"}))
+								.thumbnail
+									img(src="img/kitesurf.png")
+									.caption
+										h3 Introduction to Kite Surfing 
+										em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Aaron Hadlow</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"})) More Details
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"}))
+								.thumbnail
+									img(src="img/survival.png")
+									.caption
+										h3 Wilderness Survival Training
+										em with <a href="http://en.wikipedia.org/wiki/Dave_Canterbury">David Canterbury</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"})) More Details
+					#secondRow.row.hidden
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"}))
+								.thumbnail
+									img(src="img/rcfund.png")
+									.caption
+										h3 Rock Climbing Fundementals
+										em with <a href="http://en.wikipedia.org/wiki/Chris_Sharma">Chris Sharma</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"}) ) More Details
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"}))
+								.thumbnail
+									img(src="img/surfinglife.png")
+									.caption
+										h3 Lessons in Life and Surfing
+										em with <a href="http://en.wikipedia.org/wiki/Kelly_Slater">Kelly Slater</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"})) More Details
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"}))
+								.thumbnail
+									img(src="img/kitesurf.png")
+									.caption
+										h3 Introduction to Kite Surfing 
+										em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Aaron Hadlow</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"})) More Details
+						.col-sm-3.col-md-3.text-center
+							a#courseLink(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"}))
+								.thumbnail
+									img(src="img/survival.png")
+									.caption
+										h3 Wilderness Survival
+										em with <a href="http://en.wikipedia.org/wiki/Dave_Canterbury">David Canterbury</a>
+										p 
+											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"})) More Details
+					.text-center
+						button.outlined-clear-btn-black.margin-10#moreClasses More <span class="caret"></span>
+			#why.section
+				div.text-center
+					h2.sectionTitle Why you'll <b>love EXPLOHR</b>
+				.row
+					.col-md-4.text-center
+						h4.reason World Class Athletes as Teachers.
+						p.lead Watch high quality videos with world renown athletes, sharing their greatest wisdom and inspiration  
+					.col-md-4.text-center
+						h4.reason Track and Log your Outdoor Activities on your Profile. 
+						p.lead Use your profile to keep track of your progress in your outdoor endevours.
+					.col-md-4.text-center
+						h4.reason Learn in Person with Highly Qualified and Passionate Outdoor Enthusiasts
+						p.lead Find in-person skill sharing classes taught by certified outdoor guides and instructors from the community. 
+			
+			#topics.section
+				.text-center
+					h2.sectionTitle Topics are <b>Diverse</b>
+				.row
+					.col-md-4.text-center
+						img(src="img/surfing.png")
+					.col-md-4.text-center
+						img(src="img/rockclimbing.png")
+					.col-md-4.text-center
+						img(src="img/surfing.png")
+				.row
+					.col-md-4.text-center
+						img(src="img/surfing.png")
+					.col-md-4.text-center
+						img(src="img/surfing.png")
+					.col-md-4.text-center
+						img(src="img/surfing.png")
+				.text-center
+					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>
+			#teachers.section
+				.text-center
+					h2.sectionTitle Teachers are <b>World Renown</b>
+					p.lead Our staff is composed of hand-picked World Class<br> athletes from every domain of outdoor adventure.
+				.row
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("teacherprofile", { user : "mickfanning" }))
+							.thumbnail
+								img(src="img/edviesturs.png")
+								.caption
+									p.lead Ed Viesturs
+									p.job Mountaineer
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("teacherprofile", { user : "mickfanning" }))
+							.thumbnail
+								img(src="img/chrissharma.png")
+								.caption
+									p.lead Chris Sharma
+									p.job Rock Climber
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("teacherprofile", { user : "mickfanning" }))
+							.thumbnail
+								img(src="img/kellyslater.png")
+								.caption
+									p.lead Kelly Slater
+									p.job Surfer
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("teacherprofile", { user : "mickfanning" }))
+							.thumbnail
+								img(src="img/drewblack.png")
+								.caption
+									p.lead Drew Black
+									p.job Survivalist
+				.text-center
+					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>	
+			//-#trips.section
+				.text-center
+					h2.sectionTitle Access to Adventure Trips <b>with the Pros</b>
+				.row
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/rcfund.png")
+								.caption
+									h3 Rock Climbing in Yangshuo, China
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Aaron Hadlow</a>
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/caveexplore.png")
+								.caption
+									h3 Cave Exploring in Jalisco, Mexico
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Drew Black</a>
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/surfinglife.png")
+								.caption
+									h3 Surfing in Pavones, Costa Rica
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Kelly Slater</a>
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/iceclimb.png")
+								.caption
+									h3 Ice Climbing in Sitka, Alaska
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Will Gadd</a>
+				.text-center
+					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>	
+			#pricing.section
+				.text-center
+					h2.sectionTitle Ready to <b>Start Your Adventure?</b>
+				.col-sm-3.col-md-6 
+					#monthly.price
+						.priceTitle
+							h1 Monthly
+						.priceTag
+							<span id="dollarsign">$</span><span id="amount">18</span><span id="permonth">Per Month</span>
+						.priceBody
+							ul.benefits
+								li <span class="glyphicon glyphicon-ok" style="color:green; margin-right:13px;"></span>  Pay as you go
+								li <span class="glyphicon glyphicon-ok" style="color:green; margin-right:13px;"></span>  No fixed term
+								li <span class="glyphicon glyphicon-ok" style="color:green; margin-right:13px;"></span>  Unlimited access
+							.text-center
+								button.btn.btn-primary.btn-lg Get Started
+				.col-sm-3.col-md-6
+					#yearly.price
+						.priceTitle
+							h1 Yearly
+						.priceTag
+							<span id="dollarsign">$</span><span id="amount">8</span><span id="permonth">Per Month</span>
+						.priceBody
+							ul.benefits
+								li <span class="glyphicon glyphicon-ok" style="color:green; margin-right:13px;"></span> $96 billed today
+								li <span class="glyphicon glyphicon-ok" style="color:green; margin-right:13px;"></span> Save $120 per year
+								li <span class="glyphicon glyphicon-ok" style="color:green; margin-right:13px;"></span> Unlimited access
+							.text-center
+								button.btn.btn-primary.btn-lg Get Started
+	include ../_footer
+
+block scripts
+	
+
+
+
+
+
+

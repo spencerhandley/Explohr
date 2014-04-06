@@ -1,0 +1,29 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.col-md-6.col-md-offset-3#loginForm
+			h3 Sign Up
+			br
+			h4= info
+			form.form(role="form" action="/register" method="post")
+				div.form-group
+					label.sr-only(for="username") Username
+					input.form-control#email(placeholder="Username", type="text", name="username", required, autofocus)
+				//-.row
+					div.form-group.col-md-6
+						label.sr-only(for="firstname") First Name
+						input.form-control#first(placeholder="First Name", type="text", name="firstname", required)
+					div.form-group.col-md-6
+						label.sr-only(for="lastname") Last Name
+						input.form-control#Last(placeholder="Last Name", type="text", name="lastname", required)
+				div.form-group
+					label.sr-only(for="email") Email
+					input.form-control#email(placeholder="Enter Email", type="email", name="email", required)
+				div.form-group
+					label.sr-only(for="password") Password
+					input.form-control#password(placeholder="Password", type="password", name="password", required)
+				
+				p By clicking, you agree to the <a href="#">Terms of Service</a>
+				button.btn.btn-default.pull-right(type="submit" name="signup") Sign up

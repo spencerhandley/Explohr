@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row.pull-right#myClassTop
+			.col-md-5.col-sm-4
+				h1 My Classes
+			#sorting
+				.col-lg-3.col-md-3.col-sm-3.col-xs-6.pull-right
+					.input-group.input-group-sm
+						input.form-control(type="text")
+						span.input-group-btn
+							button.btn.btn-default(type="button") <span class="glyphicon glyphicon-search"></span>
+				.col-lg-3.col-md-4.col-sm-5.pull-right
+					.btn-group.btn-group-sm.pull-right
+						button.btn.btn-default All Classes
+						button.btn.btn-default Upcoming 
+						button.btn.btn-default Library
+		.row
+		.section
+			each course in locals.user.classes
+				include _dashboardCourse
+	include ../_footer
+
+

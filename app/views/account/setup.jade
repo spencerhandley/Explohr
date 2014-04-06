@@ -1,0 +1,43 @@
+extends ../layout
+block content
+	include ../_topbar
+	div.container
+		.row
+			#gettingstarted.col-md-6.col-md-offset-3
+				h1 Getting Started
+				p.lead Hey! Thanks for signing up for Explohr. Help us get to know you a little bit better by answering a few questions below. :)
+		.row
+			form#theForm.simform(autocomplete="off")
+				div.simform-inner
+					ol.questions
+						li
+							span
+								label(for="q1" ) What's your home town?
+							input#q1(name="q1" type="text", autofocus)
+						li
+							span
+								label(for="q2") How old are you?
+							input#q2(name="q2" type="text")
+						li
+							span
+								label(for="q3") What's your occupation?
+							input#q3(name="q3" type="text")
+						li
+							span
+								label(for="q4") What your favorite sport?
+							input#q4(name="q4" type="text")
+						li
+							span
+								label(for="q5") What your favorite book?
+							input#q5(name="q5" type="text")
+					button.submit(type="submit") submit
+					.controls
+						button.next
+						.progress
+						span.number
+							span.number-current
+							span.number-total
+						span.error-message
+				span.final-message
+block script
+

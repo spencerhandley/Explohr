@@ -1,0 +1,435 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row
+			.col-md-10.col-md-offset-1#loginForm
+				h3 Edit Profile
+				-console.log(locals.user.id);
+
+				ul.nav-tabs.nav
+					li#generalTab.active
+						a(href="#general", data-toggle="tab") General
+					li#educationTab
+						a(href="#education", data-toggle="tab") Education / Coursework
+					li#certsTab
+						a(href="#certs", data-toggle="tab") Certifications
+					li#educator
+						a(href="#teaching", data-toggle="tab") Teaching Experience
+					li#guide
+						a(href="#guiding", data-toggle="tab") Guide Experience
+					li#athlete
+						a(href="#sponsors", data-toggle="tab") Sponsors
+					li#sportsTab.dropdown
+						a(href="#", data-toggle="dropdown").dropdown-toggle Sports
+							span.caret
+						ul.dropdown-menu#sportsList
+							li#rcTab
+								a(href="#rockClimbingCt") Rock Climbing
+							li#mbTab
+								a(href="#mountainBikingCt") Mountain Biking
+							li#runTab
+								a(href="#runningCt") Running
+							li#cycTab
+								a(href="#roadCycleCt") Road Cycling
+							li#kayTab
+								a(href="#kayakingCt") Kayaking
+							li#supbTab
+								a(href="#supbCt") S.U. Paddle Boarding
+							li#surfTab
+								a(href="#surfCt") Surfing
+							li#skiTab
+								a(href="#skiCt") Skiing
+							li#sbTab
+								a(href="#snowboardCt") Snowboarding
+							li#moutTab
+								a(href="#mountaineeringCt") Mountaineering
+							li#hikeTab
+								a(href="#hikeCt") Hiking
+							li#yogaTab
+								a(href="#yogaCt") Yoga
+							li#triTab
+								a(href="#triCt") Triathalon
+							li#swimTab
+								a(href="#swimCt") Swimming
+							li#windTab
+								a(href="#windSurfCt") Wind Surfing
+							li#kiteTab
+								a(href="#kiteSurfCt") Kite Surfing
+							li#fishTab
+								a(href="#fishCt") Fishing
+							li#scubaTab
+								a(href="#scubaCt") Scuba
+							li#canoeTab
+								a(href="#canoeCt") Canoeing
+							li#raftTab
+								a(href="#raftCt") Rafting
+							li#iceTab
+								a(href="#iceClimbCt") Ice Climbing
+							li#skateTab
+								a(href="#skateCt") Skateboarding
+							li#snowshoeingTab
+								a(href="#snowShoeCt") SnowShoeing
+							li#bmxTab
+								a(href="#bmxCt") BMX
+
+
+				br
+				form.form(role="form", action= "/user/#{user._id}", method="POST")
+					div.tab-content
+						div.tab-pane.fade.in.active#general
+								div#IamA.formgroup
+									p I am an Outdoor 
+									select#IAA.form-control(name="general[IamA]" value=locals.account.general.IamA)
+										option(value="Enthusiast") Enthusiast
+										option(value="Professional") Professional
+									.checkboxes
+										input(type="checkbox" value=locals.account.general.educator name="general[educator]")
+										label(for="educator") Educator
+									.checkboxes
+										input(type="checkbox" value=locals.account.general.guide name="general[guide]")
+										label(for="guide") Guide
+									.checkboxes
+										input(type="checkbox" value=locals.account.general.athlete name="general[athlete]")
+										label(for="athlete") Athlete
+
+
+								.row
+									div.form-group.col-md-4
+										label.sr-only(for="general[firstname]") First Name
+										input.form-control(placeholder="First Name" type="text" value=locals.account.general.firstname name="general[firstname]")
+									div.form-group.col-md-4
+										label.sr-only(for="general[lastname]") Last Name
+										input.form-control(placeholder="Last Name" type="text" value=locals.account.general.lastname name="general[lastname]")
+									div.form-group.col-md-4
+										label.sr-only(for="general[email]") Email
+										input.form-control(placeholder="Email" type="text" value=locals.account.general.email name="general[email]")
+								.row
+									div.form-group.col-md-4
+										label.sr-only(for="general[age]") Age
+										input.form-control(placeholder="Age" type="text" value=locals.account.general.age name="general[age]")
+									div.form-group.col-md-4
+										label.sr-only(for="general[hometown]") Hometown
+										input.form-control(placeholder="Hometown, State" type="text" value=locals.account.general.hometown name="general[hometown]")
+									div.form-group.col-md-4
+										label.sr-only(for="general[occupation]") Occupation 
+										input.form-control(placeholder="Occupation" type="text" value=locals.account.general.occupation name="general[occupation]")
+								div.form-group
+									label.sr-only(for="general[aboutMe]") About me 
+									input.form-control#bio(placeholder="About me" type="text" value=locals.account.general.aboutMe name="general[aboutMe]")
+								div#sports.form-group
+									h3 Sports
+									.row
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[0] value="Rock Climbing" name="sportsList[0]")
+											label(for="sports-rockClimbing") Rock Climbing
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[1] value="Mountain Biking" name="sportsList[1]")
+											label(for="sports-mountainBiking") Mountain Biking
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[2] value="Running" name="sportsList[2]")
+											label(for="sports-running") Running
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[3] value="Road Cycling" name="sportsList[3]")
+											label(for="sports-roadCycing") Road Cycling
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[4] value="Kayaking" name="sportsList[4]")
+											label(for="sports-kayaking") Kayaking
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[5] value="Stand Up Paddle Boarding" name="sportsList[5]")
+											label(for="sports-supb") S.U. Paddle Boarding 
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[6] value="Surfing" name="sportsList[6]")
+											label(for="sports-surfing") Surfing
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[7] value="Skiing" name="sportsList[7]")
+											label(for="sports-skiing") Skiing
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[8] value="Snowboarding" name="sportsList[8]")
+											label(for="sports-snowboarding") Snowboarding
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[9] value="Mountaineering" name="sportsList[9]")
+											label(for="sportsList[9]") Mountaineering
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[10] value="Hiking" name="sportsList[10]")
+											label(for="sports-hiking") Hiking
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[11] value="Yoga" name="sportsList[11]")
+											label(for="sports-yoga") Yoga
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[12] value="Triathalon" name="sportsList[12]")
+											label(for="sports-triathalon") Triathalon
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[13] value="Swimming" name="sportsList[13]")
+											label(for="sports-swim") Swimming
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[14] value="Wind Surfing" name="sportsList[14]")
+											label(for="sports-windSurf") Wind Surfing
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[15] value="Kite Surfing" name="sportsList[15]")
+											label(for="sports-kiteBoard") Kite Boarding
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[16] value="Scuba" name="sportsList[16]")
+											label(for="sports-scuba") Scuba
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[17] value="Canoeing" name="sportsList[17]")
+											label(for="sports-canoe") Canoeing
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[18] value="Rafting" name="sportsList[18]")
+											label(for="sports-raft") Rafting
+										div.col-md-3
+											input(type="checkbox" checked=locals.account.sportsList[19] value="Ice Climbing" name="sportsList[19]")
+											label(for="sports-iceclimb") Ice Climbing
+						div.tab-pane#education
+							.row
+								h4 Traditional Education
+								#tradFormContainer
+									#tradEduForm
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][traditional][0][institution]") Institution
+											input.form-control.col-md-4(placeholder="Educational Institution" type="text" value=locals.account.professional.education.traditional[0].institution name="professional[education][traditional][0][institution]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][traditional][0][degree]") Degree Earned
+											input.form-control(placeholder="Degree Earned" type="text" value=locals.account.professional.education.traditional[0].degree name="professional[education][traditional][0][degree]")
+										div.form-group.col-md-2
+											label.sr-only(for="professional[education][traditional][0][start]") Start Date
+											input.form-control.datePick(placeholder="Start Date" type="text" value=locals.account.professional.education.traditional[0].start name="professional[education][traditional][0][start]")
+										div.form-group.col-md-2
+											label.sr-only(for="professional[education][traditional][0][end]") End Date
+											input.form-control.datePick(placeholder="End Date" type="text" value=locals.account.professional.education.traditional[0].end name="professional[education][traditional][0][end]")
+							.row
+								div#addTradEdu.addfieldsBtn.col-md-6.col-md-offset-3 add
+							.row.outsideCourse
+								h4 Outdoor Coursework
+								#outdoorEdFormContainer
+									#outdoorEdEduForm
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][outdoor][0][institution]") Institution
+											input.form-control(placeholder="Institution" type="text" value=locals.account.professional.education.outdoor[0].institution name="professional[education][outdoor][0][institution]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][outdoor][0][course]") Course
+											input.form-control(placeholder="Course" type="text" value=locals.account.professional.education.outdoor[0].course name="professional[education][outdoor][0][course]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][outdoor][0][duration]") Duration 
+											input.form-control(placeholder="Duration" type="text" value=locals.account.professional.education.outdoor[0].duration name="professional[education][outdoor][0][duration]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][outdoor][0][yearsAttended]") Year Attended
+											input.form-control(placeholder="Year Attended" type="text" value=locals.account.professional.education.outdoor[0].yearsAttended name="professional[education][outdoor][0][yearsAttended]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][outdoor][0][skills]") Skills Studied
+											input.form-control(placeholder="Skills Studied" type="text" value=locals.account.professional.education.outdoor[0].skills name="professional[education][outdoor][0][skills]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[education][outdoor][0][other]") Other info 
+											input.form-control(placeholder="Other Info" type="text" value=locals.account.professional.education.outdoor[0].other name="professional[education][outdoor][0][other]")
+							.row
+								div#addOutsideCourse.addfieldsBtn.col-md-6.col-md-offset-3 add
+						div.tab-pane#certs
+							.row
+								h4 Certifications
+								#certificateFormContainer
+									#certificateForm
+										div.form-group.col-md-3
+											label.sr-only(for="professional[certs][0][institution]") Institution
+											input.form-control(placeholder="Institution" type="text" value=locals.account.professional.certs[0].institution name="professional[certs][0][institution]")
+										div.form-group.col-md-3
+											label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
+											input.form-control(placeholder="Certificate Earned" type="text" value=locals.account.professional.certs[0].certificate name="professional[certs][0][certificate]")
+										div.form-group.col-md-3
+											label.sr-only(for="professional[certs][0][acquired]") Date Acquired
+											input.form-control(placeholder="Date Acquired" type="text" value=locals.account.professional.certs[0].acquired name="professional[certs][0][acquired]")
+										div.form-group.col-md-3
+											label.sr-only(for="professional[certs][0][expires]") Expires
+											input.form-control(placeholder="Expires" type="text" value=locals.account.professional.certs[0].expires name="professional[certs][0][expires]")
+							.row
+								div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
+						div.tab-pane#teaching
+							h4 Schools and Organizations Worked For:
+							#teachingFormContainer
+								#teachingForm
+									.row
+										p Type of Work
+											select#courseDescription.form-control( value=locals.account.professional.teaching.experience[0].kind name="professional[teaching][0][kind]")
+												option(value="Expiditionary") Expeditionary
+												option(value="Residential") Residential
+												option(value="Other") Other
+									.row
+										div.form-group.col-md-4
+											label.sr-only(for="professional[teaching][experience][0][organization]") Organization 
+											input.form-control(placeholder="Organization" type="text" value=locals.account.professional.teaching.experience[0].organization name="professional[teaching][experience][0][organization]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[teaching][experience][0][jobTitle]") Job Title
+											input.form-control(placeholder="Title" type="text" value=locals.account.professional.teaching.experience[0].jobTitle name="professional[teaching][experience][0][jobTitle]")
+										div.form-group.col-md-4
+											label.sr-only(for="professional[teaching][experience][0][location]") Location
+											input.form-control(placeholder="Location" type="text" value=locals.account.professional.teaching.experience[0].location name="professional[teaching][experience][0][location]")
+									.row
+										h5 Time Period
+										div.form-group.col-md-3.col-md-offset-2
+											label.sr-only(for="professional[teaching][experience][0][start]") Start Date
+											input.form-control.datePick(placeholder="Start Date" type="text" value=locals.account.professional.teaching.experience[0].start name="professional[teaching][experience][0][start]")
+										.col-md-2
+											p until
+										div.form-group.col-md-3
+											label.sr-only(for="professional[teaching][experience][0][end]") End Date
+											input.form-control.datePick(placeholder="End Date" type="text" value=locals.account.professional.teaching.experience[0].end name="professional[teaching][experience][0][end]")
+										div.form-group.col-md-2
+											input(type="checkbox", value=locals.account.professional.teaching.experience[0].current name="professional[teaching][experience][0][current]")
+											label(for="professional[teaching][experience][0][current]") I currently work here
+									.row
+										.form-group.col-md-12
+											label.sr-only(for="professional[teaching][experience][0][description]")
+											input.form-control(placeholder="Brief Description" type="text" value=locals.account.professional.teaching.experience[0].description name="professional[teaching][experience][0][description]")
+
+							.row
+								div#addTeachingExperience.addfieldsBtn.col-md-6.col-md-offset-3 add
+
+
+							.row
+								h5 Did we miss anything? Add your own work experience here:
+								.form-group.col-md-12
+									label.sr-only(for="professional[teaching][additional]")
+									input.form-control(placeholder="Description of experience" type="text" value=locals.account.professional.teaching.additional name="professional[teaching][additional]")
+						div.tab-pane#guiding
+							#section
+								
+								h4 Guiding Companies worked for:
+								#guidingCoFormContainer
+									#guidingCoForm
+										.row
+											div.form-group.col-md-4
+												label.sr-only(for="professional[guiding][companies][0][organization]") Organization 
+												input.form-control(placeholder="Organization" type="text" value=locals.account.professional.guiding.companies[0].organization name="professional[guiding][companies][0][organization]")
+											div.form-group.col-md-4
+												label.sr-only(for="professional[guiding][companies][0][jobTitle]") Job Title
+												input.form-control(placeholder="Title" type="text" value=locals.account.professional.guiding.companies[0].jobTitle name="professional[guiding][companies][0][jobTitle]")
+											div.form-group.col-md-4
+												label.sr-only(for="professional[guiding][companies][0][location]") Location
+												input.form-control(placeholder="Location" type="text" value=locals.account.professional.guiding.companies[0].location name="professional[guiding][companies][0][location]")
+										.row
+											h5 Time Period
+											div.form-group.col-md-3.col-md-offset-2
+												label.sr-only(for="professional[guiding][companies][0][start]") Start Date
+												input.form-control.datePick(placeholder="Start Date" type="text" value=locals.account.professional.guiding.companies[0].start name="professional[guiding][companies][0][start]")
+											.col-md-2
+												p until
+											div.form-group.col-md-3
+												label.sr-only(for="professional[guiding][companies][0][end]") End Date
+												input.form-control.datePick(placeholder="End Date" type="text" value=locals.account.professional.guiding.companies[0].end name="professional[guiding][companies][0][end]")
+											div.form-group.col-md-2
+												input(type="checkbox", value=locals.account.professional.guiding.companies[0].current name="professional[guiding][companies][0][current]")
+												label(for="professional[guiding][companies][0][current]") I currently work here
+										.row
+											.form-group.col-md-12
+												label.sr-only(for="professional[guiding][companies][0][description]")
+												input.form-control(placeholder="Brief Description" type="text" value=locals.account.professional.guiding.companies[0].description name="professional[guiding][companies][0][description]")
+
+								.row
+									div#addGuidingCo.addfieldsBtn.col-md-6.col-md-offset-3 add
+							#section
+								h4 Trips / Expeditions Led:
+								#tripsFormContainer
+									#tripsForm
+										.row
+											p Age Range
+												select#ageRange(name="professional[guiding][guided][0][ages]" value=locals.account.professional.guiding.guided[0].ages )
+													option(value="1 week or less") 5-7
+													option(value="professional") 7-10
+													option(value="professional") 11-14
+													option(value="professional") 15-18
+													option(value="professional") 18-21
+													option(value="professional") 22-30
+													option(value="professional") 31-50
+													option(value="professional") 51+
+											p Gender
+												select#gender(name="professional[guiding][guided][0][gender]" value=locals.account.professional.guiding.guided[0].gender )
+													option(value="1 week or less") Male
+													option(value="professional") Female
+													option(value="professional") Mixed Group
+										.row
+											div.form-group.col-md-4
+												label.sr-only(for="professional[guiding][guided][0][organization]") Organization 
+												input.form-control(placeholder="Organization" type="text" value=locals.account.professional.guiding.guided[0].organization name="professional[guiding][guided][0][organization]")
+											div.form-group.col-md-4
+												label.sr-only(for="professional[guiding][guided][0][location]" ) Location
+												input.form-control(placeholder="Location" type="text" value=locals.account.professional.guiding.guided[0].location name="professional[guiding][guided][0][location]")
+											div.form-group.col-md-4
+												label.sr-only(for="professional[guiding][guided][0][numOfClients]") # of Clients
+												input.form-control(placeholder="# of Clients" type="text" value=locals.account.professional.guiding.guided[0].numOfClients name="professional[guiding][guided][0][numOfClients]")
+										.row
+											h5 Time Period
+											div.form-group.col-md-3.col-md-offset-2
+												label.sr-only(for="professional[guiding][guided][0][start]") Start Date
+												input.form-control.datePick(placeholder="Start Date" type="text" value=locals.account.professional.guiding.guided[0].start name="professional[guiding][guided][0][start]")
+											.col-md-2
+												p until
+											div.form-group.col-md-3
+												label.sr-only(for="professional[guiding][guided][0][end]") End Date
+												input.form-control.datePick(placeholder="End Date" type="text" value=locals.account.professional.guiding.guided[0].end name="professional[guiding][guided][0][end]")
+										.row
+											.form-group.col-md-12
+												label.sr-only(for="professional[guiding][guided][0][description]") Trip Description
+												input.form-control(placeholder="Trip Description" type="text" value=locals.account.professional.guiding.guided[0].description name="professional[guiding][guided][0][description]")
+
+								.row
+									div#addTrip.addfieldsBtn.col-md-6.col-md-offset-3 add
+
+							.row
+								h5 Did we miss anything? Add your own work experience here:
+								.form-group.col-md-12
+									label.sr-only(for="professional[guiding][additional]")
+									input.form-control(placeholder="Description of experience" type="text" value=locals.account.professional.guiding.additional name="professional[guiding][additional]")
+						div.tab-pane#sponsors
+							#section
+								h4 Sponsors:
+								#sponsorFormContainer
+									#sponsorForm
+										.row
+											div.form-group.col-md-3
+												label.sr-only(for="first") Organization 
+												input.form-control(placeholder="Organization / Company" type="text" value=locals.account.professional.sponsors.organization name="professional[sponsors][0][organization]")
+											div.form-group.col-md-3
+												label.sr-only(for="email") Sport
+												input.form-control(placeholder="Sport" type="text" value=locals.account.professional.sponsors.sport name="professional[sponsors][0][sport]")
+											div.form-group.col-md-2
+												label.sr-only(for="email") Start Date
+												input.form-control.datePick(placeholder="Start Date" type="text" value=locals.account.professional.sponsors.start name="professional[sponsors][0][start]")
+											div.form-group.col-md-2
+												label.sr-only(for="email") End Date
+												input.form-control.datePick(placeholder="End Date" type="text" value=locals.account.professional.sponsors.end name="professional[sponsors][0][end]")
+											div.form-group.col-md-2
+												input(type="checkbox", value=locals.account.professional.sponsors.current name="professional[sponsors][0][current]")
+												label(for="currentlyWork") I'm currently sponsored
+										.row
+											.form-group.col-md-12
+												label.sr-only(for="professional[sponsors][0][description]")
+												input.form-control(placeholder="Brief Description" type="text" value=locals.account.professional.sponsors.description name="professional[guiding][0][description]")
+								.row
+									div#addSponsor.addfieldsBtn.col-md-6.col-md-offset-3 add
+
+						div.tab-pane#rockClimbingCt
+							.row
+								h4 Rock Climbing
+								h5 Notable Climbs
+							.row
+								#rockClimbingFormContainer
+									#rockClimbingForm
+		
+											div.form-group.col-md-3
+												label.sr-only(for="sports[rockClimbing][notableRoutes][0][location]") Location
+												input.form-control(placeholder="Location" type="text" value=locals.account.sports.rockClimbing.notableRoutes[0].location name="sports[rockClimbing][notableRoutes][0][location]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[rockClimbing][notableRoutes][0][route]") Route
+												input.form-control(placeholder="Route" type="text" value=locals.account.sports.rockClimbing.notableRoutes[0].route name="sports[rockClimbing][notableRoutes][0][route]")
+											div.form-group.col-md-2
+												label.sr-only(for="sports[rockClimbing][notableRoutes][0][grade]") Grade
+												input.form-control(placeholder="Grade" type="text" value=locals.account.sports.rockClimbing.notableRoutes[0].grade name="sports[rockClimbing][notableRoutes][0][grade]")
+											div.form-group.col-md-2
+												label.sr-only(for="sports[rockClimbing][notableRoutes][0][pitched]") Pitches
+												input.form-control(placeholder="Pitches" type="text" value=locals.account.sports.rockClimbing.notableRoutes[0].pitches name="sports[rockClimbing][notableRoutes][0][pitches]")
+											div.form-group.col-md-2
+												label.sr-only(for="sports[rockClimbing][notableRoutes][0][date]") Date
+												input.form-control.climbDate(placeholder="Date" type="text" value=locals.account.sports.rockClimbing.notableRoutes[0].date name="sports[rockClimbing][notableRoutes][0][date]")
+							.row
+								div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3 add	
+					button.btn.btn-default.pull-right(type="submit" name="editprofile") Update

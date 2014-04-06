@@ -1,0 +1,113 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	-console.log(locals)
+	.container
+		.row
+			div.courseDetails.col-sm-6.col-md-6
+				h2.courseTitle Lessons in <b>Life and Surfing</b>
+				p.lead <i>with</i> Mick Fanning
+				//-each user, i in users
+				//-	p= user.name 
+				h3 Course at a Glance
+				p.lead#duration.limitLH 15 videos 
+				p.lead#daysOfWeek.limitLH Intermediate
+			.col-sm-6.col-md-6
+				#registerBtns
+					p.lead This course is <b>Coming Soon</b>!
+					a(href=router.getLink("addToMyList", {user: locals.user._id, courseid: courseid})).btn.btn-success.btn-lg + My Classes
+
+		.row#classdescription
+			.col-sm-6.col-md-6
+				h3 Class Overview
+				p Surfing is not just a sport, it's a perspective. It's a way of life. Yes, that sounds dramatic, but hear me out. Surfing can teach you life lessons you won't learn anywhere else. In this course, world famous surfer, Mick Fanning Shares the wisdom that he’s gotten from years on the waves.
+			.col-sm-6.col-md-6
+				a(href=router.getLink("teacherprofile", { user : "mickfanning" }) style=" color: inherit")
+					h3 Your Professor
+					.col-sm-3.col-md-3.pull-right
+						img#profilePhoto(src="/img/mick.png")
+					p Michael Eugene "Mick" Fanning, nicknamed "White Lightning", is an Australian professional surfer and triple world champion. Fanning won the 2007, 2009 and 2013 ASP World Tour.
+		.section
+			.row
+				.col-sm-6.col-md-6
+					h3 Videos
+					ul#courseTopics
+						li 1 | The Five Key's to a Happy Life.
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 2 | What They Don’t Tell You About Surfing.
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 3 | How Much is Too Much?
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 4 | How Not to Surf?
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 	
+						li 5 | Practical Skills.
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm.
+						li 6 | How Much is Too Much?
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 7 | How Not to Surf?
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 	
+				.col-sm-6.col-md-6
+					a(href=router.getLink("trip", { trip : "costarica"}) style="color:inherit")
+						#adventureTrip.thumbnail
+							h3 Adventure Trip
+							p.lead <i>with</i> Mick Fanning
+							img#adventurePhoto(src="/img/surfTripPhoto.png")
+							ul.list-group
+								li.list-group-item <b>When:</b>  June 16th-23rd, 2014
+								li.list-group-item <b>Where:</b>  Pavones, Costa Rica
+								li.list-group-item <b>Known For:</b>  Worlds longest left breaking wave and tasty mexican food.
+								li.list-group-item <b>Spots Available:</b>  10 people <span id="remainingSpan">(6 spots remain)</span>
+								li.list-group-item <b>Includes:</b>  Flight, Accomodation, Food, Lessons, Guide, Two Excursions.
+
+							h2 4/10 Spots Taken
+								small.lead 5 days left to book.
+							.progress.progress-striped.active
+								.progress-bar(role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%")
+									span.sr-only 4/10 spots Taken
+							.text-center
+								button.btn.btn-primary.btn-lg More Details
+		.section#classmates
+			h3 Your Classmates
+			.row
+				.col-md-2
+					a(href=router.getLink("userprofile", { user : "deanbennet" }))
+						.thumbnail.text-center
+							img#userThumb(src="/img/1.jpg")
+							.caption
+								p.lead Sara Bennet
+				.col-md-2
+					a(href=router.getLink("userprofile", { user : "deanbennet" }))
+						.thumbnail.text-center
+							img#userThumb(src="/img/2.jpg")
+							.caption
+								p.lead Ellen Fairchild
+				.col-md-2
+					a(href=router.getLink("userprofile", { user : "deanbennet" }))
+						.thumbnail.text-center
+							img#userThumb(src="/img/3.jpg")
+							.caption
+								p.lead Kevin Blade
+				.col-md-2
+					a(href=router.getLink("userprofile", { user : "deanbennet" }))
+						.thumbnail.text-center
+							img#userThumb(src="/img/4.jpg")
+							.caption
+								p.lead Casey Long
+				.col-md-2
+					a(href=router.getLink("userprofile", { user : "deanbennet" }))
+						.thumbnail.text-center
+							img#userThumb(src="/img/5.jpg")
+							.caption
+								p.lead Kathy Heath
+				.col-md-2
+					a(href=router.getLink("userprofile", { user : "deanbennet" }))
+						.thumbnail.text-center
+							img#userThumb(src="/img/6.jpg")
+							.caption
+								p.lead Mike Frath
+
+
+
+	include ../_footer
+
