@@ -49,15 +49,17 @@ block content
 										th Type
 										th Grade
 										th Date 
+										th Lead / Follow
 
 									each climb in user.sports.rockClimbing.notableRoutes
 										tr 
 											td #{climb.location}
 											td #{climb.route}
 											td #{climb.pitches}
-											td Traditional
+											td #{climb.climbType}
 											td #{climb.grade}
 											td 5/5/13
+											td #{climb.leadFollow}
 						-if(user.sports.rockClimbing.notableRoutes)
 							h4 Mountaineering
 							.panel.panel-default.col-md-12
@@ -69,15 +71,15 @@ block content
 										th Type
 										th Grade
 										th Date 
-
 									each climb in user.sports.rockClimbing.notableRoutes
 										tr 
 											td #{climb.location}
 											td #{climb.route}
 											td #{climb.pitches}
-											td Traditional
+											td #{climb.climbType}
 											td #{climb.grade}
 											td 5/5/13
+											td #{climb.leadFollow}
 						-if(user.sports.rockClimbing.notableRoutes)
 							h4 Cycling
 							.panel.panel-default.col-md-12

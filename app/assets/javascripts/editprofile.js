@@ -84,7 +84,7 @@ $(document).ready(function(){
 
 	//clickToggle('rockClimbing', '#rcTab')
 
-	$("input[name='sportsList[rockClimbing]']").click(function(){
+	$("input[name='sportsList']").click(function(){
 		$("#rcTab").toggle();
 	});
 	$("input[name='sportsList[mountainBiking]']").click(function(){

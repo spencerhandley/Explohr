@@ -621,21 +621,31 @@ block content
 										-var i = 0
 										each climb in locals.account.sports.rockClimbing.notableRoutes
 											#rockClimbingForm
-												div.form-group.col-md-3
-													label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][location]") Location
-													input.form-control(placeholder="Location" type="text" value=climb.location name="sports[rockClimbing][notableRoutes][" + i + "][location]")
-												div.form-group.col-md-3
-													label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][route]") Route
-													input.form-control(placeholder="Route" type="text" value=climb.route name="sports[rockClimbing][notableRoutes][" + i + "][route]")
-												div.form-group.col-md-2
-													label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][grade]") Grade
-													input.form-control(placeholder="Grade" type="text" value=climb.grade name="sports[rockClimbing][notableRoutes][" + i + "][grade]")
-												div.form-group.col-md-2
-													label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][pitched]") Pitches
-													input.form-control(placeholder="Pitches" type="text" value=climb.pitches name="sports[rockClimbing][notableRoutes][" + i + "][pitches]")
-												div.form-group.col-md-2
-													label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][date]") Date
-													input.form-control.climbDate(placeholder="Date" type="text" value=climb.date name="sports[rockClimbing][notableRoutes][" + i + "][date]")
+												.row
+													div.form-group.col-md-3
+														select#climbType.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][climbType]") 
+															option(value="Traditional") Traditional
+															option(value="Sport") Sport
+														select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][leadFollow]") 
+															option(value="Lead") Lead
+															option(value="Follow") Follow
+															option(value="Mixed") Mixed
+												.row
+													div.form-group.col-md-3
+														label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][location]") Location
+														input.form-control(placeholder="Location" type="text" value=climb.location name="sports[rockClimbing][notableRoutes][" + i + "][location]")
+													div.form-group.col-md-3
+														label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][route]") Route
+														input.form-control(placeholder="Route" type="text" value=climb.route name="sports[rockClimbing][notableRoutes][" + i + "][route]")
+													div.form-group.col-md-2
+														label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][grade]") Grade
+														input.form-control(placeholder="Grade" type="text" value=climb.grade name="sports[rockClimbing][notableRoutes][" + i + "][grade]")
+													div.form-group.col-md-2
+														label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][pitched]") Pitches
+														input.form-control(placeholder="Pitches" type="text" value=climb.pitches name="sports[rockClimbing][notableRoutes][" + i + "][pitches]")
+													div.form-group.col-md-2
+														label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][date]") Date
+														input.form-control.climbDate(placeholder="Date" type="text" value=climb.date name="sports[rockClimbing][notableRoutes][" + i + "][date]")
 												-i++
 									if(!locals.account.sports.rockClimbing.notableRoutes[0])
 										#rockClimbingForm

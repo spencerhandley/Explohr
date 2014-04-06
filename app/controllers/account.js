@@ -41,7 +41,6 @@ routes.post({name: 'editProfile', re: '/user/:user'}, function (req, res){
 		$set: {
 			general: req.body.general,
 			sports: req.body.sports,
-			sportsList: req.body.sportsList,
 			professional: req.body.professional}
 
 	}, function (err, person){
@@ -51,7 +50,7 @@ routes.post({name: 'editProfile', re: '/user/:user'}, function (req, res){
 			res.json('no such user');
 		} else{
 			res.send(person);
-			res.redirect('/');
+			res.redirect('/user/:user');
 		}
 	});
 });

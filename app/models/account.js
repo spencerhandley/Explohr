@@ -71,7 +71,9 @@ var climbRoute = new Schema({
 	route: String,
 	grade: String, 
 	pitches: Number,
-	date: {type: Date}
+	date: {type: Date},
+	climbType: String,
+	leadFollow: String
 });
 
 var rockClimbing = new Schema({
