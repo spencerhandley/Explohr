@@ -80,9 +80,6 @@ var rockClimbing = new Schema({
 	notableRoutes: [climbRoute]
 });
 
-var sport = new Schema({
-	sportName: String
-})
 var Account = new Schema({
 	general: {
 		firstname: String,
@@ -99,7 +96,8 @@ var Account = new Schema({
 		photo: String,
 		friends: [{type: Schema.Types.ObjectId, ref: "Account"}]
 	},
-	sportsList: [sport],
+	sportsList: {
+	},
 	classes: [{type: Schema.Types.ObjectId, ref: 'Course'}],
 	sports: {
 		rockClimbing: {

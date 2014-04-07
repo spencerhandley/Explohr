@@ -25,56 +25,66 @@ block content
 						a(href="#", data-toggle="dropdown").dropdown-toggle Sports
 							span.caret
 						ul.dropdown-menu#sportsList
-							li#rcTab
+							- var visibility = locals.account.sportsList.rockClimbing ? "block" : "none";
+							li#rcTab(style="display: " + visibility + ";")
 								a(href="#rockClimbingCt") Rock Climbing
-							li#mbTab
+							- var visibility = locals.account.sportsList.mountainBiking ? "block" : "none";
+							li#mbTab(style="display: " + visibility + ";")
 								a(href="#mountainBikingCt") Mountain Biking
-							li#runTab
+							- var visibility = locals.account.sportsList.running ? "block" : "none";
+							li#runTab(style="display: " + visibility + ";")
 								a(href="#runningCt") Running
-							li#cycTab
+							- var visibility = locals.account.sportsList.roadCycling ? "block" : "none";
+							li#cycTab(style="display: " + visibility + ";")
 								a(href="#roadCycleCt") Road Cycling
-							li#kayTab
+							- var visibility = locals.account.sportsList.kayaking ? "block" : "none";
+							li#kayTab(style="display: " + visibility + ";")
 								a(href="#kayakingCt") Kayaking
-							li#supbTab
+							- var visibility = locals.account.sportsList.supb ? "block" : "none";
+							li#supbTab(style="display: " + visibility + ";")
 								a(href="#supbCt") S.U. Paddle Boarding
-							li#surfTab
+							- var visibility = locals.account.sportsList.surfing ? "block" : "none";
+							li#surfTab(style="display: " + visibility + ";")
 								a(href="#surfCt") Surfing
-							li#skiTab
+							- var visibility = locals.account.sportsList.skiing ? "block" : "none";
+							li#skiTab(style="display: " + visibility + ";")
 								a(href="#skiCt") Skiing
-							li#sbTab
+							- var visibility = locals.account.sportsList.snowboarding ? "block" : "none";
+							li#sbTab(style="display: " + visibility + ";")
 								a(href="#snowboardCt") Snowboarding
-							li#moutTab
+							- var visibility = locals.account.sportsList.mountaineering ? "block" : "none";
+							li#moutTab(style="display: " + visibility + ";")
 								a(href="#mountaineeringCt") Mountaineering
-							li#hikeTab
+							- var visibility = locals.account.sportsList.hiking ? "block" : "none";
+							li#hikeTab(style="display: " + visibility + ";")
 								a(href="#hikeCt") Hiking
-							li#yogaTab
+							- var visibility = locals.account.sportsList.yoga ? "block" : "none";
+							li#yogaTab(style="display: " + visibility + ";")
 								a(href="#yogaCt") Yoga
-							li#triTab
+							- var visibility = locals.account.sportsList.triathalon ? "block" : "none";
+							li#triTab(style="display: " + visibility + ";")
 								a(href="#triCt") Triathalon
-							li#swimTab
+							- var visibility = locals.account.sportsList.swimming ? "block" : "none";
+							li#swimTab(style="display: " + visibility + ";")
 								a(href="#swimCt") Swimming
-							li#windTab
+							- var visibility = locals.account.sportsList.windSurf ? "block" : "none";
+							li#windTab(style="display: " + visibility + ";")
 								a(href="#windSurfCt") Wind Surfing
-							li#kiteTab
+							- var visibility = locals.account.sportsList.kiteSurf ? "block" : "none";
+							li#kiteTab(style="display: " + visibility + ";")
 								a(href="#kiteSurfCt") Kite Surfing
-							li#fishTab
-								a(href="#fishCt") Fishing
-							li#scubaTab
+							- var visibility = locals.account.sportsList.scuba ? "block" : "none";
+							li#scubaTab(style="display: " + visibility + ";")
 								a(href="#scubaCt") Scuba
-							li#canoeTab
+							- var visibility = locals.account.sportsList.canoe ? "block" : "none";
+							li#canoeTab(style="display: " + visibility + ";")
 								a(href="#canoeCt") Canoeing
-							li#raftTab
+							- var visibility = locals.account.sportsList.raft ? "block" : "none";
+							li#raftTab(style="display: " + visibility + ";")
 								a(href="#raftCt") Rafting
-							li#iceTab
+							- var visibility = locals.account.sportsList.iceClimb ? "block" : "none";
+							li#iceTab(style="display: " + visibility + ";")
 								a(href="#iceClimbCt") Ice Climbing
-							li#skateTab
-								a(href="#skateCt") Skateboarding
-							li#snowshoeingTab
-								a(href="#snowShoeCt") SnowShoeing
-							li#bmxTab
-								a(href="#bmxCt") BMX
-
-
 				br
 				form.form(role="form", action= "/user/#{user._id}", method="POST")
 					div.tab-content
@@ -122,64 +132,64 @@ block content
 									h3 Sports
 									.row
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Rock Climbing" name="sportsList")
+											input(type="checkbox" checked=locals.account.sportsList.rockClimbing value="Rock Climbing" name="sportsList[rockClimbing]")
 											label(for="sports-rockClimbing") Rock Climbing
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Mountain Biking" name="sportsList[1]")
+											input(type="checkbox" checked=locals.account.sportsList.mountainBiking value="Mountain Biking" name="sportsList[mountainBiking]")
 											label(for="sports-mountainBiking") Mountain Biking
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Running" name="sportsList[2]")
+											input(type="checkbox" checked=locals.account.sportsList.running value="Running" name="sportsList[running]")
 											label(for="sports-running") Running
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Road Cycling" name="sportsList[3]")
+											input(type="checkbox" checked=locals.account.sportsList.roadCycling value="Road Cycling" name="sportsList[roadCycling]")
 											label(for="sports-roadCycing") Road Cycling
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Kayaking" name="sportsList[4]")
+											input(type="checkbox" checked=locals.account.sportsList.kayaking value="Kayaking" name="sportsList[kayaking]")
 											label(for="sports-kayaking") Kayaking
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Stand Up Paddle Boarding" name="sportsList[5]")
+											input(type="checkbox" checked=locals.account.sportsList.supb value="Stand Up Paddle Boarding" name="sportsList[supb]")
 											label(for="sports-supb") S.U. Paddle Boarding 
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Surfing" name="sportsList[6]")
+											input(type="checkbox" checked=locals.account.sportsList.surfing value="Surfing" name="sportsList[surfing]")
 											label(for="sports-surfing") Surfing
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Skiing" name="sportsList[7]")
+											input(type="checkbox" checked=locals.account.sportsList.skiing value="Skiing" name="sportsList[skiing]")
 											label(for="sports-skiing") Skiing
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Snowboarding" name="sportsList[8]")
+											input(type="checkbox" checked=locals.account.sportsList.snowboarding value="Snowboarding" name="sportsList[snowboarding]")
 											label(for="sports-snowboarding") Snowboarding
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Mountaineering" name="sportsList[9]")
+											input(type="checkbox" checked=locals.account.sportsList.mountaineering value="Mountaineering" name="sportsList[mountaineering]")
 											label(for="sportsList[9]") Mountaineering
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Hiking" name="sportsList[10]")
+											input(type="checkbox" checked=locals.account.sportsList.hiking value="Hiking" name="sportsList[hiking]")
 											label(for="sports-hiking") Hiking
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Yoga" name="sportsList[11]")
+											input(type="checkbox" checked=locals.account.sportsList.yoga value="Yoga" name="sportsList[yoga]")
 											label(for="sports-yoga") Yoga
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Triathalon" name="sportsList[12]")
+											input(type="checkbox" checked=locals.account.sportsList.triathalon value="Triathalons" name="sportsList[triathalon]")
 											label(for="sports-triathalon") Triathalon
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Swimming" name="sportsList[13]")
+											input(type="checkbox" checked=locals.account.sportsList.swimming value="Swimming" name="sportsList[swimming]")
 											label(for="sports-swim") Swimming
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Wind Surfing" name="sportsList[14]")
+											input(type="checkbox" checked=locals.account.sportsList.windSurf value="Wind Surfing" name="sportsList[windSurf]")
 											label(for="sports-windSurf") Wind Surfing
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Kite Surfing" name="sportsList[15]")
+											input(type="checkbox" checked=locals.account.sportsList.kiteSurf value="Kite Surfing" name="sportsList[kiteSurf]")
 											label(for="sports-kiteBoard") Kite Boarding
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Scuba" name="sportsList[16]")
+											input(type="checkbox" checked=locals.account.sportsList.scuba value="Scuba" name="sportsList[scuba]")
 											label(for="sports-scuba") Scuba
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Canoeing" name="sportsList[17]")
+											input(type="checkbox" checked=locals.account.sportsList.canoe value="Canoeing" name="sportsList[canoe]")
 											label(for="sports-canoe") Canoeing
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Rafting" name="sportsList[18]")
+											input(type="checkbox" checked=locals.account.sportsList.raft value="Rafting" name="sportsList[raft]")
 											label(for="sports-raft") Rafting
 										div.col-md-3
-											input(type="checkbox" checked=locals.account.sportsList value="Ice Climbing" name="sportsList[19]")
+											input(type="checkbox" checked=locals.account.sportsList.iceClimb value="Ice Climbing" name="sportsList[iceClimb]")
 											label(for="sports-iceclimb") Ice Climbing
 						div.tab-pane#education
 							.row

@@ -156,13 +156,14 @@ footer { height: 350px; background-color: #2c363a; padding-top: 1px; }
 
 
 /*edit profile */
+
 .addedform {border-bottom: 1px solid #e5e5e5;}
 #section { border-bottom: 1px solid #e5e5e5; margin-bottom: 20px;}
 #courseDescription {display: inline; margin-left: 10px;}
 #educator {display: none;}
 #athlete {display: none;}
 #guide { display: none;}
-#sportsList li {display: none;}
+#sportsList li {}
 .addfieldsBtn { border: 1px dashed #e5e5e5; border-radius: 5px; margin-bottom: 15px; color: #e5e5e5;}
 .addfieldsBtn:hover { border: 1px dashed #b4b4b4; color: #b4b4b4}
 

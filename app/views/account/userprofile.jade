@@ -27,10 +27,12 @@ block content
 					
 					p.userdetails
 						b Sports: 
-						//-each sport, key in user.sportsList
-							- if(user.sportsList.hasOwnProperty(key))
-								-if(sport == true )
-									span #{key}, 
+						-var arrayOfSports = Object.keys(user.sportsList).map(function (key){
+						-		return user.sportsList[key];
+						-}).join(", ");
+						span= arrayOfSports
+						//-each sport in user.sportsList	
+							span #{sport}, 
 
 					
 

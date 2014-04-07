@@ -83,79 +83,36 @@ $(document).ready(function(){
 	//}
 
 	//clickToggle('rockClimbing', '#rcTab')
+	var toggleTab = function(list, tab){
+		checkBox = "input[name='sportsList[" + list + "]']";
+		console.log(checkBox)
+		$(checkBox).click(function(){
+			$(tab).toggle();
+			//locals.list = true
+		});
+	};
 
-	$("input[name='sportsList']").click(function(){
-		$("#rcTab").toggle();
-	});
-	$("input[name='sportsList[mountainBiking]']").click(function(){
-		$("#mbTab").toggle();
-	});
-	$("input[name='sportsList[running]']").click(function(){
-		$("#runTab").toggle();
-	});
-	$("input[name='sportsList[roadCycling]']").click(function(){
-		$("#cycTab").toggle();
-	});
-	$("input[name='sportsList[kayaking]']").click(function(){
-		$("#kayTab").toggle();
-	});
-	$("input[name='sportsList[supb]']").click(function(){
-		$("#supbTab").toggle();
-	});
-	$("input[name='sportsList[surfing]']").click(function(){
-		$("#surfTab").toggle();
-	});
-	$("input[name='sportsList[skiing]']").click(function(){
-		$("#skiTab").toggle();
-	});
-	$("input[name='sportsList[snowboarding]']").click(function(){
-		$("#sbTab").toggle();
-	});
-	$("input[name='sportsList[mountaineering]']").click(function(){
-		$("#moutTab").toggle();
-	});
-	$("input[name='sportsList[hiking]']").click(function(){
-		$("#hikeTab").toggle();
-	});
-	$("input[name='sportsList[yoga]']").click(function(){
-		$("#yogaTab").toggle();
-	});
-	$("input[name='sportsList[triathalon]']").click(function(){
-		$("#triTab").toggle();
-	});
-	$("input[name='sportsList[swim]']").click(function(){
-		$("#swimTab").toggle();
-	});
-	$("input[name='sportsList[windSurf]']").click(function(){
-		$("#windTab").toggle();
-	});
-	$("input[name='sportsList[kiteBoard]']").click(function(){
-		$("#kiteTab").toggle();
-	});
-	$("input[name='sportsList[fish]']").click(function(){
-		$("#fishTab").toggle();
-	});
-	$("input[name='sportsList[scuba]']").click(function(){
-		$("#scubaTab").toggle();
-	});
-	$("input[name='sportsList[canoe]']").click(function(){
-		$("#canoeTab").toggle();
-	});
-	$("input[name='sportsList[raft]']").click(function(){
-		$("#raftTab").toggle();
-	});
-	$("input[name='sportsList[iceclimb]']").click(function(){
-		$("#iceTab").toggle();
-	});
-	$("input[name='sportsList[skate]']").click(function(){
-		$("#skateTab").toggle();
-	});
-	$("input[name='sportsList[snowshoe]']").click(function(){
-		$("#snowshoeingTab").toggle();
-	});
-	$("input[name='sportsList[bmx]']").click(function(){
-		$("#bmxTab").toggle();
-	});
+	toggleTab("rockClimbing", "#rcTab");
+	toggleTab("mountainBiking", "#mbTab");
+	toggleTab("running", "#runTab");
+	toggleTab("roadCycling", "#cycTab");
+	toggleTab("kayaking", "#kayTab");
+	toggleTab("supb", "#supbTab");
+	toggleTab("surfing", "#surfTab");
+	toggleTab("skiing", "#skiTab");
+	toggleTab("snowboarding", "#sbTab");
+	toggleTab("mountaineering", "#moutTab");
+	toggleTab("hiking", "#hikeTab");
+	toggleTab("yoga", "#yogaTab");
+	toggleTab("triathalon", "#triTab");
+	toggleTab("swimming", "#swimTab");
+	toggleTab("windSurf", "#windTab");
+	toggleTab("kiteSurf", "#kiteTab");
+	toggleTab("scuba", "#scubaTab");
+	toggleTab("canoe", "#canoeTab");
+	toggleTab("raft", "#raftTab");
+	toggleTab("iceClimb", "#iceTab");
+
 	$(".climbDate").datepicker();
 	$(".datePick").datepicker();
 
