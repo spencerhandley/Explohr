@@ -15,11 +15,14 @@ block content
 						a(href="#education", data-toggle="tab") Education / Coursework
 					li#certsTab
 						a(href="#certs", data-toggle="tab") Certifications
-					li#educator
+					-var visibility = locals.account.general.educator ? "block" : "none";
+					li#educator(style="display: " + visibility + ";")
 						a(href="#teaching", data-toggle="tab") Teaching Experience
-					li#guide
+					-var visibility = locals.account.general.guide ? "block" : "none";
+					li#guide(style="display: " + visibility + ";")
 						a(href="#guiding", data-toggle="tab") Guide Experience
-					li#athlete
+					-var visibility = locals.account.general.athlete ? "block" : "none";
+					li#athlete(style="display: " + visibility + ";")
 						a(href="#sponsors", data-toggle="tab") Sponsors
 					li#sportsTab.dropdown
 						a(href="#", data-toggle="dropdown").dropdown-toggle Sports
@@ -92,8 +95,7 @@ block content
 								div#IamA.form-group
 									p I am an Outdoor 
 									-var enthusiast = ('Enthusiast'==locals.account.general.IamA) ? 'selected' : null;
-									-var professional = ("Professional"==locals.account.general.IamA) ? 'selected' :null
-
+									-var professional = ("Professional"==locals.account.general.IamA) ? 'selected' :null;
 									select#IAA.form-control(name="general[IamA]" value=locals.account.general.IamA)
 										option(value="Enthusiast" selected=enthusiast) Enthusiast
 										option(value="Professional" selected=professional) Professional
@@ -324,10 +326,13 @@ block content
 										#teachingForm
 											.row
 												p Type of Work
-													select#courseDescription.form-control( value=experience.kind name="professional[teaching][experience][0][kind]")
-														option(value="Expiditionary") Expeditionary
-														option(value="Residential") Residential
-														option(value="Other") Other
+													-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
+													-var residential = ("Residential"==experience.kind) ? 'selected' :null;
+													-var other = ("Other"==experience.kind) ? 'selected' :null;
+													select#courseDescription.form-control( value=experience.kind name="professional[teaching][experience][" + i + "][kind]")
+														option(value="Expiditionary" selected=expiditionary) Expeditionary
+														option(value="Residential" selected=residential) Residential
+														option(value="Other" selected=other) Other
 											.row
 												div.form-group.col-md-4
 													label.sr-only(for="professional[teaching][experience][" + i + "][organization]") Organization 
@@ -360,10 +365,13 @@ block content
 									#teachingForm
 										.row
 											p Type of Work
+												-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
+												-var residential = ("Residential"==experience.kind) ? 'selected' :null;
+												-var other = ("Other"==experience.kind) ? 'selected' :null;
 												select#courseDescription.form-control( name="professional[teaching][experience][0][kind]")
-													option(value="Expiditionary") Expeditionary
-													option(value="Residential") Residential
-													option(value="Other") Other
+													option(value="Expiditionary" selected=expiditionary) Expeditionary
+													option(value="Residential" selected=residential) Residential
+													option(value="Other" selected=other) Other
 										.row
 											div.form-group.col-md-4
 												label.sr-only(for="professional[teaching][experience][0][organization]") Organization 
@@ -478,21 +486,32 @@ block content
 										each guided in locals.account.professional.guiding.guided
 											#tripsForm
 												.row
+													-var f5 = ('5-7'==guided.ages) ? 'selected' : null;
+													-var s7 = ('7-10'==guided.ages) ? 'selected' :null;
+													-var e11 = ('11-14'==guided.ages) ? 'selected' :null;
+													-var f15 = ('15-18'==guided.ages) ? 'selected' : null;
+													-var e18 = ('18-21'==guided.ages) ? 'selected' :null;
+													-var t22 = ('22-30'==guided.ages) ? 'selected' :null;
+													-var t31 = ('31-50'==guided.ages) ? 'selected' : null;
+													-var f51 = ('51+'==guided.ages) ? 'selected' :null;
 													p Age Range
 														select#ageRange(name="professional[guiding][guided][" + i + "][ages]" value=guided.ages )
-															option(value="1 week or less") 5-7
-															option(value="professional") 7-10
-															option(value="professional") 11-14
-															option(value="professional") 15-18
-															option(value="professional") 18-21
-															option(value="professional") 22-30
-															option(value="professional") 31-50
-															option(value="professional") 51+
+															option(value="5-7" selected=f5) 5-7
+															option(value="7-10" selected=s7) 7-10
+															option(value="11-14" selected=e11) 11-14
+															option(value="15-18" selected=f15) 15-18
+															option(value="18-21" selected=e18) 18-21
+															option(value="22-30" selected=t22) 22-30
+															option(value="31-50" selected=t31) 31-50
+															option(value="51+" selected=f51) 51+
 													p Gender
+														-var male = ('Male'==guided.gender) ? 'selected' : null;
+														-var female = ('Female'==guided.gender) ? 'selected' :null;
+														-var mixed = ('Mixed'==guided.gender) ? 'selected' :null;
 														select#gender(name="professional[guiding][guided][" + i + "][gender]" value=guided.gender )
-															option(value="1 week or less") Male
-															option(value="professional") Female
-															option(value="professional") Mixed Group
+															option(value="Male") Male
+															option(value="Female") Female
+															option(value="Mixed") Mixed Group
 												.row
 													div.form-group.col-md-4
 														label.sr-only(for="professional[guiding][guided][" + i + "][organization]") Organization 
@@ -521,21 +540,32 @@ block content
 									if(!locals.account.professional.guiding.guided[0])
 										#tripsForm
 											.row
+												-var f5 = ('5-7'==guided.ages) ? 'selected' : null;
+												-var s7 = ('7-10'==guided.ages) ? 'selected' :null;
+												-var e11 = ('11-14'==guided.ages) ? 'selected' :null;
+												-var f15 = ('15-18'==guided.ages) ? 'selected' : null;
+												-var e18 = ('18-21'==guided.ages) ? 'selected' :null;
+												-var t22 = ('22-30'==guided.ages) ? 'selected' :null;
+												-var t31 = ('31-50'==guided.ages) ? 'selected' : null;
+												-var f51 = ('51+'==guided.ages) ? 'selected' :null;
 												p Age Range
-													select#ageRange(name="professional[guiding][guided][0][ages]" )
-														option(value="1 week or less") 5-7
-														option(value="professional") 7-10
-														option(value="professional") 11-14
-														option(value="professional") 15-18
-														option(value="professional") 18-21
-														option(value="professional") 22-30
-														option(value="professional") 31-50
-														option(value="professional") 51+
+													select#ageRange(name="professional[guiding][guided][0][ages]" value=guided.ages )
+														option(value="5-7" selected=f5) 5-7
+														option(value="7-10" selected=s7) 7-10
+														option(value="11-14" selected=e11) 11-14
+														option(value="15-18" selected=f15) 15-18
+														option(value="18-21" selected=e18) 18-21
+														option(value="22-30" selected=t22) 22-30
+														option(value="31-50" selected=t31) 31-50
+														option(value="51+" selected=f51) 51+
 												p Gender
-													select#gender(name="professional[guiding][guided][0][gender]")
-														option(value="1 week or less") Male
-														option(value="professional") Female
-														option(value="professional") Mixed Group
+													-var male = ('Male'==guided.gender) ? 'selected' : null;
+													-var female = ('Female'==guided.gender) ? 'selected' :null;
+													-var mixed = ('Mixed'==guided.gender) ? 'selected' :null;
+													select#gender(name="professional[guiding][guided][0][gender]" value=guided.gender )
+														option(value="Male") Male
+														option(value="Female") Female
+														option(value="Mixed") Mixed Group
 											.row
 												div.form-group.col-md-4
 													label.sr-only(for="professional[guiding][guided][0][organization]") Organization 
@@ -634,14 +664,20 @@ block content
 										each climb in locals.account.sports.rockClimbing.notableRoutes
 											.rockClimbingForm
 												.row
-													div.form-group.col-md-3
+													.form-group.col-md-3
+														-var trad = ('Traditional'==climb.climbType) ? 'selected' : null;
+														-var sport = ('Sport'==climb.climbType) ? 'selected' :null;
 														select#climbType.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][climbType]") 
-															option(value="Traditional") Traditional
-															option(value="Sport") Sport
+															option(value="Traditional" selected=trad) Traditional
+															option(value="Sport" selected=sport) Sport
+													.form-group.col-md-3
+														-var lead = ('Lead'==climb.leadFollow) ? 'selected' : null;
+														-var follow = ('Follow'==climb.leadFollow) ? 'selected' :null;
+														-var mixed = ('Mixed'==climb.leadFollow) ? 'selected' : null;
 														select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][leadFollow]") 
-															option(value="Lead") Lead
-															option(value="Follow") Follow
-															option(value="Mixed") Mixed
+															option(value="Lead" selected=lead) Lead
+															option(value="Follow" selected=follow) Follow
+															option(value="Mixed" selected=mixed) Mixed
 												.row
 													div.form-group.col-md-3
 														label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][location]") Location
@@ -661,6 +697,22 @@ block content
 												-i++
 									if(!locals.account.sports.rockClimbing.notableRoutes[0])
 										#rockClimbingFormNoIndex
+										.row
+											.form-group.col-md-3
+												-var trad = ('Traditional'==climb.climbType) ? 'selected' : null;
+												-var sport = ('Sport'==climb.climbType) ? 'selected' :null;
+												select#climbType.form-control(name="sports[rockClimbing][notableRoutes][0][climbType]") 
+													option(value="Traditional" selected=trad) Traditional
+													option(value="Sport" selected=sport) Sport
+											.form-group.col-md-3
+												-var lead = ('Lead'==climb.leadFollow) ? 'selected' : null;
+												-var follow = ('Follow'==climb.leadFollow) ? 'selected' :null;
+												-var mixed = ('Mixed'==climb.leadFollow) ? 'selected' : null;
+												select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][0][leadFollow]") 
+													option(value="Lead" selected=lead) Lead
+													option(value="Follow" selected=follow) Follow
+													option(value="Mixed" selected=mixed) Mixed
+										.row
 											div.form-group.col-md-3
 												label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
 												input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][location]")
