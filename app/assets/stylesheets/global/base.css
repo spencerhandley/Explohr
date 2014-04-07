@@ -174,7 +174,7 @@ label {padding-left: 5px; display: inline;}
 #IamA p {display: inline;}
 #IamA select{ display: inline;}
 .checkboxes {display: inline; margin-left: 15px; display: none;}
-.checkboxes label {margin-left: 5px; }
+.checkboxes label {margin-left: 0px; margin-right: 10px; }
 
 /* setup */
 

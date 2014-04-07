@@ -91,18 +91,20 @@ block content
 						div.tab-pane.fade.in.active#general
 								div#IamA.form-group
 									p I am an Outdoor 
+									-var enthusiast = ('Enthusiast'==locals.account.general.IamA) ? 'selected' : null;
+									-var professional = ("Professional"==locals.account.general.IamA) ? 'selected' :null
+
 									select#IAA.form-control(name="general[IamA]" value=locals.account.general.IamA)
-										option(value="Enthusiast") Enthusiast
-										option(value="Professional") Professional
-									.checkboxes
-										input(type="checkbox" value=locals.account.general.educator name="general[educator]")
-										label(for="educator") Educator
-									.checkboxes
-										input(type="checkbox" value=locals.account.general.guide name="general[guide]")
-										label(for="guide") Guide
-									.checkboxes
-										input(type="checkbox" value=locals.account.general.athlete name="general[athlete]")
-										label(for="athlete") Athlete
+										option(value="Enthusiast" selected=enthusiast) Enthusiast
+										option(value="Professional" selected=professional) Professional
+									-var visibility = ("Professional" == locals.account.general.IamA) ? "block" : "none";
+									.checkboxes(style="display: " + visibility + ";")
+										input(type="checkbox" checked=locals.account.general.educator name="general[educator]")
+										label(for="general[educator]") Educator
+										input(type="checkbox" checked=locals.account.general.guide name="general[guide]")
+										label(for="general[guide]") Guide
+										input(type="checkbox" checked=locals.account.general.athlete name="general[athlete]")
+										label(for="general[athlete]") Athlete
 
 
 								.row

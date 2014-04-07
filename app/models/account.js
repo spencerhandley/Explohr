@@ -84,7 +84,7 @@ var Account = new Schema({
 	general: {
 		firstname: String,
 		lastname: String,
-		IamA: String,
+		IamA: {type: String, default: "Enthusiast"},
 		educator: Boolean,
 		guide: Boolean,
 		athlete: Boolean,
