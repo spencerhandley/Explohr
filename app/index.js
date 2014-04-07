@@ -95,9 +95,46 @@ app.use(express.static(join(__dirname, 'assets')));
 
 // passport config
 var Account = require('./models/account');
+FacebookStrategy = require('passport-facebook').Strategy;
+
 passport.use(new LocalStrategy(Account.authenticate()));
-passport.serializeUser(Account.serializeUser());
-passport.deserializeUser(Account.deserializeUser());
+
+passport.use(new FacebookStrategy({
+    clientID: '483379851763044',
+    clientSecret: 'b9ac905f62ceafd74cb218ea9d71bd95',
+    callbackURL: "http://localhost:3000/auth/facebook/callback",
+  },
+	function(accessToken, refreshToken, profile, done) {
+		Account.findOne({ oauthID: profile.id }, function(err, user) {
+			if(err) { console.log(err); }
+			if (!err && user != null) {
+				done(null, user);
+			} else {
+				var user = new Account({
+					oauthID: profile.id,
+					name: profile.displayName,
+					created: Date.now()
+				});
+				user.save(function(err) {
+					if(err) {
+				 		console.log(err);
+					} else {
+						console.log("saving user ...");
+						done(null, user);
+					};
+				});
+			};
+		});
+	}
+));
+passport.serializeUser(function(user, done) {
+done(null, user);
+});
+passport.deserializeUser(function(obj, done) {
+done(null, obj);
+});
+//passport.serializeUser(Account.serializeUser());
+//passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
 

@@ -32,9 +32,22 @@ routes.post({re:'/register'}, function(req, res) {
 
 				}
 			});
-		});  
+		});
 	});
 });
+function ensureAuthenticated(req, res, next) {
+if (req.isAuthenticated()) { return next(); }
+res.redirect('/')
+}
+
+routes.get( {re:'/auth/facebook', name:'facebooklogin'}, passport.authenticate('facebook'));
+
+routes.get({re:'/auth/facebook/callback'},
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 routes.post({name: 'editProfile', re: '/user/:user'}, function (req, res){
 	Account.findByIdAndUpdate( req.user.id , {
@@ -82,7 +95,7 @@ routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, funct
 routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'}, function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		if (err) {
-			res.send(null, 500)
+			res.send(null, 500);
 		} else if (account) {
 			var records = {'records': account};
 			var idx = account.classes ? account.classes.indexOf(req.params.courseid) : -1;
@@ -95,7 +108,7 @@ routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'
 					} else {
 						res.send(records);
 						res.redirect('dashboard');
-					};
+					}
 				});
 				return;
 			}
@@ -105,7 +118,6 @@ routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'
 });
 
 
-});
 routes.get({name: 'deteteClimb', re: '/course/:user/:courseid/deleteCourse'}, function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		if (err) {
@@ -150,7 +162,7 @@ routes.get({ name: 'newcourse', re: '/newcourse' }, function (req, res){
 });
 
 routes.post({ name: 'newcourse', re: '/newcourse'}, function (req,res){
-	var course = new Course(req.body.c)
+	var course = new Course(req.body.c);
 	course.videos.push(new Video());
 	course.save(function (err){
 		if(err){
@@ -178,8 +190,8 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, function (req, res){
 routes.get({name:'dashboard', re: '/dashboard/:user'}, function (req, res){
 	var locals = {};
 	Account.findOne({_id: req.user._id}).populate('classes').exec(function (err, account) {
-		console.log(account)
-		console.log(account.classes)
+		console.log(account);
+		console.log(account.classes);
 		res.render('account/userdashboard', {
 			user: account
 		});

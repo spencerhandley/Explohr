@@ -8,7 +8,7 @@
 	#rightNav
 		-if(user)
 			.dropdown.pull-right
-				a.userlink.dropdown-toggle.pull-right(type="button" id="dropdownMenu1" data-toggle="dropdown") #{user.general.firstname} #{user.general.lastname}
+				a.userlink.dropdown-toggle.pull-right(type="button" id="dropdownMenu1" data-toggle="dropdown") #{user.name}
 				ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="drapdownMenu1")
 					li(role="presentation")
 						a(role="menuitem" tabindex="-1" href=router.getLink("userprofile", {user: user._id})) Profile

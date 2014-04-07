@@ -14,6 +14,8 @@ block content
 						label.sr-only(for="password") Password
 						input.form-control#password(placeholder="Password" type="password" name="password")
 					button.btn.btn-default.pull-right(type="submit" name="signin") Sign in
+				a.pull-left(href=router.getLink("facebooklogin"))
+					img#facebook(src="/img/login-with-facebook.png")
 		.row
 			br
 			a.col-md-4.col-md-offset-4.text-center(href="#") Forgot Your Password?

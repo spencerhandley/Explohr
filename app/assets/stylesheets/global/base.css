@@ -40,6 +40,7 @@ footer { height: 350px; background-color: #2c363a; padding-top: 1px; }
 #signin {margin-left: 10px;}
 .row a {text-decoration: none;}
 .row a h3 {color: black;}
+#facebook {margin:8px;}
 /*pricing */
 .price {background-color: #f5f5f5; border: 1px #e5e5e5 solid; border-radius: 3px; margin-bottom: 60px; }
 .priceTitle {background-color: #d8d8d8; padding:10px; text-align: center; color: white; }

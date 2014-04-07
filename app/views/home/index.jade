@@ -4,7 +4,7 @@ block content
 	.top
 		.dropdown.pull-right
 			-if(user)
-				a.userlinkwhite.dropdown-toggle.pull-right(type="button" id="dropdownMenu1" data-toggle="dropdown") #{user.general.firstname} #{user.general.lastname}
+				a.userlinkwhite.dropdown-toggle.pull-right(type="button" id="dropdownMenu1" data-toggle="dropdown") #{user.name}
 				ul.dropdown-menu.dropdown-menu-right(role="menu" aria-labelledby="drapdownMenu1")
 					li(role="presentation")
 						a(role="menuitem" tabindex="-1" href=router.getLink("userprofile", {user: user._id})) Profile
@@ -14,7 +14,8 @@ block content
 			-if(!user)
 				a.outlined-clear-btn.btn.pull-right#signin(href=router.getLink("login")) Sign in
 				a.outlined-clear-btn.btn.pull-right(href=router.getLink("register")) Sign Up
-
+				a.pull-right(href=router.getLink("facebooklogin"))
+					img#facebook(src="/img/login-with-facebook.png")
 		ul.list-inline.pull-right(style="color:white;")
 			//-li.small 
 				a(href=router.getLink("catalog")) COURSES

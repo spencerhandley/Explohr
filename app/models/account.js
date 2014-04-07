@@ -81,6 +81,9 @@ var rockClimbing = new Schema({
 });
 
 var Account = new Schema({
+	oauthID: Number,
+	created: Date,
+	name: String,
 	general: {
 		firstname: String,
 		lastname: String,
