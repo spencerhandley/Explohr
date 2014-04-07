@@ -10,6 +10,13 @@ block content
 					-console.log(user)
 					#buttons.pull-right
 						h5.pull-right Outdoor #{user.general.IamA}
+						.row
+						-if(user.general.guide)
+							img.badges(src="../img/guidebadge.png")
+						-if(user.general.educator)
+							img.badges(src="../img/educatorBadge.png")
+						-if(user.general.athlete)
+							img.badges(src="../img/athleteBadge.png")
 					img.pull-left.profileImage.rounded(src="../img/3.jpg")
 					h2.profName #{user.general.firstname} #{user.general.lastname} 
 						.btn.btn-primary.btn-sm Add Friend
@@ -166,6 +173,7 @@ block content
 
 
 					.col-md-4
+
 						.row
 							.panel.panel-default#educationPanel
 								-if(user.professional.education.traditional)

@@ -1,19 +1,30 @@
 (function ($) {
 	var addForms = function(button, form, container){
 		var $addBtn = $(button),
-			$form = $(form),
+			$form = $(form).last(),
 			$container = $(container)
-			index = 0;
+			data = parseInt(document.getElementById("addRoute").getAttribute("data-i")),
+			console.log(data),
+			index = data,
+			console.log(index)
+		$rcForm = $("#rockClimbingForm")
 
 		$addBtn.click(function () {
+			console.log("a");
+			console.log($form)
 			var $clone = $form.clone();
+			console.log($clone);
 			$clone.each(function () {
+				console.log("b");
 				var $this = $(this);
 				$fields = $this.find('input'),
 				console.log($fields)
 				$fields.each(function () {
 					var $this = $(this);
-					$this.prop('name', $this.prop('name').replace(index, index + 1)); 
+					console.log(index + ":" + (index + 1));
+					var old = $this.prop('name');
+					console.log(old);
+					$this.prop('name', old.replace(index.toString(), index + 1)); 
 				})
 			});
 			$form = $clone;
@@ -29,7 +40,7 @@
 	addForms("#addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
 	addForms("#addTrip", "#tripsForm", "#tripsFormContainer")
 	addForms("#addSponsor", "#sponsorForm", "#sponsorFormContainer")
-	addForms("#addRoute", "#rockClimbingForm", "#rockClimbingFormContainer")
+	addForms("#addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
 
 
 
@@ -85,7 +96,6 @@ $(document).ready(function(){
 	//clickToggle('rockClimbing', '#rcTab')
 	var toggleTab = function(list, tab){
 		checkBox = "input[name='sportsList[" + list + "]']";
-		console.log(checkBox)
 		$(checkBox).click(function(){
 			$(tab).toggle();
 			//locals.list = true

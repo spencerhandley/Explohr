@@ -89,7 +89,7 @@ block content
 				form.form(role="form", action= "/user/#{user._id}", method="POST")
 					div.tab-content
 						div.tab-pane.fade.in.active#general
-								div#IamA.formgroup
+								div#IamA.form-group
 									p I am an Outdoor 
 									select#IAA.form-control(name="general[IamA]" value=locals.account.general.IamA)
 										option(value="Enthusiast") Enthusiast
@@ -630,7 +630,7 @@ block content
 									if(locals.account.sports.rockClimbing.notableRoutes[0])
 										-var i = 0
 										each climb in locals.account.sports.rockClimbing.notableRoutes
-											#rockClimbingForm
+											.rockClimbingForm
 												.row
 													div.form-group.col-md-3
 														select#climbType.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][climbType]") 
@@ -658,7 +658,7 @@ block content
 														input.form-control.climbDate(placeholder="Date" type="text" value=climb.date name="sports[rockClimbing][notableRoutes][" + i + "][date]")
 												-i++
 									if(!locals.account.sports.rockClimbing.notableRoutes[0])
-										#rockClimbingForm
+										#rockClimbingFormNoIndex
 											div.form-group.col-md-3
 												label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
 												input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][location]")
@@ -675,5 +675,5 @@ block content
 												label.sr-only(for="sports[rockClimbing][notableRoutes][date]") Date
 												input.form-control.climbDate(placeholder="Date" type="text" name="sports[rockClimbing][notableRoutes][date]")
 							.row
-								div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3 add	
+								div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
 					button.btn.btn-default.pull-right(type="submit" name="editprofile") Update

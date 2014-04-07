@@ -105,6 +105,34 @@ routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'
 });
 
 
+});
+routes.get({name: 'deteteClimb', re: '/course/:user/:courseid/deleteCourse'}, function (req, res) {
+	Account.findOne({ _id: req.user._id}, function (err, account) {
+		if (err) {
+			res.send(null, 500)
+		} else if (account) {
+			var records = {'records': account};
+			var idx = account.classes ? account.classes.indexOf(req.params.courseid) : -1;
+			if (idx !== -1) {
+				account.classes.splice(idx, 1);
+				account.save(function(err) {
+					if (err) {
+						console.log(err);
+						res.send(null, 500);
+					} else {
+						res.send(records);
+						res.redirect('dashboard');
+					};
+				});
+				return;
+			}
+		}
+        res.send(null, 404);
+	});
+});
+
+
+
 routes.post({name: 'login', re: '/login'}, passport.authenticate('local'), function (req, res){
 	res.redirect('/');
 });
