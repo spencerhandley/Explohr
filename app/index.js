@@ -102,9 +102,10 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.use(new FacebookStrategy({
     clientID: '483379851763044',
     clientSecret: 'b9ac905f62ceafd74cb218ea9d71bd95',
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
 	function(accessToken, refreshToken, profile, done) {
+		console.log(profile)
 		Account.findOne({ oauthID: profile.id }, function(err, user) {
 			if(err) { console.log(err); }
 			if (!err && user != null) {
@@ -113,7 +114,12 @@ passport.use(new FacebookStrategy({
 				var user = new Account({
 					oauthID: profile.id,
 					name: profile.displayName,
-					created: Date.now()
+					created: Date.now(),
+					general: {
+						firstname: profile.first_name,
+						lastname: profile.last_name,
+						hometown: profile.location.name
+					}
 				});
 				user.save(function(err) {
 					if(err) {

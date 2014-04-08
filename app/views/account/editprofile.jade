@@ -28,6 +28,7 @@ block content
 						a(href="#", data-toggle="dropdown").dropdown-toggle Sports
 							span.caret
 						ul.dropdown-menu#sportsList
+						if(locals.account.sportsList)
 							- var visibility = locals.account.sportsList.rockClimbing ? "block" : "none";
 							li#rcTab(style="display: " + visibility + ";")
 								a(href="#rockClimbingCt") Rock Climbing
@@ -365,13 +366,10 @@ block content
 									#teachingForm
 										.row
 											p Type of Work
-												-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
-												-var residential = ("Residential"==experience.kind) ? 'selected' :null;
-												-var other = ("Other"==experience.kind) ? 'selected' :null;
 												select#courseDescription.form-control( name="professional[teaching][experience][0][kind]")
-													option(value="Expiditionary" selected=expiditionary) Expeditionary
-													option(value="Residential" selected=residential) Residential
-													option(value="Other" selected=other) Other
+													option(value="Expiditionary" ) Expeditionary
+													option(value="Residential" ) Residential
+													option(value="Other" ) Other
 										.row
 											div.form-group.col-md-4
 												label.sr-only(for="professional[teaching][experience][0][organization]") Organization 
@@ -509,9 +507,9 @@ block content
 														-var female = ('Female'==guided.gender) ? 'selected' :null;
 														-var mixed = ('Mixed'==guided.gender) ? 'selected' :null;
 														select#gender(name="professional[guiding][guided][" + i + "][gender]" value=guided.gender )
-															option(value="Male") Male
-															option(value="Female") Female
-															option(value="Mixed") Mixed Group
+															option(value="Male" selected=male) Male
+															option(value="Female" selected=female) Female
+															option(value="Mixed" selected=mixed) Mixed Group
 												.row
 													div.form-group.col-md-4
 														label.sr-only(for="professional[guiding][guided][" + i + "][organization]") Organization 
@@ -540,29 +538,19 @@ block content
 									if(!locals.account.professional.guiding.guided[0])
 										#tripsForm
 											.row
-												-var f5 = ('5-7'==guided.ages) ? 'selected' : null;
-												-var s7 = ('7-10'==guided.ages) ? 'selected' :null;
-												-var e11 = ('11-14'==guided.ages) ? 'selected' :null;
-												-var f15 = ('15-18'==guided.ages) ? 'selected' : null;
-												-var e18 = ('18-21'==guided.ages) ? 'selected' :null;
-												-var t22 = ('22-30'==guided.ages) ? 'selected' :null;
-												-var t31 = ('31-50'==guided.ages) ? 'selected' : null;
-												-var f51 = ('51+'==guided.ages) ? 'selected' :null;
 												p Age Range
-													select#ageRange(name="professional[guiding][guided][0][ages]" value=guided.ages )
-														option(value="5-7" selected=f5) 5-7
-														option(value="7-10" selected=s7) 7-10
-														option(value="11-14" selected=e11) 11-14
-														option(value="15-18" selected=f15) 15-18
-														option(value="18-21" selected=e18) 18-21
-														option(value="22-30" selected=t22) 22-30
-														option(value="31-50" selected=t31) 31-50
-														option(value="51+" selected=f51) 51+
+													select#ageRange(name="professional[guiding][guided][0][ages]")
+														option(value="5-7") 5-7
+														option(value="7-10") 7-10
+														option(value="11-14") 11-14
+														option(value="15-18") 15-18
+														option(value="18-21") 18-21
+														option(value="22-30") 22-30
+														option(value="31-50") 31-50
+														option(value="51+") 51+
 												p Gender
-													-var male = ('Male'==guided.gender) ? 'selected' : null;
-													-var female = ('Female'==guided.gender) ? 'selected' :null;
-													-var mixed = ('Mixed'==guided.gender) ? 'selected' :null;
-													select#gender(name="professional[guiding][guided][0][gender]" value=guided.gender )
+						
+													select#gender(name="professional[guiding][guided][0][gender]" )
 														option(value="Male") Male
 														option(value="Female") Female
 														option(value="Mixed") Mixed Group
@@ -697,37 +685,34 @@ block content
 												-i++
 									if(!locals.account.sports.rockClimbing.notableRoutes[0])
 										#rockClimbingFormNoIndex
-										.row
-											.form-group.col-md-3
-												-var trad = ('Traditional'==climb.climbType) ? 'selected' : null;
-												-var sport = ('Sport'==climb.climbType) ? 'selected' :null;
-												select#climbType.form-control(name="sports[rockClimbing][notableRoutes][0][climbType]") 
-													option(value="Traditional" selected=trad) Traditional
-													option(value="Sport" selected=sport) Sport
-											.form-group.col-md-3
-												-var lead = ('Lead'==climb.leadFollow) ? 'selected' : null;
-												-var follow = ('Follow'==climb.leadFollow) ? 'selected' :null;
-												-var mixed = ('Mixed'==climb.leadFollow) ? 'selected' : null;
-												select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][0][leadFollow]") 
-													option(value="Lead" selected=lead) Lead
-													option(value="Follow" selected=follow) Follow
-													option(value="Mixed" selected=mixed) Mixed
-										.row
-											div.form-group.col-md-3
-												label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
-												input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][location]")
-											div.form-group.col-md-3
-												label.sr-only(for="sports[rockClimbing][notableRoutes][route]") Route
-												input.form-control(placeholder="Route" type="text" name="sports[rockClimbing][notableRoutes][route]")
-											div.form-group.col-md-2
-												label.sr-only(for="sports[rockClimbing][notableRoutes][grade]") Grade
-												input.form-control(placeholder="Grade" type="text" name="sports[rockClimbing][notableRoutes][grade]")
-											div.form-group.col-md-2
-												label.sr-only(for="sports[rockClimbing][notableRoutes][pitched]") Pitches
-												input.form-control(placeholder="Pitches" type="text" name="sports[rockClimbing][notableRoutes][pitches]")
-											div.form-group.col-md-2
-												label.sr-only(for="sports[rockClimbing][notableRoutes][date]") Date
-												input.form-control.climbDate(placeholder="Date" type="text" name="sports[rockClimbing][notableRoutes][date]")
+											-var i = 0
+											.row
+												.form-group.col-md-3
+													select#climbType.form-control(name="sports[rockClimbing][notableRoutes][0][climbType]") 
+														option(value="Traditional") Traditional
+														option(value="Sport") Sport
+												.form-group.col-md-3
+													select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][0][leadFollow]") 
+														option(value="Lead") Lead
+														option(value="Follow") Follow
+														option(value="Mixed") Mixed
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
+													input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][location]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[rockClimbing][notableRoutes][route]") Route
+													input.form-control(placeholder="Route" type="text" name="sports[rockClimbing][notableRoutes][route]")
+												div.form-group.col-md-2
+													label.sr-only(for="sports[rockClimbing][notableRoutes][grade]") Grade
+													input.form-control(placeholder="Grade" type="text" name="sports[rockClimbing][notableRoutes][grade]")
+												div.form-group.col-md-2
+													label.sr-only(for="sports[rockClimbing][notableRoutes][pitched]") Pitches
+													input.form-control(placeholder="Pitches" type="text" name="sports[rockClimbing][notableRoutes][pitches]")
+												div.form-group.col-md-2
+													label.sr-only(for="sports[rockClimbing][notableRoutes][date]") Date
+													input.form-control.climbDate(placeholder="Date" type="text" name="sports[rockClimbing][notableRoutes][date]")
+											-i++
 							.row
 								div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
 					button.btn.btn-default.pull-right(type="submit" name="editprofile") Update

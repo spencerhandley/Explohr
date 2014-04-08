@@ -18,7 +18,7 @@ block content
 						-if(user.general.athlete)
 							img.badges(src="../img/athleteBadge.png")
 					img.pull-left.profileImage.rounded(src="../img/3.jpg")
-					h2.profName #{user.general.firstname} #{user.general.lastname} 
+					h2.profName #{user.name} 
 						.btn.btn-primary.btn-sm Add Friend
 
 					p.lead #{user.general.hometown}
@@ -33,12 +33,13 @@ block content
 						span #{user.general.aboutMe}
 					
 					p.userdetails
+					-if(user.sportsList && user.sportsList >= 1)
 						b Sports: 
-						//--var arrayOfSports = Object.keys(user.sportsList).map(function (key){
-						//--		return user.sportsList[key];
-						//--}).join(", ");
-						//-span= arrayOfSports
-						//-each sport in user.sportsList	
+						-var arrayOfSports = Object.keys(user.sportsList).map(function (key){
+						-		return user.sportsList[key];
+						-}).join(", ");
+						span= arrayOfSports
+						-each sport in user.sportsList	
 							span #{sport}, 
 
 					

@@ -27,7 +27,7 @@ var certification = new Schema({
 });
 
 var teachingExperience = new Schema({
-	kind: String,
+	kind: {type: String, default: "Expiditionary"},
 	organization: String,
 	jobTitle: String,
 	location: String,
@@ -99,7 +99,7 @@ var Account = new Schema({
 		photo: String,
 		friends: [{type: Schema.Types.ObjectId, ref: "Account"}]
 	},
-	sportsList: {
+	sportsList: { type: String, default: "list"
 	},
 	classes: [{type: Schema.Types.ObjectId, ref: 'Course'}],
 	sports: {
