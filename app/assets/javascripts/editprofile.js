@@ -34,9 +34,8 @@
 	addForms("#addSponsor", "#sponsorForm", "#sponsorFormContainer")
 	addForms("#addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
 	addForms("#addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
-
-
-
+	addForms("#addRiver", ".riverForm", "#riverFormContainer")
+	addForms("#addRace", ".cyclingForm", "#cyclingFormContainer")
 
 
 })(jQuery);

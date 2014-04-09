@@ -88,6 +88,27 @@ var mountaineering = new Schema({
 	submitted: String
 });
 
+var run = new Schema({
+	river: String,
+	run: String,
+	difficulty: String,
+	craft: String,
+	role: String,
+	date: {type: Date},
+	guided: String
+});
+
+var race = new Schema({
+	race: String, 
+	location: String, 
+	type: String, 
+	location: String,
+	totalTime: String,
+	place: String,
+	date: {type: Date},
+	mtnRd: String
+})
+
 var company = new Schema({
 	company: String,
 	position: String,
@@ -142,6 +163,12 @@ var Account = new Schema({
 		},
 		mountaineering: {
 			routes: [mountaineering]
+		},
+		river: {
+			runs: [run]
+		},
+		cycling: {
+			races: [race]
 		}
 	},
 	professional: {

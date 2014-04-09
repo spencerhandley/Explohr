@@ -35,16 +35,16 @@ block content
 										a(href="#rockClimbingCt") Rock Climbing
 									- var visibility = locals.account.sportsList.mountainBiking ? "block" : "none";
 									li#mbTab(style="display: " + visibility + ";")
-										a(href="#mountainBikingCt") Mountain Biking
+										a(href="#cycleCt") Mountain Biking
 									- var visibility = locals.account.sportsList.running ? "block" : "none";
 									li#runTab(style="display: " + visibility + ";")
 										a(href="#runningCt") Running
 									- var visibility = locals.account.sportsList.roadCycling ? "block" : "none";
 									li#cycTab(style="display: " + visibility + ";")
-										a(href="#roadCycleCt") Road Cycling
+										a(href="#cycleCt") Road Cycling
 									- var visibility = locals.account.sportsList.kayaking ? "block" : "none";
 									li#kayTab(style="display: " + visibility + ";")
-										a(href="#kayakingCt") Kayaking
+										a(href="#riverCt") Kayaking
 									- var visibility = locals.account.sportsList.supb ? "block" : "none";
 									li#supbTab(style="display: " + visibility + ";")
 										a(href="#supbCt") S.U. Paddle Boarding
@@ -83,10 +83,10 @@ block content
 										a(href="#scubaCt") Scuba
 									- var visibility = locals.account.sportsList.canoe ? "block" : "none";
 									li#canoeTab(style="display: " + visibility + ";")
-										a(href="#canoeCt") Canoeing
+										a(href="#riverCt") Canoeing
 									- var visibility = locals.account.sportsList.raft ? "block" : "none";
 									li#raftTab(style="display: " + visibility + ";")
-										a(href="#raftCt") Rafting
+										a(href="#riverCt") Rafting
 									- var visibility = locals.account.sportsList.iceClimb ? "block" : "none";
 									li#iceTab(style="display: " + visibility + ";")
 										a(href="#iceClimbCt") Ice Climbing
@@ -801,11 +801,11 @@ block content
 													label.sr-only(for="sports[mountaineering][routes][" + i + "][date]") Date
 													input.form-control.climbDate(placeholder="Date" type="text" value=route.date name="sports[mountaineering][routes][" + i + "][date]")
 												.form-group.col-md-3
-														-var guided = ('Guided'==route.guided) ? 'selected' : null;
-														-var personal = ('Personal'==route.guided) ? 'selected' :null;
-														select#guidePersonal.form-control(name="sports[mountaineering][routes][" + i + "][guided]") 
-															option(value="Guided" selected=guided) Guided
-															option(value="Personal" selected=personal) Personal
+													-var guided = ('Guided'==route.guided) ? 'selected' : null;
+													-var personal = ('Personal'==route.guided) ? 'selected' :null;
+													select#guidePersonal.form-control(name="sports[mountaineering][routes][" + i + "][guided]") 
+														option(value="Guided" selected=guided) Guided
+														option(value="Personal" selected=personal) Personal
 												.form-group.col-md-3
 													-var summited = ('Yes'==route.summited) ? 'selected' : null;
 													-var didnt = ('No'==route.summited) ? 'selected' :null;
@@ -816,36 +816,163 @@ block content
 								if(!locals.account.sports.mountaineering.routes[0])
 									#mountaineeringFormNoIndex
 										-var i = 0
-										.mountaineeringForm
-											.row
-												div.form-group.col-md-3
-													label.sr-only(for="sports[mountaineering][routes][0][location]") Mountain
-													input.form-control(placeholder="Mountain" type="text" name="sports[mountaineering][routes][0][mountain]")
-												div.form-group.col-md-3
-													label.sr-only(for="sports[mountaineering][routes][0][route]") Route
-													input.form-control(placeholder="Route" type="text" name="sports[mountaineering][routes][0][route]")
-												div.form-group.col-md3
-													label.sr-only(for="sports[mountaineering][routes][0][difficulty]") Difficulty
-													input.form-control(placeholder="Difficulty" type="text" name="sports[mountaineering][routes][0][difficulty]")
-												div.form-group.col-md3
-													label.sr-only(for="sports[mountaineering][routes][0][skills]") Skills Demonstrated
-													input.form-control(placeholder="Skills Demonstrated" type="text" name="sports[mountaineering][routes][0][skills]")
-											.row
-												div.form-group.col-md-3
-													label.sr-only(for="sports[mountaineering][routes][0][description]") Description
-													input.form-control(placeholder="Description" type="text" name="sports[mountaineering][routes][0][description]")
-												div.form-group.col-md-3
-													label.sr-only(for="sports[mountaineering][routes][0][date]") Date
-													input.form-control.climbDate(placeholder="Date" type="text" name="sports[mountaineering][routes][0][date]")
+										.row
+											div.form-group.col-md-3
+												label.sr-only(for="sports[mountaineering][routes][0][location]") Mountain
+												input.form-control(placeholder="Mountain" type="text" name="sports[mountaineering][routes][0][mountain]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[mountaineering][routes][0][route]") Route
+												input.form-control(placeholder="Route" type="text" name="sports[mountaineering][routes][0][route]")
+											div.form-group.col-md3
+												label.sr-only(for="sports[mountaineering][routes][0][difficulty]") Difficulty
+												input.form-control(placeholder="Difficulty" type="text" name="sports[mountaineering][routes][0][difficulty]")
+											div.form-group.col-md3
+												label.sr-only(for="sports[mountaineering][routes][0][skills]") Skills Demonstrated
+												input.form-control(placeholder="Skills Demonstrated" type="text" name="sports[mountaineering][routes][0][skills]")
+										.row
+											div.form-group.col-md-3
+												label.sr-only(for="sports[mountaineering][routes][0][description]") Description
+												input.form-control(placeholder="Description" type="text" name="sports[mountaineering][routes][0][description]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[mountaineering][routes][0][date]") Date
+												input.form-control.climbDate(placeholder="Date" type="text" name="sports[mountaineering][routes][0][date]")
+										.form-group.col-md-3
+												select#guidePersonal.form-control(name="sports[mountaineering][routes][0][guided]") 
+													option(value="Guided" selected=guided) Guided
+													option(value="Personal" selected=personal) Personal
 											.form-group.col-md-3
-													select#guidePersonal.form-control(name="sports[mountaineering][routes][0][guided]") 
-														option(value="Guided" selected=guided) Guided
-														option(value="Personal" selected=personal) Personal
-												.form-group.col-md-3
-													select#summit.form-control(name="sports[mountaineering][routes][0][summited]") 
-														option(value="Yes" selected=summited) Summited
-														option(value="No" selected=didnt) Didn't Summit
+												select#summit.form-control(name="sports[mountaineering][routes][0][summited]") 
+													option(value="Yes" selected=summited) Summited
+													option(value="No" selected=didnt) Didn't Summit
 										-i++
 							.row
-								div#addMountRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
+								div#addMountRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
+						div.tab-pane#riverCt
+							h4 River Sports
+							#riverFormContainer
+								if(locals.account.sports.river.runs[0])
+									-var i = 0
+									each run in locals.account.sports.river.runs
+										.riverForm
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="sports[river][runs][" + i + "][river]") River
+													input.form-control(placeholder="River" type="text" value=run.river name="sports[river][runs][" + i + "][river]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[river][runs][" + i + "][run]") Run
+													input.form-control(placeholder="Run" type="text" value=run.run name="sports[river][runs][" + i + "][run]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[river][runs][" + i + "][difficulty]") Difficulty
+													input.form-control(placeholder="Difficulty" type="text" value=run.difficulty name="sports[river][runs][" + i + "][difficulty]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[river][runs][" + i + "][craft]") Craft
+													input.form-control(placeholder="Craft (kayak, canoe, etc.)" type="text" value=run.craft name="sports[river][runs][" + i + "][craft]")
+											.row
+												div.form-group.col-md-4
+													label.sr-only(for="sports[river][runs][" + i + "][role]") Role
+													input.form-control(placeholder="Role" type="text" value=run.role name="sports[river][runs][" + i + "][role]")
+												div.form-group.col-md-4
+													label.sr-only(for="sports[river][runs][" + i + "][date]") Date
+													input.form-control.climbDate(placeholder="Date" type="text" value=run.date name="sports[river][runs][" + i + "][date]")
+												.form-group.col-md-4
+													-var guided = ('Guided'==run.guided) ? 'selected' : null;
+													-var personal = ('Personal'==run.guided) ? 'selected' :null;
+													select#guidePersonal.form-control(name="sports[river][runs][" + i + "][guided]") 
+														option(value="Guided" selected=guided) Guided
+														option(value="Personal" selected=personal) Personal
+											-i++
+								if(!locals.account.sports.river.runs)
+									#riverFormNoIndex
+										-var i = 0
+										.row
+											div.form-group.col-md-3
+												label.sr-only(for="sports[river][runs][0][river]") River
+												input.form-control(placeholder="River" type="text" name="sports[river][runs][0][river]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[river][runs][0][Run]") Run
+												input.form-control(placeholder="Run" type="text" name="sports[river][runs][0][run]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[river][runs][0][difficulty]") Difficulty
+												input.form-control(placeholder="Difficulty" type="text" name="sports[river][runs][0][difficulty]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[river][runs][0][craft]") Craft
+												input.form-control(placeholder="Craft (kayak, canoe, etc.)" type="text" name="sports[river][runs][0][craft]")
+										.row
+											div.form-group.col-md-4
+												label.sr-only(for="sports[river][runs][0][role]") Role
+												input.form-control(placeholder="Role" type="text" name="sports[river][runs][0][role]")
+											div.form-group.col-md-4
+												label.sr-only(for="sports[river][runs][0][date]") Date
+												input.form-control.climbDate(placeholder="Date" type="text" name="sports[river][runs][0][date]")
+											.form-group.col-md-4
+												select#guidePersonal.form-control(name="sports[river][runs][0][guided]") 
+													option(value="Guided" selected=guided) Guided
+													option(value="Personal" selected=personal) Personal
+										-i++
+							.row
+								div#addRiver.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
+						div.tab-pane#cycleCt
+							h4 Mounatin Biking / Road Cycling
+							#cyclingFormContainer
+								if(locals.account.sports.cycling.races[0])
+									-var i = 0
+									each race in locals.account.sports.cycling.races
+										.cyclingForm
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="sports[cycling][races][" + i + "][race]") Race
+													input.form-control(placeholder="Race" type="text" value=race.race name="sports[cycling][races][" + i + "][race]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[cycling][races][" + i + "][type]") Type
+													input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" value=race.race name="sports[cycling][races][" + i + "][type]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[cycling][races][" + i + "][location]") Location
+													input.form-control(placeholder="Location" type="text" value=race.location name="sports[cycling][races][" + i + "][location]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[cycling][races][" + i + "][totalTime]") Time
+													input.form-control(placeholder="Time" type="text" value=race.totalTime name="sports[cycling][races][" + i + "][totalTime]")
+											.row
+												div.form-group.col-md-4
+													label.sr-only(for="sports[cycling][races][" + i + "][place]") Place (1st, 2nd, etc.)
+													input.form-control(placeholder="Place (1st, 2nd, etc.)" type="text" value=race.place name="sports[cycling][races][" + i + "][place]")
+												div.form-group.col-md-4
+													label.sr-only(for="sports[cycling][races][" + i + "][date]") Date
+													input.form-control.climbDate(placeholder="Date" type="text" value=race.date name="sports[cycling][races][" + i + "][date]")
+												.form-group.col-md-4
+													-var mountain = ('Mountain'==race.mtnRd) ? 'selected' : null;
+													-var road = ('Road'==race.mtnRd) ? 'selected' :null;
+													select#MtnRd.form-control(name="sports[cycling][races][" + i + "][mtnRd]") 
+														option(value="Mountain" selected=mountain) Mountain
+														option(value="Road" selected=road) Road
+											-i++
+								if(!locals.account.sports.cycling.races[0])
+									#cyclingFormNoIndex
+										-var i = 0
+										.row
+											div.form-group.col-md-3
+												label.sr-only(for="sports[cycling][races][0][race]") Race
+												input.form-control(placeholder="Race" type="text" name="sports[cycling][races][0][race]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[cycling][races][0][type]") Type
+												input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" name="sports[cycling][races][0][type]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[cycling][races][0][location]") Location
+												input.form-control(placeholder="Location" type="text" name="sports[cycling][races][0][location]")
+											div.form-group.col-md-3
+												label.sr-only(for="sports[cycling][races][0][totalTime]") Time
+												input.form-control(placeholder="Time" type="text" name="sports[cycling][races][0][totalTime]")
+										.row
+											div.form-group.col-md-4
+												label.sr-only(for="sports[cycling][races][0][place]") Place (1st, 2nd, etc.)
+												input.form-control(placeholder="Place (1st, 2nd, etc.)" type="text" name="sports[cycling][races][0][place]")
+											div.form-group.col-md-4
+												label.sr-only(for="sports[cycling][races][0][date]") Date
+												input.form-control.climbDate(placeholder="Date" type="text" name="sports[cycling][races][0][date]")
+											.form-group.col-md-4
+												select#MtnRd.form-control(name="sports[cycling][races][0][mtnRd]") 
+													option(value="Mountain" selected=mountain) Mountain
+													option(value="Road" selected=road) Road
+										-i++
+							.row
+								div#addRace.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
 					button.btn.btn-default.pull-right(type="submit" name="editprofile") Update
