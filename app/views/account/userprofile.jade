@@ -25,20 +25,23 @@ block content
 						p.userdetails
 							b Occupation: 
 							span #{user.general.occupation}
-					-if(user.general.occupation)	
+					-if(user.general.aboutMe)	
 						p.userdetails
 							b Bio: 
 							span #{user.general.aboutMe}
+					-if(user.general.age)	
+						p.userdetails
+							b Age: 
+							span #{user.general.age}
+					
 					
 					p.userdetails
 					-if(user.sportsList && user.sportsList >= 1)
-						b Sports: 
-						-var arrayOfSports = Object.keys(user.sportsList).map(function (key){
-						-		return user.sportsList[key];
-						-}).join(", ");
-						span= arrayOfSports
-						-each sport in user.sportsList	
-							span #{sport}, 
+					b Sports: 
+					-var arrayOfSports = Object.keys(user.sportsList).map(function (key){
+					-		return user.sportsList[key];
+					-}).join(", ");
+					span= arrayOfSports.substr(2)
 
 					
 
@@ -198,34 +201,36 @@ block content
 
 											//-p #{trad.start} to #{trad.end}
 								-if(user.professional.education.outdoor[0])
-									.panel-body
-										h4 Outdoor Coursework
-									ul.list-group
-										each outdoor in user.professional.education.outdoor
-											li.list-group-item
-												h4.list-group-item-heading #{outdoor.institution} 
-													.list-group-item-text.small #{outdoor.course}
-												b.list-group-item-text Duration: 
-												span #{outdoor.duration}
-												br
-												b.list-group-item-text Skills Learned: 
-												span #{outdoor.skills}
-												br
-												b.list-group-item-text More Info: 
-												span #{outdoor.other}
+									-if(user.professional.education.outdoor[0].institution)
+										.panel-body
+											h4 Outdoor Coursework
+										ul.list-group
+											each outdoor in user.professional.education.outdoor
+												li.list-group-item
+													h4.list-group-item-heading #{outdoor.institution} 
+														.list-group-item-text.small #{outdoor.course}
+													b.list-group-item-text Duration: 
+													span #{outdoor.duration}
+													br
+													b.list-group-item-text Skills Learned: 
+													span #{outdoor.skills}
+													br
+													b.list-group-item-text More Info: 
+													span #{outdoor.other}
 								-if(user.professional.certs[0])
-									.panel-body
-										h4 Certifications
-									ul.list-group
-										each cert in user.professional.certs
-											li.list-group-item
-												h4.list-group-item-heading #{cert.institution}
-													.small.list-group-item-text #{cert.certificate}
-												b.list-group-item-text Acquired: 
-												span #{cert.acquired}
-												br
-												b.list-group-item-text Expires: 
-												span #{cert.expires}
+									-if(user.professional.certs[0].institution)
+										.panel-body
+											h4 Certifications
+										ul.list-group
+											each cert in user.professional.certs
+												li.list-group-item
+													h4.list-group-item-heading #{cert.institution}
+														.small.list-group-item-text #{cert.certificate}
+													b.list-group-item-text Acquired: 
+													span #{cert.acquired}
+													br
+													b.list-group-item-text Expires: 
+													span #{cert.expires}
 
 
 					//-.row

@@ -25,6 +25,7 @@
 	};
 
 	addForms("#addOutsideCourse", "#outdoorEdEduForm", "#outdoorEdFormContainer");
+	addForms("#addWork", "#workForm", "#workFormContainer");
 	addForms("#addTradEdu", "#tradEduForm", "#tradFormContainer")
 	addForms("#addCertificate", "#certificateForm", "#certificateFormContainer")
 	addForms("#addTeachingExperience", "#teachingForm", "#teachingFormContainer")
@@ -32,6 +33,7 @@
 	addForms("#addTrip", "#tripsForm", "#tripsFormContainer")
 	addForms("#addSponsor", "#sponsorForm", "#sponsorFormContainer")
 	addForms("#addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
+	addForms("#addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
 
 
 
@@ -73,7 +75,7 @@ $(document).ready(function(){
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
-	$('#workTab a').click(function (e) {
+	$('<div id="work"></div>Tab a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')
 	});

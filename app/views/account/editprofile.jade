@@ -4,10 +4,8 @@ block content
 	include ../_topbar
 	.container
 		.row
-			.col-md-10.col-md-offset-1#loginForm
+			.col-md-12#loginForm
 				h3 Edit Profile
-				-console.log(locals.user.id);
-
 				ul.nav-tabs.nav
 					li#generalTab.active
 						a(href="#general", data-toggle="tab") General
@@ -30,7 +28,6 @@ block content
 					li#sportsTab.dropdown
 						a(href="#", data-toggle="dropdown").dropdown-toggle Sports
 							span.caret
-							-console.log(locals.account.sportsList)
 							if(locals.account.sportsList)
 								ul.dropdown-menu#sportsList
 									- var visibility = locals.account.sportsList.rockClimbing ? "block" : "none";
@@ -133,8 +130,8 @@ block content
 								div#sports.form-group
 									h3 Sports
 									.row
+										input(type="hidden" name="sportsList[placehold]")
 										div.col-md-3
-											input(type="hidden" value="placehold" name="sportsList[placehold]")
 											input(type="checkbox" checked=locals.account.sportsList.rockClimbing value="Rock Climbing" name="sportsList[rockClimbing]")
 											label(for="sports-rockClimbing") Rock Climbing
 										div.col-md-3
@@ -198,37 +195,44 @@ block content
 							.row
 								h4 Traditional Education
 								#tradFormContainer
-									-if(locals.account.professional.education.traditional[0])
+									-if(locals.account.education[0])
 										-var i = 0
-										each trad in locals.account.professional.education.traditional
+										each trad in locals.account.education
 											#tradEduForm
 												div.form-group.col-md-4
-													label.sr-only(for="professional[education][traditional][" + i + "][institution]") Institution
-													input.form-control.col-md-4(placeholder="Educational Institution" type="text" value=trad.institution name="professional[education][traditional][" + i + "][institution]")
+													label.sr-only(for="education[" + i + "][school][name]") Institution
+													input.form-control.col-md-4(placeholder="Educational Institution" type="text" value=trad.school.name name="education[" + i + "][school][name]")
 												div.form-group.col-md-4
-													label.sr-only(for="professional[education][traditional][" + i + "][degree]") Degree Earned
-													input.form-control(placeholder="Degree Earned" type="text" value=trad.degree name="professional[education][traditional][" + i + "][degree]")
+													-var conc = (trad.concentration) ? trad.concentration[0].name : null;
+													label.sr-only(for="education[" + i + "][concentration][name]") Concentration
+													input.form-control(placeholder="Degree Earned" type="text" value=conc name="education[" + i + "][concentration][0][name]")
 												div.form-group.col-md-2
-													label.sr-only(for="professional[education][traditional][" + i + "][start]") Start Date
-													input.form-control.datePick(placeholder="Start Date" type="text" value=trad.start name="professional[education][traditional][" + i + "][start]")
+													-var type = (trad.type) ? trad.type : null;
+
+													label.sr-only(for="education[" + i + "][type]") Type
+													input.form-control(placeholder="Type" type="text" value=trad.type name="education[" + i + "][type]")
 												div.form-group.col-md-2
-													label.sr-only(for="professional[education][traditional][" + i + "][end]") End Date
-													input.form-control.datePick(placeholder="End Date" type="text" value=trad.end name="professional[education][traditional][" + i + "][end]")
+													-var year = (trad.year) ? trad.year.name : null;
+													label.sr-only(for="education[" + i + "][year][name]") Year
+													input.form-control.datePick(placeholder="End Date" type="text" value=year name="education[" + i + "][year][name]")
 												-i++
-									-if(!locals.account.professional.education.traditional[0])	
+									-if(!locals.account.professional.education.traditional[0] && !locals.account.education[0])	
+										#tradEduForm
 										#tradEduForm
 											div.form-group.col-md-4
-												label.sr-only(for="professional[education][traditional][0][institution]") Institution
-												input.form-control.col-md-4(placeholder="Educational Institution" type="text" name="professional[education][traditional][0][institution]")
+												label.sr-only(for="education[0][school][name]") Institution
+												input.form-control.col-md-4(placeholder="Educational Institution" type="text" name="education[0][school][name]")
 											div.form-group.col-md-4
-												label.sr-only(for="professional[education][traditional][0][degree]") Degree Earned
-												input.form-control(placeholder="Degree Earned" type="text"  name="professional[education][traditional][0][degree]")
+												-var conc = (trad.concentration) ? trad.concentration[0].name : null;
+												label.sr-only(for="education[0][concentration][name]") Concentration
+												input.form-control(placeholder="Degree Earned" type="text" name="education[0][concentration][0][name]")
 											div.form-group.col-md-2
-												label.sr-only(for="professional[education][traditional][0][start]") Start Date
-												input.form-control.datePick(placeholder="Start Date" type="text" name="professional[education][traditional][0][start]")
+												label.sr-only(for="education[0][type]") Type
+												input.form-control(placeholder="Type" type="text" name="education[0][type]")
 											div.form-group.col-md-2
-												label.sr-only(for="professional[education][traditional][0][end]") End Date
-												input.form-control.datePick(placeholder="End Date" type="text" name="professional[education][traditional][0][end]")
+												-var year = (trad.year) ? trad.year.name : null;
+												label.sr-only(for="education[0][year][name]") Year
+												input.form-control.datePick(placeholder="End Date" type="text" name="education[0][year][name]")
 							.row
 								div#addTradEdu.addfieldsBtn.col-md-6.col-md-offset-3 add
 							.row.outsideCourse
@@ -257,7 +261,7 @@ block content
 													label.sr-only(for="professional[education][outdoor][" + i + "][other]") Other info 
 													input.form-control(placeholder="Other Info" type="text" value=outdoor.other name="professional[education][outdoor][" + i + "][other]")
 												-i++
-									if(!locals.account.professional.education.traditional[0])
+									-if(!locals.account.professional.education.outdoor[0])
 										#outdoorEdEduForm
 											div.form-group.col-md-4
 												label.sr-only(for="professional[education][outdoor][0][institution]") Institution
@@ -283,24 +287,24 @@ block content
 							.row
 								h4 Certifications
 								#certificateFormContainer
-									if(locals.account.professional.certs[0])
+									-if(locals.account.professional.certs[0])
 										-var i = 0
 										each cert in locals.account.professional.certs
 											#certificateForm
 												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][institution]") Institution
+													label.sr-only(for="professional[certs][" + i + "][institution]") Institution
 													input.form-control(placeholder="Institution" type="text" value=cert.institution name="professional[certs][" + i + "][institution]")
 												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
+													label.sr-only(for="professional[certs][" + i + "][certificate]") Certificate Earned
 													input.form-control(placeholder="Certificate Earned" type="text" value=cert.certificate name="professional[certs][" + i + "][certificate]")
 												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][acquired]") Date Acquired
+													label.sr-only(for="professional[certs][" + i + "][acquired]") Date Acquired
 													input.form-control(placeholder="Date Acquired" type="text" value=cert.acquired name="professional[certs][" + i + "][acquired]")
 												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][expires]") Expires
+													label.sr-only(for="professional[certs][" + i + "][expires]") Expires
 													input.form-control(placeholder="Expires" type="text" value=cert.expires name="professional[certs][" + i + "][expires]")
 												-i++
-									if(!locals.account.professional.certs[0])
+									-if(!locals.account.professional.certs[0])
 										#certificateForm
 											div.form-group.col-md-3
 												label.sr-only(for="professional[certs][0][institution]") Institution
@@ -317,42 +321,58 @@ block content
 							.row
 								div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
 						div.tab-pane#workExperience
+							h4 Work Experience
+							#workFormContainer
+								if(locals.account.professional.certs[0])
+									-var i = 0
+									each job in locals.account.professional.workExperience
+										#workForm
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="professional[workExperience][" + i + "][company]") Company
+													input.form-control(placeholder="Company" type="text" value=job.company name="professional[workExperience][" + i + "][company]")
+												div.form-group.col-md-3
+													label.sr-only(for="professional[workExperience][" + i + "][position]") Position
+													input.form-control(placeholder="Position" type="text" value=job.position name="professional[workExperience][" + i + "][position]")
+												div.form-group.col-md-3
+													label.sr-only(for="professional[workExperience][" + i + "][start]") Start Date
+													input.form-control(placeholder="Start Date" type="text" value=job.start name="professional[workExperience][" + i + "][start]")
+												div.form-group.col-md-3
+													label.sr-only(for="professional[workExperience][" + i + "][end]") End Date
+													input.form-control(placeholder="End Date" type="text" value=job.end name="professional[workExperience][" + i + "][end]")
+											.row
+												div.form-group.col-md-6
+													label.sr-only(for="professional[workExperience][" + i + "][location]") Location
+													input.form-control(placeholder="Location" type="text" value=job.location name="professional[workExperience][" + i + "][location]")
+												div.form-group.col-md-6
+													label.sr-only(for="professional[workExperience][" + i + "][description]") Description
+													input.form-control(placeholder="Description" type="text" value=job.description name="professional[workExperience][" + i + "][description]")
+											-i++
+								-if(!locals.account.professional.workExperience[0])
+									#workForm
+										.row
+											div.form-group.col-md-3
+												label.sr-only(for="professional[workExperience][0][company]") Company
+												input.form-control(placeholder="Company" type="text" name="professional[workExperience][0][company]")
+											div.form-group.col-md-3
+												label.sr-only(for="professional[workExperience][0][position]") Position
+												input.form-control(placeholder="Position" type="text" name="professional[workExperience][0][position]")
+											div.form-group.col-md-3
+												label.sr-only(for="professional[workExperience][0][start]") Start Date
+												input.form-control(placeholder="Start Date" type="text" name="professional[workExperience][0][start]")
+											div.form-group.col-md-3
+												label.sr-only(for="professional[workExperience][0][end]") End Date
+												input.form-control(placeholder="End Date" type="text" name="professional[workExperience][0][end]")
+										.row
+											div.form-group.col-md-6
+													label.sr-only(for="professional[workExperience][0][location]") Location
+													input.form-control(placeholder="Location" type="text" name="professional[workExperience][0][location]")
+											div.form-group.col-md-6
+												label.sr-only(for="professional[workExperience][0][expires]") Description
+												input.form-control(placeholder="Description" type="text" name="professional[workExperience][0][expires]")
+
 							.row
-								h4 Certifications
-								#certificateFormContainer
-									if(locals.account.professional.certs[0])
-										-var i = 0
-										each cert in locals.account.professional.certs
-											#certificateForm
-												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][institution]") Institution
-													input.form-control(placeholder="Institution" type="text" value=cert.institution name="professional[certs][" + i + "][institution]")
-												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
-													input.form-control(placeholder="Certificate Earned" type="text" value=cert.certificate name="professional[certs][" + i + "][certificate]")
-												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][acquired]") Date Acquired
-													input.form-control(placeholder="Date Acquired" type="text" value=cert.acquired name="professional[certs][" + i + "][acquired]")
-												div.form-group.col-md-3
-													label.sr-only(for="professional[certs][0][expires]") Expires
-													input.form-control(placeholder="Expires" type="text" value=cert.expires name="professional[certs][" + i + "][expires]")
-												-i++
-									if(!locals.account.professional.certs[0])
-										#certificateForm
-											div.form-group.col-md-3
-												label.sr-only(for="professional[certs][0][institution]") Institution
-												input.form-control(placeholder="Institution" type="text" name="professional[certs][0][institution]")
-											div.form-group.col-md-3
-												label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
-												input.form-control(placeholder="Certificate Earned" type="text" name="professional[certs][0][certificate]")
-											div.form-group.col-md-3
-												label.sr-only(for="professional[certs][0][acquired]") Date Acquired
-												input.form-control(placeholder="Date Acquired" type="text" name="professional[certs][0][acquired]")
-											div.form-group.col-md-3
-												label.sr-only(for="professional[certs][0][expires]") Expires
-												input.form-control(placeholder="Expires" type="text" name="professional[certs][0][expires]")
-							.row
-								div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
+								div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
 						div.tab-pane#teaching
 							h4 Schools and Organizations Worked For:
 							#teachingFormContainer
@@ -546,13 +566,16 @@ block content
 															option(value="Female" selected=female) Female
 															option(value="Mixed" selected=mixed) Mixed Group
 												.row
-													div.form-group.col-md-4
+													div.form-group.col-md-3
 														label.sr-only(for="professional[guiding][guided][" + i + "][organization]") Organization 
 														input.form-control(placeholder="Organization" type="text" value=guided.organization name="professional[guiding][guided][" + i + "][organization]")
-													div.form-group.col-md-4
+													div.form-group.col-md-3
 														label.sr-only(for="professional[guiding][guided][" + i + "][location]" ) Location
 														input.form-control(placeholder="Location" type="text" value=guided.location name="professional[guiding][guided][" + i + "][location]")
-													div.form-group.col-md-4
+													div.form-group.col-md-3
+														label.sr-only(for="professional[guiding][guided][" + i + "][role]" ) Role
+														input.form-control(placeholder="Role" type="text" value=guided.role name="professional[guiding][guided][" + i + "][role]")
+													div.form-group.col-md-3
 														label.sr-only(for="professional[guiding][guided][" + i + "][numOfClients]") # of Clients
 														input.form-control(placeholder="# of Clients" type="text" value=guided.numOfClients name="professional[guiding][guided][" + i + "][numOfClients]")
 												.row
@@ -750,4 +773,79 @@ block content
 											-i++
 							.row
 								div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
+						div.tab-pane#mountaineeringCt
+							h4 Alpine and Ski Mountaineering
+							#mountaineeringFormContainer
+								if(locals.account.sports.mountaineering.routes[0])
+									-var i = 0
+									each route in locals.account.sports.mountaineering.routes
+										.mountaineeringForm
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][" + i + "][location]") Mountain
+													input.form-control(placeholder="Mountain" type="text" value=route.mountain name="sports[mountaineering][routes][" + i + "][mountain]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][" + i + "][route]") Route
+													input.form-control(placeholder="Route" type="text" value=route.route name="sports[mountaineering][routes][" + i + "][route]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][" + i + "][difficulty]") Difficulty
+													input.form-control(placeholder="Difficulty" type="text" value=route.difficulty name="sports[mountaineering][routes][" + i + "][difficulty]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][" + i + "][skills]") Skills Demonstrated
+													input.form-control(placeholder="Skills Demonstrated" type="text" value=route.skills name="sports[mountaineering][routes][" + i + "][skills]")
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][" + i + "][description]") Description
+													input.form-control(placeholder="Description" type="text" value=route.description name="sports[mountaineering][routes][" + i + "][description]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][" + i + "][date]") Date
+													input.form-control.climbDate(placeholder="Date" type="text" value=route.date name="sports[mountaineering][routes][" + i + "][date]")
+												.form-group.col-md-3
+														-var guided = ('Guided'==route.guided) ? 'selected' : null;
+														-var personal = ('Personal'==route.guided) ? 'selected' :null;
+														select#guidePersonal.form-control(name="sports[mountaineering][routes][" + i + "][guided]") 
+															option(value="Guided" selected=guided) Guided
+															option(value="Personal" selected=personal) Personal
+												.form-group.col-md-3
+													-var summited = ('Yes'==route.summited) ? 'selected' : null;
+													-var didnt = ('No'==route.summited) ? 'selected' :null;
+													select#summit.form-control(name="sports[mountaineering][routes][" + i + "][summited]") 
+														option(value="Yes" selected=summited) Summited
+														option(value="No" selected=didnt) Didn't Summit
+											-i++
+								if(!locals.account.sports.mountaineering.routes[0])
+									#mountaineeringFormNoIndex
+										-var i = 0
+										.mountaineeringForm
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][0][location]") Mountain
+													input.form-control(placeholder="Mountain" type="text" name="sports[mountaineering][routes][0][mountain]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][0][route]") Route
+													input.form-control(placeholder="Route" type="text" name="sports[mountaineering][routes][0][route]")
+												div.form-group.col-md3
+													label.sr-only(for="sports[mountaineering][routes][0][difficulty]") Difficulty
+													input.form-control(placeholder="Difficulty" type="text" name="sports[mountaineering][routes][0][difficulty]")
+												div.form-group.col-md3
+													label.sr-only(for="sports[mountaineering][routes][0][skills]") Skills Demonstrated
+													input.form-control(placeholder="Skills Demonstrated" type="text" name="sports[mountaineering][routes][0][skills]")
+											.row
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][0][description]") Description
+													input.form-control(placeholder="Description" type="text" name="sports[mountaineering][routes][0][description]")
+												div.form-group.col-md-3
+													label.sr-only(for="sports[mountaineering][routes][0][date]") Date
+													input.form-control.climbDate(placeholder="Date" type="text" name="sports[mountaineering][routes][0][date]")
+											.form-group.col-md-3
+													select#guidePersonal.form-control(name="sports[mountaineering][routes][0][guided]") 
+														option(value="Guided" selected=guided) Guided
+														option(value="Personal" selected=personal) Personal
+												.form-group.col-md-3
+													select#summit.form-control(name="sports[mountaineering][routes][0][summited]") 
+														option(value="Yes" selected=summited) Summited
+														option(value="No" selected=didnt) Didn't Summit
+										-i++
+							.row
+								div#addMountRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
 					button.btn.btn-default.pull-right(type="submit" name="editprofile") Update

@@ -55,6 +55,7 @@ routes.post({name: 'editProfile', re: '/user/:user/edit'}, function (req, res){
 			general: req.body.general,
 			sports: req.body.sports,
 			sportsList: req.body.sportsList,
+			education: req.body.education,
 			professional: req.body.professional}
 
 	}, function (err, person){

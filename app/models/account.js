@@ -14,7 +14,7 @@ var outdoorCoursework = new Schema({
 	institution: String,
 	course: String,
 	duration: String,
-	yearsAttended: {type: Date},
+	yearsAttended: String,
 	skills: String,
 	other: String
 });
@@ -49,6 +49,7 @@ var guidingCompany = new Schema({
 
 var tripGuided = new Schema({
 	organization: String,
+	role: String,
 	location: String, 
 	numOfClients: Number,
 	start: {type: Date},
@@ -75,6 +76,37 @@ var climbRoute = new Schema({
 	climbType: String,
 	leadFollow: String
 });
+
+var mountaineering = new Schema({
+	mountain: String,
+	route: String,
+	difficulty: String,
+	skills: String,
+	description: String,
+	date: {type: Date},
+	guided: String, 
+	submitted: String
+});
+
+var company = new Schema({
+	company: String,
+	position: String,
+	start: {type: Date},
+	end: {type: Date},
+	location: String,
+	description: String
+});
+//var conc = new Schema({
+//	name: String
+//})
+//
+//var school = new Schema({
+//	school: {
+//		name: String, 
+//		concentration: {},
+//		type: String
+//	}
+//})
 
 var rockClimbing = new Schema({
 	notableRoutes: [climbRoute]
@@ -107,6 +139,9 @@ var Account = new Schema({
 	sports: {
 		rockClimbing: {
 			notableRoutes: [climbRoute]
+		},
+		mountaineering: {
+			routes: [mountaineering]
 		}
 	},
 	professional: {
@@ -114,6 +149,7 @@ var Account = new Schema({
 			traditional: [traditionalEdu],
 			outdoor: [outdoorCoursework]
 		},
+		workExperience: [company],
 		certs: [certification],
 		teaching: {
 			experience: [teachingExperience],
