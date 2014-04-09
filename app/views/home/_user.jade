@@ -1,12 +1,10 @@
-a#userLink(href=router.getLink("userprofile", {
-	user: user._id,
-}))
--console.log(user)
-	.listedClass.thumbnail
+a#userLink(href=router.getLink("userprofile", { user: user._id,}))
+	.listedPerson.thumbnail
 		.row
-			.col-md-8.col-sm-6
-				img#profilePhoto.pull-left(src="/img/mick.png")
+			.col-md-.col-sm-6
+				.crop
+						img.pull-left.rounded(src="https://graph.facebook.com/#{user.oauthID}/picture?type=large")
 				.classtitle
-					h3 #{user.general.firstname} #{user.general.lastname}
+					h3 #{user.name}
 						br
 						small #{user.general.hometown}

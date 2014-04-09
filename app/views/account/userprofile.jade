@@ -20,14 +20,15 @@ block content
 						img.pull-left.rounded(src="https://graph.facebook.com/#{user.oauthID}/picture?type=large")
 					h2.profName #{user.name} 
 						.btn.btn-primary.btn-sm Add Friend
-					-console.log(user.general.hometown);
 					p.lead #{user.general.hometown}
-					p.userdetails
-						b Occupation: 
-						span #{user.general.occupation}
-					p.userdetails
-						b Bio: 
-						span #{user.general.aboutMe}
+					-if(user.general.occupation)	
+						p.userdetails
+							b Occupation: 
+							span #{user.general.occupation}
+					-if(user.general.occupation)	
+						p.userdetails
+							b Bio: 
+							span #{user.general.aboutMe}
 					
 					p.userdetails
 					-if(user.sportsList && user.sportsList >= 1)
@@ -196,7 +197,7 @@ block content
 
 
 											//-p #{trad.start} to #{trad.end}
-								-if(user.professional.education.outdoor)
+								-if(user.professional.education.outdoor[0])
 									.panel-body
 										h4 Outdoor Coursework
 									ul.list-group
@@ -212,7 +213,7 @@ block content
 												br
 												b.list-group-item-text More Info: 
 												span #{outdoor.other}
-								-if(user.professional.certs)
+								-if(user.professional.certs[0])
 									.panel-body
 										h4 Certifications
 									ul.list-group

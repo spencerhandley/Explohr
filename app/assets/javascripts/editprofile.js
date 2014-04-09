@@ -73,6 +73,10 @@ $(document).ready(function(){
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
+	$('#workTab a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	});
 	$('#sportsTab a').click(function (e) {
 	  e.preventDefault()
 	  $(this).tab('show')

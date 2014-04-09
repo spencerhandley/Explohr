@@ -13,6 +13,9 @@ block content
 						a(href="#general", data-toggle="tab") General
 					li#educationTab
 						a(href="#education", data-toggle="tab") Education / Coursework
+					-if(locals.account.general.IamA == "Professional")
+						li#workTab
+							a(href="#workExperience", data-toggle="tab") Work Experience
 					li#certsTab
 						a(href="#certs", data-toggle="tab") Certifications
 					-var visibility = locals.account.general.educator ? "block" : "none";
@@ -131,7 +134,7 @@ block content
 									h3 Sports
 									.row
 										div.col-md-3
-
+											input(type="hidden" value="placehold" name="sportsList[placehold]")
 											input(type="checkbox" checked=locals.account.sportsList.rockClimbing value="Rock Climbing" name="sportsList[rockClimbing]")
 											label(for="sports-rockClimbing") Rock Climbing
 										div.col-md-3
@@ -277,6 +280,43 @@ block content
 							.row
 								div#addOutsideCourse.addfieldsBtn.col-md-6.col-md-offset-3 add
 						div.tab-pane#certs
+							.row
+								h4 Certifications
+								#certificateFormContainer
+									if(locals.account.professional.certs[0])
+										-var i = 0
+										each cert in locals.account.professional.certs
+											#certificateForm
+												div.form-group.col-md-3
+													label.sr-only(for="professional[certs][0][institution]") Institution
+													input.form-control(placeholder="Institution" type="text" value=cert.institution name="professional[certs][" + i + "][institution]")
+												div.form-group.col-md-3
+													label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
+													input.form-control(placeholder="Certificate Earned" type="text" value=cert.certificate name="professional[certs][" + i + "][certificate]")
+												div.form-group.col-md-3
+													label.sr-only(for="professional[certs][0][acquired]") Date Acquired
+													input.form-control(placeholder="Date Acquired" type="text" value=cert.acquired name="professional[certs][" + i + "][acquired]")
+												div.form-group.col-md-3
+													label.sr-only(for="professional[certs][0][expires]") Expires
+													input.form-control(placeholder="Expires" type="text" value=cert.expires name="professional[certs][" + i + "][expires]")
+												-i++
+									if(!locals.account.professional.certs[0])
+										#certificateForm
+											div.form-group.col-md-3
+												label.sr-only(for="professional[certs][0][institution]") Institution
+												input.form-control(placeholder="Institution" type="text" name="professional[certs][0][institution]")
+											div.form-group.col-md-3
+												label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
+												input.form-control(placeholder="Certificate Earned" type="text" name="professional[certs][0][certificate]")
+											div.form-group.col-md-3
+												label.sr-only(for="professional[certs][0][acquired]") Date Acquired
+												input.form-control(placeholder="Date Acquired" type="text" name="professional[certs][0][acquired]")
+											div.form-group.col-md-3
+												label.sr-only(for="professional[certs][0][expires]") Expires
+												input.form-control(placeholder="Expires" type="text" name="professional[certs][0][expires]")
+							.row
+								div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
+						div.tab-pane#workExperience
 							.row
 								h4 Certifications
 								#certificateFormContainer

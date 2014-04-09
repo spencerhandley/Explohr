@@ -101,7 +101,8 @@ var Account = new Schema({
 		friends: [{type: Schema.Types.ObjectId, ref: "Account"}]
 	},
 	education: [],
-	sportsList:  {type: Schema.Types.Mixed, default: "String"},
+	sportsList:  {type: Schema.Types.Mixed, default: {placehold: "holder"}, required: true
+	},
 	classes: [{type: Schema.Types.ObjectId, ref: 'Course'}],
 	sports: {
 		rockClimbing: {
