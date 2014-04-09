@@ -106,6 +106,7 @@ passport.use(new FacebookStrategy({
   },
 	function(accessToken, refreshToken, profile, done) {
 		console.log(profile)
+		console.log(profile._json.education)
 		Account.findOne({ oauthID: profile.id }, function(err, user) {
 			if(err) { console.log(err); }
 			if (!err && user != null) {
@@ -118,8 +119,10 @@ passport.use(new FacebookStrategy({
 					general: {
 						firstname: profile.first_name,
 						lastname: profile.last_name,
-						hometown: profile.location.name
-					}
+						hometown: profile._json.location.name,
+						username: profile.username,
+					},	
+					education: profile._json.education
 				});
 				user.save(function(err) {
 					if(err) {
@@ -133,11 +136,17 @@ passport.use(new FacebookStrategy({
 		});
 	}
 ));
+// serialize and deserialize
 passport.serializeUser(function(user, done) {
-done(null, user);
+ console.log('serializeUser: ' + user._id)
+ done(null, user._id);
 });
-passport.deserializeUser(function(obj, done) {
-done(null, obj);
+passport.deserializeUser(function(id, done) {
+ Account.findById(id, function(err, user){
+     console.log(user)
+     if(!err) done(null, user);
+     else done(err, null)
+ })
 });
 //passport.serializeUser(Account.serializeUser());
 //passport.deserializeUser(Account.deserializeUser());

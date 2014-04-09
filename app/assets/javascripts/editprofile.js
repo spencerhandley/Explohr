@@ -4,26 +4,17 @@
 			$form = $(form).last(),
 			$container = $(container)
 			data = parseInt(document.getElementById("addRoute").getAttribute("data-i")),
-			console.log(data),
 			index = data,
-			console.log(index)
 		$rcForm = $("#rockClimbingForm")
 
 		$addBtn.click(function () {
-			console.log("a");
-			console.log($form)
 			var $clone = $form.clone();
-			console.log($clone);
 			$clone.each(function () {
-				console.log("b");
 				var $this = $(this);
 				$fields = $this.find('input'),
-				console.log($fields)
 				$fields.each(function () {
 					var $this = $(this);
-					console.log(index + ":" + (index + 1));
 					var old = $this.prop('name');
-					console.log(old);
 					$this.prop('name', old.replace(index.toString(), index + 1)); 
 				})
 			});

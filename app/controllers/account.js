@@ -49,7 +49,7 @@ routes.get({re:'/auth/facebook/callback'},
     res.redirect('/');
   });
 
-routes.post({name: 'editProfile', re: '/user/:user'}, function (req, res){
+routes.post({name: 'editProfile', re: '/user/:user/edit'}, function (req, res){
 	Account.findByIdAndUpdate( req.user.id , {
 		$set: {
 			general: req.body.general,
@@ -64,7 +64,7 @@ routes.post({name: 'editProfile', re: '/user/:user'}, function (req, res){
 			res.json('no such user');
 		} else{
 			res.send(person);
-			res.redirect('/user/:user');
+			res.redirect('/user/' + req.user._id);
 		}
 	});
 });
@@ -81,7 +81,7 @@ routes.get({name: 'login', re: '/login'}, function (req, res){
 		user: req.user
 	});
 });
-routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, function (req, res) {
+routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, ensureAuthenticated , function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		account.classes.push(req.params.courseid);
 		account.save(function (err) {
@@ -92,7 +92,7 @@ routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, funct
 
 	});
 });
-routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'}, function (req, res) {
+routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'}, ensureAuthenticated ,function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		if (err) {
 			res.send(null, 500);
@@ -118,7 +118,7 @@ routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'
 });
 
 
-routes.get({name: 'deteteClimb', re: '/course/:user/:courseid/deleteCourse'}, function (req, res) {
+routes.get({name: 'deteteClimb', re: '/course/:user/:courseid/deleteCourse'}, ensureAuthenticated, function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		if (err) {
 			res.send(null, 500)
@@ -175,7 +175,7 @@ routes.post({ name: 'newcourse', re: '/newcourse'}, function (req,res){
 	});
 });
 
-routes.get({name: 'edit', re: '/user/:user/edit'}, function (req, res){
+routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function (req, res){
 	Account.findOne({_id: req.user._id}, function (err, account){
 		res.render('account/editprofile', {
 			title: 'Edit Profile',
@@ -187,7 +187,7 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, function (req, res){
 
 
 
-routes.get({name:'dashboard', re: '/dashboard/:user'}, function (req, res){
+routes.get({name:'dashboard', re: '/dashboard/:user'}, ensureAuthenticated, function (req, res){
 	var locals = {};
 	Account.findOne({_id: req.user._id}).populate('classes').exec(function (err, account) {
 		console.log(account);
@@ -221,9 +221,8 @@ routes.get({name:'people', re: '/users/list'}, function (req, res){
 });
 
 routes.get({name:'userprofile', re: '/user/:user'}, function (req, res){
-	Account.findOne({_id: req.user._id}).populate('classes').exec(function (err, account) {
-		console.log(account)
-		console.log(account.classes)
+	Account.findOne({_id: req.params.user}).populate('classes').exec(function (err, account) {
+
 		res.render('account/userprofile', {
 			user: account
 		});

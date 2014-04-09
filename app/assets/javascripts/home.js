@@ -8,6 +8,13 @@ $(document).ready(function(){
 	$(window).scroll(function(e){
 	    parallax();
 	});
+	function parallax(){
+    var scrolled = $(window).scrollTop();
+     $('.top').css('top', -(scrolled / 2) + 'px');
+	}
+	$(window).scroll(function(e){
+	    parallax();
+	});
 
 	$("#moreClasses").click(function(){
 		$("#secondRow").toggleClass("hidden");

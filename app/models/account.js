@@ -91,16 +91,17 @@ var Account = new Schema({
 		educator: Boolean,
 		guide: Boolean,
 		athlete: Boolean,
+		username: String,
 		email: String,
-		hometown: String,
+		hometown: [],
 		occupation: String,
 		aboutMe: String,
 		age: Number,
 		photo: String,
 		friends: [{type: Schema.Types.ObjectId, ref: "Account"}]
 	},
-	sportsList: { type: String, default: "list"
-	},
+	education: [],
+	sportsList:  {type: Schema.Types.Mixed, default: "String"},
 	classes: [{type: Schema.Types.ObjectId, ref: 'Course'}],
 	sports: {
 		rockClimbing: {

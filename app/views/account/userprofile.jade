@@ -7,7 +7,6 @@ block content
 		.container
 			.row#userBasics
 				div
-					-console.log(user)
 					#buttons.pull-right
 						h5.pull-right Outdoor #{user.general.IamA}
 						.row
@@ -17,14 +16,12 @@ block content
 							img.badges(src="../img/educatorBadge.png")
 						-if(user.general.athlete)
 							img.badges(src="../img/athleteBadge.png")
-					img.pull-left.profileImage.rounded(src="../img/3.jpg")
+					.crop.profileImage
+						img.pull-left.rounded(src="https://graph.facebook.com/#{user.oauthID}/picture?type=large")
 					h2.profName #{user.name} 
 						.btn.btn-primary.btn-sm Add Friend
-
+					-console.log(user.general.hometown);
 					p.lead #{user.general.hometown}
-					p.userdetails
-						b Age: 
-						span #{user.general.age}
 					p.userdetails
 						b Occupation: 
 						span #{user.general.occupation}
@@ -48,28 +45,31 @@ block content
 			.row
 				.row#profileBody
 					.col-md-8
-						-if(user.sports.rockClimbing.notableRoutes)
-							h4 Rock Climbing
-							.panel.panel-default.col-md-12
-								table.table.table-striped
-									tr
-										th Location
-										th Route 
-										th Pitches
-										th Type
-										th Grade
-										th Date 
-										th Lead / Follow
+						//- checks for any saved rock climbing routes
+						-if(user.sports.rockClimbing.notableRoutes[0])
+							//- checks for saved routes after first save on the dashboard
+							-if(user.sports.rockClimbing.notableRoutes[0].location)
+								h4 Rock Climbing
+								.panel.panel-default.col-md-12
+									table.table.table-striped
+										tr
+											th Location
+											th Route 
+											th Pitches
+											th Type
+											th Grade
+											th Date 
+											th Lead / Follow
 
-									each climb in user.sports.rockClimbing.notableRoutes
-										tr 
-											td #{climb.location}
-											td #{climb.route}
-											td #{climb.pitches}
-											td #{climb.climbType}
-											td #{climb.grade}
-											td 5/5/13
-											td #{climb.leadFollow}
+										each climb in user.sports.rockClimbing.notableRoutes
+											tr 
+												td #{climb.location}
+												td #{climb.route}
+												td #{climb.pitches}
+												td #{climb.climbType}
+												td #{climb.grade}
+												td 5/5/13
+												td #{climb.leadFollow}
 						-if(user.sports.rockClimbing.notableRoutes)
 							h4 Mountaineering
 							.panel.panel-default.col-md-12
@@ -177,14 +177,24 @@ block content
 
 						.row
 							.panel.panel-default#educationPanel
-								-if(user.professional.education.traditional)
+								-if(user.education)
 									.panel-body 
 										h4 Traditional Education
 									ul.list-group
-										each trad in user.professional.education.traditional
+										each trad in user.education
+											-console.log(trad)
 											li.list-group-item
-												h4.list-group-item-heading #{trad.institution}
-													.small.list-group-item-text #{trad.degree}
+												h4.list-group-item-heading #{trad.school.name}
+													if(trad.concentration)
+														each concentration in trad.concentration
+
+															.small.list-group-item-text #{concentration.name}
+													if(trad.type)
+														.small.list-group-item-text #{trad.type}
+													if(trad.year)
+														.small.list-group-item-text #{trad.year.name}
+
+
 											//-p #{trad.start} to #{trad.end}
 								-if(user.professional.education.outdoor)
 									.panel-body
