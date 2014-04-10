@@ -3,6 +3,6 @@
 		"callbackUrl": "http://localhost:3000/auth/facebook/callback"
 	},
 	"production": {
-		"callbackUrl": "http://explohr.co:3000/auth/facebook/callback"
+		"callbackUrl": "http://explohr.co/auth/facebook/callback"
 	}
 }
