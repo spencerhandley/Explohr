@@ -121,9 +121,9 @@ footer { height: 350px; background-color: #2c363a; padding-top: 1px; }
 /*profile */
 .crop {float: left; width: 150px; height: 150px; overflow: hidden; border-radius: 5px; margin-right: 20px; border: 3px solid white;}
 .crop img {height: 150px; margin: 0px 0 0 -40px; }
-#educationPanel {margin-top: 39px;}
+#rightPanels {margin-top: 39px;}
 #profileBody { margin-top: 0px;}
-#educationPanel { background-color: #f5f7fd;}
+#Panel { background-color: #f5f7fd;}
 #profileContainer { margin-top: -50px;}
 #userBasics h2 {color: white; margin-bottom: 5px;}
 #userBasics {margin-top: -95px;}

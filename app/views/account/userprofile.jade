@@ -49,6 +49,7 @@ block content
 			.row
 				.row#profileBody
 					.col-md-8
+
 						//- checks for any saved rock climbing routes
 						-if(user.sports.rockClimbing.notableRoutes[0])
 							//- checks for saved routes after first save on the dashboard
@@ -63,8 +64,6 @@ block content
 											th Type
 											th Grade
 											th Date 
-											th Lead / Follow
-
 										each climb in user.sports.rockClimbing.notableRoutes
 											tr 
 												td #{climb.location}
@@ -74,163 +73,211 @@ block content
 												td #{climb.grade}
 												td 5/5/13
 												td #{climb.leadFollow}
-						-if(user.sports.rockClimbing.notableRoutes)
-							h4 Mountaineering
-							.panel.panel-default.col-md-12
-								table.table.table-striped
-									tr
-										th Location
-										th Route 
-										th Pitches
-										th Type
-										th Grade
-										th Date 
-									each climb in user.sports.rockClimbing.notableRoutes
-										tr 
-											td #{climb.location}
-											td #{climb.route}
-											td #{climb.pitches}
-											td #{climb.climbType}
-											td #{climb.grade}
-											td 5/5/13
-											td #{climb.leadFollow}
-						-if(user.sports.rockClimbing.notableRoutes)
-							h4 Cycling
-							.panel.panel-default.col-md-12
-								table.table.table-striped
-									tr
-										th Location
-										th Route 
-										th Pitches
-										th Type
-										th Grade
-										th Date 
-
-									each climb in user.sports.rockClimbing.notableRoutes
-										tr 
-											td #{climb.location}
-											td #{climb.route}
-											td #{climb.pitches}
-											td Traditional
-											td #{climb.grade}
-											td 5/5/13
-						-if(user.sports.rockClimbing.notableRoutes)
-							h4 Swimming
-							.panel.panel-default.col-md-12
-								table.table.table-striped
-									tr
-										th Location
-										th Route 
-										th Pitches
-										th Type
-										th Grade
-										th Date 
-
-									each climb in user.sports.rockClimbing.notableRoutes
-										tr 
-											td #{climb.location}
-											td #{climb.route}
-											td #{climb.pitches}
-											td Traditional
-											td #{climb.grade}
-											td 5/5/13
-						-if(user.sports.rockClimbing.notableRoutes)
-							h4 Trips Guided
-							.panel.panel-default.col-md-12
-								table.table.table-striped
-									tr
-										th Location
-										th Route 
-										th Pitches
-										th Type
-										th Grade
-										th Date 
-
-									each climb in user.sports.rockClimbing.notableRoutes
-										tr 
-											td #{climb.location}
-											td #{climb.route}
-											td #{climb.pitches}
-											td Traditional
-											td #{climb.grade}
-											td 5/5/13
-						-if(user.sports.rockClimbing.notableRoutes)
-							h4 Rock Climbing
-							.panel.panel-default.col-md-12
-								table.table.table-striped
-									tr
-										th Location
-										th Route 
-										th Pitches
-										th Type
-										th Grade
-										th Date 
-
-									each climb in user.sports.rockClimbing.notableRoutes
-										tr 
-											td #{climb.location}
-											td #{climb.route}
-											td #{climb.pitches}
-											td Traditional
-											td #{climb.grade}
-											td 5/5/13
-							
-
-
+						-if(user.sports.mountaineering.routes[0])
+							-if(user.sports.mountaineering.routes[0].mountain)
+								h4 Mountaineering
+								.panel.panel-default.col-md-12
+									table.table.table-striped
+										tr
+											th Mountain
+											th Route 
+											th Difficulty
+											th Skills Demonstrated
+											th Description
+											th Date 
+											th Guided
+											th Summited
+										each mount in user.sports.mountaineering.routes
+											tr 
+												td #{mount.mountain}
+												td #{mount.route}
+												td #{mount.difficulty}
+												td #{mount.skills}
+												td #{mount.description}
+												td 5/5/13
+												td #{mount.guided}
+												td #{mount.summited}
+						-if(user.sports.cycling.races[0])
+							-if(user.sports.cycling.races[0].race)
+								h4 Mountain Biking / Cycling
+								.panel.panel-default.col-md-12
+									table.table.table-striped
+										tr
+											th Race
+											th Location 
+											th Type
+											th Total Time
+											th Place
+											th Date 
+											th Mountain / Road
+										each race in user.sports.cycling.races
+											tr 
+												td #{race.race}
+												td #{race.location}
+												td #{race.type}
+												td #{race.totalTime}
+												td #{race.place}
+												td 5/5/13
+												td #{race.mtnRd}
+						-if(user.sports.river.runs[0])
+							-if(user.sports.river.runs[0].river)
+								h4 River Sports
+								.panel.panel-default.col-md-12
+									table.table.table-striped
+										tr
+											th River
+											th Run 
+											th Difficulty
+											th Craft
+											th Role
+											th Date 
+											th Guided
+										each run in user.sports.river.runs
+											tr 
+												td #{run.river}
+												td #{run.run}
+												td #{run.difficulty}
+												td #{run.craft}
+												td #{run.role}
+												td 5/5/13
+												td #{run.guided}
 					.col-md-4
 
-						.row
-							.panel.panel-default#educationPanel
-								-if(user.education)
+						.row#rightPanels
+							.panel.panel-default#Panel
+								-if(user.professional.guiding.companies)
 									.panel-body 
-										h4 Traditional Education
+										h4 Guiding Experience
 									ul.list-group
-										each trad in user.education
-											-console.log(trad)
+										each exp in user.professional.guiding.companies
 											li.list-group-item
-												h4.list-group-item-heading #{trad.school.name}
-													if(trad.concentration)
-														each concentration in trad.concentration
-
-															.small.list-group-item-text #{concentration.name}
-													if(trad.type)
-														.small.list-group-item-text #{trad.type}
-													if(trad.year)
-														.small.list-group-item-text #{trad.year.name}
-
-
-											//-p #{trad.start} to #{trad.end}
-								-if(user.professional.education.outdoor[0])
-									-if(user.professional.education.outdoor[0].institution)
-										.panel-body
-											h4 Outdoor Coursework
+												h4.list-group-item-heading #{exp.organization}
+													if(exp.jobTitle)
+															span.small.list-group-item-text  #{exp.jobTitle}
+													if(exp.location)
+														.small.list-group-item-text #{exp.location}
+													
+													
+												if(exp.description)
+													strong Description:
+													span.small.list-group-item-text  #{exp.description}
+								-if(user.professional.guiding.guided)
+									.panel-body 
+										h5 Trips Guided
+									ul.list-group
+										each exp in user.professional.guiding.guided
+											li.list-group-item
+												h4.list-group-item-heading #{exp.organization}
+													if(exp.jobTitle)
+															span.small.list-group-item-text  #{exp.role}
+													if(exp.location)
+														.small.list-group-item-text #{exp.location}
+													if(exp.numOfClients)
+														.small.list-group-item-text #{exp.numOfClients}
+													if(exp.ages)
+														.small.list-group-item-text #{exp.ages}
+													if(exp.gender)
+														.small.list-group-item-text #{exp.gender}
+													
+													
+												if(exp.description)
+													strong Description:
+													span.small.list-group-item-text  #{exp.description}
+							-if(user.professional.teaching.experience[0].organization)
+								.panel.panel-default#Panel
+									.panel-body 
+										h4 Teaching Experience
+									ul.list-group
+										each exp in user.professional.teaching.experience
+											li.list-group-item
+												h4.list-group-item-heading #{exp.organization}
+													if(exp.jobTitle)
+															span.small.list-group-item-text  #{exp.jobTitle}
+													if(exp.location)
+														.small.list-group-item-text #{exp.location}
+													if(exp.location)
+														.small.list-group-item-text #{exp.type}
+													
+													
+												if(exp.description)
+													strong Description:
+													span.small.list-group-item-text  #{exp.description}
+							-if(user.professional.workExperience[0].company)
+								.panel.panel-default#Panel
+									.panel-body 
+										h4 Related Work Experience
+									ul.list-group
+										each exp in user.professional.workExperience
+											li.list-group-item
+												h4.list-group-item-heading #{exp.company}
+													if(exp.jobTitle)
+															span.small.list-group-item-text  #{exp.positon}
+													if(exp.location)
+														.small.list-group-item-text #{exp.location}
+												if(exp.description)
+													strong Description:
+													span.small.list-group-item-text  #{exp.description}
+							-if(user.professional.sponsors[0].organization)
+								.panel.panel-default#Panel
+									.panel-body 
+										h4 Sponsors
+									ul.list-group
+										each exp in user.professional.sponsors
+											li.list-group-item
+												h4.list-group-item-heading #{exp.organization}
+													if(exp.jobTitle)
+															span.small.list-group-item-text  #{exp.sport}
+							-if(user.professional.education.outdoor[0].institution)
+								.panel.panel-default#Panel
+											//-if(user.professional.education.outdoor[0])
+											.panel-body
+												h4 Outdoor Coursework
+											ul.list-group
+												each outdoor in user.professional.education.outdoor
+													li.list-group-item
+														h4.list-group-item-heading #{outdoor.institution} 
+															.list-group-item-text.small #{outdoor.course}
+														b.list-group-item-text Duration: 
+														span #{outdoor.duration}
+														br
+														b.list-group-item-text Skills Learned: 
+														span #{outdoor.skills}
+														br
+														b.list-group-item-text More Info: 
+														span #{outdoor.other}
+									-if(user.professional.certs[0])
+										-if(user.professional.certs[0].institution)
+											.panel-body
+												h4 Certifications
+											ul.list-group
+												each cert in user.professional.certs
+													li.list-group-item
+														h4.list-group-item-heading #{cert.institution}
+															.small.list-group-item-text #{cert.certificate}
+														b.list-group-item-text Acquired: 
+														span #{cert.acquired}
+														br
+														b.list-group-item-text Expires: 
+														span #{cert.expires}
+									-if(user.education)
+										.panel-body 
+											h4 Traditional Education
 										ul.list-group
-											each outdoor in user.professional.education.outdoor
+											each trad in user.education
+												-console.log(trad)
 												li.list-group-item
-													h4.list-group-item-heading #{outdoor.institution} 
-														.list-group-item-text.small #{outdoor.course}
-													b.list-group-item-text Duration: 
-													span #{outdoor.duration}
-													br
-													b.list-group-item-text Skills Learned: 
-													span #{outdoor.skills}
-													br
-													b.list-group-item-text More Info: 
-													span #{outdoor.other}
-								-if(user.professional.certs[0])
-									-if(user.professional.certs[0].institution)
-										.panel-body
-											h4 Certifications
-										ul.list-group
-											each cert in user.professional.certs
-												li.list-group-item
-													h4.list-group-item-heading #{cert.institution}
-														.small.list-group-item-text #{cert.certificate}
-													b.list-group-item-text Acquired: 
-													span #{cert.acquired}
-													br
-													b.list-group-item-text Expires: 
-													span #{cert.expires}
+													h4.list-group-item-heading #{trad.school.name}
+														if(trad.concentration)
+															each concentration in trad.concentration
+
+																.small.list-group-item-text #{concentration.name}
+														if(trad.type)
+															.small.list-group-item-text #{trad.type}
+														if(trad.year)
+															.small.list-group-item-text #{trad.year.name}
+
+
+												//-p #{trad.start} to #{trad.end}
 
 
 					//-.row
