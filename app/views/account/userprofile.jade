@@ -144,122 +144,127 @@ block content
 					.col-md-4
 
 						.row#rightPanels
-							.panel.panel-default#Panel
-								-if(user.professional.guiding.companies)
-									.panel-body 
-										h4 Guiding Experience
-									ul.list-group
-										each exp in user.professional.guiding.companies
-											li.list-group-item
-												h4.list-group-item-heading #{exp.organization}
-													if(exp.jobTitle)
-															span.small.list-group-item-text  #{exp.jobTitle}
-													if(exp.location)
-														.small.list-group-item-text #{exp.location}
-													
-													
-												if(exp.description)
-													strong Description:
-													span.small.list-group-item-text  #{exp.description}
-								-if(user.professional.guiding.guided)
-									.panel-body 
-										h5 Trips Guided
-									ul.list-group
-										each exp in user.professional.guiding.guided
-											li.list-group-item
-												h4.list-group-item-heading #{exp.organization}
-													if(exp.jobTitle)
-															span.small.list-group-item-text  #{exp.role}
-													if(exp.location)
-														.small.list-group-item-text #{exp.location}
-													if(exp.numOfClients)
-														.small.list-group-item-text #{exp.numOfClients}
-													if(exp.ages)
-														.small.list-group-item-text #{exp.ages}
-													if(exp.gender)
-														.small.list-group-item-text #{exp.gender}
-													
-													
-												if(exp.description)
-													strong Description:
-													span.small.list-group-item-text  #{exp.description}
-							-if(user.professional.teaching.experience[0].organization)
-								.panel.panel-default#Panel
-									.panel-body 
-										h4 Teaching Experience
-									ul.list-group
-										each exp in user.professional.teaching.experience
-											li.list-group-item
-												h4.list-group-item-heading #{exp.organization}
-													if(exp.jobTitle)
-															span.small.list-group-item-text  #{exp.jobTitle}
-													if(exp.location)
-														.small.list-group-item-text #{exp.location}
-													if(exp.location)
-														.small.list-group-item-text #{exp.type}
-													
-													
-												if(exp.description)
-													strong Description:
-													span.small.list-group-item-text  #{exp.description}
-							-if(user.professional.workExperience[0].company)
-								.panel.panel-default#Panel
-									.panel-body 
-										h4 Related Work Experience
-									ul.list-group
-										each exp in user.professional.workExperience
-											li.list-group-item
-												h4.list-group-item-heading #{exp.company}
-													if(exp.jobTitle)
-															span.small.list-group-item-text  #{exp.positon}
-													if(exp.location)
-														.small.list-group-item-text #{exp.location}
-												if(exp.description)
-													strong Description:
-													span.small.list-group-item-text  #{exp.description}
-							-if(user.professional.sponsors[0].organization)
-								.panel.panel-default#Panel
-									.panel-body 
-										h4 Sponsors
-									ul.list-group
-										each exp in user.professional.sponsors
-											li.list-group-item
-												h4.list-group-item-heading #{exp.organization}
-													if(exp.jobTitle)
-															span.small.list-group-item-text  #{exp.sport}
-							-if(user.professional.education.outdoor[0].institution)
-								.panel.panel-default#Panel
-											//-if(user.professional.education.outdoor[0])
-											.panel-body
-												h4 Outdoor Coursework
+								-if(user.professional.guiding.companies[0])
+									-if(user.professional.guiding.companies[0].organization)
+										.panel.panel-default#Panel
+											.panel-body 
+												h4 Guiding Experience
 											ul.list-group
-												each outdoor in user.professional.education.outdoor
+												each exp in user.professional.guiding.companies
 													li.list-group-item
-														h4.list-group-item-heading #{outdoor.institution} 
-															.list-group-item-text.small #{outdoor.course}
-														b.list-group-item-text Duration: 
-														span #{outdoor.duration}
-														br
-														b.list-group-item-text Skills Learned: 
-														span #{outdoor.skills}
-														br
-														b.list-group-item-text More Info: 
-														span #{outdoor.other}
-									-if(user.professional.certs[0])
-										-if(user.professional.certs[0].institution)
-											.panel-body
-												h4 Certifications
+														h4.list-group-item-heading #{exp.organization}
+															if(exp.jobTitle)
+																	span.small.list-group-item-text  #{exp.jobTitle}
+															if(exp.location)
+																.small.list-group-item-text #{exp.location}
+															
+															
+														if(exp.description)
+															strong Description:
+															span.small.list-group-item-text  #{exp.description}
+										-if(user.professional.guiding.guided)
+											.panel-body 
+												h5 Trips Guided
 											ul.list-group
-												each cert in user.professional.certs
+												each exp in user.professional.guiding.guided
 													li.list-group-item
-														h4.list-group-item-heading #{cert.institution}
-															.small.list-group-item-text #{cert.certificate}
-														b.list-group-item-text Acquired: 
-														span #{cert.acquired}
-														br
-														b.list-group-item-text Expires: 
-														span #{cert.expires}
-									-if(user.education)
+														h4.list-group-item-heading #{exp.organization}
+															if(exp.jobTitle)
+																	span.small.list-group-item-text  #{exp.role}
+															if(exp.location)
+																.small.list-group-item-text #{exp.location}
+															if(exp.numOfClients)
+																.small.list-group-item-text #{exp.numOfClients}
+															if(exp.ages)
+																.small.list-group-item-text #{exp.ages}
+															if(exp.gender)
+																.small.list-group-item-text #{exp.gender}
+															
+															
+														if(exp.description)
+															strong Description:
+															span.small.list-group-item-text  #{exp.description}
+								-if(user.professional.teaching.experience[0])
+									-if(user.professional.teaching.experience[0].organization)
+										.panel.panel-default#Panel
+											.panel-body 
+												h4 Teaching Experience
+											ul.list-group
+												each exp in user.professional.teaching.experience
+													li.list-group-item
+														h4.list-group-item-heading #{exp.organization}
+															if(exp.jobTitle)
+																	span.small.list-group-item-text  #{exp.jobTitle}
+															if(exp.location)
+																.small.list-group-item-text #{exp.location}
+															if(exp.location)
+																.small.list-group-item-text #{exp.type}
+															
+															
+														if(exp.description)
+															strong Description:
+															span.small.list-group-item-text  #{exp.description}
+								-if(user.professional.workExperience[0])
+									-if(user.professional.workExperience[0].company)
+										.panel.panel-default#Panel
+											.panel-body 
+												h4 Related Work Experience
+											ul.list-group
+												each exp in user.professional.workExperience
+													li.list-group-item
+														h4.list-group-item-heading #{exp.company}
+															if(exp.jobTitle)
+																	span.small.list-group-item-text  #{exp.positon}
+															if(exp.location)
+																.small.list-group-item-text #{exp.location}
+														if(exp.description)
+															strong Description:
+															span.small.list-group-item-text  #{exp.description}
+								-if(user.professional.sponsors[0])
+									-if(user.professional.sponsors[0].organization)
+										.panel.panel-default#Panel
+											.panel-body 
+												h4 Sponsors
+											ul.list-group
+												each exp in user.professional.sponsors
+													li.list-group-item
+														h4.list-group-item-heading #{exp.organization}
+															if(exp.jobTitle)
+																	span.small.list-group-item-text  #{exp.sport}
+								-if(user.education)
+									.panel.panel-default#Panel
+										-if(user.professional.education.outdoor[0])
+											-if(user.professional.education.outdoor[0].institution)
+												//-if(user.professional.education.outdoor[0])
+												.panel-body
+													h4 Outdoor Coursework
+												ul.list-group
+													each outdoor in user.professional.education.outdoor
+														li.list-group-item
+															h4.list-group-item-heading #{outdoor.institution} 
+																.list-group-item-text.small #{outdoor.course}
+															b.list-group-item-text Duration: 
+															span #{outdoor.duration}
+															br
+															b.list-group-item-text Skills Learned: 
+															span #{outdoor.skills}
+															br
+															b.list-group-item-text More Info: 
+															span #{outdoor.other}
+										-if(user.professional.certs[0])
+											-if(user.professional.certs[0].institution)
+												.panel-body
+													h4 Certifications
+												ul.list-group
+													each cert in user.professional.certs
+														li.list-group-item
+															h4.list-group-item-heading #{cert.institution}
+																.small.list-group-item-text #{cert.certificate}
+															b.list-group-item-text Acquired: 
+															span #{cert.acquired}
+															br
+															b.list-group-item-text Expires: 
+															span #{cert.expires}
 										.panel-body 
 											h4 Traditional Education
 										ul.list-group
