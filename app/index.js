@@ -102,7 +102,7 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.use(new FacebookStrategy({
     clientID: '483379851763044',
     clientSecret: 'b9ac905f62ceafd74cb218ea9d71bd95',
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
+    callbackURL: config.config.callbackUrl
   },
 	function(accessToken, refreshToken, profile, done) {
 		console.log(profile)
