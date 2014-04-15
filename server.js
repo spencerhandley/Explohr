@@ -2,6 +2,7 @@ var http = require('http'),
 	app = require('./app'),
 	config = require('nconf').get('server'),
 	logger = require('winston');
+	
 
 http
 	.createServer(app)

@@ -2,7 +2,6 @@
 	"development": {
 		"port": 3000
 	},
-	"production": {
-		"port": "process.env.PORT || 8081"
+	"production": 8081
 	}
 }
