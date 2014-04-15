@@ -29,7 +29,9 @@ var _ = require('underscore'),
 // Express-State configuration
 expstate.extend(app);
 app.set('state namespace', 'App.context');
-app.set(‘port’, process.env.PORT || 8081);
+app.config(function(){
+	app.set(‘port’, process.env.PORT || 8081);
+});
 
 
 // Swig configuration
