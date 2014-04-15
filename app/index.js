@@ -29,9 +29,6 @@ var _ = require('underscore'),
 // Express-State configuration
 expstate.extend(app);
 app.set('state namespace', 'App.context');
-app.config(function(){
-	app.set(‘port’, process.env.PORT || 8081);
-});
 
 
 // Swig configuration
@@ -162,7 +159,6 @@ mongoose.connect('mongodb://localhost/passport_local_mongoose');
 // Todo: Make .tmp into .tmp/assets
 if ("development" === app.get('env')) app.use(express.static(join(root, '.tmp')));
 
-//config db
 // 404 Middleware
 app.use(controllers.error['404'].handler);
 
