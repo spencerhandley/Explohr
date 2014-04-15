@@ -35,6 +35,7 @@ routes.post({re:'/register'}, function(req, res) {
 		});
 	});
 });
+
 function ensureAuthenticated(req, res, next) {
 if (req.isAuthenticated()) { return next(); }
 res.redirect('/')
@@ -69,6 +70,7 @@ routes.post({name: 'editProfile', re: '/user/:user/edit'}, function (req, res){
 		}
 	});
 });
+
 routes.get({name: 'setup', re: '/user/:user/setup'}, function (req, res){
 	res.render('account/setup', {
 		title: 'Setup Profile',
@@ -82,6 +84,7 @@ routes.get({name: 'login', re: '/login'}, function (req, res){
 		user: req.user
 	});
 });
+
 routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, ensureAuthenticated , function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		account.classes.push(req.params.courseid);
