@@ -92,7 +92,7 @@ app.use(cookies.express());
 //app.use(middleware.layout);
 
 //app.use(express.static(join(__dirname, 'assets')));
-if ("development" === app.get('env')) app.use(express.static(join(__dirname, 'assets')));
+app.use(express.static(join(__dirname, 'assets')));
 
 // passport config
 var Account = require('./models/account');
