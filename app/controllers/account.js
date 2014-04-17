@@ -230,9 +230,9 @@ routes.get({name:'jobListings', re: '/jobs/listings'}, function (req, res){
 });
 routes.get({name:'userprofile', re: '/user/:user'}, function (req, res){
 	Account.findOne({_id: req.params.user}).populate('classes').exec(function (err, account) {
-
 		res.render('account/userprofile', {
-			user: account
+			profileUser: account,
+			user: req.user
 		});
 	});
 });

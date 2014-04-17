@@ -1,0 +1,78 @@
+.dialog { overflow: hidden; position: fixed; top: -100%; left: -100%; text-align:center; padding:10px; z-index: 100; }
+.dialog.open { top: 0; right: 0; bottom: 0; left: 0; }
+.dialog .dialog-content { position: absolute; top: 50%; left: 50%; margin: auto; background-color: #FEFEFE;
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	-o-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+
+/*
+	Skins
+*/
+.dialog.style-lightbox { background-color: #000; background-color: rgba(0,0,0,0.6); }
+
+/*
+	Animations
+*/
+.dialog.style-lightbox.animate-fade-in { background-color: transparent;
+	-webkit-transition-property: background-color;
+	-moz-transition-property: background-color;
+	-ms-transition-property: background-color;
+	-o-transition-property: background-color;
+	transition-property: background-color;
+}
+.dialog.style-lightbox.open.animate-fade-in { background-color: #000; background-color: rgba(0,0,0,0.6); }
+
+.dialog-content.animate-slide-down { top: 0;
+	-webkit-transition-property: top;
+	-moz-transition-property: top;
+	-ms-transition-property: top;
+	-o-transition-property: top;
+	transition-property: top;
+}
+.dialog.open .dialog-content.animate-slide-down { top: 50%; }
+
+.dialog-content.animate-fade-in { opacity: 0;
+	-webkit-transition-property: opacity;
+	-moz-transition-property: opacity;
+	-ms-transition-property: opacity;
+	-o-transition-property: opacity;
+	transition-property: opacity;
+}
+.dialog.open .dialog-content.animate-fade-in { opacity: 1; }
+
+/*
+	MOVE
+*/
+.animate-speed-fast {
+  -webkit-transition-duration: 0.3s;
+  -moz-transition-duration: 0.3s;
+  -ms-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.animate-speed-normal {
+  -webkit-transition-duration: 0.4s;
+  -moz-transition-duration: 0.4s;
+  -ms-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+}
+
+.animate-speed-slow {
+  -webkit-transition-duration: 0.7s;
+  -moz-transition-duration: 0.7s;
+  -ms-transition-duration: 0.7s;
+  -o-transition-duration: 0.7s;
+  transition-duration: 0.7s;
+}
+
+.dialog-header { padding: 0 15px; border-bottom: 1px solid #E9EAEB; line-height: 50px; }
+.dialog-header > h3 { font-size: 1.4em; }
+.dialog-footer { padding: 30px 15px; text-align: right; line-height: 50px; }
+.dialog-footer button { margin-bottom: 10px;}
+.dialog > div > div { padding: 15px; }
+
