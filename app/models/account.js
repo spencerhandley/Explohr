@@ -85,7 +85,7 @@ var mountaineering = new Schema({
 	description: String,
 	date: {type: Date},
 	guided: String, 
-	submitted: String
+	summited: String
 });
 
 var run = new Schema({

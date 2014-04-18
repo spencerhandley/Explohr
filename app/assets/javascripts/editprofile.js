@@ -40,8 +40,51 @@
 
 })(jQuery);
 $(document).ready(function(){
-
-
+	
+	$(".editEduBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#educationTab a").tab("show");
+	})
+	$("#editCertBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#certsTab a").tab("show");
+	})
+	$("#editSponsorBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#sponsorTab a").tab("show");
+	})
+	$("#editWorkBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#workTab a").tab("show");
+	})
+	$("#editTeachingBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#educator a").tab("show");
+	})
+	$("#editRcBtn").click(function(e){
+		e.preventDefault();
+		$("#rcTab a").tab("show");
+	})
+	$("#editMountBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#moutTab a").tab("show");
+	})
+	$("#editCycleBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#cycTab a").tab("show");
+	})
+	$("#editRiverBtn").click(function(e){
+		e.preventDefault();
+		$("#generalTab").removeClass("active");
+		$("#kayTab a").tab("show");
+	})
 	$("#IAA").on('change', function(){
 		var IamA = $(this).val();
 		if(IamA == "professional") {
@@ -125,7 +168,11 @@ $(document).ready(function(){
 	$(".climbDate").datepicker();
 	$(".datePick").datepicker();
 
-
+	var mkctr = function() {
+		var count=$('#sportsUl > li:visible').length;
+	    $('#count').html(count); 
+	}
+	setTimeout(mkctr, 1000);
 
 
 });

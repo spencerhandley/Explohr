@@ -20,7 +20,7 @@ block content
 						.hoverphoto
 							.front
 								.crop.profileImage
-									img.pull-left.circle(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
+									img.pull-left(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
 							
 					section.about
 						h2.profName #{profileUser.name} 
@@ -29,7 +29,8 @@ block content
 							p Add Friend
 						-if(user)
 							-if(profileUser._id = user._id)
-								span.glyphicon.glyphicon-cog.editProfile#editProfileBtn(data-target="#editProfileModal" data-toggle="modal")
+								.editProfile
+									span.glyphicon.glyphicon-cog#editProfileBtn(data-target="#editProfileModal" data-toggle="modal")
 						.location
 							span.glyphicon.glyphicon-map-marker.pull-left.locationicon
 							p.lead #{profileUser.general.hometown}
@@ -73,6 +74,11 @@ block content
 							//- checks for saved routes after first save on the dashboard
 							-if(profileUser.sports.rockClimbing.notableRoutes[0].location)
 								h4 Rock Climbing
+									-if(user)
+										-if(user._id === profileUser._id)
+											button.btn.btn-default.btn-sm.addEvtBtn
+												span.glyphicon.glyphicon-plus.pull-right#editRcBtn(data-target="#editProfileModal" data-toggle="modal")
+
 								.panel.panel-default.col-md-12
 									table.table.table-striped
 										tr
@@ -82,6 +88,7 @@ block content
 											th Type
 											th Grade
 											th Date 
+											th Lead / Follow
 										each climb in profileUser.sports.rockClimbing.notableRoutes
 											tr 
 												td #{climb.location}
@@ -94,6 +101,10 @@ block content
 						-if(profileUser.sports.mountaineering.routes[0])
 							-if(profileUser.sports.mountaineering.routes[0].mountain)
 								h4 Mountaineering
+									-if(user)
+										-if(user._id === profileUser._id)
+											button.btn.btn-default.btn-sm.addEvtBtn
+												span.glyphicon.glyphicon-plus.pull-right#editMountBtn(data-target="#editProfileModal" data-toggle="modal")
 								.panel.panel-default.col-md-12
 									table.table.table-striped
 										tr
@@ -118,6 +129,10 @@ block content
 						-if(profileUser.sports.cycling.races[0])
 							-if(profileUser.sports.cycling.races[0].race)
 								h4 Mountain Biking / Cycling
+									-if(user)
+										-if(user._id === profileUser._id)
+											button.btn.btn-default.btn-sm.addEvtBtn
+												span.glyphicon.glyphicon-plus.pull-right#editCycleBtn(data-target="#editProfileModal" data-toggle="modal")
 								.panel.panel-default.col-md-12
 									table.table.table-striped
 										tr
@@ -140,6 +155,10 @@ block content
 						-if(profileUser.sports.river.runs[0])
 							-if(profileUser.sports.river.runs[0].river)
 								h4 River Sports
+									-if(user)
+										-if(user._id === profileUser._id)
+											button.btn.btn-default.btn-sm.addEvtBtn
+												span.glyphicon.glyphicon-plus.pull-right#editRiverBtn(data-target="#editProfileModal" data-toggle="modal")
 								.panel.panel-default.col-md-12
 									table.table.table-striped
 										tr
@@ -166,6 +185,9 @@ block content
 									-if(profileUser.professional.guiding.companies[0].organization)
 										.panel.panel-default#Panel
 											.panel-body 
+												-if(user)
+													-if(user._id === profileUser._id)
+														span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
 												h4 Guiding Experience
 											ul.list-group
 												each exp in profileUser.professional.guiding.companies
@@ -182,6 +204,9 @@ block content
 															span.small.list-group-item-text  #{exp.description}
 										-if(profileUser.professional.guiding.guided)
 											.panel-body 
+												-if(user)
+													-if(user._id === profileUser._id)
+														span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
 												h5 Trips Guided
 											ul.list-group
 												each exp in profileUser.professional.guiding.guided
@@ -206,6 +231,9 @@ block content
 									-if(profileUser.professional.teaching.experience[0].organization)
 										.panel.panel-default#Panel
 											.panel-body 
+												-if(user)
+													-if(user._id === profileUser._id)
+														span.glyphicon.glyphicon-cog.pull-right#editTeachingBtn(data-target="#editProfileModal" data-toggle="modal")
 												h4 Teaching Experience
 											ul.list-group
 												each exp in profileUser.professional.teaching.experience
@@ -230,6 +258,10 @@ block content
 									-if(profileUser.professional.workExperience[0].company)
 										.panel.panel-default#Panel
 											.panel-body 
+												-if(user)
+													-if(user._id === profileUser._id)
+														span.glyphicon.glyphicon-cog.pull-right#editWorkBtn(data-target="#editProfileModal" data-toggle="modal")
+
 												h4 Related Work Experience
 											ul.list-group
 												each exp in profileUser.professional.workExperience
@@ -252,6 +284,10 @@ block content
 									-if(profileUser.professional.sponsors[0].organization)
 										.panel.panel-default#Panel
 											.panel-body 
+												-if(user)
+													-if(user._id === profileUser._id)
+														span.glyphicon.glyphicon-cog.pull-right#editSponsorBtn(data-target="#editProfileModal" data-toggle="modal")
+
 												h4 Sponsors
 											ul.list-group
 												each exp in profileUser.professional.sponsors
@@ -265,6 +301,10 @@ block content
 											-if(profileUser.professional.education.outdoor[0].institution)
 												//-if(profileUser.professional.education.outdoor[0])
 												.panel-body
+													-if(user)
+														-if(user._id === profileUser._id)
+															span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
+
 													h4 Outdoor Coursework
 												ul.list-group
 													each outdoor in profileUser.professional.education.outdoor
@@ -282,6 +322,9 @@ block content
 										-if(profileUser.professional.certs[0])
 											-if(profileUser.professional.certs[0].institution)
 												.panel-body
+													-if(user)
+														-if(user._id === profileUser._id)
+															span.glyphicon.glyphicon-cog.pull-right#editCertBtn(data-target="#editProfileModal" data-toggle="modal")
 
 													h4 Certifications
 												ul.list-group
@@ -297,6 +340,9 @@ block content
 																.small.list-group-item-text #{cert.certificate}
 
 										.panel-body 
+											-if(user)
+												-if(user._id === profileUser._id)		
+													span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
 											h4 Traditional Education
 										ul.list-group
 											each trad in profileUser.education
@@ -363,7 +409,7 @@ block content
 										button.close(type="button", data-dismiss="modal" aria-hidden="true")
 										h4.modal-title Edit Basic Information
 									.modal-body
-										ul.nav-tabs.nav
+										ul.nav-tabs.nav#editNav
 											li#generalTab.active
 												a(href="#general", data-toggle="tab") General
 											li#educationTab
@@ -383,70 +429,71 @@ block content
 											li#athlete(style="display: " + visibility + ";")
 												a(href="#sponsors", data-toggle="tab") Sponsors
 											li#sportsTab.dropdown
-												-var count = arrayOfSports.length - 1
 												a(href="#", data-toggle="dropdown").dropdown-toggle Sports 
-													span.badge= count
+													div.badge#count
 													span.caret
 													if(profileUser.sportsList)
-														ul.dropdown-menu#sportsList
-															- var visibility = profileUser.sportsList.rockClimbing ? "block" : "none";
-															li#rcTab(style="display: " + visibility + ";")
-																a(href="#rockClimbingCt") Rock Climbing
+														ul.dropdown-menu#sportsUl
+															#sportsList
+															
 															- var visibility = profileUser.sportsList.mountainBiking ? "block" : "none";
 															li#mbTab(style="display: " + visibility + ";")
-																a(href="#cycleCt") Mountain Biking
-															- var visibility = profileUser.sportsList.running ? "block" : "none";
+																a(href="#cycleCt", data-toggle="tab") Mountain Biking
+															//- var visibility = profileUser.sportsList.running ? "block" : "none";
 															//-li#runTab(style="display: " + visibility + ";")
 																a(href="#runningCt") Running
+															- var visibility = profileUser.sportsList.rockClimbing ? "block" : "none";
+															li#rcTab(style="display: " + visibility + ";")
+																a(href="#rockClimbingCt", data-toggle="tab") Rock Climbing
 															- var visibility = profileUser.sportsList.roadCycling ? "block" : "none";
 															li#cycTab(style="display: " + visibility + ";")
-																a(href="#cycleCt") Road Cycling
+																a(href="#cycleCt", data-toggle="tab") Road Cycling
 															- var visibility = profileUser.sportsList.kayaking ? "block" : "none";
 															li#kayTab(style="display: " + visibility + ";")
-																a(href="#riverCt") Kayaking
-															- var visibility = profileUser.sportsList.supb ? "block" : "none";
+																a(href="#riverCt", data-toggle="tab") Kayaking
+															//- - var visibility = profileUser.sportsList.supb ? "block" : "none";
 															//-li#supbTab(style="display: " + visibility + ";")
 																a(href="#supbCt") S.U. Paddle Boarding
-															- var visibility = profileUser.sportsList.surfing ? "block" : "none";
+															//- - var visibility = profileUser.sportsList.surfing ? "block" : "none";
 															//-li#surfTab(style="display: " + visibility + ";")
 																a(href="#surfCt") Surfing
-															- var visibility = profileUser.sportsList.skiing ? "block" : "none";
+															//- - var visibility = profileUser.sportsList.skiing ? "block" : "none";
 															//-li#skiTab(style="display: " + visibility + ";")
 																a(href="#skiCt") Skiing
-															- var visibility = profileUser.sportsList.snowboarding ? "block" : "none";
+															//- - var visibility = profileUser.sportsList.snowboarding ? "block" : "none";
 															//-li#sbTab(style="display: " + visibility + ";")
 																a(href="#snowboardCt") Snowboarding
 															- var visibility = profileUser.sportsList.mountaineering ? "block" : "none";
 															li#moutTab(style="display: " + visibility + ";")
-																a(href="#mountaineeringCt") Mountaineering
-															- var visibility = profileUser.sportsList.hiking ? "block" : "none";
+																a(href="#mountaineeringCt", data-toggle="tab") Mountaineering
+															//- - var visibility = profileUser.sportsList.hiking ? "block" : "none";
 															//-li#hikeTab(style="display: " + visibility + ";")
 																a(href="#hikeCt") Hiking
-															- var visibility = profileUser.sportsList.yoga ? "block" : "none";
+															//- - var visibility = profileUser.sportsList.yoga ? "block" : "none";
 															//-li#yogaTab(style="display: " + visibility + ";")
 																a(href="#yogaCt") Yoga
 															- var visibility = profileUser.sportsList.triathalon ? "block" : "none";
 															li#triTab(style="display: " + visibility + ";")
-																a(href="#triCt") Triathalon
-															- var visibility = profileUser.sportsList.swimming ? "block" : "none";
+																a(href="#triCt", data-toggle="tab") Triathalon
+															//- - var visibility = profileUser.sportsList.swimming ? "block" : "none";
 															//-li#swimTab(style="display: " + visibility + ";")
 																a(href="#swimCt") Swimming
-															- var visibility = profileUser.sportsList.windSurf ? "block" : "none";
+															//- - var visibility = profileUser.sportsList.windSurf ? "block" : "none";
 															//-li#windTab(style="display: " + visibility + ";")
 																a(href="#windSurfCt") Wind Surfing
-															- var visibility = profileUser.sportsList.kiteSurf ? "block" : "none";
-															//-li#kiteTab(style="display: " + visibility + ";")
+															//- - var visibility = profileUser.sportsList.kiteSurf ? "block" : "none";
+															//- li#kiteTab(style="display: " + visibility + ";")
 																a(href="#kiteSurfCt") Kite Surfing
-															- var visibility = profileUser.sportsList.scuba ? "block" : "none";
+															//- - var visibility = profileUser.sportsList.scuba ? "block" : "none";
 															//-li#scubaTab(style="display: " + visibility + ";")
 																a(href="#scubaCt") Scuba
 															- var visibility = profileUser.sportsList.canoe ? "block" : "none";
 															li#canoeTab(style="display: " + visibility + ";")
-																a(href="#riverCt") Canoeing
+																a(href="#riverCt", data-toggle="tab") Canoeing
 															- var visibility = profileUser.sportsList.raft ? "block" : "none";
 															li#raftTab(style="display: " + visibility + ";")
-																a(href="#riverCt") Rafting
-															- var visibility = profileUser.sportsList.iceClimb ? "block" : "none";
+																a(href="#riverCt", data-toggle="tab") Rafting
+															//- - var visibility = profileUser.sportsList.iceClimb ? "block" : "none";
 															//-li#iceTab(style="display: " + visibility + ";")
 																a(href="#iceClimbCt") Ice Climbing
 										.row
@@ -1123,7 +1170,7 @@ block content
 																		-i++
 															.row
 																div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
-													div.tab-pane#mountaineeringCt
+													div.tab-pane#mountaineeringCt.col-md-12
 														h4 Alpine and Ski Mountaineering
 														#mountaineeringFormContainer
 															if(profileUser.sports.mountaineering.routes[0])
@@ -1261,7 +1308,7 @@ block content
 																	-i++
 														.row
 															div#addRiver.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
-													div.tab-pane#cycleCt
+													div.tab-pane#cycleCt.col-md-12
 														h4 Mounatin Biking / Road Cycling
 														#cyclingFormContainer
 															if(profileUser.sports.cycling.races[0])
