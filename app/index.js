@@ -103,7 +103,8 @@ passport.use(new LocalStrategy(Account.authenticate()));
 passport.use(new FacebookStrategy({
     clientID: '483379851763044',
     clientSecret: 'b9ac905f62ceafd74cb218ea9d71bd95',
-    callbackURL: config.config.callbackUrl
+    callbackURL: config.config.callbackUrl,
+    profileFields: ['id', 'displayName', 'first_name', 'last_name', 'location', 'email', 'username', 'education']
   },
 	function(accessToken, refreshToken, profile, done) {
 
@@ -112,15 +113,17 @@ passport.use(new FacebookStrategy({
 			if (!err && user != null) {
 				done(null, user);
 			} else {
+				console.log(profile)
 				var user = new Account({
 					oauthID: profile.id,
 					name: profile.displayName,
 					created: Date.now(),
 					general: {
-						firstname: profile.first_name,
-						lastname: profile.last_name,
+						firstname: profile._json.first_name,
+						lastname: profile._json.last_name,
 						hometown: profile._json.location.name,
-						username: profile.username,
+						username: profile._json.username,
+						email: profile._json.email
 					},	
 					education: profile._json.education
 				});

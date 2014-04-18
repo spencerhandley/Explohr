@@ -396,11 +396,9 @@ block content
 								button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
 				-if(user)
 					-if(user._id === profileUser._id)
-						-var visibility = profileUser.general.onboarded === false ? "open" : "";
-						-console.log(visibility)
-						section#editProfileModal.modal.fade(role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class=visibility)
+						section#editProfileModal.modal.fade.in(role="dialog" aria-labelledby="myModalLabel" aria-hidden="false")
 							-if(profileUser.general.onboarded === false)
-								.welcome
+								.welcome.text-center
 									h1 Hey there, welcome to your Profile!
 									.lead Looks like this is your first time here. Start by telling us more about yourself!
 							.modal-dialog.modal-lg
@@ -520,6 +518,7 @@ block content
 
 															.row
 																div.form-group.col-md-3
+																	-console.log(profileUser)
 																	label.sr-only(for="general[email]") Email
 																	input.form-control(placeholder="Email" type="text" value=profileUser.general.email name="general[email]")
 																div.form-group.col-md-3
@@ -1373,10 +1372,5 @@ block content
 														.row
 															div#addRace.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
 													button.btn.btn-default.pull-right(type="submit" name="editprofile") Update
-
-
-
-
-
 					
 		include ../_footer

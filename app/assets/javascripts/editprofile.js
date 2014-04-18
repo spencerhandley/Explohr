@@ -39,8 +39,15 @@
 
 
 })(jQuery);
-$(document).ready(function(){
-	
+		$(document).ready(function(){
+			if (document.cookie.indexOf('visited=true') == -1) {
+	            // var fifteenDays = 1000*60*60*24*15;
+	            // var expires = new Date((new Date()).valueOf() + fifteenDays);
+	        document.cookie = "visited=true"
+	        $("#editProfileModal").modal();
+        }
+
+	console.log(user);
 	$(".editEduBtn").click(function(e){
 		e.preventDefault();
 		$("#generalTab").removeClass("active");
