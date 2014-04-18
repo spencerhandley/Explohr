@@ -1,20 +1,19 @@
 
 $(document).ready(function(){
 	
-	function parallax(){
+	var paralax = function(top){
     var scrolled = $(window).scrollTop();
-     $('.profileTop').css('top', -(scrolled / 2) + 'px');
+     $(top).css('top', -(scrolled / 2) + 'px');
 	}
 	$(window).scroll(function(e){
-	    parallax();
+		paralax(".profileTop");
+		paralax(".top");
+
 	});
-	function parallax(){
-    var scrolled = $(window).scrollTop();
-     $('.top').css('top', -(scrolled / 2) + 'px');
-	}
-	$(window).scroll(function(e){
-	    parallax();
-	});
+
+	
+
+
 
 	$("#moreClasses").click(function(){
 		$("#secondRow").toggleClass("hidden");

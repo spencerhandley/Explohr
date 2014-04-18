@@ -90,7 +90,7 @@ routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, ensur
 		account.classes.push(req.params.courseid);
 		account.save(function (err) {
 			if (err) return (err);
-			console.log('Success!');
+
 			res.redirect('catalog');
 		});
 
@@ -172,8 +172,6 @@ routes.post({ name: 'newcourse', re: '/newcourse'}, function (req,res){
 		if(err){
 			res.json(err);
 		}else{
-			console.log("success! :) ");
-			console.log(course);
 			res.redirect('catalog');
 		}
 	});
@@ -194,8 +192,6 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function
 routes.get({name:'dashboard', re: '/dashboard/:user'}, ensureAuthenticated, function (req, res){
 	var locals = {};
 	Account.findOne({_id: req.user._id}).populate('classes').exec(function (err, account) {
-		console.log(account);
-		console.log(account.classes);
 		res.render('account/userdashboard', {
 			user: account
 		});

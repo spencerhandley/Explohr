@@ -106,8 +106,7 @@ passport.use(new FacebookStrategy({
     callbackURL: config.config.callbackUrl
   },
 	function(accessToken, refreshToken, profile, done) {
-		console.log(profile)
-		console.log(profile._json.education)
+
 		Account.findOne({ oauthID: profile.id }, function(err, user) {
 			if(err) { console.log(err); }
 			if (!err && user != null) {
@@ -144,7 +143,6 @@ passport.serializeUser(function(user, done) {
 });
 passport.deserializeUser(function(id, done) {
  Account.findById(id, function(err, user){
-     console.log(user)
      if(!err) done(null, user);
      else done(err, null)
  })

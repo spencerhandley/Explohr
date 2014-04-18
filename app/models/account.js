@@ -102,7 +102,6 @@ var race = new Schema({
 	race: String, 
 	location: String, 
 	type: String, 
-	location: String,
 	totalTime: String,
 	place: String,
 	date: {type: Date},
@@ -151,10 +150,11 @@ var Account = new Schema({
 		aboutMe: String,
 		age: Number,
 		photo: String,
+		onboarded: {type: Boolean, default: false},
 		friends: [{type: Schema.Types.ObjectId, ref: "Account"}]
 	},
 	education: [],
-	sportsList:  {type: Schema.Types.Mixed, default: {placehold: "holder"}, required: true
+	sportsList:  {type: Schema.Types.Mixed, default: {placehold: "ho"}, required: true
 	},
 	classes: [{type: Schema.Types.ObjectId, ref: 'Course'}],
 	sports: {

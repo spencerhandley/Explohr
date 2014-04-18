@@ -16,36 +16,48 @@ block content
 							img.badges(src="../img/educatorBadge.png")
 						-if(profileUser.general.athlete)
 							img.badges(src="../img/athleteBadge.png")
-					.crop.profileImage
-						img.pull-left.rounded(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
-					h2.profName #{profileUser.name} 
-						.btn.btn-primary.btn-sm Add Friend
+					section.userPhoto
+						.hoverphoto
+							.front
+								.crop.profileImage
+									img.pull-left.circle(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
+							
+					section.about
+						h2.profName #{profileUser.name} 
+						.addFriend.inline
+							span.glyphicon.glyphicon-plus
+							p Add Friend
 						-if(user)
 							-if(profileUser._id = user._id)
-								.btn.btn-primary.btn-sm#editProfileBtn Edit Profile
-
-					p.lead #{profileUser.general.hometown}
-					-if(profileUser.general.occupation)	
-						p.userdetails
-							b Occupation: 
-							span #{profileUser.general.occupation}
-					-if(profileUser.general.aboutMe)	
-						p.userdetails
-							b Bio: 
-							span #{profileUser.general.aboutMe}
-					-if(profileUser.general.age)	
-						p.userdetails
-							b Age: 
-							span #{profileUser.general.age}
-					
-					
-					p.userdetails
-					-if(profileUser.sportsList && profileUser.sportsList >= 1)
-					b Sports: 
-					-var arrayOfSports = Object.keys(profileUser.sportsList).map(function (key){
-					-		return profileUser.sportsList[key];
-					-}).join(", ");
-					span= arrayOfSports.substr(2)
+								span.glyphicon.glyphicon-cog.editProfile#editProfileBtn(data-target="#editProfileModal" data-toggle="modal")
+						.location
+							span.glyphicon.glyphicon-map-marker.pull-left.locationicon
+							p.lead #{profileUser.general.hometown}
+						-if(profileUser.general.aboutMe)
+							.userdetails.aboutBio
+								span.bio #{profileUser.general.aboutMe}
+						.generalInfo
+							-if(profileUser.general.occupation)
+								.userdetails.inline
+									b Occupation: 
+									span #{profileUser.general.occupation}
+							-if(profileUser.general.age)
+								.userdetails.inline
+									b Age: 
+									span #{profileUser.general.age}	
+							p.userdetails.inline
+								-console.log(profileUser.sportsList.placehold)
+								-var arrayOfSports = Object.keys(profileUser.sportsList).map(function (key){
+								-		return profileUser.sportsList[key];
+								-});
+								-if(arrayOfSports[0] != "ho" && arrayOfSports[1])
+									b Sports: 
+									span= arrayOfSports[1] 
+									-if(arrayOfSports[2])
+										span= ", " + arrayOfSports[2] 
+									-if(arrayOfSports.length > 3)
+										span  and 
+										a.inline= (arrayOfSports.length - 3) + " more."
 
 					
 
@@ -321,985 +333,986 @@ block content
 											img#profileUserThumb(src="/img/6.jpg")
 							.text-center
 								button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
-				-if(user._id === profileUser._id)
-					section#editProfileDialog.dialog.style-lightbox
-						div.dialog-content
-							header.dialog-header
-								h3 Edit Basic Information
-							ul.nav-tabs.nav
-								li#generalTab.active
-									a(href="#general", data-toggle="tab") General
-								li#educationTab
-									a(href="#education", data-toggle="tab") Education / Coursework
-								-if(profileUser.general.IamA == "Professional")
-									li#workTab
-										a(href="#workExperience", data-toggle="tab") Work Experience
-								li#certsTab
-									a(href="#certs", data-toggle="tab") Certifications
-								-var visibility = profileUser.general.educator ? "block" : "none";
-								li#educator(style="display: " + visibility + ";")
-									a(href="#teaching", data-toggle="tab") Teaching Experience
-								-var visibility = profileUser.general.guide ? "block" : "none";
-								li#guide(style="display: " + visibility + ";")
-									a(href="#guiding", data-toggle="tab") Guide Experience
-								-var visibility = profileUser.general.athlete ? "block" : "none";
-								li#athlete(style="display: " + visibility + ";")
-									a(href="#sponsors", data-toggle="tab") Sponsors
-								li#sportsTab.dropdown
-									a(href="#", data-toggle="dropdown").dropdown-toggle Sports
-										span.caret
-										if(profileUser.sportsList)
-											ul.dropdown-menu#sportsList
-												- var visibility = profileUser.sportsList.rockClimbing ? "block" : "none";
-												li#rcTab(style="display: " + visibility + ";")
-													a(href="#rockClimbingCt") Rock Climbing
-												- var visibility = profileUser.sportsList.mountainBiking ? "block" : "none";
-												li#mbTab(style="display: " + visibility + ";")
-													a(href="#cycleCt") Mountain Biking
-												- var visibility = profileUser.sportsList.running ? "block" : "none";
-												//-li#runTab(style="display: " + visibility + ";")
-													a(href="#runningCt") Running
-												- var visibility = profileUser.sportsList.roadCycling ? "block" : "none";
-												li#cycTab(style="display: " + visibility + ";")
-													a(href="#cycleCt") Road Cycling
-												- var visibility = profileUser.sportsList.kayaking ? "block" : "none";
-												li#kayTab(style="display: " + visibility + ";")
-													a(href="#riverCt") Kayaking
-												- var visibility = profileUser.sportsList.supb ? "block" : "none";
-												//-li#supbTab(style="display: " + visibility + ";")
-													a(href="#supbCt") S.U. Paddle Boarding
-												- var visibility = profileUser.sportsList.surfing ? "block" : "none";
-												//-li#surfTab(style="display: " + visibility + ";")
-													a(href="#surfCt") Surfing
-												- var visibility = profileUser.sportsList.skiing ? "block" : "none";
-												//-li#skiTab(style="display: " + visibility + ";")
-													a(href="#skiCt") Skiing
-												- var visibility = profileUser.sportsList.snowboarding ? "block" : "none";
-												//-li#sbTab(style="display: " + visibility + ";")
-													a(href="#snowboardCt") Snowboarding
-												- var visibility = profileUser.sportsList.mountaineering ? "block" : "none";
-												li#moutTab(style="display: " + visibility + ";")
-													a(href="#mountaineeringCt") Mountaineering
-												- var visibility = profileUser.sportsList.hiking ? "block" : "none";
-												//-li#hikeTab(style="display: " + visibility + ";")
-													a(href="#hikeCt") Hiking
-												- var visibility = profileUser.sportsList.yoga ? "block" : "none";
-												//-li#yogaTab(style="display: " + visibility + ";")
-													a(href="#yogaCt") Yoga
-												- var visibility = profileUser.sportsList.triathalon ? "block" : "none";
-												li#triTab(style="display: " + visibility + ";")
-													a(href="#triCt") Triathalon
-												- var visibility = profileUser.sportsList.swimming ? "block" : "none";
-												//-li#swimTab(style="display: " + visibility + ";")
-													a(href="#swimCt") Swimming
-												- var visibility = profileUser.sportsList.windSurf ? "block" : "none";
-												//-li#windTab(style="display: " + visibility + ";")
-													a(href="#windSurfCt") Wind Surfing
-												- var visibility = profileUser.sportsList.kiteSurf ? "block" : "none";
-												//-li#kiteTab(style="display: " + visibility + ";")
-													a(href="#kiteSurfCt") Kite Surfing
-												- var visibility = profileUser.sportsList.scuba ? "block" : "none";
-												//-li#scubaTab(style="display: " + visibility + ";")
-													a(href="#scubaCt") Scuba
-												- var visibility = profileUser.sportsList.canoe ? "block" : "none";
-												li#canoeTab(style="display: " + visibility + ";")
-													a(href="#riverCt") Canoeing
-												- var visibility = profileUser.sportsList.raft ? "block" : "none";
-												li#raftTab(style="display: " + visibility + ";")
-													a(href="#riverCt") Rafting
-												- var visibility = profileUser.sportsList.iceClimb ? "block" : "none";
-												//-li#iceTab(style="display: " + visibility + ";")
-													a(href="#iceClimbCt") Ice Climbing
-							.row
-								form.form(role="form", action=router.getLink("editProfile", {user: user._id}), method="POST")
-									div.tab-content
-										div.tab-pane.fade.in.active.col-md-12#general
-												div#IamA.form-group
-													p I am an Outdoor 
-													-var enthusiast = ('Enthusiast'==profileUser.general.IamA) ? 'selected' : null;
-													-var professional = ("Professional"==profileUser.general.IamA) ? 'selected' :null;
-													select#IAA.form-control(name="general[IamA]" value=profileUser.general.IamA)
-														option(value="Enthusiast" selected=enthusiast) Enthusiast
-														option(value="Professional" selected=professional) Professional
-													-var visibility = ("Professional" == profileUser.general.IamA) ? "block" : "none";
-													.checkboxes(style="display: " + visibility + ";")
-														input(type="checkbox" checked=profileUser.general.educator name="general[educator]")
-														label(for="general[educator]") Educator
-														input(type="checkbox" checked=profileUser.general.guide name="general[guide]")
-														label(for="general[guide]") Guide
-														input(type="checkbox" checked=profileUser.general.athlete name="general[athlete]")
-														label(for="general[athlete]") Athlete
+				-if(user)
+					-if(user._id === profileUser._id)
+						-var visibility = profileUser.general.onboarded === false ? "open" : "";
+						-console.log(visibility)
+						section#editProfileModal.modal.fade(role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" class=visibility)
+							-if(profileUser.general.onboarded === false)
+								.welcome
+									h1 Hey there, welcome to your Profile!
+									.lead Looks like this is your first time here. Start by telling us more about yourself!
+							.modal-dialog.modal-lg
+								div.modal-content
+									header.modal-header
+										button.close(type="button", data-dismiss="modal" aria-hidden="true")
+										h4.modal-title Edit Basic Information
+									.modal-body
+										ul.nav-tabs.nav
+											li#generalTab.active
+												a(href="#general", data-toggle="tab") General
+											li#educationTab
+												a(href="#education", data-toggle="tab") Education / Coursework
+											-if(profileUser.general.IamA == "Professional")
+												li#workTab
+													a(href="#workExperience", data-toggle="tab") Work Experience
+											li#certsTab
+												a(href="#certs", data-toggle="tab") Certifications
+											-var visibility = profileUser.general.educator ? "block" : "none";
+											li#educator(style="display: " + visibility + ";")
+												a(href="#teaching", data-toggle="tab") Teaching Experience
+											-var visibility = profileUser.general.guide ? "block" : "none";
+											li#guide(style="display: " + visibility + ";")
+												a(href="#guiding", data-toggle="tab") Guide Experience
+											-var visibility = profileUser.general.athlete ? "block" : "none";
+											li#athlete(style="display: " + visibility + ";")
+												a(href="#sponsors", data-toggle="tab") Sponsors
+											li#sportsTab.dropdown
+												a(href="#", data-toggle="dropdown").dropdown-toggle Sports
+													span.caret
+													if(profileUser.sportsList)
+														ul.dropdown-menu#sportsList
+															- var visibility = profileUser.sportsList.rockClimbing ? "block" : "none";
+															li#rcTab(style="display: " + visibility + ";")
+																a(href="#rockClimbingCt") Rock Climbing
+															- var visibility = profileUser.sportsList.mountainBiking ? "block" : "none";
+															li#mbTab(style="display: " + visibility + ";")
+																a(href="#cycleCt") Mountain Biking
+															- var visibility = profileUser.sportsList.running ? "block" : "none";
+															//-li#runTab(style="display: " + visibility + ";")
+																a(href="#runningCt") Running
+															- var visibility = profileUser.sportsList.roadCycling ? "block" : "none";
+															li#cycTab(style="display: " + visibility + ";")
+																a(href="#cycleCt") Road Cycling
+															- var visibility = profileUser.sportsList.kayaking ? "block" : "none";
+															li#kayTab(style="display: " + visibility + ";")
+																a(href="#riverCt") Kayaking
+															- var visibility = profileUser.sportsList.supb ? "block" : "none";
+															//-li#supbTab(style="display: " + visibility + ";")
+																a(href="#supbCt") S.U. Paddle Boarding
+															- var visibility = profileUser.sportsList.surfing ? "block" : "none";
+															//-li#surfTab(style="display: " + visibility + ";")
+																a(href="#surfCt") Surfing
+															- var visibility = profileUser.sportsList.skiing ? "block" : "none";
+															//-li#skiTab(style="display: " + visibility + ";")
+																a(href="#skiCt") Skiing
+															- var visibility = profileUser.sportsList.snowboarding ? "block" : "none";
+															//-li#sbTab(style="display: " + visibility + ";")
+																a(href="#snowboardCt") Snowboarding
+															- var visibility = profileUser.sportsList.mountaineering ? "block" : "none";
+															li#moutTab(style="display: " + visibility + ";")
+																a(href="#mountaineeringCt") Mountaineering
+															- var visibility = profileUser.sportsList.hiking ? "block" : "none";
+															//-li#hikeTab(style="display: " + visibility + ";")
+																a(href="#hikeCt") Hiking
+															- var visibility = profileUser.sportsList.yoga ? "block" : "none";
+															//-li#yogaTab(style="display: " + visibility + ";")
+																a(href="#yogaCt") Yoga
+															- var visibility = profileUser.sportsList.triathalon ? "block" : "none";
+															li#triTab(style="display: " + visibility + ";")
+																a(href="#triCt") Triathalon
+															- var visibility = profileUser.sportsList.swimming ? "block" : "none";
+															//-li#swimTab(style="display: " + visibility + ";")
+																a(href="#swimCt") Swimming
+															- var visibility = profileUser.sportsList.windSurf ? "block" : "none";
+															//-li#windTab(style="display: " + visibility + ";")
+																a(href="#windSurfCt") Wind Surfing
+															- var visibility = profileUser.sportsList.kiteSurf ? "block" : "none";
+															//-li#kiteTab(style="display: " + visibility + ";")
+																a(href="#kiteSurfCt") Kite Surfing
+															- var visibility = profileUser.sportsList.scuba ? "block" : "none";
+															//-li#scubaTab(style="display: " + visibility + ";")
+																a(href="#scubaCt") Scuba
+															- var visibility = profileUser.sportsList.canoe ? "block" : "none";
+															li#canoeTab(style="display: " + visibility + ";")
+																a(href="#riverCt") Canoeing
+															- var visibility = profileUser.sportsList.raft ? "block" : "none";
+															li#raftTab(style="display: " + visibility + ";")
+																a(href="#riverCt") Rafting
+															- var visibility = profileUser.sportsList.iceClimb ? "block" : "none";
+															//-li#iceTab(style="display: " + visibility + ";")
+																a(href="#iceClimbCt") Ice Climbing
+										.row
+											form.form(role="form", action=router.getLink("editProfile", {user: user._id}), method="POST")
+												div.tab-content
+													div.tab-pane.fade.in.active.col-md-12#general
+															div#IamA.form-group
+																input(type="hidden" value="true" name="general[onboarded]")
+																p I am an Outdoor 
+																-var enthusiast = ('Enthusiast'==profileUser.general.IamA) ? 'selected' : null;
+																-var professional = ("Professional"==profileUser.general.IamA) ? 'selected' :null;
+																select#IAA.form-control(name="general[IamA]" value=profileUser.general.IamA)
+																	option(value="Enthusiast" selected=enthusiast) Enthusiast
+																	option(value="Professional" selected=professional) Professional
+																-var visibility = ("Professional" == profileUser.general.IamA) ? "block" : "none";
+																.checkboxes(style="display: " + visibility + ";")
+																	input(type="checkbox" checked=profileUser.general.educator name="general[educator]")
+																	label(for="general[educator]") Educator
+																	input(type="checkbox" checked=profileUser.general.guide name="general[guide]")
+																	label(for="general[guide]") Guide
+																	input(type="checkbox" checked=profileUser.general.athlete name="general[athlete]")
+																	label(for="general[athlete]") Athlete
 
 
-												.row
-													div.form-group.col-md-3
-														label.sr-only(for="general[email]") Email
-														input.form-control(placeholder="Email" type="text" value=profileUser.general.email name="general[email]")
-													div.form-group.col-md-3
-														label.sr-only(for="general[age]") Age
-														input.form-control(placeholder="Age" type="text" value=profileUser.general.age name="general[age]")
-													div.form-group.col-md-3
-														label.sr-only(for="general[hometown]") Hometown
-														input.form-control(placeholder="Hometown, State" type="text" value=profileUser.general.hometown name="general[hometown]")
-													div.form-group.col-md-3
-														label.sr-only(for="general[occupation]") Occupation 
-														input.form-control(placeholder="Occupation" type="text" value=profileUser.general.occupation name="general[occupation]")
-												div.form-group
-													label.sr-only(for="general[aboutMe]") About me 
-													input.form-control#bio(placeholder="About me" type="text" value=profileUser.general.aboutMe name="general[aboutMe]")
-												div#sports.form-group
-													h3 Sports
-													.row
-														input(type="hidden" name="sportsList[placehold]")
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.rockClimbing value="Rock Climbing" name="sportsList[rockClimbing]")
-															label(for="sports-rockClimbing") Rock Climbing
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.mountainBiking value="Mountain Biking" name="sportsList[mountainBiking]")
-															label(for="sports-mountainBiking") Mountain Biking
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.running value="Running" name="sportsList[running]")
-															label(for="sports-running") Running
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.roadCycling value="Road Cycling" name="sportsList[roadCycling]")
-															label(for="sports-roadCycing") Road Cycling
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.kayaking value="Kayaking" name="sportsList[kayaking]")
-															label(for="sports-kayaking") Kayaking
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.supb value="Stand Up Paddle Boarding" name="sportsList[supb]")
-															label(for="sports-supb") S.U. Paddle Boarding 
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.surfing value="Surfing" name="sportsList[surfing]")
-															label(for="sports-surfing") Surfing
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.skiing value="Skiing" name="sportsList[skiing]")
-															label(for="sports-skiing") Skiing
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.snowboarding value="Snowboarding" name="sportsList[snowboarding]")
-															label(for="sports-snowboarding") Snowboarding
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.mountaineering value="Mountaineering" name="sportsList[mountaineering]")
-															label(for="sportsList[9]") Mountaineering
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.hiking value="Hiking" name="sportsList[hiking]")
-															label(for="sports-hiking") Hiking
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.yoga value="Yoga" name="sportsList[yoga]")
-															label(for="sports-yoga") Yoga
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.triathalon value="Triathalons" name="sportsList[triathalon]")
-															label(for="sports-triathalon") Triathalon
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.swimming value="Swimming" name="sportsList[swimming]")
-															label(for="sports-swim") Swimming
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.windSurf value="Wind Surfing" name="sportsList[windSurf]")
-															label(for="sports-windSurf") Wind Surfing
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.kiteSurf value="Kite Surfing" name="sportsList[kiteSurf]")
-															label(for="sports-kiteBoard") Kite Boarding
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.scuba value="Scuba" name="sportsList[scuba]")
-															label(for="sports-scuba") Scuba
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.canoe value="Canoeing" name="sportsList[canoe]")
-															label(for="sports-canoe") Canoeing
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.raft value="Rafting" name="sportsList[raft]")
-															label(for="sports-raft") Rafting
-														div.col-md-3
-															input(type="checkbox" checked=profileUser.sportsList.iceClimb value="Ice Climbing" name="sportsList[iceClimb]")
-															label(for="sports-iceclimb") Ice Climbing
-										div.tab-pane#education
-											h4 Traditional Education
-											#tradFormContainer
-												-if(profileUser.education[0])
-													-var i = 0
-													each trad in profileUser.education
-														#tradEduForm
-															div.form-group.col-md-4
-																label.sr-only(for="education[" + i + "][school][name]") Institution
-																input.form-control.col-md-4(placeholder="Educational Institution" type="text" value=trad.school.name name="education[" + i + "][school][name]")
-															div.form-group.col-md-4
-																-var conc = (trad.concentration) ? trad.concentration[0].name : null;
-																label.sr-only(for="education[" + i + "][concentration][name]") Concentration
-																input.form-control(placeholder="Degree Earned" type="text" value=conc name="education[" + i + "][concentration][0][name]")
-															div.form-group.col-md-2
-																-var type = (trad.type) ? trad.type : null;
+															.row
+																div.form-group.col-md-3
+																	label.sr-only(for="general[email]") Email
+																	input.form-control(placeholder="Email" type="text" value=profileUser.general.email name="general[email]")
+																div.form-group.col-md-3
+																	label.sr-only(for="general[age]") Age
+																	input.form-control(placeholder="Age" type="text" value=profileUser.general.age name="general[age]")
+																div.form-group.col-md-3
+																	label.sr-only(for="general[hometown]") Hometown
+																	input.form-control(placeholder="Hometown, State" type="text" value=profileUser.general.hometown name="general[hometown]")
+																div.form-group.col-md-3
+																	label.sr-only(for="general[occupation]") Occupation 
+																	input.form-control(placeholder="Occupation" type="text" value=profileUser.general.occupation name="general[occupation]")
+															div.form-group
+																label.sr-only(for="general[aboutMe]") About me 
+																input.form-control#bio(placeholder="About me" type="text" value=profileUser.general.aboutMe name="general[aboutMe]")
+															div#sports.form-group
+																h3 Sports
+																.row
+																	input(type="hidden" name="sportsList[placehold]")
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.rockClimbing value="Rock Climbing" name="sportsList[rockClimbing]")
+																		label(for="sports-rockClimbing") Rock Climbing
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.mountainBiking value="Mountain Biking" name="sportsList[mountainBiking]")
+																		label(for="sports-mountainBiking") Mountain Biking
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.running value="Running" name="sportsList[running]")
+																		label(for="sports-running") Running
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.roadCycling value="Road Cycling" name="sportsList[roadCycling]")
+																		label(for="sports-roadCycing") Road Cycling
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.kayaking value="Kayaking" name="sportsList[kayaking]")
+																		label(for="sports-kayaking") Kayaking
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.supb value="Stand Up Paddle Boarding" name="sportsList[supb]")
+																		label(for="sports-supb") S.U. Paddle Boarding 
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.surfing value="Surfing" name="sportsList[surfing]")
+																		label(for="sports-surfing") Surfing
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.skiing value="Skiing" name="sportsList[skiing]")
+																		label(for="sports-skiing") Skiing
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.snowboarding value="Snowboarding" name="sportsList[snowboarding]")
+																		label(for="sports-snowboarding") Snowboarding
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.mountaineering value="Mountaineering" name="sportsList[mountaineering]")
+																		label(for="sportsList[9]") Mountaineering
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.hiking value="Hiking" name="sportsList[hiking]")
+																		label(for="sports-hiking") Hiking
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.yoga value="Yoga" name="sportsList[yoga]")
+																		label(for="sports-yoga") Yoga
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.triathalon value="Triathalons" name="sportsList[triathalon]")
+																		label(for="sports-triathalon") Triathalon
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.swimming value="Swimming" name="sportsList[swimming]")
+																		label(for="sports-swim") Swimming
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.windSurf value="Wind Surfing" name="sportsList[windSurf]")
+																		label(for="sports-windSurf") Wind Surfing
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.kiteSurf value="Kite Surfing" name="sportsList[kiteSurf]")
+																		label(for="sports-kiteBoard") Kite Boarding
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.scuba value="Scuba" name="sportsList[scuba]")
+																		label(for="sports-scuba") Scuba
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.canoe value="Canoeing" name="sportsList[canoe]")
+																		label(for="sports-canoe") Canoeing
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.raft value="Rafting" name="sportsList[raft]")
+																		label(for="sports-raft") Rafting
+																	div.col-md-3
+																		input(type="checkbox" checked=profileUser.sportsList.iceClimb value="Ice Climbing" name="sportsList[iceClimb]")
+																		label(for="sports-iceclimb") Ice Climbing
+													div.tab-pane#education.col-md-12
+														h4 Traditional Education
+														#tradFormContainer
+															-if(profileUser.education[0])
+																-var i = 0
+																each trad in profileUser.education
+																	#tradEduForm
+																		div.form-group.col-md-4
+																			label.sr-only(for="education[" + i + "][school][name]") Institution
+																			input.form-control.col-md-4(placeholder="Educational Institution" type="text" value=trad.school.name name="education[" + i + "][school][name]")
+																		div.form-group.col-md-4
+																			-var conc = (trad.concentration) ? trad.concentration[0].name : null;
+																			label.sr-only(for="education[" + i + "][concentration][name]") Concentration
+																			input.form-control(placeholder="Degree Earned" type="text" value=conc name="education[" + i + "][concentration][0][name]")
+																		div.form-group.col-md-2
+																			-var type = (trad.type) ? trad.type : null;
 
-																label.sr-only(for="education[" + i + "][type]") Type
-																input.form-control(placeholder="Type" type="text" value=trad.type name="education[" + i + "][type]")
-															div.form-group.col-md-2
-																-var year = (trad.year) ? trad.year.name : null;
-																label.sr-only(for="education[" + i + "][year][name]") Year
-																input.form-control.datePick(placeholder="End Date" type="text" value=year name="education[" + i + "][year][name]")
-															-i++
-												-if(!profileUser.professional.education.traditional[0] && !profileUser.education[0])	
-													#tradEduForm
-													#tradEduForm
-														div.form-group.col-md-4
-															label.sr-only(for="education[0][school][name]") Institution
-															input.form-control.col-md-4(placeholder="Educational Institution" type="text" name="education[0][school][name]")
-														div.form-group.col-md-4
-															-var conc = (trad.concentration) ? trad.concentration[0].name : null;
-															label.sr-only(for="education[0][concentration][name]") Concentration
-															input.form-control(placeholder="Degree Earned" type="text" name="education[0][concentration][0][name]")
-														div.form-group.col-md-2
-															label.sr-only(for="education[0][type]") Type
-															input.form-control(placeholder="Type" type="text" name="education[0][type]")
-														div.form-group.col-md-2
-															-var year = (trad.year) ? trad.year.name : null;
-															label.sr-only(for="education[0][year][name]") Year
-															input.form-control.datePick(placeholder="End Date" type="text" name="education[0][year][name]")
-											.row
-												div#addTradEdu.addfieldsBtn.col-md-6.col-md-offset-3 add
-											.row.col-md-12.outsideCourse
-												h4 Outdoor Coursework
-												#outdoorEdFormContainer
-													-if(profileUser.professional.education.outdoor[0])
-														-var i = 0
-														each outdoor in profileUser.professional.education.outdoor
-															#outdoorEdEduForm
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[education][outdoor][" + i + "][institution]") Institution
-																	input.form-control(placeholder="Institution" type="text" value=outdoor.institution name="professional[education][outdoor][" + i + "][institution]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[education][outdoor][" + i + "][course]") Course
-																	input.form-control(placeholder="Course" type="text" value=outdoor.course name="professional[education][outdoor][" + i + "][course]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[education][outdoor][" + i + "][duration]") Duration 
-																	input.form-control(placeholder="Duration" type="text" value=outdoor.duration name="professional[education][outdoor][" + i + "][duration]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[education][outdoor][" + i + "][yearsAttended]") Year Attended
-																	input.form-control(placeholder="Year Attended" type="text" value=outdoor.yearsAttended name="professional[education][outdoor][" + i + "][yearsAttended]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[education][outdoor][" + i + "][skills]") Skills Studied
-																	input.form-control(placeholder="Skills Studied" type="text" value=outdoor.skills name="professional[education][outdoor][" + i + "][skills]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[education][outdoor][" + i + "][other]") Other info 
-																	input.form-control(placeholder="Other Info" type="text" value=outdoor.other name="professional[education][outdoor][" + i + "][other]")
-																-i++
-													-if(!profileUser.professional.education.outdoor[0])
-														#outdoorEdEduForm
-															div.form-group.col-md-4
-																label.sr-only(for="professional[education][outdoor][0][institution]") Institution
-																input.form-control(placeholder="Institution" type="text" name="professional[education][outdoor][0][institution]")
-															div.form-group.col-md-4
-																label.sr-only(for="professional[education][outdoor][0][course]") Course
-																input.form-control(placeholder="Course" type="text" name="professional[education][outdoor][0][course]")
-															div.form-group.col-md-4
-																label.sr-only(for="professional[education][outdoor][0][duration]") Duration 
-																input.form-control(placeholder="Duration" type="text" name="professional[education][outdoor][0][duration]")
-															div.form-group.col-md-4
-																label.sr-only(for="professional[education][outdoor][0][yearsAttended]") Year Attended
-																input.form-control(placeholder="Year Attended" type="text" name="professional[education][outdoor][0][yearsAttended]")
-															div.form-group.col-md-4
-																label.sr-only(for="professional[education][outdoor][0][skills]") Skills Studied
-																input.form-control(placeholder="Skills Studied" type="text" name="professional[education][outdoor][0][skills]")
-															div.form-group.col-md-4
-																label.sr-only(for="professional[education][outdoor][0][other]") Other info 
-																input.form-control(placeholder="Other Info" type="text" name="professional[education][outdoor][0][other]")
-											.row
-												div#addOutsideCourse.addfieldsBtn.col-md-6.col-md-offset-3 add
-										div.tab-pane#certs
-											.row.col-md-12
-												h4 Certifications
-												#certificateFormContainer
-													-if(profileUser.professional.certs[0])
-														-var i = 0
-														each cert in profileUser.professional.certs
-															#certificateForm
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[certs][" + i + "][institution]") Institution
-																	input.form-control(placeholder="Institution" type="text" value=cert.institution name="professional[certs][" + i + "][institution]")
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[certs][" + i + "][certificate]") Certificate Earned
-																	input.form-control(placeholder="Certificate Earned" type="text" value=cert.certificate name="professional[certs][" + i + "][certificate]")
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[certs][" + i + "][acquired]") Date Acquired
-																	input.form-control(placeholder="Date Acquired" type="text" value=cert.acquired name="professional[certs][" + i + "][acquired]")
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[certs][" + i + "][expires]") Expires
-																	input.form-control(placeholder="Expires" type="text" value=cert.expires name="professional[certs][" + i + "][expires]")
-																-i++
-													-if(!profileUser.professional.certs[0])
-														#certificateForm
-															div.form-group.col-md-3
-																label.sr-only(for="professional[certs][0][institution]") Institution
-																input.form-control(placeholder="Institution" type="text" name="professional[certs][0][institution]")
-															div.form-group.col-md-3
-																label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
-																input.form-control(placeholder="Certificate Earned" type="text" name="professional[certs][0][certificate]")
-															div.form-group.col-md-3
-																label.sr-only(for="professional[certs][0][acquired]") Date Acquired
-																input.form-control(placeholder="Date Acquired" type="text" name="professional[certs][0][acquired]")
-															div.form-group.col-md-3
-																label.sr-only(for="professional[certs][0][expires]") Expires
-																input.form-control(placeholder="Expires" type="text" name="professional[certs][0][expires]")
-											.row
-												div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
-										div.tab-pane#workExperience.col-md-12
-											h4 Work Experience
-											#workFormContainer
-												if(profileUser.professional.certs[0])
-													-var i = 0
-													each job in profileUser.professional.workExperience
-														#workForm
-															.row
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[workExperience][" + i + "][company]") Company
-																	input.form-control(placeholder="Company" type="text" value=job.company name="professional[workExperience][" + i + "][company]")
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[workExperience][" + i + "][position]") Position
-																	input.form-control(placeholder="Position" type="text" value=job.position name="professional[workExperience][" + i + "][position]")
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[workExperience][" + i + "][start]") Start Date
-																	input.form-control(placeholder="Start Date" type="text" value=job.start name="professional[workExperience][" + i + "][start]")
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[workExperience][" + i + "][end]") End Date
-																	input.form-control(placeholder="End Date" type="text" value=job.end name="professional[workExperience][" + i + "][end]")
-															.row
-																div.form-group.col-md-6
-																	label.sr-only(for="professional[workExperience][" + i + "][location]") Location
-																	input.form-control(placeholder="Location" type="text" value=job.location name="professional[workExperience][" + i + "][location]")
-																div.form-group.col-md-6
-																	label.sr-only(for="professional[workExperience][" + i + "][description]") Description
-																	input.form-control(placeholder="Description" type="text" value=job.description name="professional[workExperience][" + i + "][description]")
-															-i++
-												-if(!profileUser.professional.workExperience[0])
-													#workForm
+																			label.sr-only(for="education[" + i + "][type]") Type
+																			input.form-control(placeholder="Type" type="text" value=trad.type name="education[" + i + "][type]")
+																		div.form-group.col-md-2
+																			-var year = (trad.year) ? trad.year.name : null;
+																			label.sr-only(for="education[" + i + "][year][name]") Year
+																			input.form-control.datePick(placeholder="End Date" type="text" value=year name="education[" + i + "][year][name]")
+																		-i++
+															-if(!profileUser.professional.education.traditional[0] && !profileUser.education[0])	
+																#tradEduForm
+																#tradEduForm
+																	div.form-group.col-md-4
+																		label.sr-only(for="education[0][school][name]") Institution
+																		input.form-control.col-md-4(placeholder="Educational Institution" type="text" name="education[0][school][name]")
+																	div.form-group.col-md-4
+																		-var conc = (trad.concentration) ? trad.concentration[0].name : null;
+																		label.sr-only(for="education[0][concentration][name]") Concentration
+																		input.form-control(placeholder="Degree Earned" type="text" name="education[0][concentration][0][name]")
+																	div.form-group.col-md-2
+																		label.sr-only(for="education[0][type]") Type
+																		input.form-control(placeholder="Type" type="text" name="education[0][type]")
+																	div.form-group.col-md-2
+																		-var year = (trad.year) ? trad.year.name : null;
+																		label.sr-only(for="education[0][year][name]") Year
+																		input.form-control.datePick(placeholder="End Date" type="text" name="education[0][year][name]")
 														.row
-															div.form-group.col-md-3
-																label.sr-only(for="professional[workExperience][0][company]") Company
-																input.form-control(placeholder="Company" type="text" name="professional[workExperience][0][company]")
-															div.form-group.col-md-3
-																label.sr-only(for="professional[workExperience][0][position]") Position
-																input.form-control(placeholder="Position" type="text" name="professional[workExperience][0][position]")
-															div.form-group.col-md-3
-																label.sr-only(for="professional[workExperience][0][start]") Start Date
-																input.form-control(placeholder="Start Date" type="text" name="professional[workExperience][0][start]")
-															div.form-group.col-md-3
-																label.sr-only(for="professional[workExperience][0][end]") End Date
-																input.form-control(placeholder="End Date" type="text" name="professional[workExperience][0][end]")
+															div#addTradEdu.addfieldsBtn.col-md-6.col-md-offset-3 add
+														.row.col-md-12.outsideCourse
+															h4 Outdoor Coursework
+															#outdoorEdFormContainer
+																-if(profileUser.professional.education.outdoor[0])
+																	-var i = 0
+																	each outdoor in profileUser.professional.education.outdoor
+																		#outdoorEdEduForm
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[education][outdoor][" + i + "][institution]") Institution
+																				input.form-control(placeholder="Institution" type="text" value=outdoor.institution name="professional[education][outdoor][" + i + "][institution]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[education][outdoor][" + i + "][course]") Course
+																				input.form-control(placeholder="Course" type="text" value=outdoor.course name="professional[education][outdoor][" + i + "][course]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[education][outdoor][" + i + "][duration]") Duration 
+																				input.form-control(placeholder="Duration" type="text" value=outdoor.duration name="professional[education][outdoor][" + i + "][duration]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[education][outdoor][" + i + "][yearsAttended]") Year Attended
+																				input.form-control(placeholder="Year Attended" type="text" value=outdoor.yearsAttended name="professional[education][outdoor][" + i + "][yearsAttended]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[education][outdoor][" + i + "][skills]") Skills Studied
+																				input.form-control(placeholder="Skills Studied" type="text" value=outdoor.skills name="professional[education][outdoor][" + i + "][skills]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[education][outdoor][" + i + "][other]") Other info 
+																				input.form-control(placeholder="Other Info" type="text" value=outdoor.other name="professional[education][outdoor][" + i + "][other]")
+																			-i++
+																-if(!profileUser.professional.education.outdoor[0])
+																	#outdoorEdEduForm
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[education][outdoor][0][institution]") Institution
+																			input.form-control(placeholder="Institution" type="text" name="professional[education][outdoor][0][institution]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[education][outdoor][0][course]") Course
+																			input.form-control(placeholder="Course" type="text" name="professional[education][outdoor][0][course]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[education][outdoor][0][duration]") Duration 
+																			input.form-control(placeholder="Duration" type="text" name="professional[education][outdoor][0][duration]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[education][outdoor][0][yearsAttended]") Year Attended
+																			input.form-control(placeholder="Year Attended" type="text" name="professional[education][outdoor][0][yearsAttended]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[education][outdoor][0][skills]") Skills Studied
+																			input.form-control(placeholder="Skills Studied" type="text" name="professional[education][outdoor][0][skills]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[education][outdoor][0][other]") Other info 
+																			input.form-control(placeholder="Other Info" type="text" name="professional[education][outdoor][0][other]")
 														.row
-															div.form-group.col-md-6
-																	label.sr-only(for="professional[workExperience][0][location]") Location
-																	input.form-control(placeholder="Location" type="text" name="professional[workExperience][0][location]")
-															div.form-group.col-md-6
-																label.sr-only(for="professional[workExperience][0][expires]") Description
-																input.form-control(placeholder="Description" type="text" name="professional[workExperience][0][expires]")
+															div#addOutsideCourse.addfieldsBtn.col-md-6.col-md-offset-3 add
+													div.tab-pane#certs.col-md-12
+														.row.col-md-12
+															h4 Certifications
+															#certificateFormContainer
+																-if(profileUser.professional.certs[0])
+																	-var i = 0
+																	each cert in profileUser.professional.certs
+																		#certificateForm
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[certs][" + i + "][institution]") Institution
+																				input.form-control(placeholder="Institution" type="text" value=cert.institution name="professional[certs][" + i + "][institution]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[certs][" + i + "][certificate]") Certificate Earned
+																				input.form-control(placeholder="Certificate Earned" type="text" value=cert.certificate name="professional[certs][" + i + "][certificate]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[certs][" + i + "][acquired]") Date Acquired
+																				input.form-control(placeholder="Date Acquired" type="text" value=cert.acquired name="professional[certs][" + i + "][acquired]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[certs][" + i + "][expires]") Expires
+																				input.form-control(placeholder="Expires" type="text" value=cert.expires name="professional[certs][" + i + "][expires]")
+																			-i++
+																-if(!profileUser.professional.certs[0])
+																	#certificateForm
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[certs][0][institution]") Institution
+																			input.form-control(placeholder="Institution" type="text" name="professional[certs][0][institution]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[certs][0][certificate]") Certificate Earned
+																			input.form-control(placeholder="Certificate Earned" type="text" name="professional[certs][0][certificate]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[certs][0][acquired]") Date Acquired
+																			input.form-control(placeholder="Date Acquired" type="text" name="professional[certs][0][acquired]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[certs][0][expires]") Expires
+																			input.form-control(placeholder="Expires" type="text" name="professional[certs][0][expires]")
+														.row
+															div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
+													div.tab-pane#workExperience.col-md-12
+														h4 Work Experience
+														#workFormContainer
+															if(profileUser.professional.certs[0])
+																-var i = 0
+																each job in profileUser.professional.workExperience
+																	#workForm
+																		.row
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[workExperience][" + i + "][company]") Company
+																				input.form-control(placeholder="Company" type="text" value=job.company name="professional[workExperience][" + i + "][company]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[workExperience][" + i + "][position]") Position
+																				input.form-control(placeholder="Position" type="text" value=job.position name="professional[workExperience][" + i + "][position]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[workExperience][" + i + "][start]") Start Date
+																				input.form-control(placeholder="Start Date" type="text" value=job.start name="professional[workExperience][" + i + "][start]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[workExperience][" + i + "][end]") End Date
+																				input.form-control(placeholder="End Date" type="text" value=job.end name="professional[workExperience][" + i + "][end]")
+																		.row
+																			div.form-group.col-md-6
+																				label.sr-only(for="professional[workExperience][" + i + "][location]") Location
+																				input.form-control(placeholder="Location" type="text" value=job.location name="professional[workExperience][" + i + "][location]")
+																			div.form-group.col-md-6
+																				label.sr-only(for="professional[workExperience][" + i + "][description]") Description
+																				input.form-control(placeholder="Description" type="text" value=job.description name="professional[workExperience][" + i + "][description]")
+																		-i++
+															-if(!profileUser.professional.workExperience[0])
+																#workForm
+																	.row
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[workExperience][0][company]") Company
+																			input.form-control(placeholder="Company" type="text" name="professional[workExperience][0][company]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[workExperience][0][position]") Position
+																			input.form-control(placeholder="Position" type="text" name="professional[workExperience][0][position]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[workExperience][0][start]") Start Date
+																			input.form-control(placeholder="Start Date" type="text" name="professional[workExperience][0][start]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[workExperience][0][end]") End Date
+																			input.form-control(placeholder="End Date" type="text" name="professional[workExperience][0][end]")
+																	.row
+																		div.form-group.col-md-6
+																				label.sr-only(for="professional[workExperience][0][location]") Location
+																				input.form-control(placeholder="Location" type="text" name="professional[workExperience][0][location]")
+																		div.form-group.col-md-6
+																			label.sr-only(for="professional[workExperience][0][expires]") Description
+																			input.form-control(placeholder="Description" type="text" name="professional[workExperience][0][expires]")
 
-											.row
-												div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
-										div.tab-pane#teaching.col-md-12
-											h4 Schools and Organizations Worked For:
-											#teachingFormContainer
-												if(profileUser.professional.teaching.experience[0])
-													-var i = 0
-													each experience in profileUser.professional.teaching.experience
-														#teachingForm
-															.row.col-md-12
-																p Type of Work
-																	-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
-																	-var residential = ("Residential"==experience.kind) ? 'selected' :null;
-																	-var other = ("Other"==experience.kind) ? 'selected' :null;
-																	select#courseDescription.form-control( value=experience.kind name="professional[teaching][experience][" + i + "][kind]")
-																		option(value="Expiditionary" selected=expiditionary) Expeditionary
-																		option(value="Residential" selected=residential) Residential
-																		option(value="Other" selected=other) Other
-															.row
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[teaching][experience][" + i + "][organization]") Organization 
-																	input.form-control(placeholder="Organization" type="text" value=experience.organization name="professional[teaching][experience][" + i + "][organization]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[teaching][experience][" + i + "][jobTitle]") Job Title
-																	input.form-control(placeholder="Title" type="text" value=experience.jobTitle name="professional[teaching][experience][" + i + "][jobTitle]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[teaching][experience][" + i + "][location]") Location
-																	input.form-control(placeholder="Location" type="text" value=experience.location name="professional[teaching][experience][" + i + "][location]")
-															.row
-																h5 Time Period
-																div.form-group.col-md-3.col-md-offset-2
-																	label.sr-only(for="professional[teaching][experience][" + i + "][start]") Start Date
-																	input.form-control.datePick(placeholder="Start Date" type="text" value=experience.start name="professional[teaching][experience][" + i + "][start]")
-																.col-md-2
-																	p until
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[teaching][experience][" + i + "][end]") End Date
-																	input.form-control.datePick(placeholder="End Date" type="text" value=experience.end name="professional[teaching][experience][" + i + "][end]")
-																div.form-group.col-md-2
-																	input(type="checkbox", value=experience.current name="professional[teaching][experience][" + i + "][current]")
-																	label(for="professional[teaching][experience][current]") I currently work here
-															.row
-																.form-group.col-md-12
-																	label.sr-only(for="professional[teaching][experience][" + i + "][description]")
-																	input.form-control(placeholder="Brief Description" type="text" value=experience.description name="professional[teaching][experience][" + i + "][description]")
-															-i++
-												if(!profileUser.professional.teaching.experience[0])
-													#teachingForm
 														.row
-															p Type of Work
-																select#courseDescription.form-control( name="professional[teaching][experience][0][kind]")
-																	option(value="Expiditionary" ) Expeditionary
-																	option(value="Residential" ) Residential
-																	option(value="Other" ) Other
+															div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
+													div.tab-pane#teaching.col-md-12
+														h4 Schools and Organizations Worked For:
+														#teachingFormContainer
+															if(profileUser.professional.teaching.experience[0])
+																-var i = 0
+																each experience in profileUser.professional.teaching.experience
+																	#teachingForm
+																		.col-md-12
+																			p Type of Work
+																				-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
+																				-var residential = ("Residential"==experience.kind) ? 'selected' :null;
+																				-var other = ("Other"==experience.kind) ? 'selected' :null;
+																				select#courseDescription.form-control( value=experience.kind name="professional[teaching][experience][" + i + "][kind]")
+																					option(value="Expiditionary" selected=expiditionary) Expeditionary
+																					option(value="Residential" selected=residential) Residential
+																					option(value="Other" selected=other) Other
+																		.row
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[teaching][experience][" + i + "][organization]") Organization 
+																				input.form-control(placeholder="Organization" type="text" value=experience.organization name="professional[teaching][experience][" + i + "][organization]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[teaching][experience][" + i + "][jobTitle]") Job Title
+																				input.form-control(placeholder="Title" type="text" value=experience.jobTitle name="professional[teaching][experience][" + i + "][jobTitle]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[teaching][experience][" + i + "][location]") Location
+																				input.form-control(placeholder="Location" type="text" value=experience.location name="professional[teaching][experience][" + i + "][location]")
+																		.row
+																			div.form-group.col-md-3.col-md-offset-2
+																				label.sr-only(for="professional[teaching][experience][" + i + "][start]") Start Date
+																				input.form-control.datePick(placeholder="Start Date" type="text" value=experience.start name="professional[teaching][experience][" + i + "][start]")
+																			.col-md-2
+																				p until
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[teaching][experience][" + i + "][end]") End Date
+																				input.form-control.datePick(placeholder="End Date" type="text" value=experience.end name="professional[teaching][experience][" + i + "][end]")
+																			div.form-group.col-md-2
+																				input(type="checkbox", value=experience.current name="professional[teaching][experience][" + i + "][current]")
+																				label(for="professional[teaching][experience][current]") I currently work here
+																		.row
+																			.form-group.col-md-12
+																				label.sr-only(for="professional[teaching][experience][" + i + "][description]")
+																				input.form-control(placeholder="Brief Description" type="text" value=experience.description name="professional[teaching][experience][" + i + "][description]")
+																		-i++
+															if(!profileUser.professional.teaching.experience[0])
+																#teachingForm
+																	.row
+																		p Type of Work
+																			select#courseDescription.form-control( name="professional[teaching][experience][0][kind]")
+																				option(value="Expiditionary" ) Expeditionary
+																				option(value="Residential" ) Residential
+																				option(value="Other" ) Other
+																	.row
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[teaching][experience][0][organization]") Organization 
+																			input.form-control(placeholder="Organization" type="text" name="professional[teaching][experience][0][organization]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[teaching][experience][0][jobTitle]") Job Title
+																			input.form-control(placeholder="Title" type="text" name="professional[teaching][experience][0][jobTitle]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="professional[teaching][experience][0][location]") Location
+																			input.form-control(placeholder="Location" type="text" name="professional[teaching][experience][0][location]")
+																	.row
+																		div.form-group.col-md-3.col-md-offset-2
+																			label.sr-only(for="professional[teaching][experience[0]][start]") Start Date
+																			input.form-control.datePick(placeholder="Start Date" type="text" name="professional[teaching][experience][0][start]")
+																		.col-md-2
+																			p until
+																		div.form-group.col-md-3
+																			label.sr-only(for="professional[teaching][experience][0][end]") End Date
+																			input.form-control.datePick(placeholder="End Date" type="text" name="professional[teaching][experience][0][end]")
+																		div.form-group.col-md-2
+																			input(type="checkbox", name="professional[teaching][experience][0][current]")
+																			label(for="professional[teaching][experience][0][current]") I currently work here
+																	.row
+																		.form-group.col-md-12
+																			label.sr-only(for="professional[teaching][experience][0][description]")
+																			input.form-control(placeholder="Brief Description" type="text" name="professional[teaching][experience][0][description]")
+															
 														.row
-															div.form-group.col-md-4
-																label.sr-only(for="professional[teaching][experience][0][organization]") Organization 
-																input.form-control(placeholder="Organization" type="text" name="professional[teaching][experience][0][organization]")
-															div.form-group.col-md-4
-																label.sr-only(for="professional[teaching][experience][0][jobTitle]") Job Title
-																input.form-control(placeholder="Title" type="text" name="professional[teaching][experience][0][jobTitle]")
-															div.form-group.col-md-4
-																label.sr-only(for="professional[teaching][experience][0][location]") Location
-																input.form-control(placeholder="Location" type="text" name="professional[teaching][experience][0][location]")
+															div#addTeachingExperience.addfieldsBtn.col-md-6.col-md-offset-3 add
 														.row
-															h5 Time Period
-															div.form-group.col-md-3.col-md-offset-2
-																label.sr-only(for="professional[teaching][experience[0]][start]") Start Date
-																input.form-control.datePick(placeholder="Start Date" type="text" name="professional[teaching][experience][0][start]")
-															.col-md-2
-																p until
-															div.form-group.col-md-3
-																label.sr-only(for="professional[teaching][experience][0][end]") End Date
-																input.form-control.datePick(placeholder="End Date" type="text" name="professional[teaching][experience][0][end]")
-															div.form-group.col-md-2
-																input(type="checkbox", name="professional[teaching][experience][0][current]")
-																label(for="professional[teaching][experience][0][current]") I currently work here
-														.row
+															h5.col-md-12 Did we miss anything? Add your own work experience here:
 															.form-group.col-md-12
-																label.sr-only(for="professional[teaching][experience][0][description]")
-																input.form-control(placeholder="Brief Description" type="text" name="professional[teaching][experience][0][description]")
-												
-											.row
-												div#addTeachingExperience.addfieldsBtn.col-md-6.col-md-offset-3 add
+																label.sr-only(for="professional[teaching][additional]")
+																input.form-control(placeholder="Description of experience" type="text" value=profileUser.professional.teaching.additional name="professional[teaching][additional]")
+													div.tab-pane#guiding.col-md-12
+														#section
+															h4 Guiding Companies worked for:
+															#guidingCoFormContainer
+																if(profileUser.professional.guiding.companies[0])
+																	-var i = 0
+																	each company in profileUser.professional.guiding.companies
+																		#guidingCoForm
+																			.row
+																				div.form-group.col-md-4
+																					label.sr-only(for="professional[guiding][companies][" + i + "][organization]") Organization 
+																					input.form-control(placeholder="Organization" type="text" value=company.organization name="professional[guiding][companies][" + i + "][organization]")
+																				div.form-group.col-md-4
+																					label.sr-only(for="professional[guiding][companies][" + i + "][jobTitle]") Job Title
+																					input.form-control(placeholder="Title" type="text" value=company.jobTitle name="professional[guiding][companies][" + i + "][jobTitle]")
+																				div.form-group.col-md-4
+																					label.sr-only(for="professional[guiding][companies][" + i + "][location]") Location
+																					input.form-control(placeholder="Location" type="text" value=company.location name="professional[guiding][companies][" + i + "][location]")
+																			.row
+					
+																				div.form-group.col-md-3.col-md-offset-2
+																					label.sr-only(for="professional[guiding][companies][" + i + "][start]") Start Date
+																					input.form-control.datePick(placeholder="Start Date" type="text" value=company.start name="professional[guiding][companies][" + i + "][start]")
+																				.col-md-2
+																					p until
+																				div.form-group.col-md-3
+																					label.sr-only(for="professional[guiding][companies][" + i + "][end]") End Date
+																					input.form-control.datePick(placeholder="End Date" type="text" value=company.end name="professional[guiding][companies][" + i + "][end]")
+																				div.form-group.col-md-2
+																					input(type="checkbox", value=company.current name="professional[guiding][companies][" + i + "][current]")
+																					label(for="professional[guiding][companies][" + i + "][current]") I currently work here
+																			.row
+																				.form-group.col-md-12
+																					label.sr-only(for="professional[guiding][companies][description]")
+																					input.form-control(placeholder="Brief Description" type="text" value=company.description name="professional[guiding][companies][" + i + "][description]")
+																			-i++
+																if(!profileUser.professional.guiding.companies[0])
+																	#guidingCoForm
+																		.row
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[guiding][companies][0][organization]") Organization 
+																				input.form-control(placeholder="Organization" type="text"  name="professional[guiding][companies][0][organization]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[guiding][companies][0][jobTitle]") Job Title
+																				input.form-control(placeholder="Title" type="text"  name="professional[guiding][companies][0][jobTitle]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[guiding][companies][0][location]") Location
+																				input.form-control(placeholder="Location" type="text"  name="professional[guiding][companies][0][location]")
+																		.row
+																			h5 Time Period
+																			div.form-group.col-md-3.col-md-offset-2
+																				label.sr-only(for="professional[guiding][companies][0][start]") Start Date
+																				input.form-control.datePick(placeholder="Start Date" type="text"  name="professional[guiding][companies][0][start]")
+																			.col-md-2
+																				p until
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[guiding][companies][0][end]") End Date
+																				input.form-control.datePick(placeholder="End Date" type="text"  name="professional[guiding][companies][0][end]")
+																			div.form-group.col-md-2
+																				input(type="checkbox",  name="professional[guiding][companies][0][current]")
+																				label(for="professional[guiding][companies][0][current]") I currently work here
+																		.row
+																			.form-group.col-md-12
+																				label.sr-only(for="professional[guiding][companies][0][description]")
+																				input.form-control(placeholder="Brief Description" type="text"  name="professional[guiding][companies][0][description]")
 
+															.row
+																div#addGuidingCo.addfieldsBtn.col-md-6.col-md-offset-3 add
+														#section
+															h4 Trips / Expeditions Led:
+															#tripsFormContainer
+																if(profileUser.professional.guiding.guided[0])
+																	-var i = 0
+																	each guided in profileUser.professional.guiding.guided
+																		#tripsForm
+																			.row
+																				-var f5 = ('5-7'==guided.ages) ? 'selected' : null;
+																				-var s7 = ('7-10'==guided.ages) ? 'selected' :null;
+																				-var e11 = ('11-14'==guided.ages) ? 'selected' :null;
+																				-var f15 = ('15-18'==guided.ages) ? 'selected' : null;
+																				-var e18 = ('18-21'==guided.ages) ? 'selected' :null;
+																				-var t22 = ('22-30'==guided.ages) ? 'selected' :null;
+																				-var t31 = ('31-50'==guided.ages) ? 'selected' : null;
+																				-var f51 = ('51+'==guided.ages) ? 'selected' :null;
+																				p.col-md-3 Age Range
+																					select#ageRange(name="professional[guiding][guided][" + i + "][ages]" value=guided.ages )
+																						option(value="5-7" selected=f5) 5-7
+																						option(value="7-10" selected=s7) 7-10
+																						option(value="11-14" selected=e11) 11-14
+																						option(value="15-18" selected=f15) 15-18
+																						option(value="18-21" selected=e18) 18-21
+																						option(value="22-30" selected=t22) 22-30
+																						option(value="31-50" selected=t31) 31-50
+																						option(value="51+" selected=f51) 51+
+																				p.col-md-3 Gender
+																					-var male = ('Male'==guided.gender) ? 'selected' : null;
+																					-var female = ('Female'==guided.gender) ? 'selected' :null;
+																					-var mixed = ('Mixed'==guided.gender) ? 'selected' :null;
+																					select#gender(name="professional[guiding][guided][" + i + "][gender]" value=guided.gender )
+																						option(value="Male" selected=male) Male
+																						option(value="Female" selected=female) Female
+																						option(value="Mixed" selected=mixed) Mixed Group
+																			.row
+																				div.form-group.col-md-3
+																					label.sr-only(for="professional[guiding][guided][" + i + "][organization]") Organization 
+																					input.form-control(placeholder="Organization" type="text" value=guided.organization name="professional[guiding][guided][" + i + "][organization]")
+																				div.form-group.col-md-3
+																					label.sr-only(for="professional[guiding][guided][" + i + "][location]" ) Location
+																					input.form-control(placeholder="Location" type="text" value=guided.location name="professional[guiding][guided][" + i + "][location]")
+																				div.form-group.col-md-3
+																					label.sr-only(for="professional[guiding][guided][" + i + "][role]" ) Role
+																					input.form-control(placeholder="Role" type="text" value=guided.role name="professional[guiding][guided][" + i + "][role]")
+																				div.form-group.col-md-3
+																					label.sr-only(for="professional[guiding][guided][" + i + "][numOfClients]") # of Clients
+																					input.form-control(placeholder="# of Clients" type="text" value=guided.numOfClients name="professional[guiding][guided][" + i + "][numOfClients]")
+																			.row
+																				div.form-group.col-md-3.col-md-offset-2
+																					label.sr-only(for="professional[guiding][guided][" + i + "][start]") Start Date
+																					input.form-control.datePick(placeholder="Start Date" type="text" value=guided.start name="professional[guiding][guided][" + i + "][start]")
+																				.col-md-2
+																					p until
+																				div.form-group.col-md-3
+																					label.sr-only(for="professional[guiding][guided][" + i + "][end]") End Date
+																					input.form-control.datePick(placeholder="End Date" type="text" value=guided.end name="professional[guiding][guided][" + i + "][end]")
+																			.row
+																				.form-group.col-md-12
+																					label.sr-only(for="professional[guiding][guided][" + i + "][description]") Trip Description
+																					input.form-control(placeholder="Trip Description" type="text" value=guided.description name="professional[guiding][guided][" + i + "][description]")
+																			-i++
+																if(!profileUser.professional.guiding.guided[0])
+																	#tripsForm
+																		.row
+																			p.col-md-3 Age Range
+																				select#ageRange(name="professional[guiding][guided][0][ages]")
+																					option(value="5-7") 5-7
+																					option(value="7-10") 7-10
+																					option(value="11-14") 11-14
+																					option(value="15-18") 15-18
+																					option(value="18-21") 18-21
+																					option(value="22-30") 22-30
+																					option(value="31-50") 31-50
+																					option(value="51+") 51+
+																			p.col-md-3 Gender
+													
+																				select#gender(name="professional[guiding][guided][0][gender]" )
+																					option(value="Male") Male
+																					option(value="Female") Female
+																					option(value="Mixed") Mixed Group
+																		.row
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[guiding][guided][0][organization]") Organization 
+																				input.form-control(placeholder="Organization" type="text" name="professional[guiding][guided][0][organization]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[guiding][guided][0][location]" ) Location
+																				input.form-control(placeholder="Location" type="text" name="professional[guiding][guided][0][location]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="professional[guiding][guided][0][numOfClients]") # of Clients
+																				input.form-control(placeholder="# of Clients" type="text" name="professional[guiding][guided][0][numOfClients]")
+																		.row
+																			div.form-group.col-md-3.col-md-offset-2
+																				label.sr-only(for="professional[guiding][guided][0][start]") Start Date
+																				input.form-control.datePick(placeholder="Start Date" type="text" name="professional[guiding][guided][0][start]")
+																			.col-md-2
+																				p until
+																			div.form-group.col-md-3
+																				label.sr-only(for="professional[guiding][guided][0][end]") End Date
+																				input.form-control.datePick(placeholder="End Date" type="text" name="professional[guiding][guided][0][end]")
+																		.row
+																			.form-group.col-md-12
+																				label.sr-only(for="professional[guiding][guided][0][description]") Trip Description
+																				input.form-control(placeholder="Trip Description" type="text" name="professional[guiding][guided][0][description]")
+															.row
+																div#addTrip.addfieldsBtn.col-md-6.col-md-offset-3 add
 
-											.row
-												h5 Did we miss anything? Add your own work experience here:
-												.form-group.col-md-12
-													label.sr-only(for="professional[teaching][additional]")
-													input.form-control(placeholder="Description of experience" type="text" value=profileUser.professional.teaching.additional name="professional[teaching][additional]")
-										div.tab-pane#guiding
-											#section
-												
-												h4 Guiding Companies worked for:
-												#guidingCoFormContainer
-													if(profileUser.professional.guiding.companies[0])
-														-var i = 0
-														each company in profileUser.professional.guiding.companies
-															#guidingCoForm
-																.row
-																	div.form-group.col-md-4
-																		label.sr-only(for="professional[guiding][companies][" + i + "][organization]") Organization 
-																		input.form-control(placeholder="Organization" type="text" value=company.organization name="professional[guiding][companies][" + i + "][organization]")
-																	div.form-group.col-md-4
-																		label.sr-only(for="professional[guiding][companies][" + i + "][jobTitle]") Job Title
-																		input.form-control(placeholder="Title" type="text" value=company.jobTitle name="professional[guiding][companies][" + i + "][jobTitle]")
-																	div.form-group.col-md-4
-																		label.sr-only(for="professional[guiding][companies][" + i + "][location]") Location
-																		input.form-control(placeholder="Location" type="text" value=company.location name="professional[guiding][companies][" + i + "][location]")
-																.row
-																	h5 Time Period
-																	div.form-group.col-md-3.col-md-offset-2
-																		label.sr-only(for="professional[guiding][companies][" + i + "][start]") Start Date
-																		input.form-control.datePick(placeholder="Start Date" type="text" value=company.start name="professional[guiding][companies][" + i + "][start]")
-																	.col-md-2
-																		p until
-																	div.form-group.col-md-3
-																		label.sr-only(for="professional[guiding][companies][" + i + "][end]") End Date
-																		input.form-control.datePick(placeholder="End Date" type="text" value=company.end name="professional[guiding][companies][" + i + "][end]")
-																	div.form-group.col-md-2
-																		input(type="checkbox", value=company.current name="professional[guiding][companies][" + i + "][current]")
-																		label(for="professional[guiding][companies][" + i + "][current]") I currently work here
-																.row
-																	.form-group.col-md-12
-																		label.sr-only(for="professional[guiding][companies][description]")
-																		input.form-control(placeholder="Brief Description" type="text" value=company.description name="professional[guiding][companies][" + i + "][description]")
-																-i++
-													if(!profileUser.professional.guiding.companies[0])
-														#guidingCoForm
-															.row
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[guiding][companies][0][organization]") Organization 
-																	input.form-control(placeholder="Organization" type="text"  name="professional[guiding][companies][0][organization]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[guiding][companies][0][jobTitle]") Job Title
-																	input.form-control(placeholder="Title" type="text"  name="professional[guiding][companies][0][jobTitle]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[guiding][companies][0][location]") Location
-																	input.form-control(placeholder="Location" type="text"  name="professional[guiding][companies][0][location]")
-															.row
-																h5 Time Period
-																div.form-group.col-md-3.col-md-offset-2
-																	label.sr-only(for="professional[guiding][companies][0][start]") Start Date
-																	input.form-control.datePick(placeholder="Start Date" type="text"  name="professional[guiding][companies][0][start]")
-																.col-md-2
-																	p until
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[guiding][companies][0][end]") End Date
-																	input.form-control.datePick(placeholder="End Date" type="text"  name="professional[guiding][companies][0][end]")
-																div.form-group.col-md-2
-																	input(type="checkbox",  name="professional[guiding][companies][0][current]")
-																	label(for="professional[guiding][companies][0][current]") I currently work here
-															.row
-																.form-group.col-md-12
-																	label.sr-only(for="professional[guiding][companies][0][description]")
-																	input.form-control(placeholder="Brief Description" type="text"  name="professional[guiding][companies][0][description]")
+														.row
+															h5.col-md-12 Did we miss anything? Add your own work experience here:
+															.form-group.col-md-12
+																label.sr-only(for="professional[guiding][additional]")
+																input.form-control(placeholder="Description of experience" type="text" value=profileUser.professional.guiding.additional name="professional[guiding][additional]")
+													div.tab-pane#sponsors
+														.col-md-12
+															h4 Sponsors:
+															#sponsorFormContainer
+																if(profileUser.professional.sponsors[0])
+																	-var i = 0
+																	each sponsor in profileUser.professional.sponsors
+																		#sponsorForm
+																			.row
+																				div.form-group.col-md-3
+																					label.sr-only(for="first") Organization 
+																					input.form-control(placeholder="Organization / Company" type="text" value=sponsor.organization name="professional[sponsors][" + i + "][organization]")
+																				div.form-group.col-md-3
+																					label.sr-only(for="email") Sport
+																					input.form-control(placeholder="Sport" type="text" value=sponsor.sport name="professional[sponsors][" + i + "][sport]")
+																				div.form-group.col-md-2
+																					label.sr-only(for="email") Start Date
+																					input.form-control.datePick(placeholder="Start Date" type="text" value=sponsor.start name="professional[sponsors][" + i + "][start]")
+																				div.form-group.col-md-2
+																					label.sr-only(for="email") End Date
+																					input.form-control.datePick(placeholder="End Date" type="text" value=sponsor.end name="professional[sponsors][" + i + "][end]")
+																				div.form-group.col-md-2
+																					input(type="checkbox", value=sponsor.current name="professional[sponsors][" + i + "][current]")
+																					label(for="currentlyWork") I'm currently sponsored
+																			.row
+																				.form-group.col-md-12
+																					label.sr-only(for="professional[sponsors][description]")
+																					input.form-control(placeholder="Brief Description" type="text" value=sponsor.description name="professional[guiding][" + i + "][description]")
+																			-i++
+																if(!profileUser.professional.sponsors[0])
+																	#sponsorForm
+																		.row
+																			div.form-group.col-md-3
+																				label.sr-only(for="first") Organization 
+																				input.form-control(placeholder="Organization / Company" type="text"  name="professional[sponsors][organization]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="email") Sport
+																				input.form-control(placeholder="Sport" type="text"  name="professional[sponsors][sport]")
+																			div.form-group.col-md-2
+																				label.sr-only(for="email") Start Date
+																				input.form-control.datePick(placeholder="Start Date" type="text"  name="professional[sponsors][start]")
+																			div.form-group.col-md-2
+																				label.sr-only(for="email") End Date
+																				input.form-control.datePick(placeholder="End Date" type="text"  name="professional[sponsors][end]")
+																			div.form-group.col-md-2
+																				input(type="checkbox", name="professional[sponsors][current]")
+																				label(for="currentlyWork") I'm currently sponsored
+																		.row
+																			.form-group.col-md-12
+																				label.sr-only(for="professional[sponsors][description]")
+																				input.form-control(placeholder="Brief Description" type="text" name="professional[guiding][description]")
 
-												.row
-													div#addGuidingCo.addfieldsBtn.col-md-6.col-md-offset-3 add
-											#section
-												h4 Trips / Expeditions Led:
-												#tripsFormContainer
-													if(profileUser.professional.guiding.guided[0])
-														-var i = 0
-														each guided in profileUser.professional.guiding.guided
-															#tripsForm
-																.row
-																	-var f5 = ('5-7'==guided.ages) ? 'selected' : null;
-																	-var s7 = ('7-10'==guided.ages) ? 'selected' :null;
-																	-var e11 = ('11-14'==guided.ages) ? 'selected' :null;
-																	-var f15 = ('15-18'==guided.ages) ? 'selected' : null;
-																	-var e18 = ('18-21'==guided.ages) ? 'selected' :null;
-																	-var t22 = ('22-30'==guided.ages) ? 'selected' :null;
-																	-var t31 = ('31-50'==guided.ages) ? 'selected' : null;
-																	-var f51 = ('51+'==guided.ages) ? 'selected' :null;
-																	p Age Range
-																		select#ageRange(name="professional[guiding][guided][" + i + "][ages]" value=guided.ages )
-																			option(value="5-7" selected=f5) 5-7
-																			option(value="7-10" selected=s7) 7-10
-																			option(value="11-14" selected=e11) 11-14
-																			option(value="15-18" selected=f15) 15-18
-																			option(value="18-21" selected=e18) 18-21
-																			option(value="22-30" selected=t22) 22-30
-																			option(value="31-50" selected=t31) 31-50
-																			option(value="51+" selected=f51) 51+
-																	p Gender
-																		-var male = ('Male'==guided.gender) ? 'selected' : null;
-																		-var female = ('Female'==guided.gender) ? 'selected' :null;
-																		-var mixed = ('Mixed'==guided.gender) ? 'selected' :null;
-																		select#gender(name="professional[guiding][guided][" + i + "][gender]" value=guided.gender )
-																			option(value="Male" selected=male) Male
-																			option(value="Female" selected=female) Female
-																			option(value="Mixed" selected=mixed) Mixed Group
-																.row
-																	div.form-group.col-md-3
-																		label.sr-only(for="professional[guiding][guided][" + i + "][organization]") Organization 
-																		input.form-control(placeholder="Organization" type="text" value=guided.organization name="professional[guiding][guided][" + i + "][organization]")
-																	div.form-group.col-md-3
-																		label.sr-only(for="professional[guiding][guided][" + i + "][location]" ) Location
-																		input.form-control(placeholder="Location" type="text" value=guided.location name="professional[guiding][guided][" + i + "][location]")
-																	div.form-group.col-md-3
-																		label.sr-only(for="professional[guiding][guided][" + i + "][role]" ) Role
-																		input.form-control(placeholder="Role" type="text" value=guided.role name="professional[guiding][guided][" + i + "][role]")
-																	div.form-group.col-md-3
-																		label.sr-only(for="professional[guiding][guided][" + i + "][numOfClients]") # of Clients
-																		input.form-control(placeholder="# of Clients" type="text" value=guided.numOfClients name="professional[guiding][guided][" + i + "][numOfClients]")
-																.row
-																	h5 Time Period
-																	div.form-group.col-md-3.col-md-offset-2
-																		label.sr-only(for="professional[guiding][guided][" + i + "][start]") Start Date
-																		input.form-control.datePick(placeholder="Start Date" type="text" value=guided.start name="professional[guiding][guided][" + i + "][start]")
-																	.col-md-2
-																		p until
-																	div.form-group.col-md-3
-																		label.sr-only(for="professional[guiding][guided][" + i + "][end]") End Date
-																		input.form-control.datePick(placeholder="End Date" type="text" value=guided.end name="professional[guiding][guided][" + i + "][end]")
-																.row
-																	.form-group.col-md-12
-																		label.sr-only(for="professional[guiding][guided][" + i + "][description]") Trip Description
-																		input.form-control(placeholder="Trip Description" type="text" value=guided.description name="professional[guiding][guided][" + i + "][description]")
-																-i++
-													if(!profileUser.professional.guiding.guided[0])
-														#tripsForm
-															.row
-																p Age Range
-																	select#ageRange(name="professional[guiding][guided][0][ages]")
-																		option(value="5-7") 5-7
-																		option(value="7-10") 7-10
-																		option(value="11-14") 11-14
-																		option(value="15-18") 15-18
-																		option(value="18-21") 18-21
-																		option(value="22-30") 22-30
-																		option(value="31-50") 31-50
-																		option(value="51+") 51+
-																p Gender
-										
-																	select#gender(name="professional[guiding][guided][0][gender]" )
-																		option(value="Male") Male
-																		option(value="Female") Female
-																		option(value="Mixed") Mixed Group
-															.row
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[guiding][guided][0][organization]") Organization 
-																	input.form-control(placeholder="Organization" type="text" name="professional[guiding][guided][0][organization]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[guiding][guided][0][location]" ) Location
-																	input.form-control(placeholder="Location" type="text" name="professional[guiding][guided][0][location]")
-																div.form-group.col-md-4
-																	label.sr-only(for="professional[guiding][guided][0][numOfClients]") # of Clients
-																	input.form-control(placeholder="# of Clients" type="text" name="professional[guiding][guided][0][numOfClients]")
-															.row
-																h5 Time Period
-																div.form-group.col-md-3.col-md-offset-2
-																	label.sr-only(for="professional[guiding][guided][0][start]") Start Date
-																	input.form-control.datePick(placeholder="Start Date" type="text" name="professional[guiding][guided][0][start]")
-																.col-md-2
-																	p until
-																div.form-group.col-md-3
-																	label.sr-only(for="professional[guiding][guided][0][end]") End Date
-																	input.form-control.datePick(placeholder="End Date" type="text" name="professional[guiding][guided][0][end]")
-															.row
-																.form-group.col-md-12
-																	label.sr-only(for="professional[guiding][guided][0][description]") Trip Description
-																	input.form-control(placeholder="Trip Description" type="text" name="professional[guiding][guided][0][description]")
-												.row
-													div#addTrip.addfieldsBtn.col-md-6.col-md-offset-3 add
+														.row
+															div#addSponsor.addfieldsBtn.col-md-6.col-md-offset-3 add
 
-											.row
-												h5 Did we miss anything? Add your own work experience here:
-												.form-group.col-md-12
-													label.sr-only(for="professional[guiding][additional]")
-													input.form-control(placeholder="Description of experience" type="text" value=profileUser.professional.guiding.additional name="professional[guiding][additional]")
-										div.tab-pane#sponsors
-											#section
-												h4 Sponsors:
-												#sponsorFormContainer
-													if(profileUser.professional.sponsors[0])
-														-var i = 0
-														each sponsor in profileUser.professional.sponsors
-															#sponsorForm
-																.row
-																	div.form-group.col-md-3
-																		label.sr-only(for="first") Organization 
-																		input.form-control(placeholder="Organization / Company" type="text" value=sponsor.organization name="professional[sponsors][" + i + "][organization]")
-																	div.form-group.col-md-3
-																		label.sr-only(for="email") Sport
-																		input.form-control(placeholder="Sport" type="text" value=sponsor.sport name="professional[sponsors][" + i + "][sport]")
-																	div.form-group.col-md-2
-																		label.sr-only(for="email") Start Date
-																		input.form-control.datePick(placeholder="Start Date" type="text" value=sponsor.start name="professional[sponsors][" + i + "][start]")
-																	div.form-group.col-md-2
-																		label.sr-only(for="email") End Date
-																		input.form-control.datePick(placeholder="End Date" type="text" value=sponsor.end name="professional[sponsors][" + i + "][end]")
-																	div.form-group.col-md-2
-																		input(type="checkbox", value=sponsor.current name="professional[sponsors][" + i + "][current]")
-																		label(for="currentlyWork") I'm currently sponsored
-																.row
-																	.form-group.col-md-12
-																		label.sr-only(for="professional[sponsors][description]")
-																		input.form-control(placeholder="Brief Description" type="text" value=sponsor.description name="professional[guiding][" + i + "][description]")
-																-i++
-													if(!profileUser.professional.sponsors[0])
-														#sponsorForm
+													div.tab-pane#rockClimbingCt.col-md-12
+															h4 Rock Climbing
+															h5 Notable Climbs
+															#rockClimbingFormContainer
+																if(profileUser.sports.rockClimbing.notableRoutes[0])
+																	-var i = 0
+																	each climb in profileUser.sports.rockClimbing.notableRoutes
+																		.rockClimbingForm
+																			.row
+																				.form-group.col-md-3
+																					-var trad = ('Traditional'==climb.climbType) ? 'selected' : null;
+																					-var sport = ('Sport'==climb.climbType) ? 'selected' :null;
+																					select#climbType.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][climbType]") 
+																						option(value="Traditional" selected=trad) Traditional
+																						option(value="Sport" selected=sport) Sport
+																				.form-group.col-md-3
+																					-var lead = ('Lead'==climb.leadFollow) ? 'selected' : null;
+																					-var follow = ('Follow'==climb.leadFollow) ? 'selected' :null;
+																					-var mixed = ('Mixed'==climb.leadFollow) ? 'selected' : null;
+																					select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][leadFollow]") 
+																						option(value="Lead" selected=lead) Lead
+																						option(value="Follow" selected=follow) Follow
+																						option(value="Mixed" selected=mixed) Mixed
+																			.row
+																				div.form-group.col-md-3
+																					label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][location]") Location
+																					input.form-control(placeholder="Location" type="text" value=climb.location name="sports[rockClimbing][notableRoutes][" + i + "][location]")
+																				div.form-group.col-md-3
+																					label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][route]") Route
+																					input.form-control(placeholder="Route" type="text" value=climb.route name="sports[rockClimbing][notableRoutes][" + i + "][route]")
+																				div.form-group.col-md-2
+																					label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][grade]") Grade
+																					input.form-control(placeholder="Grade" type="text" value=climb.grade name="sports[rockClimbing][notableRoutes][" + i + "][grade]")
+																				div.form-group.col-md-2
+																					label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][pitched]") Pitches
+																					input.form-control(placeholder="Pitches" type="text" value=climb.pitches name="sports[rockClimbing][notableRoutes][" + i + "][pitches]")
+																				div.form-group.col-md-2
+																					label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][date]") Date
+																					input.form-control.climbDate(placeholder="Date" type="text" value=climb.date name="sports[rockClimbing][notableRoutes][" + i + "][date]")
+																			-i++
+																if(!profileUser.sports.rockClimbing.notableRoutes[0])
+																	#rockClimbingFormNoIndex
+																		-var i = 0
+																		.row
+																			.form-group.col-md-3
+																				select#climbType.form-control(name="sports[rockClimbing][notableRoutes][0][climbType]") 
+																					option(value="Traditional") Traditional
+																					option(value="Sport") Sport
+																			.form-group.col-md-3
+																				select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][0][leadFollow]") 
+																					option(value="Lead") Lead
+																					option(value="Follow") Follow
+																					option(value="Mixed") Mixed
+																		.row
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
+																				input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][location]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[rockClimbing][notableRoutes][route]") Route
+																				input.form-control(placeholder="Route" type="text" name="sports[rockClimbing][notableRoutes][route]")
+																			div.form-group.col-md-2
+																				label.sr-only(for="sports[rockClimbing][notableRoutes][grade]") Grade
+																				input.form-control(placeholder="Grade" type="text" name="sports[rockClimbing][notableRoutes][grade]")
+																			div.form-group.col-md-2
+																				label.sr-only(for="sports[rockClimbing][notableRoutes][pitched]") Pitches
+																				input.form-control(placeholder="Pitches" type="text" name="sports[rockClimbing][notableRoutes][pitches]")
+																			div.form-group.col-md-2
+																				label.sr-only(for="sports[rockClimbing][notableRoutes][date]") Date
+																				input.form-control.climbDate(placeholder="Date" type="text" name="sports[rockClimbing][notableRoutes][date]")
+																		-i++
 															.row
-																div.form-group.col-md-3
-																	label.sr-only(for="first") Organization 
-																	input.form-control(placeholder="Organization / Company" type="text"  name="professional[sponsors][organization]")
-																div.form-group.col-md-3
-																	label.sr-only(for="email") Sport
-																	input.form-control(placeholder="Sport" type="text"  name="professional[sponsors][sport]")
-																div.form-group.col-md-2
-																	label.sr-only(for="email") Start Date
-																	input.form-control.datePick(placeholder="Start Date" type="text"  name="professional[sponsors][start]")
-																div.form-group.col-md-2
-																	label.sr-only(for="email") End Date
-																	input.form-control.datePick(placeholder="End Date" type="text"  name="professional[sponsors][end]")
-																div.form-group.col-md-2
-																	input(type="checkbox", name="professional[sponsors][current]")
-																	label(for="currentlyWork") I'm currently sponsored
-															.row
-																.form-group.col-md-12
-																	label.sr-only(for="professional[sponsors][description]")
-																	input.form-control(placeholder="Brief Description" type="text" name="professional[guiding][description]")
-
-												.row
-													div#addSponsor.addfieldsBtn.col-md-6.col-md-offset-3 add
-
-										div.tab-pane#rockClimbingCt
-											.row
-												h4 Rock Climbing
-												h5 Notable Climbs
-											.row
-												#rockClimbingFormContainer
-													if(profileUser.sports.rockClimbing.notableRoutes[0])
-														-var i = 0
-														each climb in profileUser.sports.rockClimbing.notableRoutes
-															.rockClimbingForm
-																.row
+																div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
+													div.tab-pane#mountaineeringCt
+														h4 Alpine and Ski Mountaineering
+														#mountaineeringFormContainer
+															if(profileUser.sports.mountaineering.routes[0])
+																-var i = 0
+																each route in profileUser.sports.mountaineering.routes
+																	.mountaineeringForm
+																		.row
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[mountaineering][routes][" + i + "][location]") Mountain
+																				input.form-control(placeholder="Mountain" type="text" value=route.mountain name="sports[mountaineering][routes][" + i + "][mountain]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[mountaineering][routes][" + i + "][route]") Route
+																				input.form-control(placeholder="Route" type="text" value=route.route name="sports[mountaineering][routes][" + i + "][route]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[mountaineering][routes][" + i + "][difficulty]") Difficulty
+																				input.form-control(placeholder="Difficulty" type="text" value=route.difficulty name="sports[mountaineering][routes][" + i + "][difficulty]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[mountaineering][routes][" + i + "][skills]") Skills Demonstrated
+																				input.form-control(placeholder="Skills Demonstrated" type="text" value=route.skills name="sports[mountaineering][routes][" + i + "][skills]")
+																		.row
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[mountaineering][routes][" + i + "][description]") Description
+																				input.form-control(placeholder="Description" type="text" value=route.description name="sports[mountaineering][routes][" + i + "][description]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[mountaineering][routes][" + i + "][date]") Date
+																				input.form-control.climbDate(placeholder="Date" type="text" value=route.date name="sports[mountaineering][routes][" + i + "][date]")
+																			.form-group.col-md-3
+																				-var guided = ('Guided'==route.guided) ? 'selected' : null;
+																				-var personal = ('Personal'==route.guided) ? 'selected' :null;
+																				select#guidePersonal.form-control(name="sports[mountaineering][routes][" + i + "][guided]") 
+																					option(value="Guided" selected=guided) Guided
+																					option(value="Personal" selected=personal) Personal
+																			.form-group.col-md-3
+																				-var summited = ('Yes'==route.summited) ? 'selected' : null;
+																				-var didnt = ('No'==route.summited) ? 'selected' :null;
+																				select#summit.form-control(name="sports[mountaineering][routes][" + i + "][summited]") 
+																					option(value="Yes" selected=summited) Summited
+																					option(value="No" selected=didnt) Didn't Summit
+																		-i++
+															if(!profileUser.sports.mountaineering.routes[0])
+																#mountaineeringFormNoIndex
+																	-var i = 0
+																	.row
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[mountaineering][routes][0][location]") Mountain
+																			input.form-control(placeholder="Mountain" type="text" name="sports[mountaineering][routes][0][mountain]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[mountaineering][routes][0][route]") Route
+																			input.form-control(placeholder="Route" type="text" name="sports[mountaineering][routes][0][route]")
+																		div.form-group.col-md3
+																			label.sr-only(for="sports[mountaineering][routes][0][difficulty]") Difficulty
+																			input.form-control(placeholder="Difficulty" type="text" name="sports[mountaineering][routes][0][difficulty]")
+																		div.form-group.col-md3
+																			label.sr-only(for="sports[mountaineering][routes][0][skills]") Skills Demonstrated
+																			input.form-control(placeholder="Skills Demonstrated" type="text" name="sports[mountaineering][routes][0][skills]")
+																	.row
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[mountaineering][routes][0][description]") Description
+																			input.form-control(placeholder="Description" type="text" name="sports[mountaineering][routes][0][description]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[mountaineering][routes][0][date]") Date
+																			input.form-control.climbDate(placeholder="Date" type="text" name="sports[mountaineering][routes][0][date]")
 																	.form-group.col-md-3
-																		-var trad = ('Traditional'==climb.climbType) ? 'selected' : null;
-																		-var sport = ('Sport'==climb.climbType) ? 'selected' :null;
-																		select#climbType.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][climbType]") 
-																			option(value="Traditional" selected=trad) Traditional
-																			option(value="Sport" selected=sport) Sport
-																	.form-group.col-md-3
-																		-var lead = ('Lead'==climb.leadFollow) ? 'selected' : null;
-																		-var follow = ('Follow'==climb.leadFollow) ? 'selected' :null;
-																		-var mixed = ('Mixed'==climb.leadFollow) ? 'selected' : null;
-																		select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][" + i + "][leadFollow]") 
-																			option(value="Lead" selected=lead) Lead
-																			option(value="Follow" selected=follow) Follow
-																			option(value="Mixed" selected=mixed) Mixed
-																.row
-																	div.form-group.col-md-3
-																		label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][location]") Location
-																		input.form-control(placeholder="Location" type="text" value=climb.location name="sports[rockClimbing][notableRoutes][" + i + "][location]")
-																	div.form-group.col-md-3
-																		label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][route]") Route
-																		input.form-control(placeholder="Route" type="text" value=climb.route name="sports[rockClimbing][notableRoutes][" + i + "][route]")
-																	div.form-group.col-md-2
-																		label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][grade]") Grade
-																		input.form-control(placeholder="Grade" type="text" value=climb.grade name="sports[rockClimbing][notableRoutes][" + i + "][grade]")
-																	div.form-group.col-md-2
-																		label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][pitched]") Pitches
-																		input.form-control(placeholder="Pitches" type="text" value=climb.pitches name="sports[rockClimbing][notableRoutes][" + i + "][pitches]")
-																	div.form-group.col-md-2
-																		label.sr-only(for="sports[rockClimbing][notableRoutes][" + i + "][date]") Date
-																		input.form-control.climbDate(placeholder="Date" type="text" value=climb.date name="sports[rockClimbing][notableRoutes][" + i + "][date]")
-																-i++
-													if(!profileUser.sports.rockClimbing.notableRoutes[0])
-														#rockClimbingFormNoIndex
-															-var i = 0
-															.row
-																.form-group.col-md-3
-																	select#climbType.form-control(name="sports[rockClimbing][notableRoutes][0][climbType]") 
-																		option(value="Traditional") Traditional
-																		option(value="Sport") Sport
-																.form-group.col-md-3
-																	select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][0][leadFollow]") 
-																		option(value="Lead") Lead
-																		option(value="Follow") Follow
-																		option(value="Mixed") Mixed
-															.row
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
-																	input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][location]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[rockClimbing][notableRoutes][route]") Route
-																	input.form-control(placeholder="Route" type="text" name="sports[rockClimbing][notableRoutes][route]")
-																div.form-group.col-md-2
-																	label.sr-only(for="sports[rockClimbing][notableRoutes][grade]") Grade
-																	input.form-control(placeholder="Grade" type="text" name="sports[rockClimbing][notableRoutes][grade]")
-																div.form-group.col-md-2
-																	label.sr-only(for="sports[rockClimbing][notableRoutes][pitched]") Pitches
-																	input.form-control(placeholder="Pitches" type="text" name="sports[rockClimbing][notableRoutes][pitches]")
-																div.form-group.col-md-2
-																	label.sr-only(for="sports[rockClimbing][notableRoutes][date]") Date
-																	input.form-control.climbDate(placeholder="Date" type="text" name="sports[rockClimbing][notableRoutes][date]")
-															-i++
-											.row
-												div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
-										div.tab-pane#mountaineeringCt
-											h4 Alpine and Ski Mountaineering
-											#mountaineeringFormContainer
-												if(profileUser.sports.mountaineering.routes[0])
-													-var i = 0
-													each route in profileUser.sports.mountaineering.routes
-														.mountaineeringForm
-															.row
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[mountaineering][routes][" + i + "][location]") Mountain
-																	input.form-control(placeholder="Mountain" type="text" value=route.mountain name="sports[mountaineering][routes][" + i + "][mountain]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[mountaineering][routes][" + i + "][route]") Route
-																	input.form-control(placeholder="Route" type="text" value=route.route name="sports[mountaineering][routes][" + i + "][route]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[mountaineering][routes][" + i + "][difficulty]") Difficulty
-																	input.form-control(placeholder="Difficulty" type="text" value=route.difficulty name="sports[mountaineering][routes][" + i + "][difficulty]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[mountaineering][routes][" + i + "][skills]") Skills Demonstrated
-																	input.form-control(placeholder="Skills Demonstrated" type="text" value=route.skills name="sports[mountaineering][routes][" + i + "][skills]")
-															.row
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[mountaineering][routes][" + i + "][description]") Description
-																	input.form-control(placeholder="Description" type="text" value=route.description name="sports[mountaineering][routes][" + i + "][description]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[mountaineering][routes][" + i + "][date]") Date
-																	input.form-control.climbDate(placeholder="Date" type="text" value=route.date name="sports[mountaineering][routes][" + i + "][date]")
-																.form-group.col-md-3
-																	-var guided = ('Guided'==route.guided) ? 'selected' : null;
-																	-var personal = ('Personal'==route.guided) ? 'selected' :null;
-																	select#guidePersonal.form-control(name="sports[mountaineering][routes][" + i + "][guided]") 
-																		option(value="Guided" selected=guided) Guided
-																		option(value="Personal" selected=personal) Personal
-																.form-group.col-md-3
-																	-var summited = ('Yes'==route.summited) ? 'selected' : null;
-																	-var didnt = ('No'==route.summited) ? 'selected' :null;
-																	select#summit.form-control(name="sports[mountaineering][routes][" + i + "][summited]") 
-																		option(value="Yes" selected=summited) Summited
-																		option(value="No" selected=didnt) Didn't Summit
-															-i++
-												if(!profileUser.sports.mountaineering.routes[0])
-													#mountaineeringFormNoIndex
-														-var i = 0
+																			select#guidePersonal.form-control(name="sports[mountaineering][routes][0][guided]") 
+																				option(value="Guided" selected=guided) Guided
+																				option(value="Personal" selected=personal) Personal
+																		.form-group.col-md-3
+																			select#summit.form-control(name="sports[mountaineering][routes][0][summited]") 
+																				option(value="Yes" selected=summited) Summited
+																				option(value="No" selected=didnt) Didn't Summit
+																	-i++
 														.row
-															div.form-group.col-md-3
-																label.sr-only(for="sports[mountaineering][routes][0][location]") Mountain
-																input.form-control(placeholder="Mountain" type="text" name="sports[mountaineering][routes][0][mountain]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[mountaineering][routes][0][route]") Route
-																input.form-control(placeholder="Route" type="text" name="sports[mountaineering][routes][0][route]")
-															div.form-group.col-md3
-																label.sr-only(for="sports[mountaineering][routes][0][difficulty]") Difficulty
-																input.form-control(placeholder="Difficulty" type="text" name="sports[mountaineering][routes][0][difficulty]")
-															div.form-group.col-md3
-																label.sr-only(for="sports[mountaineering][routes][0][skills]") Skills Demonstrated
-																input.form-control(placeholder="Skills Demonstrated" type="text" name="sports[mountaineering][routes][0][skills]")
+															div#addMountRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
+													div.tab-pane#riverCt
+														h4 River Sports
+														#riverFormContainer
+															if(profileUser.sports.river.runs[0])
+																-var i = 0
+																each run in profileUser.sports.river.runs
+																	.riverForm
+																		.row
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[river][runs][" + i + "][river]") River
+																				input.form-control(placeholder="River" type="text" value=run.river name="sports[river][runs][" + i + "][river]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[river][runs][" + i + "][run]") Run
+																				input.form-control(placeholder="Run" type="text" value=run.run name="sports[river][runs][" + i + "][run]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[river][runs][" + i + "][difficulty]") Difficulty
+																				input.form-control(placeholder="Difficulty" type="text" value=run.difficulty name="sports[river][runs][" + i + "][difficulty]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[river][runs][" + i + "][craft]") Craft
+																				input.form-control(placeholder="Craft (kayak, canoe, etc.)" type="text" value=run.craft name="sports[river][runs][" + i + "][craft]")
+																		.row
+																			div.form-group.col-md-4
+																				label.sr-only(for="sports[river][runs][" + i + "][role]") Role
+																				input.form-control(placeholder="Role" type="text" value=run.role name="sports[river][runs][" + i + "][role]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="sports[river][runs][" + i + "][date]") Date
+																				input.form-control.climbDate(placeholder="Date" type="text" value=run.date name="sports[river][runs][" + i + "][date]")
+																			.form-group.col-md-4
+																				-var guided = ('Guided'==run.guided) ? 'selected' : null;
+																				-var personal = ('Personal'==run.guided) ? 'selected' :null;
+																				select#guidePersonal.form-control(name="sports[river][runs][" + i + "][guided]") 
+																					option(value="Guided" selected=guided) Guided
+																					option(value="Personal" selected=personal) Personal
+																		-i++
+															if(!profileUser.sports.river.runs)
+																#riverFormNoIndex
+																	-var i = 0
+																	.row
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[river][runs][0][river]") River
+																			input.form-control(placeholder="River" type="text" name="sports[river][runs][0][river]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[river][runs][0][Run]") Run
+																			input.form-control(placeholder="Run" type="text" name="sports[river][runs][0][run]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[river][runs][0][difficulty]") Difficulty
+																			input.form-control(placeholder="Difficulty" type="text" name="sports[river][runs][0][difficulty]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[river][runs][0][craft]") Craft
+																			input.form-control(placeholder="Craft (kayak, canoe, etc.)" type="text" name="sports[river][runs][0][craft]")
+																	.row
+																		div.form-group.col-md-4
+																			label.sr-only(for="sports[river][runs][0][role]") Role
+																			input.form-control(placeholder="Role" type="text" name="sports[river][runs][0][role]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="sports[river][runs][0][date]") Date
+																			input.form-control.climbDate(placeholder="Date" type="text" name="sports[river][runs][0][date]")
+																		.form-group.col-md-4
+																			select#guidePersonal.form-control(name="sports[river][runs][0][guided]") 
+																				option(value="Guided" selected=guided) Guided
+																				option(value="Personal" selected=personal) Personal
+																	-i++
 														.row
-															div.form-group.col-md-3
-																label.sr-only(for="sports[mountaineering][routes][0][description]") Description
-																input.form-control(placeholder="Description" type="text" name="sports[mountaineering][routes][0][description]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[mountaineering][routes][0][date]") Date
-																input.form-control.climbDate(placeholder="Date" type="text" name="sports[mountaineering][routes][0][date]")
-														.form-group.col-md-3
-																select#guidePersonal.form-control(name="sports[mountaineering][routes][0][guided]") 
-																	option(value="Guided" selected=guided) Guided
-																	option(value="Personal" selected=personal) Personal
-															.form-group.col-md-3
-																select#summit.form-control(name="sports[mountaineering][routes][0][summited]") 
-																	option(value="Yes" selected=summited) Summited
-																	option(value="No" selected=didnt) Didn't Summit
-														-i++
-											.row
-												div#addMountRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
-										div.tab-pane#riverCt
-											h4 River Sports
-											#riverFormContainer
-												if(profileUser.sports.river.runs[0])
-													-var i = 0
-													each run in profileUser.sports.river.runs
-														.riverForm
-															.row
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[river][runs][" + i + "][river]") River
-																	input.form-control(placeholder="River" type="text" value=run.river name="sports[river][runs][" + i + "][river]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[river][runs][" + i + "][run]") Run
-																	input.form-control(placeholder="Run" type="text" value=run.run name="sports[river][runs][" + i + "][run]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[river][runs][" + i + "][difficulty]") Difficulty
-																	input.form-control(placeholder="Difficulty" type="text" value=run.difficulty name="sports[river][runs][" + i + "][difficulty]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[river][runs][" + i + "][craft]") Craft
-																	input.form-control(placeholder="Craft (kayak, canoe, etc.)" type="text" value=run.craft name="sports[river][runs][" + i + "][craft]")
-															.row
-																div.form-group.col-md-4
-																	label.sr-only(for="sports[river][runs][" + i + "][role]") Role
-																	input.form-control(placeholder="Role" type="text" value=run.role name="sports[river][runs][" + i + "][role]")
-																div.form-group.col-md-4
-																	label.sr-only(for="sports[river][runs][" + i + "][date]") Date
-																	input.form-control.climbDate(placeholder="Date" type="text" value=run.date name="sports[river][runs][" + i + "][date]")
-																.form-group.col-md-4
-																	-var guided = ('Guided'==run.guided) ? 'selected' : null;
-																	-var personal = ('Personal'==run.guided) ? 'selected' :null;
-																	select#guidePersonal.form-control(name="sports[river][runs][" + i + "][guided]") 
-																		option(value="Guided" selected=guided) Guided
-																		option(value="Personal" selected=personal) Personal
-															-i++
-												if(!profileUser.sports.river.runs)
-													#riverFormNoIndex
-														-var i = 0
+															div#addRiver.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
+													div.tab-pane#cycleCt
+														h4 Mounatin Biking / Road Cycling
+														#cyclingFormContainer
+															if(profileUser.sports.cycling.races[0])
+																-var i = 0
+																each race in profileUser.sports.cycling.races
+																	.cyclingForm
+																		.row
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[cycling][races][" + i + "][race]") Race
+																				input.form-control(placeholder="Race" type="text" value=race.race name="sports[cycling][races][" + i + "][race]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[cycling][races][" + i + "][type]") Type
+																				input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" value=race.race name="sports[cycling][races][" + i + "][type]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[cycling][races][" + i + "][location]") Location
+																				input.form-control(placeholder="Location" type="text" value=race.location name="sports[cycling][races][" + i + "][location]")
+																			div.form-group.col-md-3
+																				label.sr-only(for="sports[cycling][races][" + i + "][totalTime]") Time
+																				input.form-control(placeholder="Time" type="text" value=race.totalTime name="sports[cycling][races][" + i + "][totalTime]")
+																		.row
+																			div.form-group.col-md-4
+																				label.sr-only(for="sports[cycling][races][" + i + "][place]") Place (1st, 2nd, etc.)
+																				input.form-control(placeholder="Place (1st, 2nd, etc.)" type="text" value=race.place name="sports[cycling][races][" + i + "][place]")
+																			div.form-group.col-md-4
+																				label.sr-only(for="sports[cycling][races][" + i + "][date]") Date
+																				input.form-control.climbDate(placeholder="Date" type="text" value=race.date name="sports[cycling][races][" + i + "][date]")
+																			.form-group.col-md-4
+																				-var mountain = ('Mountain'==race.mtnRd) ? 'selected' : null;
+																				-var road = ('Road'==race.mtnRd) ? 'selected' :null;
+																				select#MtnRd.form-control(name="sports[cycling][races][" + i + "][mtnRd]") 
+																					option(value="Mountain" selected=mountain) Mountain
+																					option(value="Road" selected=road) Road
+																		-i++
+															if(!profileUser.sports.cycling.races[0])
+																#cyclingFormNoIndex
+																	-var i = 0
+																	.row
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[cycling][races][0][race]") Race
+																			input.form-control(placeholder="Race" type="text" name="sports[cycling][races][0][race]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[cycling][races][0][type]") Type
+																			input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" name="sports[cycling][races][0][type]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[cycling][races][0][location]") Location
+																			input.form-control(placeholder="Location" type="text" name="sports[cycling][races][0][location]")
+																		div.form-group.col-md-3
+																			label.sr-only(for="sports[cycling][races][0][totalTime]") Time
+																			input.form-control(placeholder="Time" type="text" name="sports[cycling][races][0][totalTime]")
+																	.row
+																		div.form-group.col-md-4
+																			label.sr-only(for="sports[cycling][races][0][place]") Place (1st, 2nd, etc.)
+																			input.form-control(placeholder="Place (1st, 2nd, etc.)" type="text" name="sports[cycling][races][0][place]")
+																		div.form-group.col-md-4
+																			label.sr-only(for="sports[cycling][races][0][date]") Date
+																			input.form-control.climbDate(placeholder="Date" type="text" name="sports[cycling][races][0][date]")
+																		.form-group.col-md-4
+																			select#MtnRd.form-control(name="sports[cycling][races][0][mtnRd]") 
+																				option(value="Mountain" selected=mountain) Mountain
+																				option(value="Road" selected=road) Road
+																	-i++
 														.row
-															div.form-group.col-md-3
-																label.sr-only(for="sports[river][runs][0][river]") River
-																input.form-control(placeholder="River" type="text" name="sports[river][runs][0][river]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[river][runs][0][Run]") Run
-																input.form-control(placeholder="Run" type="text" name="sports[river][runs][0][run]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[river][runs][0][difficulty]") Difficulty
-																input.form-control(placeholder="Difficulty" type="text" name="sports[river][runs][0][difficulty]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[river][runs][0][craft]") Craft
-																input.form-control(placeholder="Craft (kayak, canoe, etc.)" type="text" name="sports[river][runs][0][craft]")
-														.row
-															div.form-group.col-md-4
-																label.sr-only(for="sports[river][runs][0][role]") Role
-																input.form-control(placeholder="Role" type="text" name="sports[river][runs][0][role]")
-															div.form-group.col-md-4
-																label.sr-only(for="sports[river][runs][0][date]") Date
-																input.form-control.climbDate(placeholder="Date" type="text" name="sports[river][runs][0][date]")
-															.form-group.col-md-4
-																select#guidePersonal.form-control(name="sports[river][runs][0][guided]") 
-																	option(value="Guided" selected=guided) Guided
-																	option(value="Personal" selected=personal) Personal
-														-i++
-											.row
-												div#addRiver.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
-										div.tab-pane#cycleCt
-											h4 Mounatin Biking / Road Cycling
-											#cyclingFormContainer
-												if(profileUser.sports.cycling.races[0])
-													-var i = 0
-													each race in profileUser.sports.cycling.races
-														.cyclingForm
-															.row
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[cycling][races][" + i + "][race]") Race
-																	input.form-control(placeholder="Race" type="text" value=race.race name="sports[cycling][races][" + i + "][race]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[cycling][races][" + i + "][type]") Type
-																	input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" value=race.race name="sports[cycling][races][" + i + "][type]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[cycling][races][" + i + "][location]") Location
-																	input.form-control(placeholder="Location" type="text" value=race.location name="sports[cycling][races][" + i + "][location]")
-																div.form-group.col-md-3
-																	label.sr-only(for="sports[cycling][races][" + i + "][totalTime]") Time
-																	input.form-control(placeholder="Time" type="text" value=race.totalTime name="sports[cycling][races][" + i + "][totalTime]")
-															.row
-																div.form-group.col-md-4
-																	label.sr-only(for="sports[cycling][races][" + i + "][place]") Place (1st, 2nd, etc.)
-																	input.form-control(placeholder="Place (1st, 2nd, etc.)" type="text" value=race.place name="sports[cycling][races][" + i + "][place]")
-																div.form-group.col-md-4
-																	label.sr-only(for="sports[cycling][races][" + i + "][date]") Date
-																	input.form-control.climbDate(placeholder="Date" type="text" value=race.date name="sports[cycling][races][" + i + "][date]")
-																.form-group.col-md-4
-																	-var mountain = ('Mountain'==race.mtnRd) ? 'selected' : null;
-																	-var road = ('Road'==race.mtnRd) ? 'selected' :null;
-																	select#MtnRd.form-control(name="sports[cycling][races][" + i + "][mtnRd]") 
-																		option(value="Mountain" selected=mountain) Mountain
-																		option(value="Road" selected=road) Road
-															-i++
-												if(!profileUser.sports.cycling.races[0])
-													#cyclingFormNoIndex
-														-var i = 0
-														.row
-															div.form-group.col-md-3
-																label.sr-only(for="sports[cycling][races][0][race]") Race
-																input.form-control(placeholder="Race" type="text" name="sports[cycling][races][0][race]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[cycling][races][0][type]") Type
-																input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" name="sports[cycling][races][0][type]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[cycling][races][0][location]") Location
-																input.form-control(placeholder="Location" type="text" name="sports[cycling][races][0][location]")
-															div.form-group.col-md-3
-																label.sr-only(for="sports[cycling][races][0][totalTime]") Time
-																input.form-control(placeholder="Time" type="text" name="sports[cycling][races][0][totalTime]")
-														.row
-															div.form-group.col-md-4
-																label.sr-only(for="sports[cycling][races][0][place]") Place (1st, 2nd, etc.)
-																input.form-control(placeholder="Place (1st, 2nd, etc.)" type="text" name="sports[cycling][races][0][place]")
-															div.form-group.col-md-4
-																label.sr-only(for="sports[cycling][races][0][date]") Date
-																input.form-control.climbDate(placeholder="Date" type="text" name="sports[cycling][races][0][date]")
-															.form-group.col-md-4
-																select#MtnRd.form-control(name="sports[cycling][races][0][mtnRd]") 
-																	option(value="Mountain" selected=mountain) Mountain
-																	option(value="Road" selected=road) Road
-														-i++
-											.row
-												div#addRace.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
-									.dialog-footer
-										button.btn.btn-default.pull-right(type="submit" name="editprofile") Update
+															div#addRace.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
+													button.btn.btn-default.pull-right(type="submit" name="editprofile") Update
 
 
 
 
 
-				
-	include ../_footer
+					
+		include ../_footer
