@@ -82,6 +82,8 @@ $(document).ready(function(){
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
+	$('#moreSports').tooltip()
+
 	
 	//var clickToggle = function(name, tab){
 	//	$("input[name='" + name + "']").click(function(){
@@ -94,6 +96,7 @@ $(document).ready(function(){
 		checkBox = "input[name='sportsList[" + list + "]']";
 		$(checkBox).click(function(){
 			$(tab).toggle();
+			count++
 			//locals.list = true
 		});
 	};

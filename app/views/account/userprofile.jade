@@ -56,8 +56,10 @@ block content
 									-if(arrayOfSports[2])
 										span= ", " + arrayOfSports[2] 
 									-if(arrayOfSports.length > 3)
-										span  and 
-										a.inline= (arrayOfSports.length - 3) + " more."
+										span  and
+										-var sports = arrayOfSports.slice(3).join(", ")
+
+										button.none.inline#moreSports(style="border:none; background-color: white; color: #3399cc; z-index:3000;" data-toggle="tooltip" data-placement="left" title=sports)= arrayOfSports.length -3 + " more."
 
 					
 
@@ -368,7 +370,9 @@ block content
 											li#athlete(style="display: " + visibility + ";")
 												a(href="#sponsors", data-toggle="tab") Sponsors
 											li#sportsTab.dropdown
-												a(href="#", data-toggle="dropdown").dropdown-toggle Sports
+												-var count = arrayOfSports.length - 1
+												a(href="#", data-toggle="dropdown").dropdown-toggle Sports 
+													span.badge= count
 													span.caret
 													if(profileUser.sportsList)
 														ul.dropdown-menu#sportsList

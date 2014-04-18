@@ -120,7 +120,7 @@ footer { height: 350px; background-color: #2c363a; padding-top: 1px; }
 
 /*profile */
 
-.about {position: relative; overflow: hidden;}
+.about {position: relative;}
 .welcome { color: white; z-index: 200; font-weight: 300;}
 .topbtns {height: 10px; display: inline; top:-10px;}
 .addFriend { position:relative; top: -7px; transition: color .3s; color:#3399CC; padding: 10px; padding-right: 5px; display: inline; overflow: hidden;background-color: white; border-radius: 20px; }
