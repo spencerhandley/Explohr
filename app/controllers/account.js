@@ -2,6 +2,7 @@ var passport = require('passport'),
 	async = require('async'),
 	Account = require('../models/account'),
 	Course = require('../models/course'),
+	moment = require('moment'),
 	RouteManager = require('express-shared-routes').RouteManager,
 	thumbnailPluginLib = require('mongoose-thumbnail'),
 	routes = new RouteManager();
@@ -228,7 +229,8 @@ routes.get({name:'userprofile', re: '/user/:user'}, function (req, res){
 	Account.findOne({_id: req.params.user}).populate('classes').exec(function (err, account) {
 		res.render('account/userprofile', {
 			profileUser: account,
-			user: req.user
+			user: req.user,
+			moment: moment
 		});
 	});
 });

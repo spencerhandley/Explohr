@@ -89,7 +89,7 @@ block content
 												td #{climb.pitches}
 												td #{climb.climbType}
 												td #{climb.grade}
-												td 5/5/13
+												td #{moment(climb.date).format("MM/DD/YYYY")}
 												td #{climb.leadFollow}
 						-if(profileUser.sports.mountaineering.routes[0])
 							-if(profileUser.sports.mountaineering.routes[0].mountain)
@@ -112,7 +112,7 @@ block content
 												td #{mount.difficulty}
 												td #{mount.skills}
 												td #{mount.description}
-												td 5/5/13
+												td #{moment(mount.date).format("MM/DD/YYYY")}
 												td #{mount.guided}
 												td #{mount.summited}
 						-if(profileUser.sports.cycling.races[0])
@@ -135,7 +135,7 @@ block content
 												td #{race.type}
 												td #{race.totalTime}
 												td #{race.place}
-												td 5/5/13
+												td #{moment(race.date).format("MM/DD/YYYY")}
 												td #{race.mtnRd}
 						-if(profileUser.sports.river.runs[0])
 							-if(profileUser.sports.river.runs[0].river)
@@ -157,7 +157,7 @@ block content
 												td #{run.difficulty}
 												td #{run.craft}
 												td #{run.role}
-												td 5/5/13
+												td #{moment(run.date).format("MM/DD/YYYY")}
 												td #{run.guided}
 					.col-md-4
 
@@ -210,9 +210,13 @@ block content
 											ul.list-group
 												each exp in profileUser.professional.teaching.experience
 													li.list-group-item
+														.date.pull-right
+															span.small #{moment(exp.start).format("MM/DD/YYYY")} - 
+															span.small #{moment(exp.end).format("MM/DD/YYYY")}
 														h4.list-group-item-heading #{exp.organization}
+															br
 															if(exp.jobTitle)
-																	span.small.list-group-item-text  #{exp.jobTitle}
+																span.small.list-group-item-text  #{exp.jobTitle}
 															if(exp.location)
 																.small.list-group-item-text #{exp.location}
 															if(exp.location)
@@ -230,11 +234,17 @@ block content
 											ul.list-group
 												each exp in profileUser.professional.workExperience
 													li.list-group-item
+														.date.pull-right
+															span.small #{moment(exp.start).format("MM/DD/YYYY")} - 
+															span.small #{moment(exp.end).format("MM/DD/YYYY")}
 														h4.list-group-item-heading #{exp.company}
-															if(exp.jobTitle)
-																	span.small.list-group-item-text  #{exp.positon}
+															br
+															if(exp.position)
+																span.small.list-group-item-text  #{exp.position}
 															if(exp.location)
 																.small.list-group-item-text #{exp.location}
+															
+															br
 														if(exp.description)
 															strong Description:
 															span.small.list-group-item-text  #{exp.description}
@@ -272,23 +282,28 @@ block content
 										-if(profileUser.professional.certs[0])
 											-if(profileUser.professional.certs[0].institution)
 												.panel-body
+
 													h4 Certifications
 												ul.list-group
 													each cert in profileUser.professional.certs
 														li.list-group-item
+															.dates.pull-right.text-right														
+																b.list-group-item-text Acquired: 
+																span #{moment(cert.acquired).format("MM/DD/YYYY")}
+																br
+																b.list-group-item-text Expires: 
+																span #{moment(cert.expires).format("MM/DD/YYYY")}
 															h4.list-group-item-heading #{cert.institution}
 																.small.list-group-item-text #{cert.certificate}
-															b.list-group-item-text Acquired: 
-															span #{cert.acquired}
-															br
-															b.list-group-item-text Expires: 
-															span #{cert.expires}
+
 										.panel-body 
 											h4 Traditional Education
 										ul.list-group
 											each trad in profileUser.education
-												-console.log(trad)
 												li.list-group-item
+													if(trad.year)
+														.pull-right
+															.small.list-group-item-text #{trad.year.name}
 													h4.list-group-item-heading #{trad.school.name}
 														if(trad.concentration)
 															each concentration in trad.concentration
@@ -296,8 +311,6 @@ block content
 																.small.list-group-item-text #{concentration.name}
 														if(trad.type)
 															.small.list-group-item-text #{trad.type}
-														if(trad.year)
-															.small.list-group-item-text #{trad.year.name}
 
 
 												//-p #{trad.start} to #{trad.end}
@@ -578,7 +591,7 @@ block content
 																	div.form-group.col-md-2
 																		-var year = (trad.year) ? trad.year.name : null;
 																		label.sr-only(for="education[0][year][name]") Year
-																		input.form-control.datePick(placeholder="End Date" type="text" name="education[0][year][name]")
+																		input.form-control(placeholder="End Date" type="text" name="education[0][year][name]")
 														.row
 															div#addTradEdu.addfieldsBtn.col-md-6.col-md-offset-3 add
 														.row.col-md-12.outsideCourse
