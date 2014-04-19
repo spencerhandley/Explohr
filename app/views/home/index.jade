@@ -21,8 +21,7 @@ block content
 				a(href=router.getLink("people")) PEOPLE
 			li.small 
 				a(href=router.getLink("people")) JOB LISTINGS
-		ul.list-inline.pull-right(style="color:white;")
-			//-li.small 
+			li.small 
 				a(href=router.getLink("catalog")) COURSES
 			//-li.small TRIPS
 			//-li.small BLOG
@@ -42,8 +41,8 @@ block content
 				.row
 					.col-md-3.col-md-offset-3
 						.customizebtn
-							a(href=router.getLink("userprofile", {user: user._id}))
-								h4 Your Profile
+							a(href=router.getLink("catalog", {user: user._id}))
+								h4 Course Catalog
 					.col-md-3
 						.customizebtn
 							a(href=router.getLink("people"))
@@ -52,8 +51,8 @@ block content
 				a(href=router.getLink("catalog")).outlined-clear-btn.margin-10 Class Catalog
 	.bottom
 		.container
-			h1.text-center BEAUTIFUL RESUMES FOR OUTDOOR PROFESSIONALS 
-			//-#latestCourses.section
+			h1.text-center ONLINE SCHOOL FOR OUTDOOR SPORTS 
+			#latestCourses.section
 				div.text-center
 					h2.sectionTitle What you will <b>Learn</b>			
 				div#courseCarrosel 
@@ -133,7 +132,7 @@ block content
 											a.btn.btn-primary(href=router.getLink("course", {courseTitle: "surfing", courseid: "1111"})) More Details
 					.text-center
 						button.outlined-clear-btn-black.margin-10#moreClasses More <span class="caret"></span>
-			#why.section
+			//- #why.section
 				div.text-center
 					h2.sectionTitle Why you'll <b>love EXPLOHR</b>
 				.row
@@ -146,21 +145,34 @@ block content
 					.col-md-4.text-center
 						h4.reason Allow Potential Employers to Come to You
 						p.lead Enabling public mode allows employers to easily find your profile, allowing you to focus on what you love.  
-			.row.section
+			#why.section
+				div.text-center
+					h2.sectionTitle Why you'll <b>love EXPLOHR</b>
+				.row
+					.col-md-4.text-center
+						h4.reason Learn From World Famous Instructors.
+						p.lead Our Teaching staff is composed of the worlds best athletes sharing their knowledge and techniques. 
+					.col-md-4.text-center
+						h4.reason Highest Quality Courses and Content
+						p.lead We work incredibly hard to provide you with comprehensive, high quality courses. It's a big deal.
+					.col-md-4.text-center
+						h4.reason Learn in Person from Professionals in the Community.
+						p.lead Our community is full of certified outdoor professionals excited to share their skills in person. 
+			//- .row.section
 				.col-md-6
 					.feature
 						h2 EASILY EDIT YOUR PROFILE
 						p.lead The Explohr Dashboard is both easy to understand, and flexible enough to display any variety of professional experience
 				.col-md-6
 					img.lpimage(src="/img/LP1.PNG")
-			.row.section
+			//- .row.section
 				.col-md-6
 					img.lpimage(src="/img/LP2.png")
 				.col-md-6
 					.feature
 						h2 BEAUTIFULLY DISPLAY YOUR EXPERIENCE
 						p.lead The Explohr Dashboard is both easy to understand, and flexible enough to display any variety of professional experience
-			.row.section
+			//- .row.section
 				.col-md-6
 					.feature
 						h2 TRACK YOUR OUTDOOR ACHIEVEMENTS 
@@ -169,7 +181,7 @@ block content
 					img.lpimage(src="/img/LP1.PNG")
 				
 
-			//-#topics.section
+			#topics.section
 				.text-center
 					h2.sectionTitle Topics are <b>Diverse</b>
 				.row
@@ -190,8 +202,8 @@ block content
 					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>
 			#teachers.section
 				.text-center
-					h2.sectionTitle Featured Profiles
-					p.lead Hundreds of users are already creating beautiful outdoor profiles. 
+					h2.sectionTitle Teachers are <b>World Renown</b>
+					p.lead Our staff is composed of hand-picked World Class<br> athletes from every domain of outdoor adventure.
 				.row
 					.col-sm-3.col-md-3.text-center
 						a(href=router.getLink("teacherprofile", { user : "mickfanning" }))
@@ -223,12 +235,14 @@ block content
 									p.job Survivalist
 				.text-center
 					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>	
-			.row
-				.col-md-4.col-md-offset-3
-					.facebook
-						a.pull-right(href=router.getLink("facebooklogin"))
-							h4 SIGN IN WITH FACEBOOK
-							br
+			-if(!user)
+
+				.row
+					.col-md-4.col-md-offset-3
+						.facebook
+							a.pull-right(href=router.getLink("facebooklogin"))
+								h4 SIGN IN WITH FACEBOOK
+								br
 			//-#trips.section
 				.text-center
 					h2.sectionTitle Access to Adventure Trips <b>with the Pros</b>
