@@ -7,7 +7,7 @@ var Video = new Schema({
 	link: String,
 	teacher: String,
 	length: String,
-	topic: String
+	topic: String,
 });
 
 var Course = new Schema({

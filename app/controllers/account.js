@@ -2,6 +2,7 @@ var passport = require('passport'),
 	async = require('async'),
 	Account = require('../models/account'),
 	Course = require('../models/course'),
+	Video = require('../models/course'),
 	moment = require('moment'),
 	RouteManager = require('express-shared-routes').RouteManager,
 	thumbnailPluginLib = require('mongoose-thumbnail'),
@@ -168,7 +169,6 @@ routes.get({ name: 'newcourse', re: '/newcourse' }, function (req, res){
 
 routes.post({ name: 'newcourse', re: '/newcourse'}, function (req,res){
 	var course = new Course(req.body.c);
-	course.videos.push(new Video());
 	course.save(function (err){
 		if(err){
 			res.json(err);

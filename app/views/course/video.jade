@@ -6,9 +6,9 @@ block content
 		#video
 			.row#videoContainer
 				div.courseDetails.col-sm-8.col-md-8
-					h2.profName #{locals.title}
-					p.lead By Chris Sharma
-					iframe(src="//player.vimeo.com/video/30748835", width="100%", height="500px", frameborder="0", webkitallowfullscreen, mozallowfullscreen, allowfullscreen)
+					h2.profName #{locals.video.title}
+					p.lead By #{locals.course.teacher}
+					iframe(src="#{locals.video.link}", width="100%", height="500px", frameborder="0", webkitallowfullscreen, mozallowfullscreen, allowfullscreen)
 					
 				.col-sm-4.col-md-4
 					.panel.panel-default
@@ -32,7 +32,7 @@ block content
 							a.list-group-item(href="") Rock Climbing Video Title
 							a.list-group-item(href="") Rock Climbing Video Title
 							a.list-group-item(href="") Rock Climbing Video Title
-					.panel.panel-default
+					//- .panel.panel-default
 						.panel-heading General Information
 						ul.list-group
 							li.list-group-item 

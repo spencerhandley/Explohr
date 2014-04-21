@@ -40,11 +40,11 @@
 
 })(jQuery);
 		$(document).ready(function(){
-			if (document.cookie.indexOf('visited=true') == -1) {
-	            // var fifteenDays = 1000*60*60*24*15;
-	            // var expires = new Date((new Date()).valueOf() + fifteenDays);
-	        document.cookie = "visited=true"
-	        $("#editProfileModal").modal();
+		if (document.cookie.indexOf('visited=true') == -1) {
+            // var fifteenDays = 1000*60*60*24*15;
+            // var expires = new Date((new Date()).valueOf() + fifteenDays);
+            document.cookie = "visited=true"
+            $("#editProfileModal").modal();
         }
 
 	console.log(user);

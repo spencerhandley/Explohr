@@ -5,41 +5,41 @@ block content
 	.profileTop
 	.profileContent
 		.container
-			.row#profileUserBasics
+			.row#userBasics
 				div
 					#buttons.pull-right
-						h5.pull-right Outdoor #{profileUser.general.IamA}
+						h5.pull-right Outdoor #{user.general.IamA}
 						.row
-						-if(profileUser.general.guide)
+						-if(user.general.guide)
 							img.badges(src="../img/guideBadge.png")
-						-if(profileUser.general.educator)
+						-if(user.general.educator)
 							img.badges(src="../img/educatorBadge.png")
-						-if(profileUser.general.athlete)
+						-if(user.general.athlete)
 							img.badges(src="../img/athleteBadge.png")
 					.crop.profileImage
-						img.pull-left.rounded(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
-					h2.profName #{profileUser.name} 
+						img.pull-left.rounded(src="https://graph.facebook.com/#{user.oauthID}/picture?type=large")
+					h2.profName #{user.name} 
 						.btn.btn-primary.btn-sm Add Friend
-					p.lead #{profileUser.general.hometown}
-					-if(profileUser.general.occupation)	
-						p.profileUserdetails
+					p.lead #{user.general.hometown}
+					-if(user.general.occupation)	
+						p.userdetails
 							b Occupation: 
-							span #{profileUser.general.occupation}
-					-if(profileUser.general.aboutMe)	
-						p.profileUserdetails
+							span #{user.general.occupation}
+					-if(user.general.aboutMe)	
+						p.userdetails
 							b Bio: 
-							span #{profileUser.general.aboutMe}
-					-if(profileUser.general.age)	
-						p.profileUserdetails
+							span #{user.general.aboutMe}
+					-if(user.general.age)	
+						p.userdetails
 							b Age: 
-							span #{profileUser.general.age}
+							span #{user.general.age}
 					
 					
-					p.profileUserdetails
-					-if(profileUser.sportsList && profileUser.sportsList >= 1)
+					p.userdetails
+					-if(user.sportsList && user.sportsList >= 1)
 					b Sports: 
-					-var arrayOfSports = Object.keys(profileUser.sportsList).map(function (key){
-					-		return profileUser.sportsList[key];
+					-var arrayOfSports = Object.keys(user.sportsList).map(function (key){
+					-		return user.sportsList[key];
 					-}).join(", ");
 					span= arrayOfSports.substr(2)
 
@@ -51,9 +51,9 @@ block content
 					.col-md-8
 
 						//- checks for any saved rock climbing routes
-						-if(profileUser.sports.rockClimbing.notableRoutes[0])
+						-if(user.sports.rockClimbing.notableRoutes[0])
 							//- checks for saved routes after first save on the dashboard
-							-if(profileUser.sports.rockClimbing.notableRoutes[0].location)
+							-if(user.sports.rockClimbing.notableRoutes[0].location)
 								h4 Rock Climbing
 								.panel.panel-default.col-md-12
 									table.table.table-striped
@@ -64,7 +64,7 @@ block content
 											th Type
 											th Grade
 											th Date 
-										each climb in profileUser.sports.rockClimbing.notableRoutes
+										each climb in user.sports.rockClimbing.notableRoutes
 											tr 
 												td #{climb.location}
 												td #{climb.route}
@@ -73,8 +73,8 @@ block content
 												td #{climb.grade}
 												td 5/5/13
 												td #{climb.leadFollow}
-						-if(profileUser.sports.mountaineering.routes[0])
-							-if(profileUser.sports.mountaineering.routes[0].mountain)
+						-if(user.sports.mountaineering.routes[0])
+							-if(user.sports.mountaineering.routes[0].mountain)
 								h4 Mountaineering
 								.panel.panel-default.col-md-12
 									table.table.table-striped
@@ -87,7 +87,7 @@ block content
 											th Date 
 											th Guided
 											th Summited
-										each mount in profileUser.sports.mountaineering.routes
+										each mount in user.sports.mountaineering.routes
 											tr 
 												td #{mount.mountain}
 												td #{mount.route}
@@ -97,8 +97,8 @@ block content
 												td 5/5/13
 												td #{mount.guided}
 												td #{mount.summited}
-						-if(profileUser.sports.cycling.races[0])
-							-if(profileUser.sports.cycling.races[0].race)
+						-if(user.sports.cycling.races[0])
+							-if(user.sports.cycling.races[0].race)
 								h4 Mountain Biking / Cycling
 								.panel.panel-default.col-md-12
 									table.table.table-striped
@@ -110,7 +110,7 @@ block content
 											th Place
 											th Date 
 											th Mountain / Road
-										each race in profileUser.sports.cycling.races
+										each race in user.sports.cycling.races
 											tr 
 												td #{race.race}
 												td #{race.location}
@@ -119,8 +119,8 @@ block content
 												td #{race.place}
 												td 5/5/13
 												td #{race.mtnRd}
-						-if(profileUser.sports.river.runs[0])
-							-if(profileUser.sports.river.runs[0].river)
+						-if(user.sports.river.runs[0])
+							-if(user.sports.river.runs[0].river)
 								h4 River Sports
 								.panel.panel-default.col-md-12
 									table.table.table-striped
@@ -132,7 +132,7 @@ block content
 											th Role
 											th Date 
 											th Guided
-										each run in profileUser.sports.river.runs
+										each run in user.sports.river.runs
 											tr 
 												td #{run.river}
 												td #{run.run}
@@ -144,13 +144,13 @@ block content
 					.col-md-4
 
 						.row#rightPanels
-								-if(profileUser.professional.guiding.companies[0])
-									-if(profileUser.professional.guiding.companies[0].organization)
+								-if(user.professional.guiding.companies[0])
+									-if(user.professional.guiding.companies[0].organization)
 										.panel.panel-default#Panel
 											.panel-body 
 												h4 Guiding Experience
 											ul.list-group
-												each exp in profileUser.professional.guiding.companies
+												each exp in user.professional.guiding.companies
 													li.list-group-item
 														h4.list-group-item-heading #{exp.organization}
 															if(exp.jobTitle)
@@ -162,11 +162,11 @@ block content
 														if(exp.description)
 															strong Description:
 															span.small.list-group-item-text  #{exp.description}
-										-if(profileUser.professional.guiding.guided)
+										-if(user.professional.guiding.guided)
 											.panel-body 
 												h5 Trips Guided
 											ul.list-group
-												each exp in profileUser.professional.guiding.guided
+												each exp in user.professional.guiding.guided
 													li.list-group-item
 														h4.list-group-item-heading #{exp.organization}
 															if(exp.jobTitle)
@@ -184,13 +184,13 @@ block content
 														if(exp.description)
 															strong Description:
 															span.small.list-group-item-text  #{exp.description}
-								-if(profileUser.professional.teaching.experience[0])
-									-if(profileUser.professional.teaching.experience[0].organization)
+								-if(user.professional.teaching.experience[0])
+									-if(user.professional.teaching.experience[0].organization)
 										.panel.panel-default#Panel
 											.panel-body 
 												h4 Teaching Experience
 											ul.list-group
-												each exp in profileUser.professional.teaching.experience
+												each exp in user.professional.teaching.experience
 													li.list-group-item
 														h4.list-group-item-heading #{exp.organization}
 															if(exp.jobTitle)
@@ -204,13 +204,13 @@ block content
 														if(exp.description)
 															strong Description:
 															span.small.list-group-item-text  #{exp.description}
-								-if(profileUser.professional.workExperience[0])
-									-if(profileUser.professional.workExperience[0].company)
+								-if(user.professional.workExperience[0])
+									-if(user.professional.workExperience[0].company)
 										.panel.panel-default#Panel
 											.panel-body 
 												h4 Related Work Experience
 											ul.list-group
-												each exp in profileUser.professional.workExperience
+												each exp in user.professional.workExperience
 													li.list-group-item
 														h4.list-group-item-heading #{exp.company}
 															if(exp.jobTitle)
@@ -220,26 +220,26 @@ block content
 														if(exp.description)
 															strong Description:
 															span.small.list-group-item-text  #{exp.description}
-								-if(profileUser.professional.sponsors[0])
-									-if(profileUser.professional.sponsors[0].organization)
+								-if(user.professional.sponsors[0])
+									-if(user.professional.sponsors[0].organization)
 										.panel.panel-default#Panel
 											.panel-body 
 												h4 Sponsors
 											ul.list-group
-												each exp in profileUser.professional.sponsors
+												each exp in user.professional.sponsors
 													li.list-group-item
 														h4.list-group-item-heading #{exp.organization}
 															if(exp.jobTitle)
 																	span.small.list-group-item-text  #{exp.sport}
-								-if(profileUser.education)
+								-if(user.education)
 									.panel.panel-default#Panel
-										-if(profileUser.professional.education.outdoor[0])
-											-if(profileUser.professional.education.outdoor[0].institution)
-												//-if(profileUser.professional.education.outdoor[0])
+										-if(user.professional.education.outdoor[0])
+											-if(user.professional.education.outdoor[0].institution)
+												//-if(user.professional.education.outdoor[0])
 												.panel-body
 													h4 Outdoor Coursework
 												ul.list-group
-													each outdoor in profileUser.professional.education.outdoor
+													each outdoor in user.professional.education.outdoor
 														li.list-group-item
 															h4.list-group-item-heading #{outdoor.institution} 
 																.list-group-item-text.small #{outdoor.course}
@@ -251,12 +251,12 @@ block content
 															br
 															b.list-group-item-text More Info: 
 															span #{outdoor.other}
-										-if(profileUser.professional.certs[0])
-											-if(profileUser.professional.certs[0].institution)
+										-if(user.professional.certs[0])
+											-if(user.professional.certs[0].institution)
 												.panel-body
 													h4 Certifications
 												ul.list-group
-													each cert in profileUser.professional.certs
+													each cert in user.professional.certs
 														li.list-group-item
 															h4.list-group-item-heading #{cert.institution}
 																.small.list-group-item-text #{cert.certificate}
@@ -268,7 +268,7 @@ block content
 										.panel-body 
 											h4 Traditional Education
 										ul.list-group
-											each trad in profileUser.education
+											each trad in user.education
 												-console.log(trad)
 												li.list-group-item
 													h4.list-group-item-heading #{trad.school.name}
@@ -287,34 +287,34 @@ block content
 
 					//-.row
 							h3 Courses
-							each course in locals.profileUser.classes
+							each course in locals.user.classes
 								include _profileCourse
 							h3 Friends
 							.row#classmates
 								.col-md-2.col-sm-4
-									a(href=router.getLink("profileUserprofile", { profileUser : "deanbennet" }))
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
 										.thumbnail.text-center
-											img#profileUserThumb(src="/img/1.jpg")
+											img#userThumb(src="/img/1.jpg")
 								.col-md-2.col-sm-4
-									a(href=router.getLink("profileUserprofile", { profileUser : "deanbennet" }))
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
 										.thumbnail.text-center
-											img#profileUserThumb(src="/img/2.jpg")
+											img#userThumb(src="/img/2.jpg")
 								.col-md-2.col-sm-4
-									a(href=router.getLink("profileUserprofile", { profileUser : "deanbennet" }))
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
 										.thumbnail.text-center
-											img#profileUserThumb(src="/img/3.jpg")
+											img#userThumb(src="/img/3.jpg")
 								.col-md-2.col-sm-4
-									a(href=router.getLink("profileUserprofile", { profileUser : "deanbennet" }))
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
 										.thumbnail.text-center
-											img#profileUserThumb(src="/img/4.jpg")
+											img#userThumb(src="/img/4.jpg")
 								.col-md-2.col-sm-4
-									a(href=router.getLink("profileUserprofile", { profileUser : "deanbennet" }))
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
 										.thumbnail.text-center
-											img#profileUserThumb(src="/img/5.jpg")
+											img#userThumb(src="/img/5.jpg")
 								.col-md-2.col-sm-4
-									a(href=router.getLink("profileUserprofile", { profileUser : "deanbennet" }))
+									a(href=router.getLink("userprofile", { user : "deanbennet" }))
 										.thumbnail.text-center
-											img#profileUserThumb(src="/img/6.jpg")
+											img#userThumb(src="/img/6.jpg")
 							.text-center
 								button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
 
