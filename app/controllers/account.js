@@ -42,7 +42,7 @@ if (req.isAuthenticated()) { return next(); }
 res.redirect('/')
 }
 
-routes.get( {re:'/auth/facebook', name:'facebooklogin'}, passport.authenticate('facebook', {scope: ['email', 'user_birthday', 'publish_actions']}));
+routes.get( {re:'/auth/facebook', name:'facebooklogin'}, passport.authenticate('facebook', {scope: ['email', 'user_birthday']}));
 
 routes.get({re:'/auth/facebook/callback'},
   passport.authenticate('facebook', { failureRedirect: '/login' }),
