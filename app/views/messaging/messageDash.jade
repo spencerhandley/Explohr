@@ -7,20 +7,22 @@ block content
 		.col-md-4
 			.list-group
 				each thread in locals.threads
-					-console.log(thread.members[1])
 					a(href=router.getLink("messageThread", {threadId: thread._id}))
 						each member in thread.members
 							//-if(!member._id === user._id)
 						p.list-group-item #{thread.members[1].name}
 		-if(locals.stream)
 			.col-md-8
-				each message in locals.stream.messages
-					.panel.panel-default
-						.panel-heading #{locals.sender.name} 
-							small.pull-right #{moment(message.sentAt).format("MM/DD/YYYY HH:mm a")}
-						.panel-body #{message.content}
+				#messagesContainer
+					each message in locals.stream.messages
+						.panel.panel-default
+							.panel-heading #{locals.sender.name} 
+								small.pull-right #{moment(message.sentAt).format("MM/DD/YYYY HH:mm a")}
+							.panel-body #{message.content}
 				form(role="form" action=router.getLink("sendMessage", {threadId: locals.stream._id}), method="POST").input-group
-					input(type="text" name="messageContent").form-control
+					input(type="text" name="messageContent" autofocus).form-control
 					span.input-group-btn
 						button.btn.btn-default(type="submit") Send
+		-if(!locals.stream) 
+			h3.lead.text-center Welcome to your message inbox, select a conversation on the left.
 

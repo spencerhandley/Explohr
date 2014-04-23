@@ -239,6 +239,9 @@ routes.get({name: "messageThread", re: '/user/messaging/:threadId'}, function (r
 				moment: moment,
 				sender: thread.members[1]
 			});
+			res.locals.context.threadUrl = routes.getLink('messageThread', {
+				name: thread._id,
+			});
 		});
 	});
 });
@@ -252,6 +255,19 @@ routes.get({name: "messageCenter", re: '/user/messaging'}, function (req, res) {
 		});
 	});
 });
+
+routes.get({ re: '/ajax/user/messaging/:threadId' }, function (req, res) {
+	Thread.findOne({_id: req.params.threadId}, function (err, thread) {
+		res.json('messaging/messageDash', {
+			user: req.user,
+			stream: thread,
+			threads: ["hey", "heyyou"],
+			moment: moment,
+			messages: thread.messages
+		});
+	});
+});
+
 
 routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function (req, res){
 	Account.findOne({_id: req.user._id}, function (err, account){

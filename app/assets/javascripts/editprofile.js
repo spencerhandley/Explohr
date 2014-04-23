@@ -1,4 +1,16 @@
 (function ($) {
+	var elem = document.getElementById('messagesContainer');
+ 	elem.scrollTop = elem.scrollHeight;
+
+ // 	(function poll(){
+	//     $.ajax({ url: window.location.pathname, success: function(data){
+	//         //Update your dashboard gauge
+	//         salesGauge.setValue(data.value);
+	//     }, dataType: "json", complete: poll, timeout: 30000 });
+	// })();
+
+
+
 	var addForms = function(button, form, container){
 		var $addBtn = $(button),
 			$form = $(form).last(),
@@ -200,3 +212,4 @@
 	}
 
 });
+ 
