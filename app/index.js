@@ -114,6 +114,11 @@ passport.use(new FacebookStrategy({
 				done(null, user);
 			} else {
 				console.log(profile)
+				if(profile._json.location) {
+					location = profile._json.location.name
+				} else {
+					location = "Planet Earth"
+				}
 				var user = new Account({
 					oauthID: profile.id,
 					name: profile.displayName,
@@ -121,7 +126,7 @@ passport.use(new FacebookStrategy({
 					general: {
 						firstname: profile._json.first_name,
 						lastname: profile._json.last_name,
-						hometown: profile._json.location.name,
+						hometown: location,
 						username: profile._json.username,
 						email: profile._json.email
 					},	
