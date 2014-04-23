@@ -132,6 +132,20 @@
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
+
+
+
+	$('#profileTabs a').click(function (e) {
+	  e.preventDefault()
+	  $(this).tab('show')
+	});
+	$('#profileTabs a[href="#profileBody"]').tab("show")
+	$('#profileTabs a[href="#rightPanel"]').tab("show")
+
+
+
+
+
 	$('#moreSports').tooltip()
 
 	
@@ -179,7 +193,5 @@
 		var count=$('#sportsUl > li:visible').length;
 	    $('#count').html(count); 
 	}
-	setTimeout(mkctr, 1000);
-
 
 });

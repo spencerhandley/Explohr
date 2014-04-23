@@ -65,298 +65,301 @@ block content
 					
 
 						//.btn.btn-success.pull-right#messageBtn Message
-			.row
-				.row#profileBody
-					.col-md-8
+			ul.nav.nav-tabs#profileTabs
+				li.pull-right
+					a(href="#profileBody" data-toggle="tab") Outdoor Logger
+				li.active.pull-right
+					a(href="#rightPanel" data-toggle="tab") Resume
+			br
+			.tab-content
+				.tab-pane.fade.in#profileBody
+					//- checks for any saved rock climbing routes
+					-if(profileUser.sports.rockClimbing.notableRoutes[0])
+						//- checks for saved routes after first save on the dashboard
+						-if(profileUser.sports.rockClimbing.notableRoutes[0].location)
+							h4 Rock Climbing
+								-if(user)
+									-if(user._id === profileUser._id)
+										button.btn.btn-default.btn-sm.addEvtBtn
+											span.glyphicon.glyphicon-plus.pull-right#editRcBtn(data-target="#editProfileModal" data-toggle="modal")
 
-						//- checks for any saved rock climbing routes
-						-if(profileUser.sports.rockClimbing.notableRoutes[0])
-							//- checks for saved routes after first save on the dashboard
-							-if(profileUser.sports.rockClimbing.notableRoutes[0].location)
-								h4 Rock Climbing
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Location
+										th Route 
+										th Pitches
+										th Type
+										th Grade
+										th Date 
+										th Lead / Follow
+									each climb in profileUser.sports.rockClimbing.notableRoutes
+										tr 
+											td #{climb.location}
+											td #{climb.route}
+											td #{climb.pitches}
+											td #{climb.climbType}
+											td #{climb.grade}
+											td #{moment(climb.date).format("MM/DD/YYYY")}
+											td #{climb.leadFollow}
+					-if(profileUser.sports.mountaineering.routes[0])
+						-if(profileUser.sports.mountaineering.routes[0].mountain)
+							h4 Mountaineering
+								-if(user)
+									-if(user._id === profileUser._id)
+										button.btn.btn-default.btn-sm.addEvtBtn
+											span.glyphicon.glyphicon-plus.pull-right#editMountBtn(data-target="#editProfileModal" data-toggle="modal")
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Mountain
+										th Route 
+										th Difficulty
+										th Skills Demonstrated
+										th Description
+										th Date 
+										th Guided
+										th Summited
+									each mount in profileUser.sports.mountaineering.routes
+										tr 
+											td #{mount.mountain}
+											td #{mount.route}
+											td #{mount.difficulty}
+											td #{mount.skills}
+											td #{mount.description}
+											td #{moment(mount.date).format("MM/DD/YYYY")}
+											td #{mount.guided}
+											td #{mount.summited}
+					-if(profileUser.sports.cycling.races[0])
+						-if(profileUser.sports.cycling.races[0].race)
+							h4 Mountain Biking / Cycling
+								-if(user)
+									-if(user._id === profileUser._id)
+										button.btn.btn-default.btn-sm.addEvtBtn
+											span.glyphicon.glyphicon-plus.pull-right#editCycleBtn(data-target="#editProfileModal" data-toggle="modal")
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th Race
+										th Location 
+										th Type
+										th Total Time
+										th Place
+										th Date 
+										th Mountain / Road
+									each race in profileUser.sports.cycling.races
+										tr 
+											td #{race.race}
+											td #{race.location}
+											td #{race.type}
+											td #{race.totalTime}
+											td #{race.place}
+											td #{moment(race.date).format("MM/DD/YYYY")}
+											td #{race.mtnRd}
+					-if(profileUser.sports.river.runs[0])
+						-if(profileUser.sports.river.runs[0].river)
+							h4 River Sports
+								-if(user)
+									-if(user._id === profileUser._id)
+										button.btn.btn-default.btn-sm.addEvtBtn
+											span.glyphicon.glyphicon-plus.pull-right#editRiverBtn(data-target="#editProfileModal" data-toggle="modal")
+							.panel.panel-default.col-md-12
+								table.table.table-striped
+									tr
+										th River
+										th Run 
+										th Difficulty
+										th Craft
+										th Role
+										th Date 
+										th Guided
+									each run in profileUser.sports.river.runs
+										tr 
+											td #{run.river}
+											td #{run.run}
+											td #{run.difficulty}
+											td #{run.craft}
+											td #{run.role}
+											td #{moment(run.date).format("MM/DD/YYYY")}
+											td #{run.guided}
+
+				.tab-pane.active.fade.in#rightPanel
+					-if(profileUser.professional.guiding.companies[0])
+						-if(profileUser.professional.guiding.companies[0].organization)
+							.panel.panel-default#Panel
+								.panel-body 
 									-if(user)
 										-if(user._id === profileUser._id)
-											button.btn.btn-default.btn-sm.addEvtBtn
-												span.glyphicon.glyphicon-plus.pull-right#editRcBtn(data-target="#editProfileModal" data-toggle="modal")
-
-								.panel.panel-default.col-md-12
-									table.table.table-striped
-										tr
-											th Location
-											th Route 
-											th Pitches
-											th Type
-											th Grade
-											th Date 
-											th Lead / Follow
-										each climb in profileUser.sports.rockClimbing.notableRoutes
-											tr 
-												td #{climb.location}
-												td #{climb.route}
-												td #{climb.pitches}
-												td #{climb.climbType}
-												td #{climb.grade}
-												td #{moment(climb.date).format("MM/DD/YYYY")}
-												td #{climb.leadFollow}
-						-if(profileUser.sports.mountaineering.routes[0])
-							-if(profileUser.sports.mountaineering.routes[0].mountain)
-								h4 Mountaineering
+											span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
+									h4 Guiding Experience
+								ul.list-group
+									each exp in profileUser.professional.guiding.companies
+										li.list-group-item
+											h4.list-group-item-heading #{exp.organization}
+												if(exp.jobTitle)
+														span.small.list-group-item-text  #{exp.jobTitle}
+												if(exp.location)
+													.small.list-group-item-text #{exp.location}
+												
+												
+											if(exp.description)
+												strong Description:
+												span.small.list-group-item-text  #{exp.description}
+							-if(profileUser.professional.guiding.guided)
+								.panel-body 
 									-if(user)
 										-if(user._id === profileUser._id)
-											button.btn.btn-default.btn-sm.addEvtBtn
-												span.glyphicon.glyphicon-plus.pull-right#editMountBtn(data-target="#editProfileModal" data-toggle="modal")
-								.panel.panel-default.col-md-12
-									table.table.table-striped
-										tr
-											th Mountain
-											th Route 
-											th Difficulty
-											th Skills Demonstrated
-											th Description
-											th Date 
-											th Guided
-											th Summited
-										each mount in profileUser.sports.mountaineering.routes
-											tr 
-												td #{mount.mountain}
-												td #{mount.route}
-												td #{mount.difficulty}
-												td #{mount.skills}
-												td #{mount.description}
-												td #{moment(mount.date).format("MM/DD/YYYY")}
-												td #{mount.guided}
-												td #{mount.summited}
-						-if(profileUser.sports.cycling.races[0])
-							-if(profileUser.sports.cycling.races[0].race)
-								h4 Mountain Biking / Cycling
+											span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
+									h5 Trips Guided
+								ul.list-group
+									each exp in profileUser.professional.guiding.guided
+										li.list-group-item
+											h4.list-group-item-heading #{exp.organization}
+												if(exp.jobTitle)
+														span.small.list-group-item-text  #{exp.role}
+												if(exp.location)
+													.small.list-group-item-text #{exp.location}
+												if(exp.numOfClients)
+													.small.list-group-item-text #{exp.numOfClients}
+												if(exp.ages)
+													.small.list-group-item-text #{exp.ages}
+												if(exp.gender)
+													.small.list-group-item-text #{exp.gender}
+												
+												
+											if(exp.description)
+												strong Description:
+												span.small.list-group-item-text  #{exp.description}
+					-if(profileUser.professional.teaching.experience[0])
+						-if(profileUser.professional.teaching.experience[0].organization)
+							.panel.panel-default#Panel
+								.panel-body 
 									-if(user)
 										-if(user._id === profileUser._id)
-											button.btn.btn-default.btn-sm.addEvtBtn
-												span.glyphicon.glyphicon-plus.pull-right#editCycleBtn(data-target="#editProfileModal" data-toggle="modal")
-								.panel.panel-default.col-md-12
-									table.table.table-striped
-										tr
-											th Race
-											th Location 
-											th Type
-											th Total Time
-											th Place
-											th Date 
-											th Mountain / Road
-										each race in profileUser.sports.cycling.races
-											tr 
-												td #{race.race}
-												td #{race.location}
-												td #{race.type}
-												td #{race.totalTime}
-												td #{race.place}
-												td #{moment(race.date).format("MM/DD/YYYY")}
-												td #{race.mtnRd}
-						-if(profileUser.sports.river.runs[0])
-							-if(profileUser.sports.river.runs[0].river)
-								h4 River Sports
+											span.glyphicon.glyphicon-cog.pull-right#editTeachingBtn(data-target="#editProfileModal" data-toggle="modal")
+									h4 Teaching Experience
+								ul.list-group
+									each exp in profileUser.professional.teaching.experience
+										li.list-group-item
+											.date.pull-right
+												span.small #{moment(exp.start).format("MM/DD/YYYY")} - 
+												span.small #{moment(exp.end).format("MM/DD/YYYY")}
+											h4.list-group-item-heading #{exp.organization}
+												br
+												if(exp.jobTitle)
+													span.small.list-group-item-text  #{exp.jobTitle}
+												if(exp.location)
+													.small.list-group-item-text #{exp.location}
+												if(exp.location)
+													.small.list-group-item-text #{exp.type}
+												
+												
+											if(exp.description)
+												strong Description:
+												span.small.list-group-item-text  #{exp.description}
+					-if(profileUser.professional.workExperience[0])
+						-if(profileUser.professional.workExperience[0].company)
+							.panel.panel-default#Panel
+								.panel-body 
 									-if(user)
 										-if(user._id === profileUser._id)
-											button.btn.btn-default.btn-sm.addEvtBtn
-												span.glyphicon.glyphicon-plus.pull-right#editRiverBtn(data-target="#editProfileModal" data-toggle="modal")
-								.panel.panel-default.col-md-12
-									table.table.table-striped
-										tr
-											th River
-											th Run 
-											th Difficulty
-											th Craft
-											th Role
-											th Date 
-											th Guided
-										each run in profileUser.sports.river.runs
-											tr 
-												td #{run.river}
-												td #{run.run}
-												td #{run.difficulty}
-												td #{run.craft}
-												td #{run.role}
-												td #{moment(run.date).format("MM/DD/YYYY")}
-												td #{run.guided}
-					.col-md-4
+											span.glyphicon.glyphicon-cog.pull-right#editWorkBtn(data-target="#editProfileModal" data-toggle="modal")
 
-						.row#rightPanels
-								-if(profileUser.professional.guiding.companies[0])
-									-if(profileUser.professional.guiding.companies[0].organization)
-										.panel.panel-default#Panel
-											.panel-body 
-												-if(user)
-													-if(user._id === profileUser._id)
-														span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
-												h4 Guiding Experience
-											ul.list-group
-												each exp in profileUser.professional.guiding.companies
-													li.list-group-item
-														h4.list-group-item-heading #{exp.organization}
-															if(exp.jobTitle)
-																	span.small.list-group-item-text  #{exp.jobTitle}
-															if(exp.location)
-																.small.list-group-item-text #{exp.location}
-															
-															
-														if(exp.description)
-															strong Description:
-															span.small.list-group-item-text  #{exp.description}
-										-if(profileUser.professional.guiding.guided)
-											.panel-body 
-												-if(user)
-													-if(user._id === profileUser._id)
-														span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
-												h5 Trips Guided
-											ul.list-group
-												each exp in profileUser.professional.guiding.guided
-													li.list-group-item
-														h4.list-group-item-heading #{exp.organization}
-															if(exp.jobTitle)
-																	span.small.list-group-item-text  #{exp.role}
-															if(exp.location)
-																.small.list-group-item-text #{exp.location}
-															if(exp.numOfClients)
-																.small.list-group-item-text #{exp.numOfClients}
-															if(exp.ages)
-																.small.list-group-item-text #{exp.ages}
-															if(exp.gender)
-																.small.list-group-item-text #{exp.gender}
-															
-															
-														if(exp.description)
-															strong Description:
-															span.small.list-group-item-text  #{exp.description}
-								-if(profileUser.professional.teaching.experience[0])
-									-if(profileUser.professional.teaching.experience[0].organization)
-										.panel.panel-default#Panel
-											.panel-body 
-												-if(user)
-													-if(user._id === profileUser._id)
-														span.glyphicon.glyphicon-cog.pull-right#editTeachingBtn(data-target="#editProfileModal" data-toggle="modal")
-												h4 Teaching Experience
-											ul.list-group
-												each exp in profileUser.professional.teaching.experience
-													li.list-group-item
-														.date.pull-right
-															span.small #{moment(exp.start).format("MM/DD/YYYY")} - 
-															span.small #{moment(exp.end).format("MM/DD/YYYY")}
-														h4.list-group-item-heading #{exp.organization}
-															br
-															if(exp.jobTitle)
-																span.small.list-group-item-text  #{exp.jobTitle}
-															if(exp.location)
-																.small.list-group-item-text #{exp.location}
-															if(exp.location)
-																.small.list-group-item-text #{exp.type}
-															
-															
-														if(exp.description)
-															strong Description:
-															span.small.list-group-item-text  #{exp.description}
-								-if(profileUser.professional.workExperience[0])
-									-if(profileUser.professional.workExperience[0].company)
-										.panel.panel-default#Panel
-											.panel-body 
-												-if(user)
-													-if(user._id === profileUser._id)
-														span.glyphicon.glyphicon-cog.pull-right#editWorkBtn(data-target="#editProfileModal" data-toggle="modal")
+									h4 Related Work Experience
+								ul.list-group
+									each exp in profileUser.professional.workExperience
+										li.list-group-item
+											.date.pull-right
+												span.small #{moment(exp.start).format("MM/DD/YYYY")} - 
+												span.small #{moment(exp.end).format("MM/DD/YYYY")}
+											h4.list-group-item-heading #{exp.company}
+												br
+												if(exp.position)
+													span.small.list-group-item-text  #{exp.position}
+												if(exp.location)
+													.small.list-group-item-text #{exp.location}
+												
+												br
+											if(exp.description)
+												strong Description:
+												span.small.list-group-item-text  #{exp.description}
+					-if(profileUser.professional.sponsors[0])
+						-if(profileUser.professional.sponsors[0].organization)
+							.panel.panel-default#Panel
+								.panel-body 
+									-if(user)
+										-if(user._id === profileUser._id)
+											span.glyphicon.glyphicon-cog.pull-right#editSponsorBtn(data-target="#editProfileModal" data-toggle="modal")
 
-												h4 Related Work Experience
-											ul.list-group
-												each exp in profileUser.professional.workExperience
-													li.list-group-item
-														.date.pull-right
-															span.small #{moment(exp.start).format("MM/DD/YYYY")} - 
-															span.small #{moment(exp.end).format("MM/DD/YYYY")}
-														h4.list-group-item-heading #{exp.company}
-															br
-															if(exp.position)
-																span.small.list-group-item-text  #{exp.position}
-															if(exp.location)
-																.small.list-group-item-text #{exp.location}
-															
-															br
-														if(exp.description)
-															strong Description:
-															span.small.list-group-item-text  #{exp.description}
-								-if(profileUser.professional.sponsors[0])
-									-if(profileUser.professional.sponsors[0].organization)
-										.panel.panel-default#Panel
-											.panel-body 
-												-if(user)
-													-if(user._id === profileUser._id)
-														span.glyphicon.glyphicon-cog.pull-right#editSponsorBtn(data-target="#editProfileModal" data-toggle="modal")
+									h4 Sponsors
+								ul.list-group
+									each exp in profileUser.professional.sponsors
+										li.list-group-item
+											h4.list-group-item-heading #{exp.organization}
+												if(exp.jobTitle)
+														span.small.list-group-item-text  #{exp.sport}
+					-if(profileUser.education)
+						.panel.panel-default#Panel
+							-if(profileUser.professional.education.outdoor[0])
+								-if(profileUser.professional.education.outdoor[0].institution)
+									//-if(profileUser.professional.education.outdoor[0])
+									.panel-body
+										-if(user)
+											-if(user._id === profileUser._id)
+												span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
 
-												h4 Sponsors
-											ul.list-group
-												each exp in profileUser.professional.sponsors
-													li.list-group-item
-														h4.list-group-item-heading #{exp.organization}
-															if(exp.jobTitle)
-																	span.small.list-group-item-text  #{exp.sport}
-								-if(profileUser.education)
-									.panel.panel-default#Panel
-										-if(profileUser.professional.education.outdoor[0])
-											-if(profileUser.professional.education.outdoor[0].institution)
-												//-if(profileUser.professional.education.outdoor[0])
-												.panel-body
-													-if(user)
-														-if(user._id === profileUser._id)
-															span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
+										h4 Outdoor Coursework
+									ul.list-group
+										each outdoor in profileUser.professional.education.outdoor
+											li.list-group-item
+												h4.list-group-item-heading #{outdoor.institution} 
+													.list-group-item-text.small #{outdoor.course}
+												b.list-group-item-text Duration: 
+												span #{outdoor.duration}
+												br
+												b.list-group-item-text Skills Learned: 
+												span #{outdoor.skills}
+												br
+												b.list-group-item-text More Info: 
+												span #{outdoor.other}
+							-if(profileUser.professional.certs[0])
+								-if(profileUser.professional.certs[0].institution)
+									.panel-body
+										-if(user)
+											-if(user._id === profileUser._id)
+												span.glyphicon.glyphicon-cog.pull-right#editCertBtn(data-target="#editProfileModal" data-toggle="modal")
 
-													h4 Outdoor Coursework
-												ul.list-group
-													each outdoor in profileUser.professional.education.outdoor
-														li.list-group-item
-															h4.list-group-item-heading #{outdoor.institution} 
-																.list-group-item-text.small #{outdoor.course}
-															b.list-group-item-text Duration: 
-															span #{outdoor.duration}
-															br
-															b.list-group-item-text Skills Learned: 
-															span #{outdoor.skills}
-															br
-															b.list-group-item-text More Info: 
-															span #{outdoor.other}
-										-if(profileUser.professional.certs[0])
-											-if(profileUser.professional.certs[0].institution)
-												.panel-body
-													-if(user)
-														-if(user._id === profileUser._id)
-															span.glyphicon.glyphicon-cog.pull-right#editCertBtn(data-target="#editProfileModal" data-toggle="modal")
+										h4 Certifications
+									ul.list-group
+										each cert in profileUser.professional.certs
+											li.list-group-item
+												.dates.pull-right.text-right														
+													b.list-group-item-text Acquired: 
+													span #{moment(cert.acquired).format("MM/DD/YYYY")}
+													br
+													b.list-group-item-text Expires: 
+													span #{moment(cert.expires).format("MM/DD/YYYY")}
+												h4.list-group-item-heading #{cert.institution}
+													.small.list-group-item-text #{cert.certificate}
 
-													h4 Certifications
-												ul.list-group
-													each cert in profileUser.professional.certs
-														li.list-group-item
-															.dates.pull-right.text-right														
-																b.list-group-item-text Acquired: 
-																span #{moment(cert.acquired).format("MM/DD/YYYY")}
-																br
-																b.list-group-item-text Expires: 
-																span #{moment(cert.expires).format("MM/DD/YYYY")}
-															h4.list-group-item-heading #{cert.institution}
-																.small.list-group-item-text #{cert.certificate}
+							.panel-body 
+								-if(user)
+									-if(user._id === profileUser._id)		
+										span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
+								h4 Traditional Education
+							ul.list-group
+								each trad in profileUser.education
+									li.list-group-item
+										if(trad.year)
+											.pull-right
+												.small.list-group-item-text #{trad.year.name}
+										h4.list-group-item-heading #{trad.school.name}
+											if(trad.concentration)
+												each concentration in trad.concentration
 
-										.panel-body 
-											-if(user)
-												-if(user._id === profileUser._id)		
-													span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
-											h4 Traditional Education
-										ul.list-group
-											each trad in profileUser.education
-												li.list-group-item
-													if(trad.year)
-														.pull-right
-															.small.list-group-item-text #{trad.year.name}
-													h4.list-group-item-heading #{trad.school.name}
-														if(trad.concentration)
-															each concentration in trad.concentration
-
-																.small.list-group-item-text #{concentration.name}
-														if(trad.type)
-															.small.list-group-item-text #{trad.type}
+													.small.list-group-item-text #{concentration.name}
+											if(trad.type)
+												.small.list-group-item-text #{trad.type}
 
 
 												//-p #{trad.start} to #{trad.end}
