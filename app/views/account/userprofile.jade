@@ -2,7 +2,6 @@ extends ../layout
 
 block content
 	include ../_topbar
-	.profileTop
 	.profileContent
 		.container
 			.row#userBasics
@@ -23,7 +22,9 @@ block content
 									img.pull-left(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
 							
 					section.about
-						h2.profName #{profileUser.name} 
+						h2.profName #{profileUser.name}
+						#messageUser.inline
+							span.glyphicon.glyphicon-comment
 						.addFriend.inline
 							span.glyphicon.glyphicon-plus
 							p Add Friend
@@ -1375,5 +1376,17 @@ block content
 														.row
 															div#addRace.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
 													button.btn.btn-default.pull-right(type="submit" name="editprofile") Update
+
+				#sendMessageModal.modal.fade.in(role="dialog" aria-labelledby="myModalLabel" aria-hidden="false")
+					.modal-dialog
+						form(role="form" action=router.getLink("initiateThread", {recieverId: profileUser._id, senderName: user.name, senderId: user._id}), method="POST").modal-content
+							.modal-header
+								h4 New Message to #{profileUser.name}
+							.modal-body
+								textarea( rows="5" name="messageContent").form-control
+							.modal-footer
+								button.btn.btn-default(data-dismiss="modal") Close
+								button.btn.btn-primary(type="submit") Send
+
 					
 		include ../_footer

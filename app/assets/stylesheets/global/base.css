@@ -119,6 +119,8 @@ footer { height: 350px; background-color: #2c363a; padding-top: 1px; }
 }
 
 /*profile */
+#messageUser { transition: all .4s; color: white; margin: 20px; font-size: 23px;}
+#messageUser:hover { color:#5CB85C; }
 .addEvtBtn { margin-left: 5px; }
 .about {position: relative;}
 .welcome { color: white; z-index: 200; font-weight: 300;}

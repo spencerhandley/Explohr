@@ -39,13 +39,16 @@
 
 
 })(jQuery);
-		$(document).ready(function(){
+	$(document).ready(function(){
 			if (document.cookie.indexOf('visited=true') == -1) {
 	            // var fifteenDays = 1000*60*60*24*15;
 	            // var expires = new Date((new Date()).valueOf() + fifteenDays);
-	        document.cookie = "visited=true"
-	        $("#editProfileModal").modal();
-        }
+		        document.cookie = "visited=true"
+		        $("#editProfileModal").modal();
+       		}
+    $("#messageUser").click(function () {
+    	$("#sendMessageModal").modal()
+    })
 
 	console.log(user);
 	$(".editEduBtn").click(function(e){
@@ -139,7 +142,9 @@
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
+
 	$('#profileTabs a[href="#profileBody"]').tab("show")
+	
 	$('#profileTabs a[href="#rightPanel"]').tab("show")
 
 
