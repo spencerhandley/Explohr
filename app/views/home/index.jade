@@ -11,13 +11,13 @@ block content
 						a(role="menuitem" tabindex="-1" href=router.getLink("dashboard", {user: user._id})) My Classes
 						a(role="menuitem" tabindex="-1" href=router.getLink("edit", {user: user._id})) Edit Account
 						a(role="menuitem" tabindex="-1" href=router.getLink("logout")) Sign Out
-			-if(!user)
+			//- -if(!user)
 				a.outlined-clear-btn.btn.pull-right#signin(href=router.getLink("login")) Sign in
 				a.outlined-clear-btn.btn.pull-right(href=router.getLink("register")) Sign Up
 		ul.list-inline.pull-right.white#topbarnav
 			//-li.small 
 				a(href=router.getLink("catalog")) COURSES
-			li.small 
+			//- li.small 
 				a(href=router.getLink("people")) PEOPLE
 			//- li.small 
 				a(href=router.getLink("people")) JOB LISTINGS
