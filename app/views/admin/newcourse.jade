@@ -27,24 +27,42 @@ block content
 					div.form-group
 						label.sr-only(for="overview") Overview
 						input.form-control#overview(placeholder="Overview" type="textfield" name="c[overview]")
-					.row#formVideos
-						div.form-group.col-md-4
-							label.sr-only(for="1idea") Video 1 - Link
-							input.form-control#1idea(placeholder="Video 1 - Link" type="textfield" name="c[videos][0][link]")
-						div.form-group.col-md-4
-							label.sr-only(for="1desc") Video 1 - Title
-							input.form-control#1desc(placeholder="Video 1 - Title" type="textfield" name="c[videos][0][title]")
-						div.form-group.col-md-4
-							label.sr-only(for="2idea") Video 1 - Length
-							input.form-control#1idea(placeholder="Video 1 - Length" type="textfield" name="c[videos][0][length]")
+				
+					#videoFormContainer
+						-if(videos)
+							-var i = 0
+							each video in videos
+								.row#formVideos
+									.videoForm
+										div.form-group.col-md-4
+											label.sr-only(for="c[videos][" + i + "][link]") Video - Link
+											input.form-control(placeholder="Video Link" type="text" value=video.link name="c[videos][" + i + "][link]")
+										div.form-group.col-md-4
+											label.sr-only(for="c[videos][" + i + "][title]") Video - Title
+											input.form-control(placeholder="Video Title" type="text" value=video.title name="c[videos][" + i + "][title]")
+										div.form-group.col-md-4
+											label.sr-only(for="c[videos][" + i + "][length]") Video - Length
+											input.form-control(placeholder="Video Length" type="text" value=video.length name="c[videos][" + i + "][length]")
+										-i++
+						-if(!videos)
+							#videoFormNoIndex
+								-var i = 0
+								.videoForm
+									div.form-group.col-md-4
+										label.sr-only(for="c[videos][0][link]") Video - Link
+										input.form-control(placeholder="Video Link" type="text" name="c[videos][0][link]")
+									div.form-group.col-md-4
+										label.sr-only(for="c[videos][0][title]") Video - Title
+										input.form-control(placeholder="Video Title" type="text" name="c[videos][0][title]")
+									div.form-group.col-md-4
+										label.sr-only(for="c[videos][0][length]") Video - Length
+										input.form-control(placeholder="Video Length" type="text" name="c[videos][0][length]")
+									-i++
+					div.form-group
+						label.sr-only(for="c[promo]") Promo Video
+						input.form-control#promo(placeholder="Promo Video" type="text" name="c[promo]")
 					.row
-						div.addfieldsBtn#addVideo.col-md-6.col-md-offset-3 +
-					div.form-group
-						label.sr-only(for="promo") Promo Video
-						input.form-control#promo(placeholder="Promo Video" type="textfield" name="c[promo]")
-					div.form-group
-						label.sr-only(for="password") Password
-						input.form-control#password(placeholder="Password" type="text" name="c[password]")
+						div#addVideo.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
 					
 					button.btn.btn-default.pull-right(type="submit" name="addclass") Add Class
 		

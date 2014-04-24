@@ -1,11 +1,11 @@
-(function ($) {
+$(document).ready(function(){
 	var addForms = function(button, form, container){
-		var $addBtn = $(button),
+		var $addBtn = $("#" + button),
 			$form = $(form).last(),
-			$container = $(container)
-			data = parseInt(document.getElementById("addRoute").getAttribute("data-i")),
+			$container = $(container),
+			data = parseInt(document.getElementById(button).getAttribute("data-i")),
 			index = data,
-		$rcForm = $("#rockClimbingForm")
+		$rcForm = $(form)
 
 		$addBtn.click(function () {
 			var $clone = $form.clone();
@@ -23,23 +23,22 @@
 			index++;
 		});
 	};
+	addForms("addVideo", ".videoForm", "#videoFormContainer");
+	addForms("addOutsideCourse", "#outdoorEdEduForm", "#outdoorEdFormContainer");
+	addForms("addWork", "#workForm", "#workFormContainer");
+	addForms("addTradEdu", "#tradEduForm", "#tradFormContainer")
+	addForms("addCertificate", "#certificateForm", "#certificateFormContainer")
+	addForms("addTeachingExperience", "#teachingForm", "#teachingFormContainer")
+	addForms("addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
+	addForms("addTrip", "#tripsForm", "#tripsFormContainer")
+	addForms("addSponsor", "#sponsorForm", "#sponsorFormContainer")
+	addForms("addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
+	addForms("addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
+	addForms("addRiver", ".riverForm", "#riverFormContainer")
+	addForms("addRace", ".cyclingForm", "#cyclingFormContainer")
 
-	addForms("#addOutsideCourse", "#outdoorEdEduForm", "#outdoorEdFormContainer");
-	addForms("#addWork", "#workForm", "#workFormContainer");
-	addForms("#addTradEdu", "#tradEduForm", "#tradFormContainer")
-	addForms("#addCertificate", "#certificateForm", "#certificateFormContainer")
-	addForms("#addTeachingExperience", "#teachingForm", "#teachingFormContainer")
-	addForms("#addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
-	addForms("#addTrip", "#tripsForm", "#tripsFormContainer")
-	addForms("#addSponsor", "#sponsorForm", "#sponsorFormContainer")
-	addForms("#addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
-	addForms("#addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
-	addForms("#addRiver", ".riverForm", "#riverFormContainer")
-	addForms("#addRace", ".cyclingForm", "#cyclingFormContainer")
 
 
-})(jQuery);
-		$(document).ready(function(){
 		if (document.cookie.indexOf('visited=true') == -1) {
             // var fifteenDays = 1000*60*60*24*15;
             // var expires = new Date((new Date()).valueOf() + fifteenDays);

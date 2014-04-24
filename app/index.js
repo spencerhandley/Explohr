@@ -25,11 +25,23 @@ var _ = require('underscore'),
 	middleware = require('./middleware'),
 	logger = require('winston'),
 	router = require(join(root, 'lib/router')),
+	io = require('socket.io').listen(app),
 	mongo = require('mongodb');
 // Express-State configuration
 expstate.extend(app);
 app.set('state namespace', 'App.context');
 
+
+// socket config
+io.sockets.on('connection', function (socket) {
+	socket.emit('news', { hello: 'world' });
+	socket.on('my other event', function (data) {
+		console.log(data);
+	});
+	socket.on('setPseudo', function (data) {
+		socket.set('pseudo', data);
+	});
+});
 
 // Swig configuration
 swig.setDefaults({ cache: false });

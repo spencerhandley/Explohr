@@ -781,7 +781,7 @@ block content
 													div.tab-pane#teaching.col-md-12
 														h4 Schools and Organizations Worked For:
 														#teachingFormContainer
-															if(profileUser.professional.teaching.experience[0])
+															-if(profileUser.professional.teaching.experience[0])
 																-var i = 0
 																each experience in profileUser.professional.teaching.experience
 																	#teachingForm
@@ -821,7 +821,7 @@ block content
 																				label.sr-only(for="professional[teaching][experience][" + i + "][description]")
 																				input.form-control(placeholder="Brief Description" type="text" value=experience.description name="professional[teaching][experience][" + i + "][description]")
 																		-i++
-															if(!profileUser.professional.teaching.experience[0])
+															-if(!profileUser.professional.teaching.experience[0])
 																#teachingForm
 																	.row
 																		p Type of Work
@@ -867,7 +867,7 @@ block content
 														#section
 															h4 Guiding Companies worked for:
 															#guidingCoFormContainer
-																if(profileUser.professional.guiding.companies[0])
+																-if(profileUser.professional.guiding.companies[0])
 																	-var i = 0
 																	each company in profileUser.professional.guiding.companies
 																		#guidingCoForm
@@ -899,7 +899,7 @@ block content
 																					label.sr-only(for="professional[guiding][companies][description]")
 																					input.form-control(placeholder="Brief Description" type="text" value=company.description name="professional[guiding][companies][" + i + "][description]")
 																			-i++
-																if(!profileUser.professional.guiding.companies[0])
+																-if(!profileUser.professional.guiding.companies[0])
 																	#guidingCoForm
 																		.row
 																			div.form-group.col-md-4
@@ -934,7 +934,7 @@ block content
 														#section
 															h4 Trips / Expeditions Led:
 															#tripsFormContainer
-																if(profileUser.professional.guiding.guided[0])
+																-if(profileUser.professional.guiding.guided[0])
 																	-var i = 0
 																	each guided in profileUser.professional.guiding.guided
 																		#tripsForm
@@ -992,7 +992,7 @@ block content
 																					label.sr-only(for="professional[guiding][guided][" + i + "][description]") Trip Description
 																					input.form-control(placeholder="Trip Description" type="text" value=guided.description name="professional[guiding][guided][" + i + "][description]")
 																			-i++
-																if(!profileUser.professional.guiding.guided[0])
+																-if(!profileUser.professional.guiding.guided[0])
 																	#tripsForm
 																		.row
 																			p.col-md-3 Age Range
@@ -1046,7 +1046,7 @@ block content
 														.col-md-12
 															h4 Sponsors:
 															#sponsorFormContainer
-																if(profileUser.professional.sponsors[0])
+																-if(profileUser.professional.sponsors[0])
 																	-var i = 0
 																	each sponsor in profileUser.professional.sponsors
 																		#sponsorForm
@@ -1071,7 +1071,7 @@ block content
 																					label.sr-only(for="professional[sponsors][description]")
 																					input.form-control(placeholder="Brief Description" type="text" value=sponsor.description name="professional[guiding][" + i + "][description]")
 																			-i++
-																if(!profileUser.professional.sponsors[0])
+																-if(!profileUser.professional.sponsors[0])
 																	#sponsorForm
 																		.row
 																			div.form-group.col-md-3
@@ -1172,7 +1172,7 @@ block content
 													div.tab-pane#mountaineeringCt.col-md-12
 														h4 Alpine and Ski Mountaineering
 														#mountaineeringFormContainer
-															if(profileUser.sports.mountaineering.routes[0])
+															-if(profileUser.sports.mountaineering.routes[0])
 																-var i = 0
 																each route in profileUser.sports.mountaineering.routes
 																	.mountaineeringForm
@@ -1209,7 +1209,7 @@ block content
 																					option(value="Yes" selected=summited) Summited
 																					option(value="No" selected=didnt) Didn't Summit
 																		-i++
-															if(!profileUser.sports.mountaineering.routes[0])
+															-if(!profileUser.sports.mountaineering.routes[0])
 																#mountaineeringFormNoIndex
 																	-var i = 0
 																	.row
