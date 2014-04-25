@@ -190,8 +190,8 @@ block content
 					.col-md-4.text-center
 						img(src="img/rockclimbing.png")
 					.col-md-4.text-center
-						img(src="img/surfing.png")
-				.row
+						img(src="img/snowboarding.png")
+				//- .row
 					.col-md-4.text-center
 						img(src="img/surfing.png")
 					.col-md-4.text-center
@@ -199,7 +199,7 @@ block content
 					.col-md-4.text-center
 						img(src="img/surfing.png")
 				.text-center
-					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>
+					button.outlined-clear-btn-black.margin-10 Many More <span class="caret"></span>
 			#teachers.section
 				.text-center
 					h2.sectionTitle Teachers are <b>World Renowned</b>
@@ -235,7 +235,62 @@ block content
 									p.job Survivalist
 				.text-center
 					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>	
-			-if(!user)
+			#skillSharing.section
+				.text-center
+					h2.sectionTitle Learn in Person with <b>Certified Guides </b>
+					p.lead Our community is full of certified guides and teachers.<br>. <a href="#">Find one</a> in our skill sharing marketplace and learn in person!
+				.row
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/rcfund.png")
+								.caption
+									h3 Fundementals of Rock Climbing
+									em.lead Yosemite, California 
+									br
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Aaron Hadlow</a>
+									br
+									br
+									em Prerequisite: <a href="#"> Rock Climbing Fund. </a>
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/caveexplore.png")
+								.caption
+									h3 Intro to Cave Exploration
+									em.lead Chasm Cave, California 
+									br
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Drew Black</a>
+									br
+									br
+									em Prerequisite: <a href="#"> Cave Exploration 101 </a>
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/surfinglife.png")
+								.caption
+									h3 Surfing Practice Workshop
+									em.lead Ocean Beach, California 
+									br
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Joseph Levitt</a>
+									br
+									br
+									em Prerequisite: <a href="#"> Surfing Fundementals </a>
+					.col-sm-3.col-md-3.text-center
+						a(href=router.getLink("trip", {trip: "costarica"}))
+							.thumbnail
+								img(src="img/iceclimb.png")
+								.caption
+									h3 Ice Climbing Outside Course
+									em.lead Lee Vinning, California 
+									br
+									em with <a href="http://en.wikipedia.org/wiki/Aaron_Hadlow">Will Gadd</a>
+									br
+									br
+									em Prerequisite <a href="#"> Cave Exploration 101 </a>
+				.text-center
+					button.outlined-clear-btn-black.margin-10 More <span class="caret"></span>	
+			//- -if(!user)
 
 				.row
 					.col-md-4.col-md-offset-3
