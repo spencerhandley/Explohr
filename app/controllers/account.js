@@ -167,6 +167,30 @@ routes.get({ name: 'newcourse', re: '/newcourse' }, function (req, res){
 	});
 });
 
+routes.get({ name: 'editcourse', re: '/course/:courseId/edit' }, function (req, res){
+	Course.findOne({_id: req.params.courseId}, function (err, course){
+		res.render('admin/newcourse', {
+			title: 'New Course',
+			user: req.user,
+			course: course
+		});
+	});
+});
+
+routes.get({ name: 'editcourses', re: '/editcourses' }, function (req, res){
+	Course.find({}, function (err, courses){
+		var courseMap = {};
+		courses.forEach(function(course){
+			courseMap[course._id] = course;
+		})
+		res.render('admin/editcourses', {
+			title: 'New Course',
+			user: req.user,
+			courses: courseMap
+		});
+	});
+});
+
 routes.post({ name: 'newcourse', re: '/newcourse'}, function (req,res){
 	var course = new Course(req.body.c);
 	course.save(function (err){
@@ -177,6 +201,7 @@ routes.post({ name: 'newcourse', re: '/newcourse'}, function (req,res){
 		}
 	});
 });
+
 
 routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function (req, res){
 	Account.findOne({_id: req.user._id}, function (err, account){
@@ -207,6 +232,12 @@ routes.get({name:'teacherprofile', re: '/teacher/:user'}, function (req, res){
 		user: req.user
 	});
 });
+routes.get({name: 'deleteCourse', re: '/course/:courseId/delete'}, function (req, res) {
+	Course.remove({_id: req.params.courseId}, function (err) {
+		if (err) throw err
+		res.redirect('editcourses');
+	})
+})
 
 routes.get({name:'people', re: '/users/list'}, function (req, res){
 	Account.find({}, function (err, users) {

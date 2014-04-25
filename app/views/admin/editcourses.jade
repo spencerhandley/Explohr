@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row
+			.col-md-8.col-md-offset-2
+				h3 Edit Courses
+					a.btn.btn-primary.pull-right(href=router.getLink("newcourse")) Add Course
+
+				each course in courses
+					a(href=router.getLink("deleteCourse", {courseId: course._id}))
+						span.glyphicon.glyphicon-remove.pull-left.deleteCourse
+					a(href=router.getLink("editcourse", {courseId: course._id} ))
+						p #{course.title}
+							
+				
