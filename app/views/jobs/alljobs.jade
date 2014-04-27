@@ -5,7 +5,7 @@ block content
 	.container
 		.row.pull-right#myClassTop
 			.col-md-5.col-sm-4
-				h1 People
+				h1 Job Listings
 			#sorting
 				.col-lg-3.col-md-3.col-sm-3.col-xs-6.pull-right
 					.input-group.input-group-sm
@@ -19,18 +19,6 @@ block content
 						button.btn.btn-default Top Ranked
 		.row
 			.col-md-12
-				each user in locals.users
-					include _user
-				//-a#courseLink(href=router.getLink("course", {courseid: }))
-					.listedClass.thumbnail
-						.row
-							.col-md-8.col-sm-6
-								img#profilePhoto.pull-left(src="/img/mick.png")
-								.classtitle
-									h3 Lessons in Surfing and Life
-									em.subheader with <a href="http://en.wikipedia.org/wiki/Kelly_Slater">Kelly Slater</a>
-									p.dateMonth March 15th - April 15th
-									p.date Tuesdays and Thursdays 8:00pm - 9:00pm PST
-							.col-md-4.text-center
-								.btn.btn-lg.btn-success#addClassBtn + My Classes
+				each job in locals.jobs
+					include _job
 	include ../_footer

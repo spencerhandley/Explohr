@@ -1,0 +1,98 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row
+			-console.log(job)
+			div.courseDetails.col-sm-6.col-md-6
+				h2.courseTitle #{job.listing}
+				p.lead #{job.location}
+				p Published: #{moment(job.dateCreated).format("MM/DD/YYYY")}
+
+
+				h3 Job Overview
+				p #{job.description}
+				h3 Ideal Candidate
+				p #{job.idealCandidate}
+
+			.col-sm-6.col-md-6
+				#registerBtns
+					p.lead Apply for this Job <b>Today</b>!
+					p #{job.applicationDetails}
+					a(href=router.getLink("apply", {jobId: job._id})).btn.btn-success.btn-lg Apply Now
+				.panel.panel-default#tripDetails
+					.panel-heading Employer Information
+					ul.list-group
+						li.list-group-item <b>Seasons:</b>  #{job.seasons}
+						li.list-group-item <b>Staff Size:</b>  23
+						li.list-group-item <b>Age Requirement:</b>  #{job.ageRequirement}
+						li.list-group-item <b>Housing:</b> #{job.housing}
+						li.list-group-item <b>Jobs Available:</b>  #{job.jobs}
+
+
+
+		.row#classdescription
+			.col-sm-6.col-md-6
+			.col-sm-6.col-md-6
+				a(href=router.getLink("teacherprofile", { user : "mickfanning" }) style=" color: inherit")
+					
+		.section
+			.row
+				.col-sm-6.col-md-6
+					h3 What You'll Do.
+					ul#courseTopics
+						li 1 | Personalized Surf Lessons.
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 2 | Stay in an Incredible Beach Chalet.
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 3 | Dine on Local Foods Every Evening. 
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 
+						li 4 | Enjoy the company of other inspired surfers
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm. 	
+						li 5 | Jungle Trek
+							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm.
+				.col-sm-6.col-md-6
+					h3 Current Attendees
+					p These awesome people have already reserved their spot. <a href="#">Join them!</a>
+					.row#classmates
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/1.jpg")
+									.caption
+										p.lead Sara Bennet
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/2.jpg")
+									.caption
+										p.lead Ellen Fairchild
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/3.jpg")
+									.caption
+										p.lead Kevin Blade
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/4.jpg")
+									.caption
+										p.lead Casey Long
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/5.jpg")
+									.caption
+										p.lead Kathy Heath
+						.col-md-4.col-sm-4
+							a(href=router.getLink("userprofile", { user : "deanbennet" }))
+								.thumbnail.text-center
+									img#userThumb(src="/img/6.jpg")
+									.caption
+										p.lead Mike Frath
+					.text-center
+						button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
+	include ../_footer
+

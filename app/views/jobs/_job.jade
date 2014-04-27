@@ -1,0 +1,8 @@
+a#userLink(href=router.getLink("jobListing", { jobId: job._id,}))
+	.listedPerson.thumbnail
+		.row
+			.col-md-.col-sm-6
+				.classtitle
+					h3 #{job.listing}
+						br
+						small #{job.location}

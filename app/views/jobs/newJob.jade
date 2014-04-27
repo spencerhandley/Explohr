@@ -1,0 +1,60 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		.row
+			.col-md-8.col-md-offset-2#loginForm
+				h3 Add a Course
+				form.form(role="form" action="/newjob" method="post")
+					.row
+						h5 Seasons
+						div.col-md-3
+							input(type="checkbox" value="Spring " name="j[seasons][0]")
+							label(for="j[seasons]") Spring
+						div.col-md-3
+							input(type="checkbox" value="Summer " name="j[seasons][1]")
+							label(for="j[seasons]") Summer
+						div.col-md-3
+							input(type="checkbox" value="Fall " name="j[seasons][2]")
+							label(for="j[seasons]") Fall
+						div.col-md-3
+							input(type="checkbox" value="Winter " name="j[seasons][3]")
+							label(for="j[seasons]") Winter
+					br
+					.row
+						div.form-group.col-md-6
+							label.sr-only(for="username") Listing Title
+							input.form-control(placeholder="Listing Title" type="text" name="j[listing]")
+						div.form-group.col-md-6
+							label.sr-only(for="teacher") Description
+							input.form-control(placeholder="Description" type="text" name="j[description]")
+					.row
+						div.form-group.col-md-12
+							label.sr-only(for="Publish") Ideal Candidate
+							input.form-control(placeholder="Ideal Candidate" type="textfield" name="j[idealCandidate]")
+
+					.row
+						div.form-group.col-md-6
+							label.sr-only(for="Publish") Location
+							input.form-control(placeholder="Location" type="textfield" name="j[location]")
+						div.form-group.col-md-6
+							label.sr-only(for="level") Jobs
+							input.form-control(placeholder="Jobs" type="textfield" name="j[jobs]")
+					div.form-group
+						label.sr-only(for="topic") Housing
+						input.form-control(placeholder="Housing" type="text" name="j[housing]")
+					div.form-group
+						label.sr-only(for="topic") Application Details
+						input.form-control(placeholder="Application Details" type="text" name="j[applicationDetails]")
+					.row
+						div.form-group.col-md-6
+							label.sr-only(for="overview") Age Requirement
+							input.form-control(placeholder="Age Requirement" type="textfield" name="j[ageRequirement]")
+						div.form-group.col-md-6
+							label.sr-only(for="overview") Compensation
+							input.form-control(placeholder="Compensation" type="textfield" name="j[compensation]")
+					-if(user)
+						input(type="hidden" value=user._id name="j[organization]")
+					button.btn.btn-primary.pull-right(type="submit" name="addjob") Add Class
+					.btn.btn-default.pull-left Add Questionaire

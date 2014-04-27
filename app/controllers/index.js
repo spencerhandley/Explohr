@@ -3,5 +3,7 @@ module.exports = {
 	home: require('./home'),
 	misc: require('./misc'),
 	course: require('./course'),
-	account: require('./account')
+	account: require('./account'),
+	jobs: require('./jobs')
+
 };

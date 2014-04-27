@@ -27,7 +27,7 @@ var certification = new Schema({
 });
 
 var teachingExperience = new Schema({
-	kind: {type: String, default: "Expiditionary"},
+	kind: {type: String, default: "Expeditionary"},
 	organization: String,
 	jobTitle: String,
 	location: String,
@@ -136,6 +136,7 @@ var Account = new Schema({
 	oauthID: Number,
 	created: Date,
 	name: String,
+	applications: [String],
 	general: {
 		firstname: String,
 		lastname: String,
