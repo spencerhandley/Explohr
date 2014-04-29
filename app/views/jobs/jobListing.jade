@@ -4,7 +4,6 @@ block content
 	include ../_topbar
 	.container
 		.row
-			-console.log(job)
 			div.courseDetails.col-sm-6.col-md-6
 				h2.courseTitle #{job.listing}
 				p.lead #{job.location}
@@ -15,6 +14,7 @@ block content
 				p #{job.description}
 				h3 Ideal Candidate
 				p #{job.idealCandidate}
+				
 
 			.col-sm-6.col-md-6
 				#registerBtns
@@ -53,8 +53,8 @@ block content
 						li 5 | Jungle Trek
 							p Mick will share with you his thought on what it takes to be happy healthy and live with enthusiasm.
 				.col-sm-6.col-md-6
-					h3 Current Attendees
-					p These awesome people have already reserved their spot. <a href="#">Join them!</a>
+					h3 Current Applicants
+					p These awesome people have already applied for this awesome job. <a href="#">Join them!</a>
 					.row#classmates
 						.col-md-4.col-sm-4
 							a(href=router.getLink("userprofile", { user : "deanbennet" }))

@@ -6,17 +6,21 @@ block content
 		.row.pull-right#myClassTop
 			.col-md-5.col-sm-4
 				h1 Job Listings
+				a(href=router.getLink("newJob")).btn.btn-primary.btn-sm Add Listing
+
 			#sorting
 				.col-lg-3.col-md-3.col-sm-3.col-xs-6.pull-right
 					.input-group.input-group-sm
 						input.form-control(type="text")
 						span.input-group-btn
 							button.btn.btn-default(type="button") <span class="glyphicon glyphicon-search"></span>
-				.col-lg-3.col-md-4.col-sm-5.pull-right
+
+				.col-lg-3.col-md-6.col-sm-5.pull-right
 					.btn-group.btn-group-sm.pull-right
 						button.btn.btn-default All People
 						button.btn.btn-default Most Active 
 						button.btn.btn-default Top Ranked
+
 		.row
 			.col-md-12
 				each job in locals.jobs

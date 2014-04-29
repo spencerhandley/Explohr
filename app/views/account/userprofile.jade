@@ -3,6 +3,7 @@ extends ../layout
 block content
 	include ../_topbar
 	.profileContent
+		.profileTop
 		.container
 			.row#userBasics
 				div
@@ -18,9 +19,8 @@ block content
 					section.userPhoto
 						.hoverphoto
 							.front
-								.crop.profileImage
+								.crop
 									img.pull-left(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
-							
 					section.about
 						h2.profName #{profileUser.name}
 						#messageUser.inline

@@ -1,6 +1,7 @@
 (function ($) {
 	var elem = document.getElementById('messagesContainer');
- 	elem.scrollTop = elem.scrollHeight;
+ 	if(elem) {
+ 		elem.scrollTop = elem.scrollHeight;}
 
  // 	(function poll(){
 	//     $.ajax({ url: window.location.pathname, success: function(data){
@@ -9,15 +10,14 @@
 	//     }, dataType: "json", complete: poll, timeout: 30000 });
 	// })();
 
-
-
 	var addForms = function(button, form, container){
-		var $addBtn = $(button),
+
+		var $addBtn = $("#" + button),
 			$form = $(form).last(),
 			$container = $(container)
-			data = parseInt(document.getElementById("addRoute").getAttribute("data-i")),
+			data = parseInt(document.getElementById(button).getAttribute("data-i")),
 			index = data,
-		$rcForm = $("#rockClimbingForm")
+		$rcForm = $(form)
 
 		$addBtn.click(function () {
 			var $clone = $form.clone();
@@ -36,18 +36,18 @@
 		});
 	};
 
-	addForms("#addOutsideCourse", "#outdoorEdEduForm", "#outdoorEdFormContainer");
-	addForms("#addWork", "#workForm", "#workFormContainer");
-	addForms("#addTradEdu", "#tradEduForm", "#tradFormContainer")
-	addForms("#addCertificate", "#certificateForm", "#certificateFormContainer")
-	addForms("#addTeachingExperience", "#teachingForm", "#teachingFormContainer")
-	addForms("#addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
-	addForms("#addTrip", "#tripsForm", "#tripsFormContainer")
-	addForms("#addSponsor", "#sponsorForm", "#sponsorFormContainer")
-	addForms("#addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
-	addForms("#addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
-	addForms("#addRiver", ".riverForm", "#riverFormContainer")
-	addForms("#addRace", ".cyclingForm", "#cyclingFormContainer")
+	addForms("addOutsideCourse", "#outdoorEdEduForm", "#outdoorEdFormContainer");
+	addForms("addWork", "#workForm", "#workFormContainer");
+	addForms("addTradEdu", "#tradEduForm", "#tradFormContainer")
+	addForms("addCertificate", "#certificateForm", "#certificateFormContainer")
+	addForms("addTeachingExperience", "#teachingForm", "#teachingFormContainer")
+	addForms("addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
+	addForms("addTrip", "#tripsForm", "#tripsFormContainer")
+	addForms("addSponsor", "#sponsorForm", "#sponsorFormContainer")
+	addForms("addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
+	addForms("addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
+	addForms("addRiver", ".riverForm", "#riverFormContainer")
+	addForms("addRace", ".cyclingForm", "#cyclingFormContainer")
 
 
 })(jQuery);
@@ -62,7 +62,6 @@
     	$("#sendMessageModal").modal()
     })
 
-	console.log(user);
 	$(".editEduBtn").click(function(e){
 		e.preventDefault();
 		$("#generalTab").removeClass("active");
@@ -154,8 +153,6 @@
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
-
-	$('#profileTabs a[href="#profileBody"]').tab("show")
 	
 	$('#profileTabs a[href="#rightPanel"]').tab("show")
 

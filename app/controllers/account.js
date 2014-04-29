@@ -90,6 +90,7 @@ routes.get({name: 'login', re: '/login'}, function (req, res){
 
 routes.get({name: 'addToMyList', re: '/course/:user/:courseid/addCourse'}, ensureAuthenticated , function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
+		//TODO handle duplicates
 		account.classes.push(req.params.courseid);
 		account.save(function (err) {
 			if (err) return (err);

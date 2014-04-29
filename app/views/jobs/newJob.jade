@@ -1,5 +1,4 @@
 extends ../layout
-
 block content
 	include ../_topbar
 	.container
@@ -56,5 +55,27 @@ block content
 							input.form-control(placeholder="Compensation" type="textfield" name="j[compensation]")
 					-if(user)
 						input(type="hidden" value=user._id name="j[organization]")
-					button.btn.btn-primary.pull-right(type="submit" name="addjob") Add Class
-					.btn.btn-default.pull-left Add Questionaire
+
+					.modal.fade#questionaire(role="dialog" aria-hidden="true" tabindex="-1")
+						.modal-dialog
+							.modal-content
+								.modal-header 
+									h4 Questionaire
+								.modal-body
+									.lead This questionaire is a great way to get to know a little bit more about the applicant. Feel free to ask anything!
+									#questionFormContainer
+										-var i=0
+										div.form-group#questionForm
+											label.sr-only(for="topic") Question #1
+											input.form-control(placeholder="Question #1" type="text" name="j[question][" + i + "]")
+										-i++
+									.row
+										#addQuestion.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add question
+					button.btn.btn-primary.pull-right(type="submit" name="addjob") Add Job
+					.btn.btn-default.pull-left#addQuestionaire(data-toggle="modal" data-target="#questionaire") Add Questionaire
+block scripts
+	script(src="/javascripts/newjob.js")
+
+
+
+

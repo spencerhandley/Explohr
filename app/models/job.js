@@ -11,6 +11,7 @@ var jobListing = new Schema({
 	housing: String,
 	ageRequirement: String,
 	location: String,
+	perks: String,
 	jobs: String,
 	dateCreated: { type: Date, default: Date.now },
 	applicants: [String],
