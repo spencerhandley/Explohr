@@ -7,10 +7,10 @@ block content
 			h3 Register Business
 			br
 			h4= info
-			form.form(role="form" action="/companyregistration" method="post")
+			form.form(role="form" action="/register" method="post")
 				div.form-group
 					label.sr-only(for="organizationName") Business Name
-					input.form-control#first(placeholder="Organization Name", type="text", name="organizationName", required)
+					input.form-control#first(placeholder="Organization Name", type="text", name="username", required)
 				div.form-group
 					label.sr-only(for="email") Email
 					input.form-control#email(placeholder="Email", type="text", name="email", required)
