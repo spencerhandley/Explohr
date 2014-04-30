@@ -4,23 +4,16 @@ block content
 	include ../_topbar
 	.container
 		.col-md-6.col-md-offset-3#loginForm
-			h3 Sign Up
+			h3 Register Business
 			br
 			h4= info
-			form.form(role="form" action="/register" method="post")
+			form.form(role="form" action="/companyregistration" method="post")
 				div.form-group
-					label.sr-only(for="username") Username
-					input.form-control#email(placeholder="Username", type="text", name="username", required, autofocus)
-				.row
-					div.form-group.col-md-6
-						label.sr-only(for="general[firstname]") First Name
-						input.form-control#first(placeholder="First Name", type="text", name="general[firstname]", required)
-					div.form-group.col-md-6
-						label.sr-only(for="general[lastname]") Last Name
-						input.form-control#Last(placeholder="Last Name", type="text", name="general[lastname]", required)
+					label.sr-only(for="organizationName") Business Name
+					input.form-control#first(placeholder="Organization Name", type="text", name="organizationName", required)
 				div.form-group
-					label.sr-only(for="general[email]") Email
-					input.form-control#email(placeholder="Enter Email", type="email", name="general[email]", required)
+					label.sr-only(for="email") Email
+					input.form-control#email(placeholder="Email", type="text", name="email", required)
 				div.form-group
 					label.sr-only(for="password") Password
 					input.form-control#password(placeholder="Password", type="password", name="password", required)

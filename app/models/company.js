@@ -3,6 +3,8 @@ var mongoose = require('mongoose'),
     passportLocalMongoose = require('passport-local-mongoose');
 
 var company = new Schema({
+	type: {type: String, default: "Company"},
+	username: String,
 	name: String,
 	companyType: String,
 	idealCandidate: String,
@@ -24,6 +26,6 @@ var company = new Schema({
 	dateCreated: { type: Date, default: Date.now }
 });
 
-jobListing.plugin(passportLocalMongoose);
+company.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('JobListing', jobListing);
+module.exports = mongoose.model('Company', company);
