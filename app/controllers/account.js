@@ -1,6 +1,7 @@
 var passport = require('passport'),
 	async = require('async'),
 	Account = require('../models/account'),
+	Company = require('../models/company')
 	Course = require('../models/course'),
 	Thread = require('../models/messages'),
 	Message = require('../models/message'),
@@ -16,14 +17,14 @@ routes.get({name: 'register', re: '/register'}, function (req, res){
 });
 
 routes.post({re:'/register'}, function(req, res) {
-	Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+	Company.register(new Company({ username : req.body.username, name: req.body.organizationName }), req.body.password, function(err, account) {
 	    if (err) {
-	        return res.render('account/register', { account : account });
+	        return res.render('account/register');
 	    }
 	    passport.authenticate('local')(req, res, function () {
-		    Account.findByIdAndUpdate( account._id, {
+		    Company.findByIdAndUpdate( account._id, {
 				$set: {
-					general: req.body.general }
+					email: req.body.username }
 			}, function (err, person){
 				if(err){
 					res.json(err);
@@ -32,7 +33,6 @@ routes.post({re:'/register'}, function(req, res) {
 				} else{
 					res.send(person);
 					res.redirect('/');
-
 				}
 			});
 		});

@@ -8,14 +8,17 @@ block content
 				h3 Sign in
 				form.form(role="form" action="/login" method="post")
 					div.form-group
-						label.sr-only(for="username") Username
-						input.form-control#username(placeholder="Enter Username" type="text" name="username")
+						label.sr-only(for="username") Email
+						input.form-control#username(placeholder="Email" type="text" name="username")
 					div.form-group
 						label.sr-only(for="password") Password
 						input.form-control#password(placeholder="Password" type="password" name="password")
 					button.btn.btn-default.pull-right(type="submit" name="signin") Sign in
-				a.pull-left(href=router.getLink("facebooklogin"))
+					a.btn.btn-primary.pull-left(href=router.getLink("register"))  Register 
+
+				//-a.pull-left(href=router.getLink("facebooklogin"))
 					img#facebook(src="/img/login-with-facebook.png")
 		.row
 			br
+
 			a.col-md-4.col-md-offset-4.text-center(href="#") Forgot Your Password?

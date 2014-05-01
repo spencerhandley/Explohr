@@ -2,7 +2,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
 
-var company = new Schema({
+var Company = new Schema({
 	type: {type: String, default: "Company"},
 	username: String,
 	name: String,
@@ -26,6 +26,6 @@ var company = new Schema({
 	dateCreated: { type: Date, default: Date.now }
 });
 
-company.plugin(passportLocalMongoose);
+Company.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('Company', company);
+module.exports = mongoose.model('Company', Company);

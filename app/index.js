@@ -95,10 +95,11 @@ app.use(cookies.express());
 app.use(express.static(join(__dirname, 'assets')));
 
 // passport config
+var Company = require('./models/company');
 var Account = require('./models/account');
 FacebookStrategy = require('passport-facebook').Strategy;
 
-passport.use(new LocalStrategy(Account.authenticate()));
+passport.use(new LocalStrategy(Company.authenticate()));
 
 passport.use(new FacebookStrategy({
     clientID: '483379851763044',
@@ -150,10 +151,19 @@ passport.serializeUser(function(user, done) {
  done(null, user._id);
 });
 passport.deserializeUser(function(id, done) {
- Account.findById(id, function(err, user){
-     if(!err) done(null, user);
-     else done(err, null)
- })
+	Account.findById(id, function(err, user){
+	    if(!err && user) {
+	    	done(null, user);
+	    } else { 
+	    	Company.findById(id, function(err, user){
+	    		if(!err && user) {
+	    			done(null, user);
+	    		} else {
+	    			done(err, null)
+	    		}
+	    	});
+		}
+	});
 });
 //passport.serializeUser(Account.serializeUser());
 //passport.deserializeUser(Account.deserializeUser());
