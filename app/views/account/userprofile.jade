@@ -82,7 +82,7 @@ block content
 						-if(profileUser.sports.rockClimbing.notableRoutes[0].location)
 							h4 Rock Climbing
 								-if(user)
-									-if(user._id === profileUser._id)
+									-if(String(profileUser._id) === String(user._id))
 										button.btn.btn-default.btn-sm.addEvtBtn
 											span.glyphicon.glyphicon-plus.pull-right#editRcBtn(data-target="#editProfileModal" data-toggle="modal")
 
@@ -109,7 +109,7 @@ block content
 						-if(profileUser.sports.mountaineering.routes[0].mountain)
 							h4 Mountaineering
 								-if(user)
-									-if(user._id === profileUser._id)
+									-if(String(profileUser._id) === String(user._id))
 										button.btn.btn-default.btn-sm.addEvtBtn
 											span.glyphicon.glyphicon-plus.pull-right#editMountBtn(data-target="#editProfileModal" data-toggle="modal")
 							.panel.panel-default.col-md-12
@@ -137,7 +137,7 @@ block content
 						-if(profileUser.sports.cycling.races[0].race)
 							h4 Mountain Biking / Cycling
 								-if(user)
-									-if(user._id === profileUser._id)
+									-if(String(profileUser._id) === String(user._id))
 										button.btn.btn-default.btn-sm.addEvtBtn
 											span.glyphicon.glyphicon-plus.pull-right#editCycleBtn(data-target="#editProfileModal" data-toggle="modal")
 							.panel.panel-default.col-md-12
@@ -163,7 +163,7 @@ block content
 						-if(profileUser.sports.river.runs[0].river)
 							h4 River Sports
 								-if(user)
-									-if(user._id === profileUser._id)
+									-if(String(profileUser._id) === String(user._id))
 										button.btn.btn-default.btn-sm.addEvtBtn
 											span.glyphicon.glyphicon-plus.pull-right#editRiverBtn(data-target="#editProfileModal" data-toggle="modal")
 							.panel.panel-default.col-md-12
@@ -192,7 +192,7 @@ block content
 							.panel.panel-default#Panel
 								.panel-body 
 									-if(user)
-										-if(user._id === profileUser._id)
+										-if(String(profileUser._id) === String(user._id))
 											span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
 									h4 Guiding Experience
 								ul.list-group
@@ -211,7 +211,7 @@ block content
 							-if(profileUser.professional.guiding.guided)
 								.panel-body 
 									-if(user)
-										-if(user._id === profileUser._id)
+										-if(String(profileUser._id) === String(user._id))
 											span.glyphicon.glyphicon-cog.pull-right#editGuidingBtn(data-target="#editProfileModal" data-toggle="modal")
 									h5 Trips Guided
 								ul.list-group
@@ -230,7 +230,7 @@ block content
 													.small.list-group-item-text #{exp.gender}
 												
 												
-											if(exp.description)
+											-if(exp.description)
 												strong Description:
 												span.small.list-group-item-text  #{exp.description}
 					-if(profileUser.professional.teaching.experience[0])
@@ -238,7 +238,7 @@ block content
 							.panel.panel-default#Panel
 								.panel-body 
 									-if(user)
-										-if(user._id === profileUser._id)
+										-if(String(profileUser._id) === String(user._id))
 											span.glyphicon.glyphicon-cog.pull-right#editTeachingBtn(data-target="#editProfileModal" data-toggle="modal")
 									h4 Teaching Experience
 								ul.list-group
@@ -249,15 +249,15 @@ block content
 												span.small #{moment(exp.end).format("MM/DD/YYYY")}
 											h4.list-group-item-heading #{exp.organization}
 												br
-												if(exp.jobTitle)
+												-if(exp.jobTitle)
 													span.small.list-group-item-text  #{exp.jobTitle}
-												if(exp.location)
+												-if(exp.location)
 													.small.list-group-item-text #{exp.location}
-												if(exp.location)
+												-if(exp.location)
 													.small.list-group-item-text #{exp.type}
 												
 												
-											if(exp.description)
+											-if(exp.description)
 												strong Description:
 												span.small.list-group-item-text  #{exp.description}
 					-if(profileUser.professional.workExperience[0])
@@ -265,7 +265,7 @@ block content
 							.panel.panel-default#Panel
 								.panel-body 
 									-if(user)
-										-if(user._id === profileUser._id)
+										-if(String(profileUser._id) === String(user._id))
 											span.glyphicon.glyphicon-cog.pull-right#editWorkBtn(data-target="#editProfileModal" data-toggle="modal")
 
 									h4 Related Work Experience
@@ -277,13 +277,13 @@ block content
 												span.small #{moment(exp.end).format("MM/DD/YYYY")}
 											h4.list-group-item-heading #{exp.company}
 												br
-												if(exp.position)
+												-if(exp.position)
 													span.small.list-group-item-text  #{exp.position}
-												if(exp.location)
+												-if(exp.location)
 													.small.list-group-item-text #{exp.location}
 												
 												br
-											if(exp.description)
+											-if(exp.description)
 												strong Description:
 												span.small.list-group-item-text  #{exp.description}
 					-if(profileUser.professional.sponsors[0])
@@ -291,7 +291,7 @@ block content
 							.panel.panel-default#Panel
 								.panel-body 
 									-if(user)
-										-if(user._id === profileUser._id)
+										-if(String(profileUser._id) === String(user._id))
 											span.glyphicon.glyphicon-cog.pull-right#editSponsorBtn(data-target="#editProfileModal" data-toggle="modal")
 
 									h4 Sponsors
@@ -299,7 +299,7 @@ block content
 									each exp in profileUser.professional.sponsors
 										li.list-group-item
 											h4.list-group-item-heading #{exp.organization}
-												if(exp.jobTitle)
+												-if(exp.jobTitle)
 														span.small.list-group-item-text  #{exp.sport}
 					-if(profileUser.education)
 						.panel.panel-default#Panel
@@ -308,7 +308,7 @@ block content
 									//-if(profileUser.professional.education.outdoor[0])
 									.panel-body
 										-if(user)
-											-if(user._id === profileUser._id)
+											-if(String(profileUser._id) === String(user._id))
 												span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
 
 										h4 Outdoor Coursework
@@ -329,7 +329,7 @@ block content
 								-if(profileUser.professional.certs[0].institution)
 									.panel-body
 										-if(user)
-											-if(user._id === profileUser._id)
+											-if(String(profileUser._id) === String(user._id))
 												span.glyphicon.glyphicon-cog.pull-right#editCertBtn(data-target="#editProfileModal" data-toggle="modal")
 
 										h4 Certifications
@@ -347,7 +347,7 @@ block content
 
 							.panel-body 
 								-if(user)
-									-if(user._id === profileUser._id)		
+									-if(String(profileUser._id) === String(user._id))
 										span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
 								h4 Traditional Education
 							ul.list-group
@@ -357,11 +357,11 @@ block content
 											.pull-right
 												.small.list-group-item-text #{trad.year.name}
 										h4.list-group-item-heading #{trad.school.name}
-											if(trad.concentration)
+											-if(trad.concentration)
 												each concentration in trad.concentration
 
 													.small.list-group-item-text #{concentration.name}
-											if(trad.type)
+											-if(trad.type)
 												.small.list-group-item-text #{trad.type}
 
 
@@ -401,7 +401,7 @@ block content
 							.text-center
 								button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
 				-if(user)
-					-if(user._id = profileUser._id)
+					-if(String(user._id) === String(profileUser._id)
 						section#editProfileModal.modal.fade.in(role="dialog" aria-labelledby="myModalLabel" aria-hidden="false")
 							-if(profileUser.general.onboarded === false)
 								.welcome.text-center
