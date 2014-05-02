@@ -32,7 +32,7 @@ block content
 						-if(user)
 							-console.log(locals.profileUser._id)
 							-console.log(locals.user._id)
-							-if(locals.profileUser._id = locals.user._id)
+							-if(profileUser._id.toString === user._id.toString)
 								.editProfile
 									span.glyphicon.glyphicon-cog#editProfileBtn(data-target="#editProfileModal" data-toggle="modal")
 						.location
