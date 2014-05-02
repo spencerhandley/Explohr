@@ -14,18 +14,32 @@ block content
 				p #{job.description}
 				h3 Ideal Candidate
 				p #{job.idealCandidate}
+				h3 Responsibilities
+				p #{job.applicationDetails}
 				
 
 			.col-sm-6.col-md-6
 				#registerBtns
+					-console.log(user)
 					p.lead Apply for this Job <b>Today</b>!
-					p #{job.applicationDetails}
-					a(href=router.getLink("apply", {jobId: job._id})).btn.btn-success.btn-lg Apply Now
+					-if(!user)
+						//- TODO add dialog with login options - route back to this page
+						a(href=router.getLink("facebooklogin")).btn.btn-success.btn-lg Login to Apply
+					-if(user)
+						-if(user.staffSize)
+							button.btn.btn-default.btn-lg(disabled="disabled") Companies Can't Apply
+
+						-if(!user.staffSize)
+							-if(job.questionaire[0] != "")
+								button#applyQuest.btn.btn-success.btn-lg Apply with Questionaire
+							-if(job.questionaire)
+								a(href=router.getLink("apply", {jobId: job._id})).btn.btn-success.btn-lg Apply Now
 				.panel.panel-default#tripDetails
 					.panel-heading Employer Information
 					ul.list-group
 						li.list-group-item <b>Seasons:</b>  #{job.seasons}
-						li.list-group-item <b>Staff Size:</b>  23
+						li.list-group-item <b>Staff Size:</b>  #{company.staffSize}
+						li.list-group-item <b>Email:</b> #{company.email}
 						li.list-group-item <b>Age Requirement:</b>  #{job.ageRequirement}
 						li.list-group-item <b>Housing:</b> #{job.housing}
 						li.list-group-item <b>Jobs Available:</b>  #{job.jobs}
@@ -37,7 +51,7 @@ block content
 			.col-sm-6.col-md-6
 				a(href=router.getLink("teacherprofile", { user : "mickfanning" }) style=" color: inherit")
 					
-		.section
+		//- .section
 			.row
 				.col-sm-6.col-md-6
 					h3 What You'll Do.
@@ -94,5 +108,25 @@ block content
 										p.lead Mike Frath
 					.text-center
 						button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
+		-if(user)	
+			.modal.fade#questionaireDialog(role="dialog" aria-hidden="true" tabindex="-1")
+				.modal-dialog
+					form(role="form" action="/jobs/" + user._id + "-" + job._id + "/apply" method="post").modal-content
+						.modal-header 
+							h4 Questionaire
+						.modal-body
+							.lead Almost Done! Just answer a few questions to finalize your application!
+							#questionFormContainer
+								-console.log(job)
+								-var i = 0 
+								each question in job.questionaire
+									.lead #{question}
+									input.form-control(type="text" name="question[" + i + "]")
+									-i++
+						.modal-footer
+							button.btn.btn-primary.pull-right(type="submit" name="apply") Submit Application
+
 	include ../_footer
+block scripts
+	script(src="/javascripts/job.js")
 

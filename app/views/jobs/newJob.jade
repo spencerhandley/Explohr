@@ -4,8 +4,8 @@ block content
 	.container
 		.row
 			.col-md-8.col-md-offset-2#loginForm
-				h3 Add a Course
-				form.form(role="form" action="/newjob" method="post")
+				h3 New Job Listing
+				form.form(role="form" action="/jobs/newjob" method="post")
 					.row
 						h5 Seasons
 						div.col-md-3
@@ -67,7 +67,7 @@ block content
 										-var i=0
 										div.form-group#questionForm
 											label.sr-only(for="topic") Question #1
-											input.form-control(placeholder="Question #1" type="text" name="j[question][" + i + "]")
+											input.form-control(placeholder="Question #1" type="text" name="j[questionaire][" + i + "]")
 										-i++
 									.row
 										#addQuestion.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add question

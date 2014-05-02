@@ -1,0 +1,118 @@
+extends ../layout
+
+block content
+	include ../_topbar
+	.container
+		#profile
+			-console.log(profileCompany)
+			-console.log(locals.user)
+			.row#videoContainer
+				div.courseDetails.col-sm-6.col-md-6
+					//-img.pull-right.profileImage(src="../img/mick.png")
+					h2.profName #{profileCompany.name}
+					-if(user)
+						-if(locals.user._id = profileCompany._id)
+							button.btn.btn-primary.pull-right.inline#editCompanyProfileBtn Edit Profile
+					p.lead #{profileCompany.location}
+					p Mick Fanning’s path to surfing greatness has incorporated all the attributes of a champion. He has overcome personal tragedy, career-threatening injury and one of sport’s greatest competitive dynasties, in the form of American Kelly Slater, to twice reach surfing’s highest echelon.
+					p In his first year on tour, aged 22, Mick finished an incredible 5th in the world, earning him the ASP Rookie of the Year award. In 2003 Mick climbed one step higher and finished 4th and many thought 2004 would be Mick’s year. However, a catastrophic freesurfing injury changed everything. Mick ripped his hamstring clean off the bone, was out of action for six months and left questioning whether he’d ever again surf competitively. His comeback to the world tour was a stirring win in front of 20,000 fans at his homebreak, Snapper Rocks.
+					p Mick then put together one of the most impressive competitive seasons of all time, winning three events, finishing runner-up in another and making four semi finals. His incredible effort in 2007 saw Mick become the first Australian to usurp Slater for a world title in 15 years. The first person Mick thought of when he won was his beloved brother, Sean, who died tragically in a car accident when Mick was just 16 and he dedicated this achievement to him.
+					p In 2008 Mick married long time girlfriend Karissa, put in some blistering performances on the Gold Coast, South Africa and California and finished 8th. Then in 2009, it was on again. Mick clawed his way from the shadows of runaway ratings leader, Joel Parkinson, one of his best friends, to capture World Title number two at the final event at Pipeline.
+					p Although Mick has since struggled to find the consistency that helped him bag his world titles, he has had a number of finals appearances including two event wins. His most recent victory came early in the 2012 season with an epic win over Slater at Bells Beach. The result has pushed Mick close to the top the ratings and has put him in a solid position to challenge the World Title frontrunners.
+
+					
+				.col-sm-6.col-md-6
+					.panel.panel-default
+						.panel-heading General Information
+						ul.list-group
+							li.list-group-item 
+								p <b>Staff Size:</b>  #{profileCompany.staffSize}
+							li.list-group-item 
+								p <b>Main Contact:</b>  #{profileCompany.mainContact}, #{profileCompany.email}
+							li.list-group-item 
+								p <b>Phone:</b>  #{profileCompany.phone}
+							li.list-group-item 
+								p <b>URL:</b>  <a href="http://www.#{profileCompany.url}">#{profileCompany.url}</a>
+							li.list-group-item 
+								p <b>Age Requirement:</b>  #{profileCompany.ageRequirement}
+					
+					h3 Job Listings
+					each job in profileCompany.jobPostings
+						a#courseLink(href=router.getLink("jobListing", {jobId: job._id}))
+							.thumbnail
+								.row
+									.col-md-6
+										h3 #{job.listing}
+										p  #{job.jobs}
+										h4 #{job.location}
+					//- .profileSection
+						h3 Upcoming Trips
+						a#courseLink(href=router.getLink("trip", {trip: "costarica"}))
+							#teachersCourse.thumbnail
+								.row
+									.col-md-3
+										img#courseImage.pull-left(src="../img/surftrip.png")
+									#classCaption.col-md-6
+										h3 Surfing in Pavones, Costa Rica
+										p  Surf the longest left breaking wave in the world with Mick Fanning and other passionate surfers.
+									#rightcaption.col-md-3
+										h5 April 30th 2014 
+										em through
+										h5 May 15th 2014
+										.btn.btn-primary Details
+			-if(user)	
+				.modal.fade#editCompanyProfile(role="dialog" aria-hidden="true" tabindex="-1")
+					.modal-dialog
+						form(role="form" action=router.getLink("editCompanyProfile", {user: profileCompany._id}) method="POST" ).modal-content
+							.modal-header 
+								h4 Edit Profile
+							.modal-body
+								.lead 
+								.row
+									div.form-group.col-md-12
+										label.sr-only(for="name") Organization Name
+										input.form-control(placeholder="Organization Name" type="text" value=locals.profileCompany.name name="name")
+									div.form-group.col-md-12
+										label.sr-only(for="staffSize") Staff Size
+										input.form-control(placeholder="Staff Size" type="text" value=locals.profileCompany.staffSize name="staffSize")
+									div.form-group.col-md-12
+										label.sr-only(for="mainContact") Main Contact
+										input.form-control(placeholder="Main Contact" type="text" value=locals.profileCompany.mainContact name="mainContact")
+									div.form-group.col-md-12
+										label.sr-only(for="email") Email 
+										input.form-control(placeholder="Email" type="text" value=locals.profileCompany.email name="email")
+									div.form-group.col-md-12
+										label.sr-only(for="phone") Phone 
+										input.form-control(placeholder="Phone" type="text" value=locals.profileCompany.phone name="phone")
+									div.form-group.col-md-12
+										label.sr-only(for="location") Location 
+										input.form-control(placeholder="Location" type="text" value=locals.profileCompany.location name="location")
+									div.form-group.col-md-12
+										label.sr-only(for="url") URL 
+										input.form-control(placeholder="URL" type="text" value=locals.profileCompany.url name="url")
+									div.form-group.col-md-12
+										label.sr-only(for="housing") Housing 
+										input.form-control(placeholder="Housing" type="text" value=locals.profileCompany.housing name="housing")
+									div.form-group.col-md-12
+										label.sr-only(for="roomAndBoard") Room and Board 
+										input.form-control(placeholder="Room and Board" type="text" value=locals.profileCompany.roomAndBoard name="roomAndBoard")
+									div.form-group.col-md-12
+										label.sr-only(for="perks") Perks 
+										input.form-control(placeholder="Perks" type="text" value=locals.profileCompany.perks name="perks")
+									div.form-group.col-md-12
+										label.sr-only(for="housing") Housing 
+										input.form-control(placeholder="Housing" type="text" value=locals.profileCompany.housing name="housing")
+									div.form-group.col-md-12
+										label.sr-only(for="ageRequirement") Age Requirement 
+										input.form-control(placeholder="Age Requirement" type="text" value=locals.profileCompany.ageRequirement name="ageRequirement")
+								div.form-group
+									label.sr-only(for="gettingHere") Getting Here 
+									input.form-control#bio(placeholder="Getting Here" type="text" value=locals.profileCompany.gettingHere name="gettingHere")
+							.modal-footer
+								button.btn.btn-primary.pull-right(type="submit" name="update") Update
+
+
+				
+	include ../_footer
+block scripts
+	script(src="/javascripts/companyprofile.js")

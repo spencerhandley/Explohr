@@ -1,4 +1,5 @@
 var Account = require('../models/account'),
+	Company = require('../models/company'),
 	moment = require('moment'),
 	Job = require('../models/job'),
 	RouteManager = require('express-shared-routes').RouteManager,
@@ -13,26 +14,43 @@ routes.get({name: 'newJob',  re: '/jobs/newjob'}, function (req, res){
 });
 routes.post({ name: 'newJob', re: '/jobs/newjob'}, function (req, res) {
 	var job = new Job(req.body.j);
+	job.organization = req.user._id
 	job.save(function (err){
 		if(err){
 			res.json(err);
 		} else {
-			res.render('jobs/jobListing', {
-				job: job,
-				user: req.user,
-				moment: moment
-			});
+			console.log(req.user._id)
+			Company.findById( req.user._id , function (err, company){
+				console.log(company)
+				company.jobPostings.push(job)
+				company.save(function(err) {
+					if(err){
+						res.json(err);
+					} else if(company === null){
+						res.json('no such company');
+					} else{
+						res.render('jobs/jobListing', {
+							job: job,
+							user: req.user,
+							moment: moment
+						});
+					}
+				})
+			});	
 		};
 	});
 });
 
 routes.get({name: 'jobListing',  re: '/jobs/:jobId'}, function (req, res){
 	Job.findOne({_id: req.params.jobId}, function (err, job) {
-		res.render('jobs/jobListing', {
-			moment: moment,
-			job: job,
-			user: req.user
-		});
+		Company.findOne({_id: job.organization}, function (err, company) {
+			res.render('jobs/jobListing', {
+				moment: moment,
+				company: company,
+				job: job,
+				user: req.user
+			});
+		})
 	});
 });
 

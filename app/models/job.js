@@ -16,7 +16,7 @@ var jobListing = new Schema({
 	dateCreated: { type: Date, default: Date.now },
 	applicants: [String],
 	applicationDetails: String,
-	questionaire: String,
+	questionaire: [String],
 	compensation: String
 });
 

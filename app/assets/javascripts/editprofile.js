@@ -153,7 +153,7 @@
 	  e.preventDefault()
 	  $(this).tab('show')
 	});
-	
+
 	$('#profileTabs a[href="#rightPanel"]').tab("show")
 
 

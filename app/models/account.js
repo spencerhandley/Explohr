@@ -134,6 +134,7 @@ var rockClimbing = new Schema({
 
 var Account = new Schema({
 	oauthID: Number,
+	type: {type: String, default: "Account"},
 	created: Date,
 	name: String,
 	applications: [String],

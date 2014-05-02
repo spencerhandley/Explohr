@@ -28,4 +28,4 @@ $(document).ready(function() {
 	};
 	addForms("addQuestion", "#questionForm", "#questionFormContainer");
 
-});
+});	

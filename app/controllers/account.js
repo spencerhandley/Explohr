@@ -280,6 +280,15 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function
 	});
 });
 
+routes.get({name: 'companyDashboard', re: '/company/:companyId/dashboard'}, ensureAuthenticated, function (req, res){
+	Company.findOne({_id: req.params.companyId}, function (err, company){
+		res.render('account/companydashboard', {
+			title: 'Company Dashboard',
+			company: company,
+			user: req.user
+		});
+	});
+});
 
 
 routes.get({name:'dashboard', re: '/dashboard/:user'}, ensureAuthenticated, function (req, res){
@@ -317,6 +326,7 @@ routes.get({name:'jobListings', re: '/jobs/listings'}, function (req, res){
 		user:req.user
 	});
 });
+
 routes.get({name:'userprofile', re: '/user/:user'}, function (req, res){
 	Account.findOne({_id: req.params.user}).populate('classes').exec(function (err, account) {
 		res.render('account/userprofile', {
@@ -324,5 +334,43 @@ routes.get({name:'userprofile', re: '/user/:user'}, function (req, res){
 			user: req.user,
 			moment: moment
 		});
+	});
+});
+
+routes.get({name:'companyProfile', re: '/company/:companyId'}, function (req, res){
+	Company.findOne({_id: req.params.companyId}).populate('jobPostings').exec(function (err, company) {
+		res.render('account/companyprofile', {
+			profileCompany: company,
+			user: req.user,
+			moment: moment
+		});
+	});
+});
+
+routes.post({name: 'editCompanyProfile', re: '/company/:user/edit'}, function (req, res){
+	Company.findByIdAndUpdate( req.user._id , {
+		$set: {name: req.body.name,
+			staffSize: req.body.staffSize,
+			mainContact: req.body.mainContact,
+			email: req.body.email, 
+			phone: req.body.phone,
+			location: req.body.location,
+			url: req.body.url,
+			housing: req.body.housing, 
+			roomAndBoard: req.body.roomAndBoard,
+			perks: req.body.perks,
+			ageRequirement: req.body.ageRequirement,
+			gettingHere: req.body.gettingHere
+		}
+
+	}, function (err, company){
+		if(err){
+			res.json(err);
+		} else if(company === null){
+			res.json('no such user');
+		} else{
+			res.send(company);
+			res.redirect('/company/' + req.user._id);
+		}
 	});
 });
