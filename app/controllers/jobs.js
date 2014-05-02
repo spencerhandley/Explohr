@@ -68,10 +68,18 @@ routes.get({ name: 'editJobs', re: '/editjobs' }, function (req, res){
 });
 
 routes.get({name: 'deleteJob', re: '/jobs/:jobId/delete'}, function (req, res) {
-	Job.remove({_id: req.params.jobId}, function (err) {
-		if (err) throw err
-		res.redirect('editJobs');
+	Company.findOne({_id: req.user._id}, function(err, company) {
+		var jobs = company.jobPostings
+		var index = jobs.indexOf(req.params.jobId)
+		company.jobListings.remove(req.params.jobId)
+		company.save()
+		Job.remove({_id: req.params.jobId}, function (err) {
+			if (err) throw err
+			res.redirect('editJobs');
+		})
+		
 	})
+	
 })
 
 routes.get({name: 'apply', re: '/jobs/:jobId/apply'}, function (req, res) {
