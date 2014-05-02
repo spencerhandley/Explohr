@@ -32,7 +32,7 @@ block content
 						-if(user)
 							-console.log(locals.profileUser._id)
 							-console.log(locals.user._id)
-							-if(profileUser._id.toString === user._id.toString)
+							-if(String(profileUser._id) === String(user._id))
 								.editProfile
 									span.glyphicon.glyphicon-cog#editProfileBtn(data-target="#editProfileModal" data-toggle="modal")
 						.location
@@ -401,7 +401,7 @@ block content
 							.text-center
 								button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
 				-if(user)
-					-if(user._id === profileUser._id)
+					-if(user._id = profileUser._id)
 						section#editProfileModal.modal.fade.in(role="dialog" aria-labelledby="myModalLabel" aria-hidden="false")
 							-if(profileUser.general.onboarded === false)
 								.welcome.text-center
