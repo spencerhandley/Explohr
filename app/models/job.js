@@ -1,4 +1,5 @@
 var mongoose = require('mongoose'),
+
     Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
 
@@ -22,4 +23,4 @@ var jobListing = new Schema({
 
 jobListing.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('JobListing', jobListing);
+module.exports = mongoose.model('jobListing', jobListing);

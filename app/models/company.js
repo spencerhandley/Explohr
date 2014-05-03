@@ -1,5 +1,6 @@
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
+    jobListing = require("../models/job"),
     passportLocalMongoose = require('passport-local-mongoose');
 
 var Company = new Schema({
@@ -15,7 +16,7 @@ var Company = new Schema({
 	phone: String,
 	location: String,
 	url: String,
-	jobPostings: [],
+	jobListings: [{type: Schema.Types.ObjectId, ref: 'jobListing'}],
 	seasons: [String],
 	housing: String,
 	roomAndBoard: String, 

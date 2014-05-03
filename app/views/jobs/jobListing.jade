@@ -32,7 +32,7 @@ block content
 						-if(!user.staffSize)
 							-if(job.questionaire[0] != "")
 								button#applyQuest.btn.btn-success.btn-lg Apply with Questionaire
-							-if(job.questionaire)
+							-if(!job.questionaire[0])
 								a(href=router.getLink("apply", {jobId: job._id})).btn.btn-success.btn-lg Apply Now
 				.panel.panel-default#tripDetails
 					.panel-heading Employer Information

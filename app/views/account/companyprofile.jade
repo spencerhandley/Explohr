@@ -33,7 +33,7 @@ block content
 								p <b>Age Requirement:</b>  #{profileCompany.ageRequirement}
 					
 					h3 Job Listings
-					each job in profileCompany.jobPostings
+					each job in profileCompany.jobListings
 						a#courseLink(href=router.getLink("jobListing", {jobId: job._id}))
 							.thumbnail
 								.row
@@ -95,9 +95,6 @@ block content
 									div.form-group.col-md-12
 										label.sr-only(for="perks") Perks 
 										input.form-control(placeholder="Perks" type="text" value=locals.profileCompany.perks name="perks")
-									div.form-group.col-md-12
-										label.sr-only(for="housing") Housing 
-										input.form-control(placeholder="Housing" type="text" value=locals.profileCompany.housing name="housing")
 									div.form-group.col-md-12
 										label.sr-only(for="ageRequirement") Age Requirement 
 										input.form-control(placeholder="Age Requirement" type="text" value=locals.profileCompany.ageRequirement name="ageRequirement")

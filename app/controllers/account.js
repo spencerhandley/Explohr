@@ -32,7 +32,7 @@ routes.post({re:'/register'}, function(req, res) {
 					res.json('no such user');
 				} else{
 					res.send(person);
-					res.redirect('/');
+					res.redirect('/company/' + req.user._id + '/dashboard');
 				}
 			});
 		});
@@ -154,7 +154,7 @@ routes.get({name: 'deteteClimb', re: '/course/:user/:courseid/deleteCourse'}, en
 
 
 routes.post({name: 'login', re: '/login'}, passport.authenticate('local'), function (req, res){
-	res.redirect('/');
+	res.redirect('/company/' + req.user._id + '/dashboard');
 });
 
 routes.get({ name: 'logout', re: '/logout' }, function (req, res) {
@@ -281,7 +281,7 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function
 });
 
 routes.get({name: 'companyDashboard', re: '/company/:companyId/dashboard'}, ensureAuthenticated, function (req, res){
-	Company.findOne({_id: req.params.companyId}, function (err, company){
+	Company.findOne({_id: req.params.companyId}).populate('jobListings').exec(function (err, company){
 		res.render('account/companydashboard', {
 			title: 'Company Dashboard',
 			company: company,
@@ -338,7 +338,7 @@ routes.get({name:'userprofile', re: '/user/:user'}, function (req, res){
 });
 
 routes.get({name:'companyProfile', re: '/company/:companyId'}, function (req, res){
-	Company.findOne({_id: req.params.companyId}).populate('jobPostings').exec(function (err, company) {
+	Company.findOne({_id: req.params.companyId}).populate('jobListings').exec(function (err, company) {
 		res.render('account/companyprofile', {
 			profileCompany: company,
 			user: req.user,

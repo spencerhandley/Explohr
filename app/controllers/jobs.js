@@ -22,7 +22,7 @@ routes.post({ name: 'newJob', re: '/jobs/newjob'}, function (req, res) {
 			console.log(req.user._id)
 			Company.findById( req.user._id , function (err, company){
 				console.log(company)
-				company.jobPostings.push(job)
+				company.jobListings.push(job._id)
 				company.save(function(err) {
 					if(err){
 						res.json(err);
@@ -31,6 +31,7 @@ routes.post({ name: 'newJob', re: '/jobs/newjob'}, function (req, res) {
 					} else{
 						res.render('jobs/jobListing', {
 							job: job,
+							company: company,
 							user: req.user,
 							moment: moment
 						});
@@ -68,17 +69,37 @@ routes.get({ name: 'editJobs', re: '/editjobs' }, function (req, res){
 });
 
 routes.get({name: 'deleteJob', re: '/jobs/:jobId/delete'}, function (req, res) {
-	Company.findOne({_id: req.user._id}, function(err, company) {
-		var jobs = company.jobPostings
-		var index = jobs.indexOf(req.params.jobId)
-		jobs.splice(index, 1)
-		company.jobListings.remove(req.params.jobId)
-		company.save()
-		Job.remove({_id: req.params.jobId}, function (err) {
-			if (err) throw err
-			res.redirect('editJobs');
-		})
-		
+
+
+	Company.findOne({ _id: req.user._id}, function (err, account) {
+		if (err) {
+			res.send(null, 500);
+		} else if (account) {
+			console.log("acocunt exists")
+			console.log("account:" + account)
+			var records = {'records': account.jobListings};
+			var idx = account.jobListings ? account.jobListings : -1;
+			console.log(idx)
+			if (idx !== -1) {
+				account.jobListings.splice(idx, 1);
+				account.save(function(err) {
+					if (err) {
+						console.log(err);
+						res.send(null, 500);
+					} else {
+						console.log("account Saved")
+						Job.remove({_id: req.params.jobId}, function (err) {
+							if (err) throw err
+							res.redirect('/company/' + req.user._id + '/dashboard');
+						})
+					}
+				});
+				return;
+			}
+		}
+        console.log("didn't work")
+        res.send(null, 404);
+
 	})
 	
 })
