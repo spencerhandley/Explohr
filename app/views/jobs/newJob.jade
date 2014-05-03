@@ -5,7 +5,7 @@ block content
 		.row
 			.col-md-8.col-md-offset-2#loginForm
 				h3 New Job Listing
-				form.form(role="form" action="/jobs/newjob" method="post")
+				//- form.form(role="form" action="/jobs/newjob" method="post")
 					.row
 						h5 Seasons
 						div.col-md-3
@@ -73,7 +73,7 @@ block content
 										#addQuestion.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add question
 					button.btn.btn-primary.pull-right(type="submit" name="addjob") Add Job
 					.btn.btn-default.pull-left#addQuestionaire(data-toggle="modal" data-target="#questionaire") Add Questionaire
-block scripts
+//- block scripts
 	script(src="/javascripts/newjob.js")
 
 
