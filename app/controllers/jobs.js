@@ -6,7 +6,7 @@ var Account = require('../models/account'),
 	thumbnailPluginLib = require('mongoose-thumbnail'),
 	routes = new RouteManager();
 
-routes.get({name: 'newJob',  re: '/jobs/newjob'}, function (req, res){
+routes.get({name: 'newJobPage',  re: '/jobs/listings/newjob'}, function (req, res){
 	res.render('jobs/newjob', {
 		title: "New Job",
 		user: req.user
@@ -71,6 +71,7 @@ routes.get({name: 'deleteJob', re: '/jobs/:jobId/delete'}, function (req, res) {
 	Company.findOne({_id: req.user._id}, function(err, company) {
 		var jobs = company.jobPostings
 		var index = jobs.indexOf(req.params.jobId)
+		jobs.splice(index, 1)
 		company.jobListings.remove(req.params.jobId)
 		company.save()
 		Job.remove({_id: req.params.jobId}, function (err) {
