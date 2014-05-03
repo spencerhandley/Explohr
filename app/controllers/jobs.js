@@ -7,7 +7,7 @@ var Account = require('../models/account'),
 	routes = new RouteManager();
 
 routes.get({name: 'newJobPage',  re: '/jobs/listings/newjob'}, function (req, res){
-	res.render('jobs/newjob', {
+	res.render('jobs/newJob', {
 		title: "New Job",
 		user: req.user
 	});
