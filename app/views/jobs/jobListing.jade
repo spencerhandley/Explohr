@@ -6,8 +6,9 @@ block content
 		.row
 			div.courseDetails.col-sm-6.col-md-6
 				h2.courseTitle #{job.listing}
-				p.lead #{job.location}
-				p Published: #{moment(job.dateCreated).format("MM/DD/YYYY")}
+				p.lead #{company.name}
+				h4 #{job.location}
+				small Published: #{moment(job.dateCreated).format("MM/DD/YYYY")}
 
 
 				h3 Job Overview
@@ -33,7 +34,7 @@ block content
 							-if(job.questionaire[0] != "")
 								button#applyQuest.btn.btn-success.btn-lg Apply with Questionaire
 							-if(!job.questionaire[0])
-								a(href=router.getLink("apply", {jobId: job._id})).btn.btn-success.btn-lg Apply Now
+								button.btn.btn-success.btn-lg#normalApply Apply Now
 				.panel.panel-default#tripDetails
 					.panel-heading Employer Information
 					ul.list-group
@@ -109,6 +110,17 @@ block content
 					.text-center
 						button.outlined-clear-btn-black.margin-10 5 More <span class="caret"></span>
 		-if(user)	
+			.modal.fade#applyDialog(role="dialog" aria-hidden="true" tabindex="-1")
+				.modal-dialog
+					.modal-content
+						.modal-body
+							.lead.text-center Are you sure you want to apply for this job?
+						.modal-footer
+							button(data-dismiss="modal" type="button")#cancel.btn.btn-default Cancel
+							a(href=router.getLink("apply", {jobId: job._id})).btn.btn-success.pull-right Confirm
+
+
+		-if(user)	
 			.modal.fade#questionaireDialog(role="dialog" aria-hidden="true" tabindex="-1")
 				.modal-dialog
 					form(role="form" action="/jobs/" + user._id + "-" + job._id + "/apply" method="post").modal-content
@@ -125,6 +137,7 @@ block content
 									-i++
 						.modal-footer
 							button.btn.btn-primary.pull-right(type="submit" name="apply") Submit Application
+
 
 	include ../_footer
 block scripts

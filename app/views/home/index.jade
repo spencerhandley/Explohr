@@ -14,7 +14,7 @@ block content
 							a(role="menuitem" tabindex="-1" href=router.getLink("userprofile", {user: user._id})) Profile
 							a(role="menuitem" tabindex="-1" href=router.getLink("messageCenter", {user: user._id})) Messages
 							//-a(role="menuitem" tabindex="-1" href=router.getLink("dashboard", {user: user._id})) My Classes
-							a(role="menuitem" tabindex="-1" href=router.getLink("edit", {user: user._id})) Edit Account
+							a(role="menuitem" tabindex="-1" href=router.getLink("edit", {user: user._id})) Applications
 							a(role="menuitem" tabindex="-1" href=router.getLink("logout")) Sign Out
 						-if(user.type === "Company")
 							a(role="menuitem" tabindex="-1" href=router.getLink("companyProfile", {companyId: user._id})) Profile
@@ -43,10 +43,15 @@ block content
 			p.text-center.white#subTitle 
 			-if(!user)
 				.row
-					.col-md-4.col-md-offset-3
+					.col-md-2.col-md-offset-3
 						.facebook
-							a.pull-right(href=router.getLink("facebooklogin"))
-								h4 SIGN IN WITH FACEBOOK
+							a(href=router.getLink("facebooklogin"))
+								h4 SIGN IN
+					.col-md-3.col-md-offset-1
+						.facebook
+							a(href=router.getLink("facebooklogin"))
+								h4 COMPANY REGISTRATION
+
 			-if(user)
 				.row
 					.col-md-3.col-md-offset-3
@@ -55,8 +60,8 @@ block content
 								h4 Your Profile
 					.col-md-3
 						.customizebtn
-							a(href=router.getLink("people"))
-								h4(style="background-color: rgba(0,0,0,0.0);") Browse People
+							a(href=router.getLink("jobListings"))
+								h4(style="background-color: rgba(0,0,0,0.0);") Browse Jobs
 			//-#courseBtns
 				a(href=router.getLink("catalog")).outlined-clear-btn.margin-10 Class Catalog
 	.bottom

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-
+	Account = require('../models/account')
     Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
 
@@ -15,7 +15,7 @@ var jobListing = new Schema({
 	perks: String,
 	jobs: String,
 	dateCreated: { type: Date, default: Date.now },
-	applicants: [String],
+	applicants: [{type: Schema.Types.ObjectId, ref: 'Account'}],
 	applicationDetails: String,
 	questionaire: [String],
 	compensation: String

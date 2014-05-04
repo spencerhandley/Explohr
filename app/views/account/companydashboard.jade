@@ -11,29 +11,34 @@ block content
 					p.lead #{company.name}
 
 			.row
-				.col-md-6
+				.col-md-4
 					a(href=router.getLink("newJobPage")).btn.btn-primary.btn-sm.pull-right Add Listing
 					h3.inline Listings
-					br
-					br
 					-console.log(company)
-					each job in company.jobListings
-						.thumbnail
-							.row
-								.col-md-12
-									h6.pull-right #{job.location} - #{job.seasons}
-									h5 #{job.listing}
-									p #{job.applicants}
-							.row
-								.col-md-12
-									a(href=router.getLink("deleteJob", {jobId: job._id})).btn.btn-danger.pull-right Delete
-									a(href=router.getLink("jobListing", {jobId: job._id})).btn.btn-primary.pull-right View Listing
-									p Posted: #{moment(job.dateCreated).format("MM/DD/YYYY")}
+					.listingContainer
+						each job in company.jobListings
+							.dashJobListing
+								.row
+									.col-md-12
+										h6.pull-right #{job.seasons}
+										h5 #{job.listing} 
+											span.badge  #{job.applicants.length}
+											
+								.row
+									.col-md-12
+										a.buttonPadding(href=router.getLink("deleteJob", {jobId: job._id})).btn.btn-danger.pull-right Delete
+										a.buttonPadding(href=router.getLink("jobListing", {jobId: job._id})).btn.btn-primary.pull-right View Listing
+										p Posted: #{moment(job.dateCreated).format("MM/DD/YYYY")}
 
-				.profileSection
+				.profileSection.col-md-8
 					h3.inline Recent Applicants
-
-
-
-				
-	include ../_footer
+					#applicantPanel
+					each applicant in company.jobListings[0].applicants
+						.listedApplicant
+							a(href=router.getLink('userprofile', {user: applicant._id}))
+								.circleThumbnail.pull-left
+									img(src="https://graph.facebook.com/#{applicant.oauthID}/picture?type=large")
+								.applicantDetails
+									h5 #{applicant.name}
+									p #{applicant.general.hometown}
+						

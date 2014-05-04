@@ -1,7 +1,8 @@
 var passport = require('passport'),
 	async = require('async'),
 	Account = require('../models/account'),
-	Company = require('../models/company')
+	Company = require('../models/company'),
+	Job = require('../models/job'),
 	Course = require('../models/course'),
 	Thread = require('../models/messages'),
 	Message = require('../models/message'),
@@ -282,10 +283,13 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function
 
 routes.get({name: 'companyDashboard', re: '/company/:companyId/dashboard'}, ensureAuthenticated, function (req, res){
 	Company.findOne({_id: req.params.companyId}).populate('jobListings').exec(function (err, company){
-		res.render('account/companydashboard', {
-			title: 'Company Dashboard',
-			company: company,
-			user: req.user
+		Job.populate(company.jobListings, {path: 'applicants'}, function(err, data){
+			res.render('account/companydashboard', {
+				title: 'Company Dashboard',
+				company: company,
+				moment: moment,
+				user: req.user
+			});
 		});
 	});
 });
