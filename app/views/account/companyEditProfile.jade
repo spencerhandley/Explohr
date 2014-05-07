@@ -1,0 +1,45 @@
+extends ../layout
+block content
+	include ../_topbar
+	.container
+		#editCompanyProfile(role="dialog" aria-hidden="true" tabindex="-1")
+			form(role="form" action=router.getLink("editCompanyProfile", {user: company._id}) method="POST" )
+				h4 Basic Info
+				.row
+					div.form-group.col-md-4
+						label.sr-only(for="name") Organization Name
+						input.form-control(placeholder="Organization Name" type="text" value=locals.company.name name="name")
+					div.form-group.col-md-4
+						label.sr-only(for="staffSize") Staff Size
+						input.form-control(placeholder="Staff Size" type="text" value=locals.company.staffSize name="staffSize")
+					div.form-group.col-md-4
+						label.sr-only(for="mainContact") Main Contact
+						input.form-control(placeholder="Main Contact" type="text" value=locals.company.mainContact name="mainContact")
+					div.form-group.col-md-4
+						label.sr-only(for="email") Email 
+						input.form-control(placeholder="Email" type="text" value=locals.company.email name="email")
+					div.form-group.col-md-4
+						label.sr-only(for="phone") Phone 
+						input.form-control(placeholder="Phone" type="text" value=locals.company.phone name="phone")
+					div.form-group.col-md-4
+						label.sr-only(for="location") Location 
+						input.form-control(placeholder="Location" type="text" value=locals.company.location name="location")
+					div.form-group.col-md-4
+						label.sr-only(for="url") URL 
+						input.form-control(placeholder="URL" type="text" value=locals.company.url name="url")
+					div.form-group.col-md-4
+						label.sr-only(for="housing") Housing 
+						input.form-control(placeholder="Housing" type="text" value=locals.company.housing name="housing")
+					div.form-group.col-md-4
+						label.sr-only(for="roomAndBoard") Room and Board 
+						input.form-control(placeholder="Room and Board" type="text" value=locals.company.roomAndBoard name="roomAndBoard")
+					div.form-group.col-md-4
+						label.sr-only(for="perks") Perks 
+						input.form-control(placeholder="Perks" type="text" value=locals.company.perks name="perks")
+					div.form-group.col-md-4
+						label.sr-only(for="ageRequirement") Age Requirement 
+						input.form-control(placeholder="Age Requirement" type="text" value=locals.company.ageRequirement name="ageRequirement")
+				div.form-group
+					label.sr-only(for="gettingHere") Getting Here 
+					input.form-control#bio(placeholder="Getting Here" type="text" value=locals.company.gettingHere name="gettingHere")
+				button.btn.btn-primary.pull-right(type="submit" name="update") Update

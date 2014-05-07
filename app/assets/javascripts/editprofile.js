@@ -40,9 +40,9 @@
 	addForms("addWork", "#workForm", "#workFormContainer");
 	addForms("addTradEdu", "#tradEduForm", "#tradFormContainer")
 	addForms("addCertificate", "#certificateForm", "#certificateFormContainer")
-	addForms("addTeachingExperience", "#teachingForm", "#teachingFormContainer")
-	addForms("addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
-	addForms("addTrip", "#tripsForm", "#tripsFormContainer")
+	// addForms("addTeachingExperience", "#teachingForm", "#teachingFormContainer")
+	// addForms("addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
+	// addForms("addTrip", "#tripsForm", "#tripsFormContainer")
 	addForms("addSponsor", "#sponsorForm", "#sponsorFormContainer")
 	addForms("addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
 	addForms("addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
@@ -108,7 +108,7 @@
 	})
 	$("#IAA").on('change', function(){
 		var IamA = $(this).val();
-		if(IamA == "professional") {
+		if(IamA == "Professional") {
 			$(".checkboxes").toggle();
 		}else {
 			$(".checkboxes").toggle();

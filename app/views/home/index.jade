@@ -4,7 +4,7 @@ block content
 	.top
 		-if(!user)
 			a.outlined-clear-btn.btn.pull-left#signin(href=router.getLink("login")) Business Login 
-			a.outlined-clear-btn.btn.pull-left(href=router.getLink("register"))  Business Registration
+			//-a.outlined-clear-btn.btn.pull-left(href=router.getLink("register"))  Business Registration
 		.dropdown.pull-right
 			-if(user)
 				a.userlinkwhite.dropdown-toggle.pull-right(type="button" id="dropdownMenu1" data-toggle="dropdown") #{user.name}
@@ -43,13 +43,13 @@ block content
 			p.text-center.white#subTitle 
 			-if(!user)
 				.row
-					.col-md-2.col-md-offset-3
+					.col-md-3.col-md-offset-3
 						.facebook
 							a(href=router.getLink("facebooklogin"))
-								h4 SIGN IN
-					.col-md-3.col-md-offset-1
-						.facebook
-							a(href=router.getLink("facebooklogin"))
+								h4 SIGN IN WITH FACEBOOK
+					.col-md-3
+						.companyRegBtn
+							a(href=router.getLink("register")) 
 								h4 COMPANY REGISTRATION
 
 			-if(user)

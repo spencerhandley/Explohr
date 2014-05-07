@@ -42,6 +42,20 @@ routes.post({ name: 'newJob', re: '/jobs/newjob'}, function (req, res) {
 	});
 });
 
+routes.post({name: 'updateJob', re: '/jobs/:jobId/updateJob'}, function (req, res){
+	Job.findByIdAndUpdate( req.params.jobId , req.body.j , function (err, person){
+		if(err){
+			res.json(err);
+		} else if(person === null){
+			res.json('no such user');
+		} else{
+			res.send(person);
+			res.redirect('/jobs/' + req.params.jobId);
+		}
+	});
+});
+
+
 routes.get({name: 'jobListing',  re: '/jobs/:jobId'}, function (req, res){
 	Job.findOne({_id: req.params.jobId}, function (err, job) {
 		Company.findOne({_id: job.organization}, function (err, company) {
@@ -103,6 +117,8 @@ routes.get({name: 'deleteJob', re: '/jobs/:jobId/delete'}, function (req, res) {
 	})
 	
 })
+
+
 
 routes.get({name: 'apply', re: '/jobs/:jobId/apply'}, function (req, res) {
 	Job.findOne({_id: req.params.jobId}, function (err, job) {

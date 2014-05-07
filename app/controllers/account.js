@@ -33,7 +33,7 @@ routes.post({re:'/register'}, function(req, res) {
 					res.json('no such user');
 				} else{
 					res.send(person);
-					res.redirect('/company/' + req.user._id + '/dashboard');
+					res.redirect('/company/' + req.user._id + '/edit');
 				}
 			});
 		});
@@ -74,6 +74,7 @@ routes.post({name: 'editProfile', re: '/user/:user/edit'}, function (req, res){
 		}
 	});
 });
+
 
 routes.get({name: 'setup', re: '/user/:user/setup'}, function (req, res){
 	res.render('account/setup', {
@@ -280,7 +281,15 @@ routes.get({name: 'edit', re: '/user/:user/edit'}, ensureAuthenticated, function
 		});
 	});
 });
-
+routes.get({name: 'companyEdit', re: '/company/:user/edit'}, ensureAuthenticated, function (req, res){
+	Company.findOne({_id: req.user._id}, function (err, account){
+		res.render('account/companyEditProfile', {
+			title: 'Edit Profile',
+			company: account,
+			user: req.user
+		});
+	});
+});
 routes.get({name: 'companyDashboard', re: '/company/:companyId/dashboard'}, ensureAuthenticated, function (req, res){
 	Company.findOne({_id: req.params.companyId}).populate('jobListings').exec(function (err, company){
 		Job.populate(company.jobListings, {path: 'applicants'}, function(err, data){
