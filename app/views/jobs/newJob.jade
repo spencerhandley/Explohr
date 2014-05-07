@@ -9,16 +9,16 @@ block content
 					.row
 						h5 Seasons
 						div.col-md-3
-							input(type="checkbox" value="Spring " name="j[seasons][0]")
+							input(type="checkbox" value="Spring " name="j[seasons][spring]")
 							label(for="j[seasons]") Spring
 						div.col-md-3
-							input(type="checkbox" value="Summer " name="j[seasons][1]")
+							input(type="checkbox" value="Summer " name="j[seasons][summer]")
 							label(for="j[seasons]") Summer
 						div.col-md-3
-							input(type="checkbox" value="Fall " name="j[seasons][2]")
+							input(type="checkbox" value="Fall " name="j[seasons][fall]")
 							label(for="j[seasons]") Fall
 						div.col-md-3
-							input(type="checkbox" value="Winter " name="j[seasons][3]")
+							input(type="checkbox" value="Winter " name="j[seasons][winter]")
 							label(for="j[seasons]") Winter
 					br
 					.row
@@ -71,6 +71,8 @@ block content
 										-i++
 									.row
 										#addQuestion.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add question
+								.modal-footer
+									button(data-dismiss="modal" type="button").btn.btn-success Confirm
 					button.btn.btn-primary.pull-right(type="submit" name="addjob") Add Job
 					.btn.btn-default.pull-left#addQuestionaire(data-toggle="modal" data-target="#questionaire") Add Questionaire
 block scripts

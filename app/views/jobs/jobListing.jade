@@ -5,6 +5,9 @@ block content
 	.container
 		.row
 			div.courseDetails.col-sm-6.col-md-6
+				-if(user)
+					-if(String(job.organization) === String(user._id))
+						button.btn.btn-default#editJobBtn Edit Listing
 				h2.courseTitle #{job.listing}
 				p.lead #{company.name}
 				h4 #{job.location}
@@ -27,10 +30,10 @@ block content
 						//- TODO add dialog with login options - route back to this page
 						a(href=router.getLink("facebooklogin")).btn.btn-success.btn-lg Login to Apply
 					-if(user)
-						-if(user.staffSize)
+						-if(user.type === "Company")
 							button.btn.btn-default.btn-lg(disabled="disabled") Companies Can't Apply
 
-						-if(!user.staffSize)
+						-if(!user.type === "Company")
 							-if(job.questionaire[0] != "")
 								button#applyQuest.btn.btn-success.btn-lg Apply with Questionaire
 							-if(!job.questionaire[0])
@@ -38,7 +41,13 @@ block content
 				.panel.panel-default#tripDetails
 					.panel-heading Employer Information
 					ul.list-group
-						li.list-group-item <b>Seasons:</b>  #{job.seasons}
+						-var arrayOfSeasons = Object.keys(job.seasons).map(function (key){
+						-		return job.seasons[key];
+						-});
+						-var slicedseasons = arrayOfSeasons.slice(0).join(", ")
+						li.list-group-item <b>Seasons: </b>
+							-var checkseasons = (arrayOfSeasons[0] = "ho") ? slicedseasons : null
+							span= checkseasons
 						li.list-group-item <b>Staff Size:</b>  #{company.staffSize}
 						li.list-group-item <b>Email:</b> #{company.email}
 						li.list-group-item <b>Age Requirement:</b>  #{job.ageRequirement}
@@ -137,6 +146,69 @@ block content
 									-i++
 						.modal-footer
 							button.btn.btn-primary.pull-right(type="submit" name="apply") Submit Application
+		-if(user)
+			.modal.fade#editJobListingDialog(role="dialog" aria-hidden="true" tabindex="-1")
+				.modal-dialog
+					.col-md-12#loginForm
+						h3 Edit Job Listing
+						form.form(role="form" action="/jobs/" + job._id + "/updateJob" method="post")
+							.row
+								h5 Seasons
+								div.col-md-3
+									input(type="checkbox" value="Spring" checked=job.seasons.spring name="j[seasons][spring]")
+									label(for="j[seasons]") Spring
+								div.col-md-3
+									input(type="checkbox" value="Summer" checked=job.seasons.summer name="j[seasons][summer]")
+									label(for="j[seasons]") Summer
+								div.col-md-3
+									input(type="checkbox" value="Fall" checked=job.seasons.fall name="j[seasons][fall]")
+									label(for="j[seasons]") Fall
+								div.col-md-3
+									input(type="checkbox" value="Winter" checked=job.seasons.winter name="j[seasons][winter]")
+									label(for="j[seasons]") Winter
+							br
+							.row
+								div.form-group.col-md-6
+									label.sr-only(for="username") Listing Title
+									input.form-control(placeholder="Listing Title" type="text" value=job.listing name="j[listing]")
+								div.form-group.col-md-6
+									label.sr-only(for="teacher") Description
+									input.form-control(placeholder="Description" type="text" value=job.description name="j[description]")
+							.row
+								div.form-group.col-md-12
+									label.sr-only(for="Publish") Ideal Candidate
+									input.form-control(placeholder="Ideal Candidate" type="textfield" value=job.idealCandidate name="j[idealCandidate]")
+
+							.row
+								div.form-group.col-md-6
+									label.sr-only(for="Publish") Location
+									input.form-control(placeholder="Location" type="textfield" value=job.location name="j[location]")
+								div.form-group.col-md-6
+									label.sr-only(for="level") Jobs
+									input.form-control(placeholder="Jobs" type="textfield" value=job.jobs name="j[jobs]")
+							div.form-group
+								label.sr-only(for="topic") Housing
+								input.form-control(placeholder="Housing" type="text" value=job.housing name="j[housing]")
+							div.form-group
+								label.sr-only(for="topic") Application Details
+								input.form-control(placeholder="Application Details" type="text" value=job.applicationDetails name="j[applicationDetails]")
+							.row
+								div.form-group.col-md-6
+									label.sr-only(for="overview") Age Requirement
+									input.form-control(placeholder="Age Requirement" type="textfield" value=job.ageRequirement name="j[ageRequirement]")
+								div.form-group.col-md-6
+									label.sr-only(for="overview") Compensation
+									input.form-control(placeholder="Compensation" type="textfield" value=job.compensation name="j[compensation]")
+							#questionFormContainer
+								-var i=0
+								div.form-group#questionForm
+									label.sr-only(for="topic") Question #1
+									input.form-control(placeholder="Question #1" type="text" value=job.questionaire[i] name="j[questionaire][" + i + "]")
+								-i++
+							.row
+										#addQuestion.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add question
+							button.btn.btn-primary.pull-right(type="submit" name="addjob") Update Job
+							.btn.btn-default.pull-left#addQuestionaire(data-toggle="modal" data-target="#questionaire") Update Questionaire
 
 
 	include ../_footer

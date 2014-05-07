@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-	Account = require('../models/account')
+	Account = require('../models/account'),
     Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
 
@@ -8,7 +8,7 @@ var jobListing = new Schema({
 	listing: String,
 	description: String,
 	idealCandidate: String, 
-	seasons: [String],
+	seasons: {type: Schema.Types.Mixed, default: {placehold: "ho"}, required: true},
 	housing: String,
 	ageRequirement: String,
 	location: String,

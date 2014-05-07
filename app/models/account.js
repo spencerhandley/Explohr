@@ -111,8 +111,10 @@ var race = new Schema({
 var company = new Schema({
 	company: String,
 	position: String,
-	start: {type: Date},
-	end: {type: Date},
+	courseArea: String,
+	start: String,
+	end: String,
+	current: String,
 	location: String,
 	description: String
 });
@@ -139,6 +141,7 @@ var Account = new Schema({
 	name: String,
 	applications: [String],
 	general: {
+		specialities: String,
 		firstname: String,
 		lastname: String,
 		IamA: {type: String, default: "Enthusiast"},
@@ -151,6 +154,7 @@ var Account = new Schema({
 		occupation: String,
 		aboutMe: String,
 		age: Number,
+		fieldDays: String,
 		photo: String,
 		onboarded: {type: Boolean, default: false},
 		friends: [{type: Schema.Types.ObjectId, ref: "Account"}]
@@ -178,17 +182,17 @@ var Account = new Schema({
 			traditional: [traditionalEdu],
 			outdoor: [outdoorCoursework]
 		},
-		workExperience: [company],
+		experience: [company],
 		certs: [certification],
-		teaching: {
-			experience: [teachingExperience],
-			additional: String
-		},
-		guiding: {
-			companies: [guidingCompany],
-			guided: [tripGuided],
-			additional: String
-		},
+		// teaching: {
+			// experience: [teachingExperience],
+			// additional: String
+		// },
+		// guiding: {
+			// companies: [guidingCompany],
+		// 	guided: [tripGuided],
+		// 	additional: String
+		// },
 		sponsors: [sponsor],
 	}
 });

@@ -13,7 +13,11 @@ a.active { font-weight: bold; text-decoration: underline; }
 #alpha {margin-top: -10px; margin-bottom: 4px; padding-left: 130px; font-size: 11px; font-weight: 300;}
 #title { margin-top: -10px; font-size: 60px; }
 #subTitle { font-size: 20px; z-index:1;  }
-.facebook h4 { text-align: center; background-image: url(/img/fblogo.png); background-repeat: no-repeat; background-position: 20px 20px ; background-size: 20px; color: white; padding: 23px; font-size: 15px; padding-left: 50px; margin-right:-40px;font-weight: 400; background-color: #3463B8; border-radius: 3px;}
+.facebook h4 { text-align: center; background-image: url(/img/fblogo.png); background-repeat: no-repeat; background-position: 20px 20px ; background-size: 20px; color: white; padding: 23px; font-size: 15px; padding-left: 50px; font-weight: 400; background-color: #3463B8; border-radius: 3px;}
+
+#editJobBtn {position: relative; display: inline; float: right; margin-top: 45px;}
+
+.companyRegBtn h4 { text-align: center; color: black; padding: 23px; font-size: 15px;  font-weight: 400; background-color: white; border-radius: 3px;}
 .customizebtn h4 { text-align: center; color: white; padding: 23px; font-size: 20px; font-weight: 200; background-color: #3463B8; border-radius: 5px; border: 3px white solid; background-color:  rgba(255,255,255, 0.2)}
 
 .white { color: white; }

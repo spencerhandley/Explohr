@@ -41,6 +41,10 @@ block content
 						-if(profileUser.general.aboutMe)
 							.userdetails.aboutBio
 								span.bio #{profileUser.general.aboutMe}
+						-if(profileUser.general.specialities)
+							.userdetails
+								b Areas of Expertise: 
+								span #{profileUser.general.specialities}
 						.generalInfo
 							-if(profileUser.general.occupation)
 								.userdetails.inline
@@ -50,12 +54,16 @@ block content
 								.userdetails.inline
 									b Age: 
 									span #{profileUser.general.age}	
+							-if(profileUser.general.fieldDays)
+								.userdetails.inline
+									b Field Days: 
+									span #{profileUser.general.fieldDays}	
 							p.userdetails.inline
 								-var arrayOfSports = Object.keys(profileUser.sportsList).map(function (key){
 								-		return profileUser.sportsList[key];
 								-});
 								-if(arrayOfSports[0] != "ho" && arrayOfSports[1])
-									b Sports: 
+									b Activities: 
 									span= arrayOfSports[1] 
 									-if(arrayOfSports[2])
 										span= ", " + arrayOfSports[2] 
@@ -70,7 +78,7 @@ block content
 						//.btn.btn-success.pull-right#messageBtn Message
 			ul.nav.nav-tabs#profileTabs
 				li.pull-right
-					a(href="#profileBody" data-toggle="tab") Outdoor Logger
+					a(href="#profileBody" data-toggle="tab") Outdoor Pursuits
 				li.active.pull-right
 					a(href="#rightPanel" data-toggle="tab") Resume
 			br
@@ -187,7 +195,7 @@ block content
 											td #{run.guided}
 
 				.tab-pane.active.fade.in#rightPanel
-					-if(profileUser.professional.guiding.companies[0])
+					//- -if(profileUser.professional.guiding.companies[0])
 						-if(profileUser.professional.guiding.companies[0].organization)
 							.panel.panel-default#Panel
 								.panel-body 
@@ -233,7 +241,7 @@ block content
 											if(exp.description)
 												strong Description:
 												span.small.list-group-item-text  #{exp.description}
-					-if(profileUser.professional.teaching.experience[0])
+					//- -if(profileUser.professional.teaching.experience[0])
 						-if(profileUser.professional.teaching.experience[0].organization)
 							.panel.panel-default#Panel
 								.panel-body 
@@ -260,21 +268,24 @@ block content
 											if(exp.description)
 												strong Description:
 												span.small.list-group-item-text  #{exp.description}
-					-if(profileUser.professional.workExperience[0])
-						-if(profileUser.professional.workExperience[0].company)
+					-if(profileUser.professional.experience[0])
+						-if(profileUser.professional.experience[0].company)
 							.panel.panel-default#Panel
 								.panel-body 
 									-if(user)
 										-if(String(profileUser._id) === String(user._id))
 											span.glyphicon.glyphicon-cog.pull-right#editWorkBtn(data-target="#editProfileModal" data-toggle="modal")
 
-									h4 Related Work Experience
+									h4 Work Experience
 								ul.list-group
-									each exp in profileUser.professional.workExperience
+									each exp in profileUser.professional.experience
 										li.list-group-item
 											.date.pull-right
-												span.small #{moment(exp.start).format("MM/DD/YYYY")} - 
-												span.small #{moment(exp.end).format("MM/DD/YYYY")}
+												span.small #{exp.start} - 
+												-if(exp.current)
+													span.small Present
+												-if(!exp.current)
+													span.small #{exp.end}
 											h4.list-group-item-heading #{exp.company}
 												br
 												if(exp.position)
@@ -315,16 +326,21 @@ block content
 									ul.list-group
 										each outdoor in profileUser.professional.education.outdoor
 											li.list-group-item
+												.date.pull-right
+													span.small #{outdoor.yearsAttended} 
 												h4.list-group-item-heading #{outdoor.institution} 
 													.list-group-item-text.small #{outdoor.course}
-												b.list-group-item-text Duration: 
-												span #{outdoor.duration}
+												-if(outdoor.duration)
+													b.list-group-item-text Duration: 
+													span #{outdoor.duration}
 												br
-												b.list-group-item-text Skills Learned: 
-												span #{outdoor.skills}
+												-if(outdoor.skills)
+													b.list-group-item-text Skills Learned: 
+													span #{outdoor.skills}
 												br
-												b.list-group-item-text More Info: 
-												span #{outdoor.other}
+												-if(outdoor.other)
+													b.list-group-item-text More Info: 
+													span #{outdoor.other}
 							-if(profileUser.professional.certs[0])
 								-if(profileUser.professional.certs[0].institution)
 									.panel-body
@@ -342,8 +358,8 @@ block content
 													br
 													b.list-group-item-text Expires: 
 													span #{moment(cert.expires).format("MM/DD/YYYY")}
-												h4.list-group-item-heading #{cert.institution}
-													.small.list-group-item-text #{cert.certificate}
+												h4.list-group-item-heading #{cert.certificate}
+													.small.list-group-item-text #{cert.institution}
 
 							.panel-body 
 								-if(user)
@@ -418,16 +434,15 @@ block content
 												a(href="#general", data-toggle="tab") General
 											li#educationTab
 												a(href="#education", data-toggle="tab") Education / Coursework
-											-if(profileUser.general.IamA == "Professional")
-												li#workTab
-													a(href="#workExperience", data-toggle="tab") Work Experience
+											li#workTab
+												a(href="#workExperience",  data-toggle="tab") Work Experience
 											li#certsTab
 												a(href="#certs", data-toggle="tab") Certifications
-											-var visibility = profileUser.general.educator ? "block" : "none";
-											li#educator(style="display: " + visibility + ";")
+											//- -var visibility = profileUser.general.educator ? "block" : "none";
+											//- li#educator(style="display: " + visibility + ";")
 												a(href="#teaching", data-toggle="tab") Teaching Experience
-											-var visibility = profileUser.general.guide ? "block" : "none";
-											li#guide(style="display: " + visibility + ";")
+											//- -var visibility = profileUser.general.guide ? "block" : "none";
+											//- li#guide(style="display: " + visibility + ";")
 												a(href="#guiding", data-toggle="tab") Guide Experience
 											-var visibility = profileUser.general.athlete ? "block" : "none";
 											li#athlete(style="display: " + visibility + ";")
@@ -523,19 +538,26 @@ block content
 
 
 															.row
-																div.form-group.col-md-3
+																div.form-group.col-md-4
 																	-console.log(profileUser)
 																	label.sr-only(for="general[email]") Email
 																	input.form-control(placeholder="Email" type="text" value=profileUser.general.email name="general[email]")
-																div.form-group.col-md-3
+																div.form-group.col-md-4
 																	label.sr-only(for="general[age]") Age
 																	input.form-control(placeholder="Age" type="text" value=profileUser.general.age name="general[age]")
-																div.form-group.col-md-3
+																div.form-group.col-md-4
 																	label.sr-only(for="general[hometown]") Hometown
 																	input.form-control(placeholder="Hometown, State" type="text" value=profileUser.general.hometown name="general[hometown]")
-																div.form-group.col-md-3
+																div.form-group.col-md-4
 																	label.sr-only(for="general[occupation]") Occupation 
 																	input.form-control(placeholder="Occupation" type="text" value=profileUser.general.occupation name="general[occupation]")
+																div.form-group.col-md-4
+																	label.sr-only(for="general[fieldDays]") # of Field Days 
+																	input.form-control(placeholder="# of Field Days" type="text" value=profileUser.general.fieldDays name="general[fieldDays]")
+																div.form-group.col-md-4
+																	label.sr-only(for="general[specialities]") Areas of Expertise 
+																	input.form-control(placeholder="Areas of Expertise" type="text" value=profileUser.general.specialities name="general[specialities]")
+
 															div.form-group
 																label.sr-only(for="general[aboutMe]") About me 
 																input.form-control#bio(placeholder="About me" type="text" value=profileUser.general.aboutMe name="general[aboutMe]")
@@ -731,7 +753,7 @@ block content
 																			input.form-control(placeholder="Expires" type="text" name="professional[certs][0][expires]")
 														.row
 															div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
-													div.tab-pane#workExperience.col-md-12
+													//- div.tab-pane#workExperience.col-md-12
 														h4 Work Experience
 														#workFormContainer
 															if(profileUser.professional.certs[0])
@@ -784,92 +806,24 @@ block content
 
 														.row
 															div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
-													div.tab-pane#teaching.col-md-12
-														h4 Schools and Organizations Worked For:
-														#teachingFormContainer
-															if(profileUser.professional.teaching.experience[0])
+													div.tab-pane#workExperience.col-md-12
+														h4 Work Experience:
+														#workFormContainer
+															//- include _workExperience
+
+															if(profileUser.professional.experience[0])
 																-var i = 0
-																each experience in profileUser.professional.teaching.experience
-																	#teachingForm
-																		.col-md-12
-																			p Type of Work
-																				-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
-																				-var residential = ("Residential"==experience.kind) ? 'selected' :null;
-																				-var other = ("Other"==experience.kind) ? 'selected' :null;
-																				select#courseDescription.form-control( value=experience.kind name="professional[teaching][experience][" + i + "][kind]")
-																					option(value="Expiditionary" selected=expiditionary) Expeditionary
-																					option(value="Residential" selected=residential) Residential
-																					option(value="Other" selected=other) Other
-																		.row
-																			div.form-group.col-md-4
-																				label.sr-only(for="professional[teaching][experience][" + i + "][organization]") Organization 
-																				input.form-control(placeholder="Organization" type="text" value=experience.organization name="professional[teaching][experience][" + i + "][organization]")
-																			div.form-group.col-md-4
-																				label.sr-only(for="professional[teaching][experience][" + i + "][jobTitle]") Job Title
-																				input.form-control(placeholder="Title" type="text" value=experience.jobTitle name="professional[teaching][experience][" + i + "][jobTitle]")
-																			div.form-group.col-md-4
-																				label.sr-only(for="professional[teaching][experience][" + i + "][location]") Location
-																				input.form-control(placeholder="Location" type="text" value=experience.location name="professional[teaching][experience][" + i + "][location]")
-																		.row
-																			div.form-group.col-md-3.col-md-offset-2
-																				label.sr-only(for="professional[teaching][experience][" + i + "][start]") Start Date
-																				input.form-control.datePick(placeholder="Start Date" type="text" value=experience.start name="professional[teaching][experience][" + i + "][start]")
-																			.col-md-2
-																				p until
-																			div.form-group.col-md-3
-																				label.sr-only(for="professional[teaching][experience][" + i + "][end]") End Date
-																				input.form-control.datePick(placeholder="End Date" type="text" value=experience.end name="professional[teaching][experience][" + i + "][end]")
-																			div.form-group.col-md-2
-																				input(type="checkbox", value=experience.current name="professional[teaching][experience][" + i + "][current]")
-																				label(for="professional[teaching][experience][current]") I currently work here
-																		.row
-																			.form-group.col-md-12
-																				label.sr-only(for="professional[teaching][experience][" + i + "][description]")
-																				input.form-control(placeholder="Brief Description" type="text" value=experience.description name="professional[teaching][experience][" + i + "][description]")
+																each experience in profileUser.professional.experience
+																	include _workExperience
 																		-i++
-															if(!profileUser.professional.teaching.experience[0])
-																#teachingForm
-																	.row
-																		p Type of Work
-																			select#courseDescription.form-control( name="professional[teaching][experience][0][kind]")
-																				option(value="Expiditionary" ) Expeditionary
-																				option(value="Residential" ) Residential
-																				option(value="Other" ) Other
-																	.row
-																		div.form-group.col-md-4
-																			label.sr-only(for="professional[teaching][experience][0][organization]") Organization 
-																			input.form-control(placeholder="Organization" type="text" name="professional[teaching][experience][0][organization]")
-																		div.form-group.col-md-4
-																			label.sr-only(for="professional[teaching][experience][0][jobTitle]") Job Title
-																			input.form-control(placeholder="Title" type="text" name="professional[teaching][experience][0][jobTitle]")
-																		div.form-group.col-md-4
-																			label.sr-only(for="professional[teaching][experience][0][location]") Location
-																			input.form-control(placeholder="Location" type="text" name="professional[teaching][experience][0][location]")
-																	.row
-																		div.form-group.col-md-3.col-md-offset-2
-																			label.sr-only(for="professional[teaching][experience[0]][start]") Start Date
-																			input.form-control.datePick(placeholder="Start Date" type="text" name="professional[teaching][experience][0][start]")
-																		.col-md-2
-																			p until
-																		div.form-group.col-md-3
-																			label.sr-only(for="professional[teaching][experience][0][end]") End Date
-																			input.form-control.datePick(placeholder="End Date" type="text" name="professional[teaching][experience][0][end]")
-																		div.form-group.col-md-2
-																			input(type="checkbox", name="professional[teaching][experience][0][current]")
-																			label(for="professional[teaching][experience][0][current]") I currently work here
-																	.row
-																		.form-group.col-md-12
-																			label.sr-only(for="professional[teaching][experience][0][description]")
-																			input.form-control(placeholder="Brief Description" type="text" name="professional[teaching][experience][0][description]")
-															
 														.row
-															div#addTeachingExperience.addfieldsBtn.col-md-6.col-md-offset-3 add
-														.row
+															div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
+														//- .row
 															h5.col-md-12 Did we miss anything? Add your own work experience here:
 															.form-group.col-md-12
-																label.sr-only(for="professional[teaching][additional]")
+																label.sr-only(for="professional[additional]")
 																input.form-control(placeholder="Description of experience" type="text" value=profileUser.professional.teaching.additional name="professional[teaching][additional]")
-													div.tab-pane#guiding.col-md-12
+													//- div.tab-pane#guiding.col-md-12
 														#section
 															h4 Guiding Companies worked for:
 															#guidingCoFormContainer
@@ -1326,7 +1280,7 @@ block content
 																				input.form-control(placeholder="Race" type="text" value=race.race name="sports[cycling][races][" + i + "][race]")
 																			div.form-group.col-md-3
 																				label.sr-only(for="sports[cycling][races][" + i + "][type]") Type
-																				input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" value=race.race name="sports[cycling][races][" + i + "][type]")
+																				input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" value=race.type name="sports[cycling][races][" + i + "][type]")
 																			div.form-group.col-md-3
 																				label.sr-only(for="sports[cycling][races][" + i + "][location]") Location
 																				input.form-control(placeholder="Location" type="text" value=race.location name="sports[cycling][races][" + i + "][location]")
