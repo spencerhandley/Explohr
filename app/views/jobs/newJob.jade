@@ -72,8 +72,12 @@ block content
 									.row
 										#addQuestion.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add question
 								.modal-footer
+ 
 									button(data-dismiss="modal" type="button").btn.btn-success Confirm
 					button.btn.btn-primary.pull-right(type="submit" name="addjob") Add Job
+					.col-md-3.pull-right
+						label(for="coverLetter") Require Cover Letter 
+						input.pull-right(type="checkbox" value="true" name="j[coverLetter]")
 					.btn.btn-default.pull-left#addQuestionaire(data-toggle="modal" data-target="#questionaire") Add Questionaire
 block scripts
 	script(src="/javascripts/newjob.js")

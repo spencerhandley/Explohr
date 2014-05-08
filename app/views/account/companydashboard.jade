@@ -16,29 +16,35 @@ block content
 					h3.inline Listings
 					-console.log(company)
 					.listingContainer
-						each job in company.jobListings
-							.dashJobListing
-								.row
-									.col-md-12
-										h6.pull-right #{job.seasons}
-										h5 #{job.listing} 
-											span.badge  #{job.applicants.length}
-											
-								.row
-									.col-md-12
-										a.buttonPadding(href=router.getLink("deleteJob", {jobId: job._id})).btn.btn-danger.pull-right Delete
-										a.buttonPadding(href=router.getLink("jobListing", {jobId: job._id})).btn.btn-primary.pull-right View Listing
-										p Posted: #{moment(job.dateCreated).format("MM/DD/YYYY")}
+						if(company.jobListings)
+							each job in company.jobListings
+								.dashJobListing
+									.row
+										.col-md-12
+											-var arrayOfSeasons = Object.keys(job.seasons).map(function (key){
+											-		return job.seasons[key];
+											-});
+											-var slicedseasons = arrayOfSeasons.slice(0).join(", ")
+											h6.pull-right= slicedseasons
+											h5 #{job.listing} 
+												span.badge  #{job.applicants.length}
+												
+									.row
+										.col-md-12
+											a.buttonPadding(href=router.getLink("deleteJob", {jobId: job._id})).btn.btn-danger.pull-right Delete
+											a.buttonPadding(href=router.getLink("jobListing", {jobId: job._id})).btn.btn-primary.pull-right View Listing
+											p Posted: #{moment(job.dateCreated).format("MM/DD/YYYY")}
 
 				.profileSection.col-md-8
 					h3.inline Recent Applicants
 					#applicantPanel
-					each applicant in company.jobListings[0].applicants
-						.listedApplicant
-							a(href=router.getLink('userprofile', {user: applicant._id}))
-								.circleThumbnail.pull-left
-									img(src="https://graph.facebook.com/#{applicant.oauthID}/picture?type=large")
-								.applicantDetails
-									h5 #{applicant.name}
-									p #{applicant.general.hometown}
+					if(company.jobListings[0])
+						each applicant in company.jobListings[0].applicants
+							.listedApplicant
+								a(href=router.getLink('userprofile', {user: applicant._id}))
+									.circleThumbnail.pull-left
+										img(src="https://graph.facebook.com/#{applicant.oauthID}/picture?type=large")
+									.applicantDetails
+										h5 #{applicant.name}
+										p #{applicant.general.hometown}
 						

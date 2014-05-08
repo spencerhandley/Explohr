@@ -33,7 +33,7 @@ block content
 						-if(user.type === "Company")
 							button.btn.btn-default.btn-lg(disabled="disabled") Companies Can't Apply
 
-						-if(!user.type === "Company")
+						-if(user.type === "Account")
 							-if(job.questionaire[0] != "")
 								button#applyQuest.btn.btn-success.btn-lg Apply with Questionaire
 							-if(!job.questionaire[0])
@@ -199,6 +199,9 @@ block content
 								div.form-group.col-md-6
 									label.sr-only(for="overview") Compensation
 									input.form-control(placeholder="Compensation" type="textfield" value=job.compensation name="j[compensation]")
+							.col-md-3.pull-right
+								label(for="coverLetter") Require Cover Letter 
+								input.pull-right(type="checkbox" checked=job.coverLetter value="true" name="j[coverLetter]")
 							#questionFormContainer
 								-var i=0
 								div.form-group#questionForm

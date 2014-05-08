@@ -6,4 +6,8 @@ a#userLink(href=router.getLink("jobListing", { jobId: job._id,}))
 					h3 #{job.listing}
 						br
 						small #{job.location}
-					p #{job.seasons}
+					-var arrayOfSeasons = Object.keys(job.seasons).map(function (key){
+					-		return job.seasons[key];
+					-});
+					-var slicedseasons = arrayOfSeasons.slice(0).join(", ")
+					p=slicedseasons
