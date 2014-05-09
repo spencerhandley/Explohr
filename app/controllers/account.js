@@ -363,26 +363,25 @@ routes.get({name:'companyProfile', re: '/company/:companyId'}, function (req, re
 routes.post({name: 'deleteTradEdu', re: '/company/:user/trad/:tradEduId/delete'}, ensureAuthenticated, function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		if(err) {
-			console.log("there was an error" + err)
 			res.send(null, 500)
 		} else if (account) {
-			console.log("deleting now")
 			var records = {'records': account};
-			console.log(account)
-			function findById (source) {
-				for (var i = 0; i<source.length; i++) {
-					if (source[i]._id === req.params.tradEduId) {
-						return source[i]
+			var findEdu = function(source) {
+				var sourceIdx = 0;
+				for (var i = 0; i<source.education.length; i++) {
+					sourceIdx++
+					if (source.education[i]._id == req.params.tradEduId) {
+						break;
 					}
 				}
+				return sourceIdx
+
 			}
-			var index = findById(account);
+			var edu = (findEdu(account) - 1);
 // TODO Remove item from the DB correctly. This remove one randomly based on how the idex comes in. No Bueno!!!
-			var idx = account.education ? index : -1 ;
-			console.log(idx)
+			var idx = account.education ? edu : -1 ;
 			if (idx !== -1) {
 				account.education.splice(idx, 1);
-				console.log(account)
 				account.save(function(err) {
 					if (err) {
 						console.log(err);
