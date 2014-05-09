@@ -19,13 +19,15 @@ block content
 				h3 Ideal Candidate
 				p #{job.idealCandidate}
 				h3 Responsibilities
-				p #{job.applicationDetails}
+				p #{job.responsibilities}
 				
 
 			.col-sm-6.col-md-6
 				#registerBtns
 					-console.log(user)
 					p.lead Apply for this Job <b>Today</b>!
+					
+					p #{job.applicationDetails}
 					-if(!user)
 						//- TODO add dialog with login options - route back to this page
 						a(href=router.getLink("facebooklogin")).btn.btn-success.btn-lg Login to Apply
@@ -192,6 +194,9 @@ block content
 							div.form-group
 								label.sr-only(for="topic") Application Details
 								input.form-control(placeholder="Application Details" type="text" value=job.applicationDetails name="j[applicationDetails]")
+							div.form-group
+								label.sr-only(for="topic") Responsibilities
+								input.form-control(placeholder="Responsibilities" type="text" name="j[responsibilities]")
 							.row
 								div.form-group.col-md-6
 									label.sr-only(for="overview") Age Requirement

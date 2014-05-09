@@ -2,13 +2,16 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose');
 
-
+var Concentration = new Schema ({
+	name: String
+})
 var traditionalEdu = new Schema({
-	institution: String,
-	degree: String,
-	start: {type: Date},
-	end: {type: Date}
+	school: {name: String},
+	type: String,
+	concentration: [Concentration],
+	year: {name: String}
 });
+
 
 var outdoorCoursework = new Schema({
 	institution: String,
@@ -159,7 +162,7 @@ var Account = new Schema({
 		onboarded: {type: Boolean, default: false},
 		friends: [{type: Schema.Types.ObjectId, ref: "Account"}]
 	},
-	education: [],
+	education: [traditionalEdu],
 	sportsList:  {type: Schema.Types.Mixed, default: {placehold: "ho"}, required: true
 	},
 	classes: [{type: Schema.Types.ObjectId, ref: 'Course'}],
@@ -179,7 +182,6 @@ var Account = new Schema({
 	},
 	professional: {
 		education: {
-			traditional: [traditionalEdu],
 			outdoor: [outdoorCoursework]
 		},
 		experience: [company],

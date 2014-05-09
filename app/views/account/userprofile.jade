@@ -4,7 +4,7 @@ block content
 	include ../_topbar
 	.profileContent
 		.profileTop
-		.container
+		.container(data-user="#{profileUser._id}")
 			.row#userBasics
 				div
 					#buttons.pull-right
@@ -360,25 +360,28 @@ block content
 													span #{moment(cert.expires).format("MM/DD/YYYY")}
 												h4.list-group-item-heading #{cert.certificate}
 													.small.list-group-item-text #{cert.institution}
+							if(profileUser.education)
+								if(profileUser.education[0])
+									.panel-body 
+										-if(user)
+											-if(String(profileUser._id) === String(user._id))		
+												span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
+										h4 Traditional Education
+									ul.list-group
+										each trad in profileUser.education
+											li.list-group-item
+												if(trad.year)
+													.pull-right
+														.small.list-group-item-text #{trad.year.name}
+												h4.list-group-item-heading #{trad.school.name}
+													if(trad.concentration[0])
+														each concentration in trad.concentration
 
-							.panel-body 
-								-if(user)
-									-if(String(profileUser._id) === String(user._id))		
-										span.glyphicon.glyphicon-cog.pull-right.editEduBtn(data-target="#editProfileModal" data-toggle="modal")
-								h4 Traditional Education
-							ul.list-group
-								each trad in profileUser.education
-									li.list-group-item
-										if(trad.year)
-											.pull-right
-												.small.list-group-item-text #{trad.year.name}
-										h4.list-group-item-heading #{trad.school.name}
-											if(trad.concentration)
-												each concentration in trad.concentration
-
-													.small.list-group-item-text #{concentration.name}
-											if(trad.type)
-												.small.list-group-item-text #{trad.type}
+															.small.list-group-item-text #{concentration.name}
+													if(trad.type)
+														.small.list-group-item-text #{trad.type}
+												a(href="#")
+													span.glyphicon.glyphicon-remove.delete(data-id="#{trad._id}") Delete
 
 
 												//-p #{trad.start} to #{trad.end}
@@ -636,7 +639,7 @@ block content
 																			label.sr-only(for="education[" + i + "][school][name]") Institution
 																			input.form-control.col-md-4(placeholder="Educational Institution" type="text" value=trad.school.name name="education[" + i + "][school][name]")
 																		div.form-group.col-md-4
-																			-var conc = (trad.concentration) ? trad.concentration[0].name : null;
+																			-var conc = (trad.concentration[0]) ? trad.concentration[0].name : null;
 																			label.sr-only(for="education[" + i + "][concentration][name]") Concentration
 																			input.form-control(placeholder="Degree Earned" type="text" value=conc name="education[" + i + "][concentration][0][name]")
 																		div.form-group.col-md-2
@@ -649,21 +652,22 @@ block content
 																			label.sr-only(for="education[" + i + "][year][name]") Year
 																			input.form-control.datePick(placeholder="End Date" type="text" value=year name="education[" + i + "][year][name]")
 																		-i++
-															-if(!profileUser.professional.education.traditional[0] && !profileUser.education[0])	
-																#tradEduForm
+															-if(!profileUser.education[0])	
 																#tradEduForm
 																	div.form-group.col-md-4
 																		label.sr-only(for="education[0][school][name]") Institution
 																		input.form-control.col-md-4(placeholder="Educational Institution" type="text" name="education[0][school][name]")
 																	div.form-group.col-md-4
-																		-var conc = (trad.concentration) ? trad.concentration[0].name : null;
+																		if(trad)
+																			-var conc = (trad.concentration[0]) ? trad.concentration[0].name : null;
 																		label.sr-only(for="education[0][concentration][name]") Concentration
 																		input.form-control(placeholder="Degree Earned" type="text" name="education[0][concentration][0][name]")
 																	div.form-group.col-md-2
 																		label.sr-only(for="education[0][type]") Type
 																		input.form-control(placeholder="Type" type="text" name="education[0][type]")
 																	div.form-group.col-md-2
-																		-var year = (trad.year) ? trad.year.name : null;
+																		if(trad)
+																			-var year = (trad.year) ? trad.year.name : null;
 																		label.sr-only(for="education[0][year][name]") Year
 																		input.form-control(placeholder="End Date" type="text" name="education[0][year][name]")
 														.row
@@ -1344,6 +1348,7 @@ block content
 								.modal-footer
 									button.btn.btn-default(data-dismiss="modal") Close
 									button.btn.btn-primary(type="submit") Send
-
+block scripts
+	script(src="/javascripts/profile.js") 
 					
-		include ../_footer
+include ../_footer

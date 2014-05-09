@@ -360,6 +360,71 @@ routes.get({name:'companyProfile', re: '/company/:companyId'}, function (req, re
 	});
 });
 
+routes.post({name: 'deleteTradEdu', re: '/company/:user/trad/:tradEduId/delete'}, ensureAuthenticated, function (req, res) {
+	Account.findOne({ _id: req.user._id}, function (err, account) {
+		if(err) {
+			console.log("there was an error" + err)
+			res.send(null, 500)
+		} else if (account) {
+			console.log("deleting now")
+			var records = {'records': account};
+			console.log(account)
+			function findById (source) {
+				for (var i = 0; i<source.length; i++) {
+					if (source[i]._id === req.params.tradEduId) {
+						return source[i]
+					}
+				}
+			}
+			var index = findById(account);
+// TODO Remove item from the DB correctly. This remove one randomly based on how the idex comes in. No Bueno!!!
+			var idx = account.education ? index : -1 ;
+			console.log(idx)
+			if (idx !== -1) {
+				account.education.splice(idx, 1);
+				console.log(account)
+				account.save(function(err) {
+					if (err) {
+						console.log(err);
+					} else {
+						res.send(records)
+					}
+				});
+				return
+			}
+		}
+		res.send(null, 404);
+	})
+})
+
+// routes.get({name: 'deteteClimb', re: '/course/:user/:courseid/deleteCourse'}, ensureAuthenticated, function (req, res) {
+// 	Account.findOne({ _id: req.user._id}, function (err, account) {
+// 		if (err) {
+// 			res.send(null, 500)
+// 		} else if (account) {
+// 			var records = {'records': account};
+// 			var idx = account.classes ? account.classes.indexOf(req.params.courseid) : -1;
+// 			if (idx !== -1) {
+// 				account.classes.splice(idx, 1);
+// 				account.save(function(err) {
+// 					if (err) {
+// 						console.log(err);
+// 						res.send(null, 500);
+// 					} else {
+// 						res.send(records);
+// 						res.redirect('dashboard');
+// 					};
+// 				});
+// 				return;
+// 			}
+// 		}
+//         res.send(null, 404);
+// 	});
+// });
+
+
+
+
 routes.post({name: 'editCompanyProfile', re: '/company/:user/edit'}, function (req, res){
 	Company.findByIdAndUpdate( req.user._id , {
 		$set: {name: req.body.name,
