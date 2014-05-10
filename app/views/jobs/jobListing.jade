@@ -129,7 +129,23 @@ block content
 						.modal-footer
 							button(data-dismiss="modal" type="button")#cancel.btn.btn-default Cancel
 							a(href=router.getLink("apply", {jobId: job._id})).btn.btn-success.pull-right Confirm
-
+		-if(user)	
+			.modal.fade#coverLetterDialog(role="dialog" aria-hidden="true" tabindex="-1")
+				.modal-dialog
+					form(role="form" action="/jobs/" + user._id + "-" + job._id + "/apply" method="post").modal-content
+						.modal-header 
+							h4 Cover Letter
+						.modal-body
+							.lead Almost Done! This job requires a cover letter. Just enter your cover letter below and you're all set!
+							textarea.form-control(rows="4" name="coverLetter")
+							#questionFormContainer
+								-var i = 0 
+								each question in job.questionaire
+									.lead #{question}
+									input.form-control(type="text" name="question[" + i + "]")
+									-i++
+						.modal-footer
+							button.btn.btn-primary.pull-right(type="submit" name="apply") Submit Application					
 
 		-if(user)	
 			.modal.fade#questionaireDialog(role="dialog" aria-hidden="true" tabindex="-1")

@@ -3,8 +3,13 @@ var Account = require('../models/account'),
 	moment = require('moment'),
 	Job = require('../models/job'),
 	RouteManager = require('express-shared-routes').RouteManager,
-	thumbnailPluginLib = require('mongoose-thumbnail'),
 	routes = new RouteManager();
+
+routes.get({name:'jobListings', re: '/jobs/listings'}, function (req, res){
+	res.render('jobs/listings', {
+		user:req.user
+	});
+});
 
 routes.get({name: 'newJobPage',  re: '/jobs/listings/newjob'}, function (req, res){
 	res.render('jobs/newJob', {
@@ -12,6 +17,7 @@ routes.get({name: 'newJobPage',  re: '/jobs/listings/newjob'}, function (req, re
 		user: req.user
 	});
 });
+
 routes.post({ name: 'newJob', re: '/jobs/newjob'}, function (req, res) {
 	var job = new Job(req.body.j);
 	job.organization = req.user._id

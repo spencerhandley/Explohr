@@ -25,6 +25,19 @@ routes.get({name: 'catalog', re: '/catalog'}, function (req, res) {
 	});
 });
 
+routes.get({name:'people', re: '/users/list'}, function (req, res){
+	Account.find({}, function (err, users) {
+		var userMap = {};
+		users.forEach(function(user){
+			userMap[user._id] = user;
+		})
+		res.render('home/people', {
+			users: userMap,
+			user:req.user
+		});
+	});
+});
+
 routes.get({name: 'course', re: '/course/:courseid-:courseTitle'}, function (req, res) {
 	Course.findOne({_id: req.params.courseid}, function (err, course) {
 		if(err) return(err);

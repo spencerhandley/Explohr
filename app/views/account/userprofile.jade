@@ -23,7 +23,7 @@ block content
 									img.pull-left(src="https://graph.facebook.com/#{profileUser.oauthID}/picture?type=large")
 					section.about
 						h2.profName #{profileUser.name}
-						-if(user)
+						//- -if(user)
 							#messageUser.inline
 								span.glyphicon.glyphicon-comment
 						//- .addFriend.inline
@@ -34,7 +34,8 @@ block content
 							-console.log(locals.user._id)
 							-if(String(profileUser._id) === String(user._id))
 								.editProfile
-									span.glyphicon.glyphicon-cog#editProfileBtn(data-target="#editProfileModal" data-toggle="modal")
+									span.glyphicon.glyphicon-cog#editProfileBtn(data-target="#editProfileModal" data-toggle="modal") 
+									p Edit Profile
 						.location
 							span.glyphicon.glyphicon-map-marker.pull-left.locationicon
 							p.lead #{profileUser.general.hometown}
@@ -294,9 +295,13 @@ block content
 													.small.list-group-item-text #{exp.location}
 												
 												br
-											if(exp.description)
+											-if(exp.description)
 												strong Description:
 												span.small.list-group-item-text  #{exp.description}
+											-if(user)	
+												-if(String(profileUser._id) === String(user._id))
+													a(href="#")
+														span.glyphicon.glyphicon-remove.delete.delExp(data-id="#{exp._id}") Delete
 					-if(profileUser.professional.sponsors[0])
 						-if(profileUser.professional.sponsors[0].organization)
 							.panel.panel-default#Panel
@@ -310,8 +315,11 @@ block content
 									each exp in profileUser.professional.sponsors
 										li.list-group-item
 											h4.list-group-item-heading #{exp.organization}
-												if(exp.jobTitle)
-														span.small.list-group-item-text  #{exp.sport}
+												-if(exp.jobTitle)
+													span.small.list-group-item-text  #{exp.sport}
+											-if(user)	
+												-if(String(profileUser._id) === String(user._id))	
+													span.glyphicon.glyphicon-remove.delete.delSpon(data-id="#{exp._id}") Delete
 					-if(profileUser.education)
 						.panel.panel-default#Panel
 							-if(profileUser.professional.education.outdoor[0])
@@ -341,6 +349,10 @@ block content
 												-if(outdoor.other)
 													b.list-group-item-text More Info: 
 													span #{outdoor.other}
+												-if(user)	
+													-if(String(profileUser._id) === String(user._id))	
+														a(href="#")
+															span.glyphicon.glyphicon-remove.delete.delOutdoor(data-id="#{outdoor._id}") Delete
 							-if(profileUser.professional.certs[0])
 								-if(profileUser.professional.certs[0].institution)
 									.panel-body
@@ -360,6 +372,10 @@ block content
 													span #{moment(cert.expires).format("MM/DD/YYYY")}
 												h4.list-group-item-heading #{cert.certificate}
 													.small.list-group-item-text #{cert.institution}
+												-if(user)	
+													-if(String(profileUser._id) === String(user._id))	
+														a(href="#")
+															span.glyphicon.glyphicon-remove.delete.delCert(data-id="#{cert._id}") Delete
 							if(profileUser.education)
 								if(profileUser.education[0])
 									.panel-body 
@@ -380,8 +396,10 @@ block content
 															.small.list-group-item-text #{concentration.name}
 													if(trad.type)
 														.small.list-group-item-text #{trad.type}
-												a(href="#")
-													span.glyphicon.glyphicon-remove.delete(data-id="#{trad._id}") Delete
+												-if(user)
+													-if(String(profileUser._id) === String(user._id))	
+														a(href="#")
+															span.glyphicon.glyphicon-remove.delete.delTrad(data-id="#{trad._id}") Delete
 
 
 												//-p #{trad.start} to #{trad.end}
@@ -556,14 +574,14 @@ block content
 																	input.form-control(placeholder="Occupation" type="text" value=profileUser.general.occupation name="general[occupation]")
 																div.form-group.col-md-4
 																	label.sr-only(for="general[fieldDays]") # of Field Days 
-																	input.form-control(placeholder="# of Field Days" type="text" value=profileUser.general.fieldDays name="general[fieldDays]")
+																	input.form-control#fieldDays(data-toggle="popover" data-content="This is a great way to display how much experience you have in the field." data-trigger="hover" data-placement="auto" placeholder="# of Field Days" type="text" value=profileUser.general.fieldDays name="general[fieldDays]")
 																div.form-group.col-md-4
 																	label.sr-only(for="general[specialities]") Areas of Expertise 
-																	input.form-control(placeholder="Areas of Expertise" type="text" value=profileUser.general.specialities name="general[specialities]")
+																	input.form-control#areasOfExpertise(data-toggle="popover" data-content="This is a great place to list your strengths. " data-trigger="hover" data-placement="auto" placeholder="Areas of Expertise" type="text" value=profileUser.general.specialities name="general[specialities]")
 
 															div.form-group
 																label.sr-only(for="general[aboutMe]") About me 
-																input.form-control#bio(placeholder="About me" type="text" value=profileUser.general.aboutMe name="general[aboutMe]")
+																input.form-control#bio.aboutField( data-toggle="popover" data-content="Write a couple paragraphs about who you are, your hobbies, goals, dreams, pets, any anything in between. What makes you, you?" data-trigger="hover" data-placement="auto" data-container="#editProfileModal" placeholder="About me" type="text" value=profileUser.general.aboutMe name="general[aboutMe]")
 															div#sports.form-group
 																h3 Sports
 																.row
@@ -650,7 +668,7 @@ block content
 																		div.form-group.col-md-2
 																			-var year = (trad.year) ? trad.year.name : null;
 																			label.sr-only(for="education[" + i + "][year][name]") Year
-																			input.form-control.datePick(placeholder="End Date" type="text" value=year name="education[" + i + "][year][name]")
+																			input.form-control(placeholder="End Date" type="text" value=year name="education[" + i + "][year][name]")
 																		-i++
 															-if(!profileUser.education[0])	
 																#tradEduForm
@@ -815,11 +833,11 @@ block content
 														#workFormContainer
 															//- include _workExperience
 
-															if(profileUser.professional.experience[0])
-																-var i = 0
-																each experience in profileUser.professional.experience
-																	include _workExperience
-																		-i++
+															//- if(profileUser.professional.experience[0])
+															-var i = 0
+															//- each experience in profileUser.professional.experience
+															//- include _workExperience
+															-i++
 														.row
 															div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
 														//- .row
@@ -849,12 +867,12 @@ block content
 					
 																				div.form-group.col-md-3.col-md-offset-2
 																					label.sr-only(for="professional[guiding][companies][" + i + "][start]") Start Date
-																					input.form-control.datePick(placeholder="Start Date" type="text" value=company.start name="professional[guiding][companies][" + i + "][start]")
+																					input.form-control(placeholder="Start Date" type="text" value=company.start name="professional[guiding][companies][" + i + "][start]")
 																				.col-md-2
 																					p until
 																				div.form-group.col-md-3
 																					label.sr-only(for="professional[guiding][companies][" + i + "][end]") End Date
-																					input.form-control.datePick(placeholder="End Date" type="text" value=company.end name="professional[guiding][companies][" + i + "][end]")
+																					input.form-control(placeholder="End Date" type="text" value=company.end name="professional[guiding][companies][" + i + "][end]")
 																				div.form-group.col-md-2
 																					input(type="checkbox", value=company.current name="professional[guiding][companies][" + i + "][current]")
 																					label(for="professional[guiding][companies][" + i + "][current]") I currently work here
@@ -879,12 +897,12 @@ block content
 																			h5 Time Period
 																			div.form-group.col-md-3.col-md-offset-2
 																				label.sr-only(for="professional[guiding][companies][0][start]") Start Date
-																				input.form-control.datePick(placeholder="Start Date" type="text"  name="professional[guiding][companies][0][start]")
+																				input.form-control(placeholder="Start Date" type="text"  name="professional[guiding][companies][0][start]")
 																			.col-md-2
 																				p until
 																			div.form-group.col-md-3
 																				label.sr-only(for="professional[guiding][companies][0][end]") End Date
-																				input.form-control.datePick(placeholder="End Date" type="text"  name="professional[guiding][companies][0][end]")
+																				input.form-control(placeholder="End Date" type="text"  name="professional[guiding][companies][0][end]")
 																			div.form-group.col-md-2
 																				input(type="checkbox",  name="professional[guiding][companies][0][current]")
 																				label(for="professional[guiding][companies][0][current]") I currently work here
@@ -945,12 +963,12 @@ block content
 																			.row
 																				div.form-group.col-md-3.col-md-offset-2
 																					label.sr-only(for="professional[guiding][guided][" + i + "][start]") Start Date
-																					input.form-control.datePick(placeholder="Start Date" type="text" value=guided.start name="professional[guiding][guided][" + i + "][start]")
+																					input.form-control(placeholder="Start Date" type="text" value=guided.start name="professional[guiding][guided][" + i + "][start]")
 																				.col-md-2
 																					p until
 																				div.form-group.col-md-3
 																					label.sr-only(for="professional[guiding][guided][" + i + "][end]") End Date
-																					input.form-control.datePick(placeholder="End Date" type="text" value=guided.end name="professional[guiding][guided][" + i + "][end]")
+																					input.form-control(placeholder="End Date" type="text" value=guided.end name="professional[guiding][guided][" + i + "][end]")
 																			.row
 																				.form-group.col-md-12
 																					label.sr-only(for="professional[guiding][guided][" + i + "][description]") Trip Description
@@ -988,12 +1006,12 @@ block content
 																		.row
 																			div.form-group.col-md-3.col-md-offset-2
 																				label.sr-only(for="professional[guiding][guided][0][start]") Start Date
-																				input.form-control.datePick(placeholder="Start Date" type="text" name="professional[guiding][guided][0][start]")
+																				input.form-control(placeholder="Start Date" type="text" name="professional[guiding][guided][0][start]")
 																			.col-md-2
 																				p until
 																			div.form-group.col-md-3
 																				label.sr-only(for="professional[guiding][guided][0][end]") End Date
-																				input.form-control.datePick(placeholder="End Date" type="text" name="professional[guiding][guided][0][end]")
+																				input.form-control(placeholder="End Date" type="text" name="professional[guiding][guided][0][end]")
 																		.row
 																			.form-group.col-md-12
 																				label.sr-only(for="professional[guiding][guided][0][description]") Trip Description
@@ -1023,10 +1041,10 @@ block content
 																					input.form-control(placeholder="Sport" type="text" value=sponsor.sport name="professional[sponsors][" + i + "][sport]")
 																				div.form-group.col-md-2
 																					label.sr-only(for="email") Start Date
-																					input.form-control.datePick(placeholder="Start Date" type="text" value=sponsor.start name="professional[sponsors][" + i + "][start]")
+																					input.form-control(placeholder="Start Date" type="text" value=sponsor.start name="professional[sponsors][" + i + "][start]")
 																				div.form-group.col-md-2
 																					label.sr-only(for="email") End Date
-																					input.form-control.datePick(placeholder="End Date" type="text" value=sponsor.end name="professional[sponsors][" + i + "][end]")
+																					input.form-control(placeholder="End Date" type="text" value=sponsor.end name="professional[sponsors][" + i + "][end]")
 																				div.form-group.col-md-2
 																					input(type="checkbox", value=sponsor.current name="professional[sponsors][" + i + "][current]")
 																					label(for="currentlyWork") I'm currently sponsored
@@ -1046,10 +1064,10 @@ block content
 																				input.form-control(placeholder="Sport" type="text"  name="professional[sponsors][sport]")
 																			div.form-group.col-md-2
 																				label.sr-only(for="email") Start Date
-																				input.form-control.datePick(placeholder="Start Date" type="text"  name="professional[sponsors][start]")
+																				input.form-control(placeholder="Start Date" type="text"  name="professional[sponsors][start]")
 																			div.form-group.col-md-2
 																				label.sr-only(for="email") End Date
-																				input.form-control.datePick(placeholder="End Date" type="text"  name="professional[sponsors][end]")
+																				input.form-control(placeholder="End Date" type="text"  name="professional[sponsors][end]")
 																			div.form-group.col-md-2
 																				input(type="checkbox", name="professional[sponsors][current]")
 																				label(for="currentlyWork") I'm currently sponsored
