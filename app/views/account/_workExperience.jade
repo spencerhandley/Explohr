@@ -16,30 +16,30 @@
 				option(value="Other" selected=other) Other
 	.row
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + i + "][organization]") Organization 
-			input.form-control(placeholder="Organization" type="text"  name="professional[experience][" + i + "][organization]")
+			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][organization]") Organization 
+			input.form-control(placeholder="Organization" type="text" value=(experience ? experience.organization : null)  name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][organization]")
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + i + "][jobTitle]") Job Title
-			input.form-control(placeholder="Title" type="text"  name="professional[experience][" + i + "][jobTitle]")
+			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][jobTitle]") Job Title
+			input.form-control(placeholder="Title" type="text" value=(experience ? experience.jobTitle : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][jobTitle]")
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + i + "][location]") Location
-			input.form-control(placeholder="Location" type="text"  name="professional[experience][" + i + "][location]")
+			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][location]") Location
+			input.form-control(placeholder="Location" type="text" value=(experience ? experience.location : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][location]")
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + i + "][courseArea]") Course Area 
-			input.form-control(placeholder="Course Area" type="text"  name="professional[experience][" + i + "][courseArea]")
+			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][courseArea]") Course Area 
+			input.form-control(placeholder="Course Area" type="text"  value=(experience ? experience.courseArea : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][courseArea]")
 	.row
 		div.form-group.col-md-3.col-md-offset-2
-			label.sr-only(for="professional[experience][" + i + "][start]") Start Date
-			input.form-control(placeholder="Start Date" type="text" name="professional[experience][" + i + "][start]")
+			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][start]") Start Date
+			input.form-control(placeholder="Start Date" type="text" value=(experience ? experience.start : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][start]")
 		.col-md-2
 			p until
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + i + "][end]") End Date
-			input.form-control(placeholder="End Date" type="text" name="professional[experience][" + i + "][end]")
+			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][end]") End Date
+			input.form-control(placeholder="End Date" type="text" value=(experience ? experience.end : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][end]")
 		div.form-group.col-md-2
-			input(type="checkbox",  name="professional[experience][" + i + "][current]")
-			label(for="professional[experience][current]") I currently work here
+			input(type="checkbox", checked=(experience ? experience.current : null)  name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][current]")
+			label(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][current]") I currently work here
 	.row
 		.form-group.col-md-12
-			label.sr-only(for="professional[experience][" + i + "][description]")
-			input.form-control(placeholder="Brief Description" type="text" name="professional[experience][" + i + "][description]")
+			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][description]")
+			input.form-control(placeholder="Brief Description" type="text" value=(experience ? experience.description : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][description]")

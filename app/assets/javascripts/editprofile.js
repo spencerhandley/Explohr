@@ -25,7 +25,7 @@
 
 			$clone.each(function () {
 				var $this = $(this);
-				$fields = $this.find('input'),
+				$fields = $this.find('input')
 				$selects = $this.find('select')
 				$selects.each(function () {
 					var $this = $(this);

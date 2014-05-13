@@ -184,7 +184,8 @@ var Account = new Schema({
 		education: {
 			outdoor: [outdoorCoursework]
 		},
-		experience: [company],
+		experience: [{type: Schema.Types.Mixed, default: {placehold: "ho"}, required: true
+	}],
 		certs: [certification],
 		// teaching: {
 			// experience: [teachingExperience],

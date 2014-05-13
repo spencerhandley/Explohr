@@ -268,7 +268,7 @@ block content
 												strong Description:
 												span.small.list-group-item-text  #{exp.description}
 					-if(profileUser.professional.experience[0])
-						-if(profileUser.professional.experience[0].company)
+						-if(profileUser.professional.experience[0].organization)
 							.panel.panel-default#Panel
 								.panel-body 
 									-if(user)
@@ -285,10 +285,10 @@ block content
 													span.small Present
 												-if(!exp.current)
 													span.small #{exp.end}
-											h4.list-group-item-heading #{exp.company}
+											h4.list-group-item-heading #{exp.organization}
 												br
 												if(exp.position)
-													span.small.list-group-item-text  #{exp.position}
+													span.small.list-group-item-text  #{exp.jobTitle}
 												if(exp.location)
 													.small.list-group-item-text #{exp.location}
 												
@@ -686,7 +686,7 @@ block content
 																		label.sr-only(for="education[0][year][name]") Year
 																		input.form-control(placeholder="End Date" type="text" name="education[0][year][name]")
 														.row
-															div#addTradEdu.addfieldsBtn.col-md-6.col-md-offset-3 add
+															div#addTradEdu.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
 														.row.col-md-12.outsideCourse
 															h4 Outdoor Coursework
 															#outdoorEdFormContainer
@@ -734,7 +734,7 @@ block content
 																			label.sr-only(for="professional[education][outdoor][0][other]") Other info 
 																			input.form-control(placeholder="Other Info" type="text" name="professional[education][outdoor][0][other]")
 														.row
-															div#addOutsideCourse.addfieldsBtn.col-md-6.col-md-offset-3 add
+															div#addOutsideCourse.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
 													div.tab-pane#certs.col-md-12
 														.row.col-md-12
 															h4 Certifications
@@ -771,7 +771,7 @@ block content
 																			label.sr-only(for="professional[certs][0][expires]") Expires
 																			input.form-control(placeholder="Expires" type="text" name="professional[certs][0][expires]")
 														.row
-															div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3 add
+															div#addCertificate.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
 													//- div.tab-pane#workExperience.col-md-12
 														h4 Work Experience
 														#workFormContainer
@@ -827,61 +827,23 @@ block content
 															div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
 													div.tab-pane#workExperience.col-md-12
 														h4 Work Experience:
+														-console.log(profileUser.professional.experience[0])
 														#workFormContainer
-															include _workExperience
+															-if(!profileUser.professional.experience[0])
+																-var i = 0
+
+																include _workExperience
 										
-															if(profileUser.professional.experience)
+															-if(profileUser.professional.experience[0])
 																-var i = 0
 																each experience in profileUser.professional.experience
-																	console.log(experience)
-																	//- #workForm
-																	//- 	.col-md-12
-																	//- 		p What kind of Work Experience would you like to add?
-																	//- 			-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
-																	//- 			-var residential = ("Residential"==experience.kind) ? 'selected' :null;
-																	//- 			-var logistics = ("Logistics and Gear"==experience.kind) ? 'selected' :null;
-																	//- 			-var guiding = ("Guiding"==experience.kind) ? 'selected' :null;
-																	//- 			-var wilderness = ("Wilderness Therapy"==experience.kind) ? 'selected' :null;
-																	//- 			-var other = ("Other"==experience.kind) ? 'selected' :null;
-																	//- 			select#expType.form-control( value=experience.kind name="professional[experience][" + i + "][kind]")
-																	//- 				option(value="Expiditionary" selected=expiditionary) Expeditionary Outdoor Education
-																	//- 				option(value="Residential" selected=residential) Residential
-																	//- 				option(value="Logistics and Gear" selected=logistics ) Logistics and Gear
-																	//- 				option(value="Guiding" selected=guiding) Guiding
-																	//- 				option(value="Wilderness Therapy" selected=wilderness) Wilderness Therapy
-																	//- 				option(value="Other" selected=other) Other
-																	//- 	.row
-																	//- 		div.form-group.col-md-3
-																	//- 			label.sr-only(for="professional[experience][" + i + "][organization]") Organization 
-																	//- 			input.form-control(placeholder="Organization" type="text" value=experience.organization name="professional[experience][" + i + "][organization]")
-																	//- 		div.form-group.col-md-3
-																	//- 			label.sr-only(for="professional[experience][" + i + "][jobTitle]") Job Title
-																	//- 			input.form-control(placeholder="Title" type="text" value=experience.jobTitle name="professional[experience][" + i + "][jobTitle]")
-																	//- 		div.form-group.col-md-3
-																	//- 			label.sr-only(for="professional[experience][" + i + "][location]") Location
-																	//- 			input.form-control(placeholder="Location" type="text" value=experience.location name="professional[experience][" + i + "][location]")
-																	//- 		div.form-group.col-md-3
-																	//- 			label.sr-only(for="professional[experience][" + i + "][courseArea]") Course Area 
-																	//- 			input.form-control(placeholder="Course Area" type="text" value=experience.courseArea name="professional[experience][" + i + "][courseArea]")
-																	//- 	.row
-																	//- 		div.form-group.col-md-3.col-md-offset-2
-																	//- 			label.sr-only(for="professional[experience][" + i + "][start]") Start Date
-																	//- 			input.form-control(placeholder="Start Date" type="text" value=experience.start name="professional[experience][" + i + "][start]")
-																	//- 		.col-md-2
-																	//- 			p until
-																	//- 		div.form-group.col-md-3
-																	//- 			label.sr-only(for="professional[experience][" + i + "][end]") End Date
-																	//- 			input.form-control(placeholder="End Date" type="text" value=experience.end name="professional[experience][" + i + "][end]")
-																	//- 		div.form-group.col-md-2
-																	//- 			input(type="checkbox", checked=experience.current name="professional[experience][" + i + "][current]")
-																	//- 			label(for="professional[experience][current]") I currently work here
-																	//- 	.row
-																	//- 		.form-group.col-md-12
-																	//- 			label.sr-only(for="professional[experience][" + i + "][description]")
-																	//- 			input.form-control(placeholder="Brief Description" type="text" value=experience.description name="professional[experience][" + i + "][description]")
-															-i++
+																	-console.log(i)
+																	include _workExperience
+																	-i++
+
 														.row
-															div#addWork.addfieldsBtn.col-md-6.col-md-offset-3 add
+															-console.log(i)
+															div#addWork.addfieldsBtn.col-md-6.col-md-offset-3(data-i=(i - 1)) add
 														//- .row
 															h5.col-md-12 Did we miss anything? Add your own work experience here:
 															.form-group.col-md-12
@@ -1100,26 +1062,26 @@ block content
 																		.row
 																			div.form-group.col-md-3
 																				label.sr-only(for="first") Organization 
-																				input.form-control(placeholder="Organization / Company" type="text"  name="professional[sponsors][organization]")
+																				input.form-control(placeholder="Organization / Company" type="text"  name="professional[sponsors][0][organization]")
 																			div.form-group.col-md-3
 																				label.sr-only(for="email") Sport
-																				input.form-control(placeholder="Sport" type="text"  name="professional[sponsors][sport]")
+																				input.form-control(placeholder="Sport" type="text"  name="professional[sponsors][0][sport]")
 																			div.form-group.col-md-2
 																				label.sr-only(for="email") Start Date
-																				input.form-control(placeholder="Start Date" type="text"  name="professional[sponsors][start]")
+																				input.form-control(placeholder="Start Date" type="text"  name="professional[sponsors][0][start]")
 																			div.form-group.col-md-2
 																				label.sr-only(for="email") End Date
-																				input.form-control(placeholder="End Date" type="text"  name="professional[sponsors][end]")
+																				input.form-control(placeholder="End Date" type="text"  name="professional[sponsors][0][end]")
 																			div.form-group.col-md-2
-																				input(type="checkbox", name="professional[sponsors][current]")
+																				input(type="checkbox", name="professional[sponsors][0][current]")
 																				label(for="currentlyWork") I'm currently sponsored
 																		.row
 																			.form-group.col-md-12
 																				label.sr-only(for="professional[sponsors][description]")
-																				input.form-control(placeholder="Brief Description" type="text" name="professional[guiding][description]")
+																				input.form-control(placeholder="Brief Description" type="text" name="professional[guiding][0][description]")
 
 														.row
-															div#addSponsor.addfieldsBtn.col-md-6.col-md-offset-3 add
+															div#addSponsor.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add
 
 													div.tab-pane#rockClimbingCt.col-md-12
 															h4 Rock Climbing
@@ -1176,20 +1138,20 @@ block content
 																					option(value="Mixed") Mixed
 																		.row
 																			div.form-group.col-md-3
-																				label.sr-only(for="sports[rockClimbing][notableRoutes][location]") Location
-																				input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][location]")
+																				label.sr-only(for="sports[rockClimbing][notableRoutes][0][location]") Location
+																				input.form-control(placeholder="Location" type="text" name="sports[rockClimbing][notableRoutes][0][location]")
 																			div.form-group.col-md-3
 																				label.sr-only(for="sports[rockClimbing][notableRoutes][route]") Route
-																				input.form-control(placeholder="Route" type="text" name="sports[rockClimbing][notableRoutes][route]")
+																				input.form-control(placeholder="Route" type="text" name="sports[rockClimbing][notableRoutes][0][route]")
 																			div.form-group.col-md-2
 																				label.sr-only(for="sports[rockClimbing][notableRoutes][grade]") Grade
-																				input.form-control(placeholder="Grade" type="text" name="sports[rockClimbing][notableRoutes][grade]")
+																				input.form-control(placeholder="Grade" type="text" name="sports[rockClimbing][notableRoutes][0][grade]")
 																			div.form-group.col-md-2
 																				label.sr-only(for="sports[rockClimbing][notableRoutes][pitched]") Pitches
-																				input.form-control(placeholder="Pitches" type="text" name="sports[rockClimbing][notableRoutes][pitches]")
+																				input.form-control(placeholder="Pitches" type="text" name="sports[rockClimbing][notableRoutes][0][pitches]")
 																			div.form-group.col-md-2
 																				label.sr-only(for="sports[rockClimbing][notableRoutes][date]") Date
-																				input.form-control(placeholder="Date" type="text" name="sports[rockClimbing][notableRoutes][date]")
+																				input.form-control(placeholder="Date" type="text" name="sports[rockClimbing][notableRoutes][0][date]")
 																		-i++
 															.row
 																div#addRoute.addfieldsBtn.col-md-6.col-md-offset-3(data-i= (i - 1)) add	
