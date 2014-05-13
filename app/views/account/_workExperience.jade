@@ -43,3 +43,4 @@
 		.form-group.col-md-12
 			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][description]")
 			input.form-control(placeholder="Brief Description" type="text" value=(experience ? experience.description : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][description]")
+	-i++
