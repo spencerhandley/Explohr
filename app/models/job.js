@@ -14,6 +14,7 @@ var jobListing = new Schema({
 	location: String,
 	perks: String,
 	jobs: String,
+	responsibilities: String,
 	coverLetter: {type: Schema.Types.Mixed, default: {placehold: "false"}},
 	dateCreated: { type: Date, default: Date.now },
 	applicants: [{type: Schema.Types.ObjectId, ref: 'Account'}],

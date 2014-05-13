@@ -34,11 +34,6 @@ routes.post({re:'/register'}, function(req, res) {
 	});
 });
 
-function ensureAuthenticated(req, res, next) {
-if (req.isAuthenticated()) { return next(); }
-res.redirect('/')
-}
-
 routes.get( {re:'/auth/facebook', name:'facebooklogin'}, passport.authenticate('facebook', {scope: ['email', 'user_birthday']}));
 
 routes.get({re:'/auth/facebook/callback'},

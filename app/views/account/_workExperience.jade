@@ -1,13 +1,13 @@
 #workForm
 	.col-md-12
 		p What kind of Work Experience would you like to add?
-			-var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
-			-var residential = ("Residential"==experience.kind) ? 'selected' :null;
-			-var logistics = ("Logistics and Gear"==experience.kind) ? 'selected' :null;
-			-var guiding = ("Guiding"==experience.kind) ? 'selected' :null;
-			-var wilderness = ("Wilderness Therapy"==experience.kind) ? 'selected' :null;
-			-var other = ("Other"==experience.kind) ? 'selected' :null;
-			select#courseDescription.form-control( value=experience.kind name="professional[experience][" + i + "][kind]")
+			//- -var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
+			//- -var residential = ("Residential"==experience.kind) ? 'selected' :null;
+			//- -var logistics = ("Logistics and Gear"==experience.kind) ? 'selected' :null;
+			//- -var guiding = ("Guiding"==experience.kind) ? 'selected' :null;
+			//- -var wilderness = ("Wilderness Therapy"==experience.kind) ? 'selected' :null;
+			//- -var other = ("Other"==experience.kind) ? 'selected' :null;
+			select#expType.form-control( name="professional[experience][" + i + "][kind]")
 				option(value="Expiditionary" selected=expiditionary) Expeditionary Outdoor Education
 				option(value="Residential" selected=residential) Residential
 				option(value="Logistics and Gear" selected=logistics ) Logistics and Gear
@@ -17,29 +17,29 @@
 	.row
 		div.form-group.col-md-3
 			label.sr-only(for="professional[experience][" + i + "][organization]") Organization 
-			input.form-control(placeholder="Organization" type="text" value=experience.organization name="professional[experience][" + i + "][organization]")
+			input.form-control(placeholder="Organization" type="text"  name="professional[experience][" + i + "][organization]")
 		div.form-group.col-md-3
 			label.sr-only(for="professional[experience][" + i + "][jobTitle]") Job Title
-			input.form-control(placeholder="Title" type="text" value=experience.jobTitle name="professional[experience][" + i + "][jobTitle]")
+			input.form-control(placeholder="Title" type="text"  name="professional[experience][" + i + "][jobTitle]")
 		div.form-group.col-md-3
 			label.sr-only(for="professional[experience][" + i + "][location]") Location
-			input.form-control(placeholder="Location" type="text" value=experience.location name="professional[experience][" + i + "][location]")
+			input.form-control(placeholder="Location" type="text"  name="professional[experience][" + i + "][location]")
 		div.form-group.col-md-3
 			label.sr-only(for="professional[experience][" + i + "][courseArea]") Course Area 
-			input.form-control(placeholder="Course Area" type="text" value=experience.courseArea name="professional[experience][" + i + "][courseArea]")
+			input.form-control(placeholder="Course Area" type="text"  name="professional[experience][" + i + "][courseArea]")
 	.row
 		div.form-group.col-md-3.col-md-offset-2
 			label.sr-only(for="professional[experience][" + i + "][start]") Start Date
-			input.form-control(placeholder="Start Date" type="text" value=experience.start name="professional[experience][" + i + "][start]")
+			input.form-control(placeholder="Start Date" type="text" name="professional[experience][" + i + "][start]")
 		.col-md-2
 			p until
 		div.form-group.col-md-3
 			label.sr-only(for="professional[experience][" + i + "][end]") End Date
-			input.form-control(placeholder="End Date" type="text" value=experience.end name="professional[experience][" + i + "][end]")
+			input.form-control(placeholder="End Date" type="text" name="professional[experience][" + i + "][end]")
 		div.form-group.col-md-2
-			input(type="checkbox", checked=experience.current name="professional[experience][" + i + "][current]")
+			input(type="checkbox",  name="professional[experience][" + i + "][current]")
 			label(for="professional[experience][current]") I currently work here
 	.row
 		.form-group.col-md-12
 			label.sr-only(for="professional[experience][" + i + "][description]")
-			input.form-control(placeholder="Brief Description" type="text" value=experience.description name="professional[experience][" + i + "][description]")
+			input.form-control(placeholder="Brief Description" type="text" name="professional[experience][" + i + "][description]")

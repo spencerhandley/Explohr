@@ -14,25 +14,36 @@
 
 		var $addBtn = $("#" + button),
 			$form = $(form).last(),
-			$container = $(container)
-			data = parseInt(document.getElementById(button).getAttribute("data-i")),
-			index = data,
-		$rcForm = $(form)
+			$container = $(container),
+			$rcForm = $(form),
+			index = $addBtn.data("i"),
+			data = parseInt(document.getElementById(button).getAttribute("data-i"));
 
 		$addBtn.click(function () {
-			var $clone = $form.clone();
+			var $clone = $form.clone()
+			console.log(index)
+
 			$clone.each(function () {
 				var $this = $(this);
 				$fields = $this.find('input'),
+				$selects = $this.find('select')
+				$selects.each(function () {
+					var $this = $(this);
+					var old = $this.prop('name');
+					$this.val("")
+					$this.prop('name', old.replace(index.toString(), index + 1)); 
+				})
 				$fields.each(function () {
 					var $this = $(this);
 					var old = $this.prop('name');
+					$this.val("")
 					$this.prop('name', old.replace(index.toString(), index + 1)); 
 				})
 			});
+			index++;
 			$form = $clone;
 			$container.append($clone);
-			index++;
+			console.log(index)
 		});
 	};
 
