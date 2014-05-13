@@ -9,3 +9,5 @@ angular.module('people', ['ngresource', 'ngroute']);
 angular.module('people').controller('mainCtrl', function($scope) {
 	$scope.users = users
 })
+
+

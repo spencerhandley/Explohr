@@ -29,5 +29,13 @@ $(document).ready(function () {
 	$("#areasOfExpertise").popover()
 	$("#fieldDays").popover()
 	$(".aboutField").popover()
+$("#expType").on("change", function(){
+	var type = $(this).val();
+	if(type == "expiditionary") {
+		$("#expFormCont").html()
+	}
+})
+
+
 
 })
