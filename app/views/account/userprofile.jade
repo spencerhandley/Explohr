@@ -40,10 +40,6 @@ block content
 						-if(profileUser.general.aboutMe)
 							.userdetails.aboutBio
 								span.bio #{profileUser.general.aboutMe}
-						-if(profileUser.general.specialities)
-							.userdetails
-								b Areas of Expertise: 
-								span #{profileUser.general.specialities}
 						.generalInfo
 							-if(profileUser.general.occupation)
 								.userdetails.inline
@@ -57,6 +53,10 @@ block content
 								.userdetails.inline
 									b Field Days: 
 									span #{profileUser.general.fieldDays}	
+							-if(profileUser.general.specialities)
+								.userdetails.inline
+									b Areas of Expertise: 
+									span #{profileUser.general.specialities}
 							p.userdetails.inline
 								-var arrayOfSports = Object.keys(profileUser.sportsList).map(function (key){
 								-		return profileUser.sportsList[key];
