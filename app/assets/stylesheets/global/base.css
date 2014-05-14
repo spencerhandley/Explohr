@@ -20,6 +20,7 @@ a.active { font-weight: bold; text-decoration: underline; }
 .companyRegBtn h4 { text-align: center; color: black; padding: 23px; font-size: 15px;  font-weight: 400; background-color: white; border-radius: 3px;}
 .customizebtn h4 { text-align: center; color: white; padding: 23px; font-size: 20px; font-weight: 200; background-color: #3463B8; border-radius: 5px; border: 3px white solid; background-color:  rgba(255,255,255, 0.2)}
 #lp3 {margin-left: 115px;}
+#lp2 {margin-left: -100px;}
 .white { color: white; }
 .margin-10 { margin:10px; }
 #courseBtns { text-align: center; margin-top: 45px }
