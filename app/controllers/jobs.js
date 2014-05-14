@@ -125,7 +125,7 @@ routes.get({name: 'deleteJob', re: '/jobs/:jobId/delete'}, function (req, res) {
 	
 })
 
-routes.get({name: 'deleteListingsJob', re: '/jobs/:jobId/delete'}, function (req, res) {
+routes.get({name: 'deleteListingsJob', re: '/jobs/:jobId/deleteListing'}, function (req, res) {
 
 
 	Job.findOne({ _id: req.params.jobId}, function (err, job) {
