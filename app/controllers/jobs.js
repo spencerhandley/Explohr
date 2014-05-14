@@ -18,6 +18,7 @@ routes.get({name: 'newJobPage',  re: '/jobs/listings/newjob'}, function (req, re
 	});
 });
 
+
 routes.post({ name: 'newJob', re: '/jobs/newjob'}, function (req, res) {
 	var job = new Job(req.body.j);
 	job.organization = req.user._id
@@ -124,6 +125,19 @@ routes.get({name: 'deleteJob', re: '/jobs/:jobId/delete'}, function (req, res) {
 	
 })
 
+routes.get({name: 'deleteListingsJob', re: '/jobs/:jobId/delete'}, function (req, res) {
+
+
+	Job.findOne({ _id: req.params.jobId}, function (err, job) {
+		if (err) {
+			res.send(null, 500);
+		} else if (job) {
+			job.remove()
+			res.redirect('jobListings')
+		}
+	})
+	
+})
 
 
 routes.get({name: 'apply', re: '/jobs/:jobId/apply'}, function (req, res) {

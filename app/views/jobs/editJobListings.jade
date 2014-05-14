@@ -9,7 +9,7 @@ block content
 					a.btn.btn-primary.pull-right(href=router.getLink("newJob")) Add Course
 
 				each job in jobs
-					a(href=router.getLink("deleteJob", {jobId: job._id}))
+					a(href=router.getLink("deleteListingsJob", {jobId: job._id}))
 						span.glyphicon.glyphicon-remove.pull-left.deleteCourse
 					a(href=router.getLink("jobListing", {jobId: job._id} ))
 						p #{job.listing}
