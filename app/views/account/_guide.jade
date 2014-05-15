@@ -1,0 +1,56 @@
+.tripsForm
+	-var turnaryI = (profileUser.professional.experience.length > 0 ? i : "0");
+	.row
+		-var f5 = ('5-7'==guided.ages) ? 'selected' : null;
+		-var s7 = ('7-10'==guided.ages) ? 'selected' :null;
+		-var e11 = ('11-14'==guided.ages) ? 'selected' :null;
+		-var f15 = ('15-18'==guided.ages) ? 'selected' : null;
+		-var e18 = ('18-21'==guided.ages) ? 'selected' :null;
+		-var t22 = ('22-30'==guided.ages) ? 'selected' :null;
+		-var t31 = ('31-50'==guided.ages) ? 'selected' : null;
+		-var f51 = ('51+'==guided.ages) ? 'selected' :null;
+		p.col-md-3 Age Range
+			select#ageRange(name="professional[guiding][guided][" + turnaryI + "][ages]" value=guided.ages )
+				option(value="5-7" selected=f5) 5-7
+				option(value="7-10" selected=s7) 7-10
+				option(value="11-14" selected=e11) 11-14
+				option(value="15-18" selected=f15) 15-18
+				option(value="18-21" selected=e18) 18-21
+				option(value="22-30" selected=t22) 22-30
+				option(value="31-50" selected=t31) 31-50
+				option(value="51+" selected=f51) 51+
+		p.col-md-3 Gender
+			-var male = ('Male'==guided.gender) ? 'selected' : null;
+			-var female = ('Female'==guided.gender) ? 'selected' :null;
+			-var mixed = ('Mixed'==guided.gender) ? 'selected' :null;
+			select#gender(name="professional[guiding][guided][" + turnaryI + "][gender]" value=guided.gender )
+				option(value="Male" selected=male) Male
+				option(value="Female" selected=female) Female
+				option(value="Mixed" selected=mixed) Mixed Group
+	.row
+		div.form-group.col-md-3
+			label.sr-only(for="professional[guiding][guided][" + turnaryI + "][organization]") Organization 
+			input.form-control(placeholder="Organization" type="text" value=guided.organization name="professional[guiding][guided][" + turnaryI + "][organization]")
+		div.form-group.col-md-3
+			label.sr-only(for="professional[guiding][guided][" + turnaryI + "][location]" ) Location
+			input.form-control(placeholder="Location" type="text" value=guided.location name="professional[guiding][guided][" + turnaryI + "][location]")
+		div.form-group.col-md-3
+			label.sr-only(for="professional[guiding][guided][" + turnaryI + "][role]" ) Role
+			input.form-control(placeholder="Role" type="text" value=guided.role name="professional[guiding][guided][" + turnaryI + "][role]")
+		div.form-group.col-md-3
+			label.sr-only(for="professional[guiding][guided][" + turnaryI + "][numOfClients]") # of Clients
+			input.form-control(placeholder="# of Clients" type="text" value=guided.numOfClients name="professional[guiding][guided][" + turnaryI + "][numOfClients]")
+	.row
+		div.form-group.col-md-3.col-md-offset-2
+			label.sr-only(for="professional[guiding][guided][" + turnaryI + "][start]") Start Date
+			input.form-control(placeholder="Start Date" type="text" value=guided.start name="professional[guiding][guided][" + turnaryI + "][start]")
+		.col-md-2
+			p until
+		div.form-group.col-md-3
+			label.sr-only(for="professional[guiding][guided][" + turnaryI + "][end]") End Date
+			input.form-control(placeholder="End Date" type="text" value=guided.end name="professional[guiding][guided][" + turnaryI + "][end]")
+	.row
+		.form-group.col-md-12
+			label.sr-only(for="professional[guiding][guided][" + turnaryI + "][description]") Trip Description
+			input.form-control(placeholder="Trip Description" type="text" value=guided.description name="professional[guiding][guided][" + turnaryI + "][description]")
+	-i++

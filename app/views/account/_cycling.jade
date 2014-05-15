@@ -1,0 +1,29 @@
+.cyclingForm
+	-var turnaryI = (profileUser.professional.experience.length > 0 ? i : "0");
+	.row
+		div.form-group.col-md-3
+			label.sr-only(for="sports[cycling][races][" + turnaryI + "][race]") Race
+			input.form-control(placeholder="Race" type="text" value=race.race name="sports[cycling][races][" + turnaryI + "][race]")
+		div.form-group.col-md-3
+			label.sr-only(for="sports[cycling][races][" + turnaryI + "][type]") Type
+			input.form-control(placeholder="Type (Speed Trial, Century, etc.)" type="text" value=race.type name="sports[cycling][races][" + turnaryI + "][type]")
+		div.form-group.col-md-3
+			label.sr-only(for="sports[cycling][races][" + turnaryI + "][location]") Location
+			input.form-control(placeholder="Location" type="text" value=race.location name="sports[cycling][races][" + turnaryI + "][location]")
+		div.form-group.col-md-3
+			label.sr-only(for="sports[cycling][races][" + turnaryI + "][totalTime]") Time
+			input.form-control(placeholder="Time" type="text" value=race.totalTime name="sports[cycling][races][" + turnaryI + "][totalTime]")
+	.row
+		div.form-group.col-md-4
+			label.sr-only(for="sports[cycling][races][" + turnaryI + "][place]") Place (1st, 2nd, etc.)
+			input.form-control(placeholder="Place (1st, 2nd, etc.)" type="text" value=race.place name="sports[cycling][races][" + turnaryI + "][place]")
+		div.form-group.col-md-4
+			label.sr-only(for="sports[cycling][races][" + turnaryI + "][date]") Date
+			input.form-control.climbDate(placeholder="Date" type="text" value=race.date name="sports[cycling][races][" + turnaryI + "][date]")
+		.form-group.col-md-4
+			-var mountain = ('Mountain'==race.mtnRd) ? 'selected' : null;
+			-var road = ('Road'==race.mtnRd) ? 'selected' :null;
+			select#MtnRd.form-control(name="sports[cycling][races][" + turnaryI + "][mtnRd]") 
+				option(value="Mountain" selected=mountain) Mountain
+				option(value="Road" selected=road) Road
+	-i++

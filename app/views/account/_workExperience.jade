@@ -1,46 +1,48 @@
-#workForm
-	.col-md-12
+.workForm
+	-var turnaryI = (profileUser.professional.experience.length > 0 ? i : 5);
+	-console.log(i)
+	.form-group
 		p What kind of Work Experience would you like to add?
-			//- -var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
-			//- -var residential = ("Residential"==experience.kind) ? 'selected' :null;
-			//- -var logistics = ("Logistics and Gear"==experience.kind) ? 'selected' :null;
-			//- -var guiding = ("Guiding"==experience.kind) ? 'selected' :null;
-			//- -var wilderness = ("Wilderness Therapy"==experience.kind) ? 'selected' :null;
-			//- -var other = ("Other"==experience.kind) ? 'selected' :null;
-			select#expType.form-control( name="professional[experience][" + i + "][kind]")
-				option(value="Expiditionary" selected=expiditionary) Expeditionary Outdoor Education
-				option(value="Residential" selected=residential) Residential
-				option(value="Logistics and Gear" selected=logistics ) Logistics and Gear
-				option(value="Guiding" selected=guiding) Guiding
-				option(value="Wilderness Therapy" selected=wilderness) Wilderness Therapy
-				option(value="Other" selected=other) Other
+		//- -var expiditionary = ('Expiditionary'==experience.kind) ? 'selected' : null;
+		//- -var residential = ("Residential"==experience.kind) ? 'selected' :null;
+		//- -var logistics = ("Logistics and Gear"==experience.kind) ? 'selected' :null;
+		//- -var guiding = ("Guiding"==experience.kind) ? 'selected' :null;
+		//- -var wilderness = ("Wilderness Therapy"==experience.kind) ? 'selected' :null;
+		//- -var other = ("Other"==experience.kind) ? 'selected' :null;
+		select#expType.form-control( name="professional[experience][" + turnaryI + "][kind]")
+			option(value="Expiditionary" selected=expiditionary) Expeditionary Outdoor Education
+			option(value="Residential" selected=residential) Residential
+			option(value="Logistics and Gear" selected=logistics ) Logistics and Gear
+			option(value="Guiding" selected=guiding) Guiding
+			option(value="Wilderness Therapy" selected=wilderness) Wilderness Therapy
+			option(value="Other" selected=other) Other
 	.row
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][organization]") Organization 
-			input.form-control(placeholder="Organization" type="text" value=(experience ? experience.organization : null)  name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][organization]")
+			label.sr-only(for="professional[experience][" + turnaryI + "][organization]") Organization 
+			input.form-control(placeholder="Organization" type="text" value=(experience ? experience.organization : null)  name="professional[experience][" + turnaryI + "][organization]")
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][jobTitle]") Job Title
-			input.form-control(placeholder="Title" type="text" value=(experience ? experience.jobTitle : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][jobTitle]")
+			label.sr-only(for="professional[experience][" + turnaryI + "][jobTitle]") Job Title
+			input.form-control(placeholder="Title" type="text" value=(experience ? experience.jobTitle : null) name="professional[experience][" + turnaryI + "][jobTitle]")
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][location]") Location
-			input.form-control(placeholder="Location" type="text" value=(experience ? experience.location : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][location]")
+			label.sr-only(for="professional[experience][" + turnaryI + "][location]") Location
+			input.form-control(placeholder="Location" type="text" value=(experience ? experience.location : null) name="professional[experience][" + turnaryI + "][location]")
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][courseArea]") Course Area 
-			input.form-control(placeholder="Course Area" type="text"  value=(experience ? experience.courseArea : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][courseArea]")
+			label.sr-only(for="professional[experience][" + turnaryI + "][courseArea]") Course Area 
+			input.form-control(placeholder="Course Area" type="text"  value=(experience ? experience.courseArea : null) name="professional[experience][" + turnaryI + "][courseArea]")
 	.row
 		div.form-group.col-md-3.col-md-offset-2
-			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][start]") Start Date
-			input.form-control(placeholder="Start Date" type="text" value=(experience ? experience.start : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][start]")
+			label.sr-only(for="professional[experience][" + turnaryI + "][start]") Start Date
+			input.form-control(placeholder="Start Date" type="text" value=(experience ? experience.start : null) name="professional[experience][" + turnaryI + "][start]")
 		.col-md-2
 			p until
 		div.form-group.col-md-3
-			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][end]") End Date
-			input.form-control(placeholder="End Date" type="text" value=(experience ? experience.end : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][end]")
+			label.sr-only(for="professional[experience][" + turnaryI + "][end]") End Date
+			input.form-control(placeholder="End Date" type="text" value=(experience ? experience.end : null) name="professional[experience][" + turnaryI + "][end]")
 		div.form-group.col-md-2
-			input(type="checkbox", checked=(experience ? experience.current : null)  name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][current]")
-			label(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][current]") I currently work here
+			input(type="checkbox", checked=(experience ? experience.current : null)  name="professional[experience][" + turnaryI + "][current]")
+			label(for="professional[experience][" + turnaryI + "][current]") I currently work here
 	.row
 		.form-group.col-md-12
-			label.sr-only(for="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][description]")
-			input.form-control(placeholder="Brief Description" type="text" value=(experience ? experience.description : null) name="professional[experience][" + (profileUser.professional.experience.length > 0 ? i : "0") + "][description]")
+			label.sr-only(for="professional[experience][" + turnaryI + "][description]")
+			input.form-control(placeholder="Brief Description" type="text" value=(experience ? experience.description : null) name="professional[experience][" + turnaryI + "][description]")
 	-i++

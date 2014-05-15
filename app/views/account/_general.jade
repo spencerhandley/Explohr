@@ -1,0 +1,105 @@
+div#IamA.form-group
+	input(type="hidden" value="true" name="general[onboarded]")
+	p I am an Outdoor 
+	-var enthusiast = ('Enthusiast'==profileUser.general.IamA) ? 'selected' : null;
+	-var professional = ("Professional"==profileUser.general.IamA) ? 'selected' :null;
+	select#IAA.form-control(name="general[IamA]" value=profileUser.general.IamA)
+		option(value="Enthusiast" selected=enthusiast) Enthusiast
+		option(value="Professional" selected=professional) Professional
+	-var visibility = ("Professional" == profileUser.general.IamA) ? "block" : "none";
+	.checkboxes(style="display: " + visibility + ";")
+		input(type="checkbox" checked=profileUser.general.educator name="general[educator]")
+		label(for="general[educator]") Educator
+		input(type="checkbox" checked=profileUser.general.guide name="general[guide]")
+		label(for="general[guide]") Guide
+		input(type="checkbox" checked=profileUser.general.athlete name="general[athlete]")
+		label(for="general[athlete]") Athlete
+
+
+.row
+	div.form-group.col-md-4
+		label.sr-only(for="general[email]") Email
+		input.form-control(placeholder="Email" type="text" value=profileUser.general.email name="general[email]")
+	div.form-group.col-md-4
+		label.sr-only(for="general[age]") Age
+		input.form-control(placeholder="Age" type="text" value=profileUser.general.age name="general[age]")
+	div.form-group.col-md-4
+		label.sr-only(for="general[hometown]") Hometown
+		input.form-control(placeholder="Hometown, State" type="text" value=profileUser.general.hometown name="general[hometown]")
+	div.form-group.col-md-4
+		label.sr-only(for="general[occupation]") Occupation 
+		input.form-control(placeholder="Occupation" type="text" value=profileUser.general.occupation name="general[occupation]")
+	div.form-group.col-md-4
+		label.sr-only(for="general[fieldDays]") # of Field Days 
+		input.form-control#fieldDays(data-toggle="popover" data-content="This is a great way to display how much experience you have in the field." data-trigger="hover" data-placement="auto" placeholder="# of Field Days" type="text" value=profileUser.general.fieldDays name="general[fieldDays]")
+	div.form-group.col-md-4
+		label.sr-only(for="general[specialities]") Areas of Expertise 
+		input.form-control#areasOfExpertise(data-toggle="popover" data-content="This is a great place to list your strengths. " data-trigger="hover" data-placement="auto" placeholder="Areas of Expertise" type="text" value=profileUser.general.specialities name="general[specialities]")
+
+div.form-group
+	label.sr-only(for="general[aboutMe]") About me 
+	input.form-control#bio.aboutField( data-toggle="popover" data-content="Write a couple paragraphs about who you are, your hobbies, goals, dreams, pets, any anything in between. What makes you, you?" data-trigger="hover" data-placement="auto" data-container="#editProfileModal" placeholder="About me" type="text" value=profileUser.general.aboutMe name="general[aboutMe]")
+div#sports.form-group
+	h3 Sports
+	.row
+		input(type="hidden" name="sportsList[placehold]")
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.rockClimbing value="Rock Climbing" name="sportsList[rockClimbing]")
+			label(for="sports-rockClimbing") Rock Climbing
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.mountainBiking value="Mountain Biking" name="sportsList[mountainBiking]")
+			label(for="sports-mountainBiking") Mountain Biking
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.running value="Running" name="sportsList[running]")
+			label(for="sports-running") Running
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.roadCycling value="Road Cycling" name="sportsList[roadCycling]")
+			label(for="sports-roadCycing") Road Cycling
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.kayaking value="Kayaking" name="sportsList[kayaking]")
+			label(for="sports-kayaking") Kayaking
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.supb value="Stand Up Paddle Boarding" name="sportsList[supb]")
+			label(for="sports-supb") S.U. Paddle Boarding 
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.surfing value="Surfing" name="sportsList[surfing]")
+			label(for="sports-surfing") Surfing
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.skiing value="Skiing" name="sportsList[skiing]")
+			label(for="sports-skiing") Skiing
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.snowboarding value="Snowboarding" name="sportsList[snowboarding]")
+			label(for="sports-snowboarding") Snowboarding
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.mountaineering value="Mountaineering" name="sportsList[mountaineering]")
+			label(for="sportsList[9]") Mountaineering
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.hiking value="Hiking" name="sportsList[hiking]")
+			label(for="sports-hiking") Hiking
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.yoga value="Yoga" name="sportsList[yoga]")
+			label(for="sports-yoga") Yoga
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.triathalon value="Triathalons" name="sportsList[triathalon]")
+			label(for="sports-triathalon") Triathalon
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.swimming value="Swimming" name="sportsList[swimming]")
+			label(for="sports-swim") Swimming
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.windSurf value="Wind Surfing" name="sportsList[windSurf]")
+			label(for="sports-windSurf") Wind Surfing
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.kiteSurf value="Kite Surfing" name="sportsList[kiteSurf]")
+			label(for="sports-kiteBoard") Kite Boarding
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.scuba value="Scuba" name="sportsList[scuba]")
+			label(for="sports-scuba") Scuba
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.canoe value="Canoeing" name="sportsList[canoe]")
+			label(for="sports-canoe") Canoeing
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.raft value="Rafting" name="sportsList[raft]")
+			label(for="sports-raft") Rafting
+		div.col-md-3
+			input(type="checkbox" checked=profileUser.sportsList.iceClimb value="Ice Climbing" name="sportsList[iceClimb]")
+			label(for="sports-iceclimb") Ice Climbing

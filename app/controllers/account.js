@@ -77,15 +77,23 @@ routes.get({name: 'removeFromMyList', re: '/course/:user/:courseid/deleteCourse'
 	});
 });
 
-routes.get({name: 'deteteClimb', re: '/course/:user/:courseid/deleteCourse'}, function (req, res) {
+routes.get({name: 'deleteClimb', re: '/user/:climbId/deleteClimb'}, function (req, res) {
 	Account.findOne({ _id: req.user._id}, function (err, account) {
 		if (err) {
 			res.send(null, 500)
 		} else if (account) {
 			var records = {'records': account};
-			var idx = account.classes ? account.classes.indexOf(req.params.courseid) : -1;
+			var climb;
+			account.sports.rockClimbing.notableRoutes.forEach(function (c){
+				if(c._id === req.params.climbId) {
+					climb = c;
+				}
+			})
+
+			var idx = account.sports.rockClimbing.notableRoutes ? account.sports.rockClimbing.notableRoutes.indexOf(climb) : -1;
+			console.log(climb)
 			if (idx !== -1) {
-				account.classes.splice(idx, 1);
+				account.sports.rockClimbing.notableRoutes.splice(idx, 1);
 				account.save(function(err) {
 					if (err) {
 						console.log(err);

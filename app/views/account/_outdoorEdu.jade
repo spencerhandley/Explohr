@@ -1,0 +1,22 @@
+.outdoorEdEduForm
+	-var turnaryI = (profileUser.professional.experience.length > 0 ? i : "0");
+
+	div.form-group.col-md-4
+		label.sr-only(for="professional[education][outdoor][" + turnaryI + "][institution]") Institution
+		input.form-control(placeholder="Institution" type="text" value=outdoor.institution name="professional[education][outdoor][" + turnaryI + "][institution]")
+	div.form-group.col-md-4
+		label.sr-only(for="professional[education][outdoor][" + turnaryI + "][course]") Course
+		input.form-control(placeholder="Course" type="text" value=outdoor.course name="professional[education][outdoor][" + turnaryI + "][course]")
+	div.form-group.col-md-4
+		label.sr-only(for="professional[education][outdoor][" + turnaryI + "][duration]") Duration 
+		input.form-control(placeholder="Duration" type="text" value=outdoor.duration name="professional[education][outdoor][" + turnaryI + "][duration]")
+	div.form-group.col-md-4
+		label.sr-only(for="professional[education][outdoor][" + turnaryI + "][yearsAttended]") Year Attended
+		input.form-control(placeholder="Year Attended" type="text" value=outdoor.yearsAttended name="professional[education][outdoor][" + turnaryI + "][yearsAttended]")
+	div.form-group.col-md-4
+		label.sr-only(for="professional[education][outdoor][" + turnaryI + "][skills]") Skills Studied
+		input.form-control(placeholder="Skills Studied" type="text" value=outdoor.skills name="professional[education][outdoor][" + turnaryI + "][skills]")
+	div.form-group.col-md-4
+		label.sr-only(for="professional[education][outdoor][" + turnaryI + "][other]") Other info 
+		input.form-control(placeholder="Other Info" type="text" value=outdoor.other name="professional[education][outdoor][" + turnaryI + "][other]")
+	-i++

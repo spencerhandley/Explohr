@@ -1,0 +1,16 @@
+.certificateForm
+	-var turnaryI = (profileUser.professional.experience.length > 0 ? i : "0");
+
+	div.form-group.col-md-3
+		label.sr-only(for="professional[certs][" + turnaryI + "][institution]") Institution
+		input.form-control(placeholder="Institution" type="text" value=cert.institution name="professional[certs][" + turnaryI + "][institution]")
+	div.form-group.col-md-3
+		label.sr-only(for="professional[certs][" + turnaryI + "][certificate]") Certificate Earned
+		input.form-control(placeholder="Certificate Earned" type="text" value=cert.certificate name="professional[certs][" + turnaryI + "][certificate]")
+	div.form-group.col-md-3
+		label.sr-only(for="professional[certs][" + turnaryI + "][acquired]") Date Acquired
+		input.form-control(placeholder="Date Acquired" type="text" value=cert.acquired name="professional[certs][" + turnaryI + "][acquired]")
+	div.form-group.col-md-3
+		label.sr-only(for="professional[certs][" + turnaryI + "][expires]") Expires
+		input.form-control(placeholder="Expires" type="text" value=cert.expires name="professional[certs][" + turnaryI + "][expires]")
+	-i++

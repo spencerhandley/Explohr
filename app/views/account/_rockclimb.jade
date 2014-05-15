@@ -1,0 +1,34 @@
+.rockClimbingForm
+	-var turnaryI = (profileUser.professional.experience.length > 0 ? i : "0");
+	.row
+		.form-group.col-md-3
+			-var trad = ('Traditional'==climb.climbType) ? 'selected' : null;
+			-var sport = ('Sport'==climb.climbType) ? 'selected' :null;
+			select#climbType.form-control(name="sports[rockClimbing][notableRoutes][" + turnaryI + "][climbType]") 
+				option(value="Traditional" selected=trad) Traditional
+				option(value="Sport" selected=sport) Sport
+		.form-group.col-md-3
+			-var lead = ('Lead'==climb.leadFollow) ? 'selected' : null;
+			-var follow = ('Follow'==climb.leadFollow) ? 'selected' :null;
+			-var mixed = ('Mixed'==climb.leadFollow) ? 'selected' : null;
+			select#leadFollow.form-control(name="sports[rockClimbing][notableRoutes][" + turnaryI + "][leadFollow]") 
+				option(value="Lead" selected=lead) Lead
+				option(value="Follow" selected=follow) Follow
+				option(value="Mixed" selected=mixed) Mixed
+	.row
+		div.form-group.col-md-3
+			label.sr-only(for="sports[rockClimbing][notableRoutes][" + turnaryI + "][location]") Location
+			input.form-control(placeholder="Location" type="text" value=climb.location name="sports[rockClimbing][notableRoutes][" + turnaryI + "][location]")
+		div.form-group.col-md-3
+			label.sr-only(for="sports[rockClimbing][notableRoutes][" + turnaryI + "][route]") Route
+			input.form-control(placeholder="Route" type="text" value=climb.route name="sports[rockClimbing][notableRoutes][" + turnaryI + "][route]")
+		div.form-group.col-md-2
+			label.sr-only(for="sports[rockClimbing][notableRoutes][" + turnaryI + "][grade]") Grade
+			input.form-control(placeholder="Grade" type="text" value=climb.grade name="sports[rockClimbing][notableRoutes][" + turnaryI + "][grade]")
+		div.form-group.col-md-2
+			label.sr-only(for="sports[rockClimbing][notableRoutes][" + turnaryI + "][pitched]") Pitches
+			input.form-control(placeholder="Pitches" type="text" value=climb.pitches name="sports[rockClimbing][notableRoutes][" + turnaryI + "][pitches]")
+		div.form-group.col-md-2
+			label.sr-only(for="sports[rockClimbing][notableRoutes][" + turnaryI + "][date]") Date
+			input.form-control(placeholder="Date" type="text" value=climb.date name="sports[rockClimbing][notableRoutes][" + turnaryI + "][date]")
+	-i++

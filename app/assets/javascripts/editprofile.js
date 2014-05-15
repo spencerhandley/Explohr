@@ -11,28 +11,26 @@
 	// })();
 
 	var addForms = function(button, form, container){
-
 		var $addBtn = $("#" + button),
 			$form = $(form).last(),
 			$container = $(container),
-			$rcForm = $(form),
-			index = $addBtn.data("i"),
-			data = parseInt(document.getElementById(button).getAttribute("data-i"));
-
+			index = $addBtn.data("i")
 		$addBtn.click(function () {
-			var $clone = $form.clone()
-			console.log(index)
-
+			
+			var $clone = $form.clone();
+			console.log($clone)
 			$clone.each(function () {
-				var $this = $(this);
-				$fields = $this.find('input')
-				$selects = $this.find('select')
-				$selects.each(function () {
-					var $this = $(this);
-					var old = $this.prop('name');
-					$this.val("")
-					$this.prop('name', old.replace(index.toString(), index + 1)); 
-				})
+				var $this = $(this),
+				$fields = $this.find('input'),
+				$selects = $this.find('select');
+				console.log($fields)
+				// $selects.each(function () {
+
+				// 	var $this = $(this);
+				// 	var old = $this.prop('name');
+				// 	$this.val("")
+				// 	$this.prop('name', old.replace(index.toString(), index + 1)); 
+				// })
 				$fields.each(function () {
 					var $this = $(this);
 					var old = $this.prop('name');
@@ -43,18 +41,17 @@
 			index++;
 			$form = $clone;
 			$container.append($clone);
-			console.log(index)
 		});
 	};
 
-	addForms("addOutsideCourse", "#outdoorEdEduForm", "#outdoorEdFormContainer");
-	addForms("addWork", "#workForm", "#workFormContainer");
-	addForms("addTradEdu", "#tradEduForm", "#tradFormContainer")
-	addForms("addCertificate", "#certificateForm", "#certificateFormContainer")
+	addForms("addOutsideCourse", ".outdoorEdEduForm", "#outdoorEdFormContainer");
+	addForms("addWork", ".workForm", "#workFormContainer");
+	addForms("addTradEdu", ".tradEduForm", "#tradFormContainer")
+	addForms("addCertificate", ".certificateForm", "#certificateFormContainer")
 	// addForms("addTeachingExperience", "#teachingForm", "#teachingFormContainer")
 	// addForms("addGuidingCo", "#guidingCoForm", "#guidingCoFormContainer")
 	// addForms("addTrip", "#tripsForm", "#tripsFormContainer")
-	addForms("addSponsor", "#sponsorForm", "#sponsorFormContainer")
+	addForms("addSponsor", ".sponsorForm", "#sponsorFormContainer")
 	addForms("addRoute", ".rockClimbingForm", "#rockClimbingFormContainer")
 	addForms("addMountRoute", ".mountaineeringForm", "#mountaineeringFormContainer")
 	addForms("addRiver", ".riverForm", "#riverFormContainer")

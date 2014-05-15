@@ -1,0 +1,17 @@
+.tradEduForm
+	-var turnaryI = (profileUser.education.length > 0 ? i : "9");
+	div.form-group.col-md-4
+		label.sr-only(for="education[" + turnaryI + "][school][name]") Institution
+		input.form-control.col-md-4(placeholder="Educational Institution" type="text" value=(trad ? trad.school.name : null) name="education[" + turnaryI + "][school][name]")
+	div.form-group.col-md-4
+		label.sr-only(for="education[" + turnaryI + "][concentration][name]") Concentration
+		input.form-control(placeholder="Concentration" type="text" value=(trad ? trad.concentration[0].name : null) name="education[" + turnaryI + "][concentration][0][name]")
+	div.form-group.col-md-2
+		-var type = (trad.type) ? trad.type : null;
+		label.sr-only(for="education[" + turnaryI + "][type]") Type
+		input.form-control(placeholder="Type" type="text" value=(trad ? trad.type : null) name="education[" + turnaryI + "][type]")
+	div.form-group.col-md-2
+		-var year = (trad.year) ? trad.year.name : null;
+		label.sr-only(for="education[" + turnaryI + "][year][name]") Year
+		input.form-control(placeholder="End Date" type="text" value=(trad ? trad.year.name : null) name="education[" + turnaryI + "][year][name]")
+	

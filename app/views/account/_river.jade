@@ -1,0 +1,30 @@
+.riverForm
+	-var turnaryI = (profileUser.professional.experience.length > 0 ? i : "0");
+
+	.row
+		div.form-group.col-md-3
+			label.sr-only(for="sports[river][runs][" + turnaryI + "][river]") River
+			input.form-control(placeholder="River" type="text" value=run.river name="sports[river][runs][" + turnaryI + "][river]")
+		div.form-group.col-md-3
+			label.sr-only(for="sports[river][runs][" + turnaryI + "][run]") Run
+			input.form-control(placeholder="Run" type="text" value=run.run name="sports[river][runs][" + turnaryI + "][run]")
+		div.form-group.col-md-3
+			label.sr-only(for="sports[river][runs][" + turnaryI + "][difficulty]") Difficulty
+			input.form-control(placeholder="Difficulty" type="text" value=run.difficulty name="sports[river][runs][" + turnaryI + "][difficulty]")
+		div.form-group.col-md-3
+			label.sr-only(for="sports[river][runs][" + turnaryI + "][craft]") Craft
+			input.form-control(placeholder="Craft (kayak, canoe, etc.)" type="text" value=run.craft name="sports[river][runs][" + turnaryI + "][craft]")
+	.row
+		div.form-group.col-md-4
+			label.sr-only(for="sports[river][runs][" + turnaryI + "][role]") Role
+			input.form-control(placeholder="Role" type="text" value=run.role name="sports[river][runs][" + turnaryI + "][role]")
+		div.form-group.col-md-4
+			label.sr-only(for="sports[river][runs][" + turnaryI + "][date]") Date
+			input.form-control.climbDate(placeholder="Date" type="text" value=run.date name="sports[river][runs][" + turnaryI + "][date]")
+		.form-group.col-md-4
+			-var guided = ('Guided'==run.guided) ? 'selected' : null;
+			-var personal = ('Personal'==run.guided) ? 'selected' :null;
+			select#guidePersonal.form-control(name="sports[river][runs][" + turnaryI + "][guided]") 
+				option(value="Guided" selected=guided) Guided
+				option(value="Personal" selected=personal) Personal
+	-i++
