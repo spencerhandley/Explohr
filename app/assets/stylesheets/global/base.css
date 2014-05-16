@@ -592,7 +592,7 @@ input[type=text]::-ms-clear {
 	border-top:1px solid rgb(176, 176, 176);
 	border-right:1px solid rgb(176, 176, 176);
 	border-bottom: none;
-	background-color:rgb(245, 245, 245);
+	background-color:rgba(245, 245, 245,0);
 	font:400 1.143em/1.38 'Proxima Nova';
 	text-align:center;
 	color:rgb(0, 0, 0);
@@ -602,10 +602,11 @@ input[type=text]::-ms-clear {
 	display:block;
 	float:left;
 	width:25%;
-	height:43px;
+	height:47px;
 	border-top:1px solid rgb(176, 176, 176);
 	border-right:1px solid rgb(176, 176, 176);
 	border-left:1px solid rgb(176, 176, 176);
+	border-bottom: 4px solid #71cb88;
 	background-color:rgb(255, 255, 255);
 	font:400 1.143em/1.38 'Proxima Nova';
 	text-align:center;
@@ -829,6 +830,355 @@ input[type=text]::-ms-clear {
 .listing-2,.listing-3 {
 	clear:both;
 	margin-top:5px;
+}
+
+.applicants-list {
+	float:left;
+	width:100%;
+	height:857px;
+	margin-top:60px;
+	font:normal 0.875em/1.38 ProximaNova-Light;
+	color:rgb(0,0,0);
+}
+
+.applicant p {
+	margin: 0;
+}
+
+
+.applicant {
+	position:relative;
+	display: inline-block;
+	margin:0 50px 20px 0;
+	width:308px;
+	height:497px;
+	border-width:3px 1px 1px;
+	border-color:rgb(99, 163, 69) rgb(152, 152, 152) rgb(152, 152, 152);
+	border-style:solid;
+	border-radius:3px;
+	background-color:rgb(255, 255, 255);
+
+}
+
+.applicant-age {
+	float:left;
+	width:14%;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-age-label {
+	float:left;
+	width:25%;
+	font:1.143em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-name {
+	position:absolute;
+	top:73px;
+	left:54%;
+	z-index:4;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-name-label {
+	position:absolute;
+	top:51px;
+	left:54%;
+	z-index:3;
+	font:1.143em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-occupation {
+	position:absolute;
+	top:122px;
+	left:54%;
+	z-index:9;
+	width:119px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-occupation-label {
+	position:absolute;
+	top:0;
+	left:40%;
+	z-index:7;
+	width:86%;
+	font:1.143em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-photo {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:10;
+	width:100%;
+	height:134px;
+	border:1px solid rgb(198, 198, 198);
+	background:url('../images/Arnaud.JPG') rgb(222, 222, 222);
+	background-size:cover;
+	background-position:center center;
+
+}
+
+.applicant-photo-container {
+	position:absolute;
+	top:11px;
+	left:3%;
+	z-index:11;
+	width:134px;
+	height:134px;
+	background-color:rgb(222, 222, 222);
+
+}
+
+.certified {
+	display:block;
+	position:absolute;
+	top:11px;
+	right:3%;
+	z-index:12;
+	width:134px;
+	height:30px;
+	border-radius:3px;
+	background-color:rgb(99, 163, 69);
+	font:400 1.143em/2 'Proxima Nova';
+	text-align:center;
+	color:rgb(255, 255, 255);
+
+}
+
+.work-experience {
+	width:93%;
+	height:181px;
+	margin:162px auto 0;
+	border-top:2px solid rgb(235, 235, 235);
+
+}
+
+.introduction-third-line {
+	position:absolute;
+	top:98px;
+	right:16%;
+	z-index:8;
+	width:30%;
+	height:23px;
+
+}
+
+.job {
+	float:left;
+	clear:both;
+	width:100%;
+	height:43px;
+	padding-left:5px;
+	border-left:2px solid rgb(135, 133, 133);
+
+}
+
+.job-length-label {
+	display:inline-block;
+	float:left;
+	min-height:20px;
+	padding-bottom:1px;
+	font:1em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.job-organisation-label {
+	display:inline-block;
+	float:left;
+	padding-bottom:1px;
+	font:1em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.job-position {
+	display:inline-block;
+	float:left;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.reject-applicant {
+	display:block;
+	float:right;
+	width:53px;
+	height:34px;
+	margin:23px 10px 0 0;
+	border:1px solid rgb(163, 69, 69);
+	border-radius:3px;
+	background-color:rgba(163, 69, 69, 0);
+	font:400 1.071em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(163, 69, 69);
+
+}
+.reject-applicant:hover {
+	background-color:rgb(163, 69, 69);
+	color:white;
+	transition: all .3s;
+	-webkit-transition: all .3s
+
+}
+
+.save-applicant {
+	display:block;
+	float:left;
+	clear:both;
+	width:53px;
+	height:34px;
+	margin:23px 0 0 10px;
+	border:1px solid rgb(99, 163, 69);
+	border-radius:3px;
+	background-color:transparent;
+	font:400 1.071em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(99, 163, 69);
+
+}
+
+.save-applicant:hover {
+	background-color:rgb(99, 163, 69);
+	color:white;
+	transition: all .3s;
+	-webkit-transition: all .3s
+
+}
+
+.school {
+	float:left;
+	clear:both;
+	width:100%;
+	margin-top:6px;
+	padding-left:5px;
+	border-left:2px solid rgb(135, 133, 133);
+
+}
+
+.job-length,.school-name {
+	display:inline-block;
+	float:left;
+	margin-top:1px;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.school-subject {
+	display:inline-block;
+	float:left;
+	clear:both;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.school-subject-label {
+	display:inline-block;
+	float:left;
+	padding-bottom:1px;
+	font:1em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.see-questionaire {
+	display:block;
+	float:left;
+	width:146px;
+	height:34px;
+	margin:23px 0 0 18px;
+	border:1px solid rgb(135, 133, 133);
+	border-radius:3px;
+	background-color:rgba(255, 255, 255, 0);
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(55, 55, 55);
+
+}
+.see-questionaire:hover {
+	background-color:rgb(135, 133, 133);
+	color:white;
+	transition: all .3s;
+	-webkit-transition: all .3s
+
+}
+
+
+.education .education-title,.work-experience .work-experience-title {
+	float:left;
+	width:100%;
+	margin-top:4px;
+	margin-bottom: 0;
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(0,0,0);
+
+}
+
+.education {
+	width:93%;
+	height:76px;
+	margin:9px auto 0;
+	border-top:2px solid rgb(235, 235, 235);
+
+}
+
+.job.first {
+	margin-top:6px;
+
+}
+
+.job.second,.job.third {
+	margin-top:9px;
+
+}
+
+.job-length-label,.job-organisation-label {
+	margin-left: 0.35%;
+}
+
+.job-position {
+	margin-top:1px;
+
+}
+
+.organisation-name {
+	clear:both;
+	margin-top:2px;
+	display:inline-block;
+	float:left;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
 }
 /*.crop {float: left; width: 200px; height: 200px; overflow: hidden; border-radius: 10px;  border: 4px solid white;}*/
 /*.crop img {min-height: 200px; min-width:200px;margin: 0 auto; }*/
