@@ -561,5 +561,282 @@ input[type=text]::-ms-clear {
 .listingContainer { margin-top: 20px;}
 .listedApplicant { background-color: white; padding: 10px; line-height: 10px;}
 .listedApplicant:nth-child(odd) {background-color: #f5f5f5}
+
+#dashboard-title-row {
+	margin-top: 30px;
+}
+
+.dashboard-title-div {
+	margin: 0;
+	padding: 0;
+}
+
+.add-listing {
+	margin-top:12px;
+}
+
+.applicant-flow {
+	position:relative;
+	float:left;
+	z-index:4;
+	width:82%;
+	height:43px;
+	margin:2px 0 0 1px;
+}
+
+.applicant-flow-hired,.applicant-flow-interview,.applicant-flow-saved {
+	display:block;
+	float:left;
+	width:25%;
+	height:43px;
+	border-top:1px solid rgb(176, 176, 176);
+	border-right:1px solid rgb(176, 176, 176);
+	border-bottom: none;
+	background-color:rgb(245, 245, 245);
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(0, 0, 0);
+}
+
+.applicant-flow-new {
+	display:block;
+	float:left;
+	width:25%;
+	height:43px;
+	border-top:1px solid rgb(176, 176, 176);
+	border-right:1px solid rgb(176, 176, 176);
+	border-left:1px solid rgb(176, 176, 176);
+	background-color:rgb(255, 255, 255);
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(0, 0, 0);
+}
+
+.applicants-number {
+	float:right;
+	width:100%;
+	font-family:'Proxima Nova';
+	font-size:0.857em;
+	font-weight:400;
+	text-align:center;
+	line-height: 16px;
+	color:rgb(69, 69, 69);
+}
+
+.applicants-total {
+	float:right;
+	width:26px;
+	height:16px;
+	margin:10px 10px 0 0;
+	border:1px solid rgb(131, 131, 131);
+	border-radius:35px;
+	background-color:rgb(255, 255, 255);
+}
+
+.company-name {
+	float:left;
+	clear:both;
+	width:307px;
+	padding-left:1px;
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(210, 210, 210);
+}
+
+.dashboard-title {
+	float: left;
+	width: 552px;
+	text-shadow: 0 1px 0 rgb(255, 255, 255);
+	font-family: ProximaNova-Semibold;
+	font-size: 3.714em;
+	color: rgb(0,0,0);
+	height: auto;
+	margin-bottom: 0;
+	line-height: normal;
+}
+
+.job-date {
+	display:inline-block;
+	float:left;
+	min-height:14px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1em;
+	margin:5px 0 0;
+	color:rgb(0,0,0);
+}
+
+.job-date-label {
+	display:inline-block;
+	float:left;
+	clear:both;
+	margin:5px 0 0 6px;
+	font-family:ProximaNova-Semibold;
+	font-size:1em;
+	color:rgb(0,0,0);
+}
+
+.job-post-date-label {
+	display:inline-block;
+	float:left;
+	clear:both;
+	margin:5px 0 0 6px;
+	font-family:ProximaNova-Semibold;
+	font-size:1em;
+	color:rgb(0,0,0);
+}
+
+.left-container {
+	position:relative;
+	float:left;
+	clear:both;
+	width:307px;
+	height:917px;
+	margin-top:9px;
+	padding: 0;
+}
+
+.left-container-title {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	z-index:10;
+	width:307px;
+	height:48px;
+	margin:0 auto;
+	padding-bottom: 10px;
+	border-bottom:4px solid rgb(185, 185, 185);
+}
+
+
+.left-container-title-text {
+	display:inline-block;
+	float:left;
+	margin-top:14px;
+	font-family:ProximaNova-Semibold;
+	font-size:1.429em;
+	color:rgb(0,0,0);
+}
+
+.listing {
+	float:left;
+	width:307px;
+	height:89px;
+	margin-left:0px;
+	margin-bottom: 5px;
+	border:1px solid rgba(167, 167, 167, 0.53);
+	background-color:rgba(255, 255, 255, 0.35);
+	cursor: pointer;
+}
+.listing:hover {
+	border-left:1px solid #71cb88;
+}
+.listing:active {
+	float:left;
+	clear:both;
+	width:307px;
+	height:89px;
+	border: 1px solid transparent;
+	border-left:4px solid #71cb88;
+	background-color:rgba(255, 255, 255, 0.35);
+}
+
+.listing-active {
+	float:left;
+	clear:both;
+	width:307px;
+	height:89px;
+	margin:5px 0 0 -1px;
+	border-left:4px solid #71cb88;
+	background-color:rgba(255, 255, 255, 0.35);
+}
+
+.listings {
+	float:left;
+	width:100%;
+	height:857px;
+	margin-top:60px;
+}
+
+.name-of-listing {
+	display:inline-block;
+	float:left;
+	margin:10px 0 0 6px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	color:rgb(0,0,0);
+	line-height: normal;
+}
+
+.page-container {
+	width:960px;
+	height:1000px;
+	margin:3px auto 0;
+}
+
+.right-container {
+	position:relative;
+	float:left;
+	width:66.0416666666%;
+	height:917px;
+	margin:9px 0 0 19px;
+}
+
+.right-container-title {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	z-index:6;
+	width:100%;
+	height:48px;
+	margin:0 auto;
+	border-bottom:4px solid rgb(185, 185, 185);
+}
+
+.right-container-title .close-listing {
+	position:relative;
+	float:right;
+	margin-top:12px;
+	z-index:5;
+	margin-right:8px;
+	border-color:#d43f3a;
+	background-color:#d9534f;
+	text-align:center;
+	color:rgb(255, 255, 255);
+}
+
+._button {
+	display:block;
+	float:right;
+	width:27px;
+	height:26px;
+	margin:5px 5px 0 0;
+	border:1px solid rgb(58, 125, 182);
+	border-radius:3px;
+	background-color:rgb(58, 125, 182);
+	font-family:'Proxima Nova';
+	font-size:1.143em;
+	font-weight:400;
+	text-align:center;
+	color:rgb(255, 255, 255);
+}
+
+
+
+.job-post-date {
+	display:inline-block;
+	float:left;
+	min-height:14px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1em;
+	color:rgb(0,0,0);
+	margin:5px 0 0 5px;
+}
+
+.listing-2,.listing-3 {
+	clear:both;
+	margin-top:5px;
+}
 /*.crop {float: left; width: 200px; height: 200px; overflow: hidden; border-radius: 10px;  border: 4px solid white;}*/
 /*.crop img {min-height: 200px; min-width:200px;margin: 0 auto; }*/
