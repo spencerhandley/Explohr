@@ -1,10 +1,10 @@
-a#userLink(href=router.getLink("userprofile", { user: user._id,}))
+a#userLink(href=router.getLink("userprofile", { user: user._id,}), ng-repeat="user in users")
 	.listedPerson.thumbnail
 		.row
 			.col-md-.col-sm-6
 				.crop
 						img.pull-left.rounded(src="https://graph.facebook.com/#{user.oauthID}/picture?type=large")
 				.classtitle
-					h3 #{user.name}
+					h3 {{user.name}}
 						br
 						small #{user.general.hometown}

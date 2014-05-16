@@ -3,7 +3,7 @@ extends ../layout
 block content
 	include ../_topbar
 	.container(ng-app="people")
-		div(ng-view)
+		div(ng-controller="mainCtlr")
 			.row.pull-right#myClassTop
 				.col-md-5.col-sm-4
 					h1 People
@@ -20,7 +20,7 @@ block content
 							button.btn.btn-default Top Ranked
 			.row
 				.col-md-12
-					each user in locals.users
+					div(ng-repeat="user in users")
 						include _user
 
 	include ../_footer

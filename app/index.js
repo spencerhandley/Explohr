@@ -72,6 +72,11 @@ app.use(express.logger({ format: 'dev', stream: { write: function (message) {
 	logger.info(message.slice(0, -1));
 }}}));
 
+// angular partials 
+app.get('/paritals/:partialsPath', function(req, res) {
+	res.render('partials/' + req.params.paritalsPath)
+})
+
 app.use(function (req, res, next) {
 	// expose current user data to view
 	res.locals.currentUser = req.session.account;

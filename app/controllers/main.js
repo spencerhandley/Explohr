@@ -2,6 +2,10 @@ var	Account = require('../models/account'),
 	Course = require('../models/course'),
 	RouteManager = require('express-shared-routes').RouteManager,
 	routes = new RouteManager();
+// angular partials 
+routes.get({re: '/paritals/:partialsPath'}, function(req, res) {
+	res.render('partials/' + req.params.paritalsPath)
+})
 
 routes.get({name: 'home', re: '/'}, function(req, res) {
 	res.render('home/index', {
