@@ -731,24 +731,16 @@ input[type=text]::-ms-clear {
 .listing:hover {
 	border-left:1px solid #71cb88;
 }
-.listing:active {
-	float:left;
-	clear:both;
-	width:307px;
-	height:89px;
-	border: 1px solid transparent;
-	border-left:4px solid #71cb88;
-	background-color:rgba(255, 255, 255, 0.35);
-}
 
 .listing-active {
 	float:left;
-	clear:both;
 	width:307px;
 	height:89px;
-	margin:5px 0 0 -1px;
+	margin-left:0px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	border: 1px solid transparent;
 	border-left:4px solid #71cb88;
-	background-color:rgba(255, 255, 255, 0.35);
 }
 
 .listings {
