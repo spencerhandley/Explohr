@@ -4,47 +4,83 @@ block content
 	include ../_topbar
 	.container
 		#profile
-			.row#videoContainer
-				div.courseDetails.col-sm-12.col-md-12
-
-					h2.profName Company Dashboard
-					p.lead #{company.name}
+			.row#dashboard-title-row
+				div.dashboard-title-div.col-sm-12.col-md-12
+					p.dashboard-title Dashboard
+					p.company-name #{company.name}
 
 			.row
-				.col-md-4
-					a(href=router.getLink("newJobPage")).btn.btn-primary.btn-sm.pull-right Add Listing
-					h3.inline Listings
-					-console.log(company)
-					.listingContainer
+				.left-container.col-md-4
+					.left-container-title.clearfix
+						p.left-container-title-text Listings
+						a(href=router.getLink("newJobPage")).btn.btn-primary.btn-sm.pull-right.add-listing Add Listing
+
+					.listings.clearfix
 						if(company.jobListings)
 							each job in company.jobListings
-								.dashJobListing
-									.row
-										.col-md-12
-											-var arrayOfSeasons = Object.keys(job.seasons).map(function (key){
-											-		return job.seasons[key];
-											-});
-											-var slicedseasons = arrayOfSeasons.slice(0).join(", ")
-											h6.pull-right= slicedseasons
-											h5 #{job.listing} 
-												span.badge  #{job.applicants.length}
-												
-									.row
-										.col-md-12
-											a.buttonPadding(href=router.getLink("deleteJob", {jobId: job._id})).btn.btn-danger.pull-right Delete
-											a.buttonPadding(href=router.getLink("jobListing", {jobId: job._id})).btn.btn-primary.pull-right View Listing
-											p Posted: #{moment(job.dateCreated).format("MM/DD/YYYY")}
+								div(data-listing="#{job._id}").listing.clearfix
+									p.name-of-listing #{job.listing}
+									button._button ···
+									.applicants-total.clearfix
+										p.applicants-number #{job.applicants.length}
+									p.job-date-label Job for 
+									-var arrayOfSeasons = Object.keys(job.seasons).map(function (key){
+									-		return job.seasons[key];
+									-});
+									-var slicedseasons = arrayOfSeasons.slice(0).join(", ")
+									p.job-date= slicedseasons
+									p.job-post-date-label Posted on
+									p.job-post-date #{moment(job.dateCreated).format("MM/DD/YYYY")}
+				
+				.right-container.col-md-8
+					.right-container-title.clearfix
+						.applicant-flow.clearfix
+							button.applicant-flow-new.applicant-flow-button-active New
+							button.applicant-flow-saved.applicant-flow-button Saved 
+							button.applicant-flow-interview.applicant-flow-button Interview 
+							button.applicant-flow-hired.applicant-flow-button Hired 
+						a.btn.btn-primary.btn-sm.pull-right.close-listing Close Applications
 
-				.profileSection.col-md-8
-					h3.inline Recent Applicants
-					#applicantPanel
-					if(company.jobListings[0])
-						each applicant in company.jobListings[0].applicants
-							.listedApplicant
-								a(href=router.getLink('userprofile', {user: applicant._id}))
-									.circleThumbnail.pull-left
-										img(src="https://graph.facebook.com/#{applicant.oauthID}/picture?type=large")
-									.applicantDetails
-										h5 #{applicant.name}
-										p #{applicant.general.hometown}
-						
+					.applicants-list
+						each job in company.jobListings
+							each applicant in listings[job._id]
+								div(data-listing="#{job._id}").applicant.clearfix
+									button.certified ✓ Certified 
+									.applicant-photo-container
+										.applicant-photo
+									p.applicant-occupation a full time student
+									.introduction-third-line.clearfix
+										p.applicant-age-label I'm 
+										p.applicant-age 19
+										p.applicant-occupation-label  and I'm
+									p.applicant-name Arnaud Schenk
+									p.applicant-name-label Hi, my name is
+									.work-experience.clearfix
+										p.work-experience-title Work Experience
+										.job.first.clearfix
+											p.job-position Camp counselor & educator
+											p.job-length-label  for 
+											p.job-length 4 weeks
+											p.job-organisation-label  at 
+											p.organisation-name Bainbridge Summer Camp
+										.job.second.clearfix
+											p.job-position Guide
+											p.job-length-label  for 
+											p.job-length 4 weeks
+											p.job-organisation-label  at 
+											p.organisation-name Yellowstone National Park
+										.job.third.clearfix
+											p.job-position Camp aid and cook
+											p.job-length-label  for 
+											p.job-length 5 weeks
+											p.job-organisation-label  at 
+											p.organisation-name Bainbridge Summer Camp
+									.education.clearfix
+										p.education-title Education
+										.school.clearfix
+											p.school-name UC Berkley
+											p.school-subject-label  studying 
+											p.school-subject Psychology and Teaching
+									button.save-applicant Save
+									button.see-questionaire See Questionaire
+									button.reject-applicant Reject

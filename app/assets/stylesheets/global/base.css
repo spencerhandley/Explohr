@@ -561,5 +561,624 @@ input[type=text]::-ms-clear {
 .listingContainer { margin-top: 20px;}
 .listedApplicant { background-color: white; padding: 10px; line-height: 10px;}
 .listedApplicant:nth-child(odd) {background-color: #f5f5f5}
+
+#dashboard-title-row {
+	margin-top: 30px;
+}
+
+.dashboard-title-div {
+	margin: 0;
+	padding: 0;
+}
+
+.add-listing {
+	margin-top:12px;
+}
+
+.applicant-flow {
+	position:relative;
+	float:left;
+	z-index:4;
+	width:82%;
+	height:43px;
+	margin:2px 0 0 1px;
+}
+
+.applicant-flow-hired,.applicant-flow-interview,.applicant-flow-saved {
+	display:block;
+	float:left;
+	width:25%;
+	height:43px;
+	border-top:1px solid rgb(176, 176, 176);
+	border-right:1px solid rgb(176, 176, 176);
+	border-bottom: none;
+	background-color:rgba(245, 245, 245,0);
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(0, 0, 0);
+}
+
+.applicant-flow-new {
+	display:block;
+	float:left;
+	width:25%;
+	height:47px;
+	border-top:1px solid rgb(176, 176, 176);
+	border-right:1px solid rgb(176, 176, 176);
+	border-left:1px solid rgb(176, 176, 176);
+	border-bottom: 4px solid #71cb88;
+	background-color:rgb(255, 255, 255);
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(0, 0, 0);
+}
+
+.applicants-number {
+	float:right;
+	width:100%;
+	font-family:'Proxima Nova';
+	font-size:0.857em;
+	font-weight:400;
+	text-align:center;
+	line-height: 16px;
+	color:rgb(69, 69, 69);
+}
+
+.applicants-total {
+	float:right;
+	width:26px;
+	height:16px;
+	margin:10px 10px 0 0;
+	border:1px solid rgb(131, 131, 131);
+	border-radius:35px;
+	background-color:rgb(255, 255, 255);
+}
+
+.company-name {
+	float:left;
+	clear:both;
+	width:307px;
+	padding-left:1px;
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(210, 210, 210);
+}
+
+.dashboard-title {
+	float: left;
+	width: 552px;
+	text-shadow: 0 1px 0 rgb(255, 255, 255);
+	font-family: ProximaNova-Semibold;
+	font-size: 3.714em;
+	color: rgb(0,0,0);
+	height: auto;
+	margin-bottom: 0;
+	line-height: normal;
+}
+
+.job-date {
+	display:inline-block;
+	float:left;
+	min-height:14px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1em;
+	margin:5px 0 0;
+	color:rgb(0,0,0);
+}
+
+.job-date-label {
+	display:inline-block;
+	float:left;
+	clear:both;
+	margin:5px 0 0 6px;
+	font-family:ProximaNova-Semibold;
+	font-size:1em;
+	color:rgb(0,0,0);
+}
+
+.job-post-date-label {
+	display:inline-block;
+	float:left;
+	clear:both;
+	margin:5px 0 0 6px;
+	font-family:ProximaNova-Semibold;
+	font-size:1em;
+	color:rgb(0,0,0);
+}
+
+.left-container {
+	position:relative;
+	float:left;
+	clear:both;
+	width:307px;
+	height:917px;
+	margin-top:9px;
+	padding: 0;
+}
+
+.left-container-title {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	z-index:10;
+	width:307px;
+	height:48px;
+	margin:0 auto;
+	padding-bottom: 10px;
+	border-bottom:4px solid rgb(185, 185, 185);
+}
+
+
+.left-container-title-text {
+	display:inline-block;
+	float:left;
+	margin-top:14px;
+	font-family:ProximaNova-Semibold;
+	font-size:1.429em;
+	color:rgb(0,0,0);
+}
+
+.listing {
+	float:left;
+	width:307px;
+	height:89px;
+	margin-left:0px;
+	margin-bottom: 5px;
+	border:1px solid rgba(167, 167, 167, 0.53);
+	background-color:rgba(255, 255, 255, 0.35);
+	cursor: pointer;
+}
+.listing:hover {
+	border-left:1px solid #71cb88;
+}
+
+.listing-active {
+	float:left;
+	width:307px;
+	height:89px;
+	margin-left:0px;
+	margin-bottom: 5px;
+	cursor: pointer;
+	border: 1px solid transparent;
+	border-left:4px solid #71cb88;
+}
+
+.listings {
+	float:left;
+	width:100%;
+	height:857px;
+	margin-top:60px;
+}
+
+.name-of-listing {
+	display:inline-block;
+	float:left;
+	margin:10px 0 0 6px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	color:rgb(0,0,0);
+	line-height: normal;
+}
+
+.page-container {
+	width:960px;
+	height:1000px;
+	margin:3px auto 0;
+}
+
+.right-container {
+	position:relative;
+	float:left;
+	width:66.0416666666%;
+	height:917px;
+	margin:9px 0 0 19px;
+}
+
+.right-container-title {
+	position:absolute;
+	top:0;
+	left:0;
+	right:0;
+	z-index:6;
+	width:100%;
+	height:48px;
+	margin:0 auto;
+	border-bottom:4px solid rgb(185, 185, 185);
+}
+
+.right-container-title .close-listing {
+	position:relative;
+	float:right;
+	margin-top:12px;
+	z-index:5;
+	margin-right:8px;
+	border-color:#d43f3a;
+	background-color:#d9534f;
+	text-align:center;
+	color:rgb(255, 255, 255);
+}
+
+._button {
+	display:block;
+	float:right;
+	width:27px;
+	height:26px;
+	margin:5px 5px 0 0;
+	border:1px solid rgb(58, 125, 182);
+	border-radius:3px;
+	background-color:rgb(58, 125, 182);
+	font-family:'Proxima Nova';
+	font-size:1.143em;
+	font-weight:400;
+	text-align:center;
+	color:rgb(255, 255, 255);
+}
+
+
+
+.job-post-date {
+	display:inline-block;
+	float:left;
+	min-height:14px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1em;
+	color:rgb(0,0,0);
+	margin:5px 0 0 5px;
+}
+
+.listing-2,.listing-3 {
+	clear:both;
+	margin-top:5px;
+}
+
+.applicants-list {
+	float:left;
+	width:100%;
+	height:857px;
+	margin-top:60px;
+	font:normal 0.875em/1.38 ProximaNova-Light;
+	color:rgb(0,0,0);
+}
+
+.applicant p {
+	margin: 0;
+}
+
+
+.applicant {
+	position:relative;
+	display: inline-block;
+	margin:0 50px 20px 0;
+	width:308px;
+	height:497px;
+	border-width:3px 1px 1px;
+	border-color:rgb(99, 163, 69) rgb(152, 152, 152) rgb(152, 152, 152);
+	border-style:solid;
+	border-radius:3px;
+	background-color:rgb(255, 255, 255);
+
+}
+
+.applicant-age {
+	float:left;
+	width:14%;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-age-label {
+	float:left;
+	width:25%;
+	font:1.143em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-name {
+	position:absolute;
+	top:73px;
+	left:54%;
+	z-index:4;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-name-label {
+	position:absolute;
+	top:51px;
+	left:54%;
+	z-index:3;
+	font:1.143em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-occupation {
+	position:absolute;
+	top:122px;
+	left:54%;
+	z-index:9;
+	width:119px;
+	border-bottom:1px dotted rgb(142, 140, 140);
+	font-size:1.143em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-occupation-label {
+	position:absolute;
+	top:0;
+	left:40%;
+	z-index:7;
+	width:86%;
+	font:1.143em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.applicant-photo {
+	position:absolute;
+	top:0;
+	left:0;
+	z-index:10;
+	width:100%;
+	height:134px;
+	border:1px solid rgb(198, 198, 198);
+	background:url('../images/Arnaud.JPG') rgb(222, 222, 222);
+	background-size:cover;
+	background-position:center center;
+
+}
+
+.applicant-photo-container {
+	position:absolute;
+	top:11px;
+	left:3%;
+	z-index:11;
+	width:134px;
+	height:134px;
+	background-color:rgb(222, 222, 222);
+
+}
+
+.certified {
+	display:block;
+	position:absolute;
+	top:11px;
+	right:3%;
+	z-index:12;
+	width:134px;
+	height:30px;
+	border-radius:3px;
+	background-color:rgb(99, 163, 69);
+	font:400 1.143em/2 'Proxima Nova';
+	text-align:center;
+	color:rgb(255, 255, 255);
+
+}
+
+.work-experience {
+	width:93%;
+	height:181px;
+	margin:162px auto 0;
+	border-top:2px solid rgb(235, 235, 235);
+
+}
+
+.introduction-third-line {
+	position:absolute;
+	top:98px;
+	right:16%;
+	z-index:8;
+	width:30%;
+	height:23px;
+
+}
+
+.job {
+	float:left;
+	clear:both;
+	width:100%;
+	height:43px;
+	padding-left:5px;
+	border-left:2px solid rgb(135, 133, 133);
+
+}
+
+.job-length-label {
+	display:inline-block;
+	float:left;
+	min-height:20px;
+	padding-bottom:1px;
+	font:1em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.job-organisation-label {
+	display:inline-block;
+	float:left;
+	padding-bottom:1px;
+	font:1em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.job-position {
+	display:inline-block;
+	float:left;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.reject-applicant {
+	display:block;
+	float:right;
+	width:53px;
+	height:34px;
+	margin:23px 10px 0 0;
+	border:1px solid rgb(163, 69, 69);
+	border-radius:3px;
+	background-color:rgba(163, 69, 69, 0);
+	font:400 1.071em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(163, 69, 69);
+
+}
+.reject-applicant:hover {
+	background-color:rgb(163, 69, 69);
+	color:white;
+	transition: all .3s;
+	-webkit-transition: all .3s
+
+}
+
+.save-applicant {
+	display:block;
+	float:left;
+	clear:both;
+	width:53px;
+	height:34px;
+	margin:23px 0 0 10px;
+	border:1px solid rgb(99, 163, 69);
+	border-radius:3px;
+	background-color:transparent;
+	font:400 1.071em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(99, 163, 69);
+
+}
+
+.save-applicant:hover {
+	background-color:rgb(99, 163, 69);
+	color:white;
+	transition: all .3s;
+	-webkit-transition: all .3s
+
+}
+
+.school {
+	float:left;
+	clear:both;
+	width:100%;
+	margin-top:6px;
+	padding-left:5px;
+	border-left:2px solid rgb(135, 133, 133);
+
+}
+
+.job-length,.school-name {
+	display:inline-block;
+	float:left;
+	margin-top:1px;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.school-subject {
+	display:inline-block;
+	float:left;
+	clear:both;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+
+}
+
+.school-subject-label {
+	display:inline-block;
+	float:left;
+	padding-bottom:1px;
+	font:1em/1.38 ProximaNova-Semibold;
+	color:rgb(0,0,0);
+
+}
+
+.see-questionaire {
+	display:block;
+	float:left;
+	width:146px;
+	height:34px;
+	margin:23px 0 0 18px;
+	border:1px solid rgb(135, 133, 133);
+	border-radius:3px;
+	background-color:rgba(255, 255, 255, 0);
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(55, 55, 55);
+
+}
+.see-questionaire:hover {
+	background-color:rgb(135, 133, 133);
+	color:white;
+	transition: all .3s;
+	-webkit-transition: all .3s
+
+}
+
+
+.education .education-title,.work-experience .work-experience-title {
+	float:left;
+	width:100%;
+	margin-top:4px;
+	margin-bottom: 0;
+	font:400 1.143em/1.38 'Proxima Nova';
+	text-align:center;
+	color:rgb(0,0,0);
+
+}
+
+.education {
+	width:93%;
+	height:76px;
+	margin:9px auto 0;
+	border-top:2px solid rgb(235, 235, 235);
+
+}
+
+.job.first {
+	margin-top:6px;
+
+}
+
+.job.second,.job.third {
+	margin-top:9px;
+
+}
+
+.job-length-label,.job-organisation-label {
+	margin-left: 0.35%;
+}
+
+.job-position {
+	margin-top:1px;
+
+}
+
+.organisation-name {
+	clear:both;
+	margin-top:2px;
+	display:inline-block;
+	float:left;
+	border-bottom:1px dotted rgb(135, 133, 133);
+	font-size:1em;
+	line-height:1.38;
+	color:rgb(0,0,0);
+}
 /*.crop {float: left; width: 200px; height: 200px; overflow: hidden; border-radius: 10px;  border: 4px solid white;}*/
 /*.crop img {min-height: 200px; min-width:200px;margin: 0 auto; }*/
