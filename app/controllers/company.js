@@ -17,14 +17,44 @@ routes.get({name: 'companyEdit', re: '/company/:user/edit'},  function (req, res
 
 routes.get({name: 'companyDashboard', re: '/company/:companyId/dashboard'},  function (req, res){
 	Company.findOne({_id: req.params.companyId}).populate('jobListings').exec(function (err, company){
-		Job.populate(company.jobListings, {path: 'applicants'}, function(err, data){
+		var jobListings = company.jobListings;
+
+		function findApplicants(jobListings, callback) {
+			console.log(1);
+			var jobListingsArray = []
+			,   count = 0;
+			for (var i = jobListings.length; i > 0; i--) {
+
+				console.log("executed");
+				Job.findOne({_id: jobListings[i-1]._id}).populate('applicants').exec(function (err,job) {
+					var jobId = job._id
+					,   jobApplicants = job.applicants;
+
+					jobListingsArray[jobId] = jobApplicants;
+					console.log("we know this works");
+					count++;
+					if (count === jobListings.length) {
+						console.log("callback");
+						callback(jobListingsArray);
+					}
+				})
+
+			}
+		}
+
+		findApplicants(jobListings,function (popListing) {
+			var returnedListing = popListing;
+			console.log(returnedListing);
+			console.log(2);
 			res.render('account/companydashboard', {
 				title: 'Company Dashboard',
 				company: company,
 				moment: moment,
-				user: req.user
+				user: req.user,
+				jobListingsArray: jobListings,
+				listings: returnedListing
 			});
-		});
+		})
 	});
 });
 
