@@ -5,8 +5,8 @@ var Company = require('../models/company'),
 	routes = new RouteManager(),
 	middleware = require('../middleware');
 
-routes.get({name: 'companyEdit', re: '/company/:user/edit'},  function (req, res){
-	Company.findOne({_id: req.user._id}, function (err, account){
+routes.get({name: 'companyEdit', re: '/company/:companyId/edit'},  function (req, res){
+	Company.findOne({_id: req.params.companyId}, function (err, account){
 		res.render('account/companyEditProfile', {
 			title: 'Edit Profile',
 			company: account,
@@ -20,32 +20,24 @@ routes.get({name: 'companyDashboard', re: '/company/:companyId/dashboard'},  fun
 		var jobListings = company.jobListings;
 
 		function findApplicants(jobListings, callback) {
-			console.log(1);
 			var jobListingsArray = []
 			,   count = 0;
 			for (var i = jobListings.length; i > 0; i--) {
-
-				console.log("executed");
 				Job.findOne({_id: jobListings[i-1]._id}).populate('applicants').exec(function (err,job) {
 					var jobId = job._id
 					,   jobApplicants = job.applicants;
 
 					jobListingsArray[jobId] = jobApplicants;
-					console.log("we know this works");
 					count++;
 					if (count === jobListings.length) {
-						console.log("callback");
 						callback(jobListingsArray);
 					}
 				})
 
 			}
 		}
-
 		findApplicants(jobListings,function (popListing) {
 			var returnedListing = popListing;
-			console.log(returnedListing);
-			console.log(2);
 			res.render('account/companydashboard', {
 				title: 'Company Dashboard',
 				company: company,

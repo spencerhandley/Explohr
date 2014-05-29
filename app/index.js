@@ -84,7 +84,10 @@ app.use(function (req, res, next) {
 	next();
 });
 
+app.use(express.static(join(__dirname, 'assets')));
+app.use(middleware.authentication.ensureAuthenticated);
 app.use(app.router);
+
 //app.use(middleware.browser.redirect);
 app.use(express.json());
 app.use(express.urlencoded());
@@ -92,7 +95,7 @@ app.use(cookies.express());
 //app.use(middleware.layout);
 
 //app.use(express.static(join(__dirname, 'assets')));
-app.use(express.static(join(__dirname, 'assets')));
+
 
 // passport config
 var Company = require('./models/company');
